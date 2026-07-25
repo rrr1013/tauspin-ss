@@ -1,0 +1,6 @@
+#ifndef TAUSPINNTUPLE_TAUSPINNTUPLEDICT_H
+#define TAUSPINNTUPLE_TAUSPINNTUPLEDICT_H
+
+#include "TauSpinNtuple/TauSpinNtupleAlg.h"
+
+#endif

@@ -1,4 +1,5 @@
 #include "TauSpinNtuple/TauSpinNtupleAlg.h"
+#include <xAODTau/TauJetContainer.h>
 
 // コンストラクタ
 TauSpinNtupleAlg::TauSpinNtupleAlg(
@@ -15,6 +16,9 @@ StatusCode TauSpinNtupleAlg::initialize(){
 }
 
 StatusCode TauSpinNtupleAlg::execute(){
+    const xAOD::TauJetContainer* taus = nullptr;
+    ANA_CHECK(evtStore()->retrieve(taus, "TauJets"));
+    ANA_MSG_INFO("Number of tau candidates: " << taus->size());
     
     return StatusCode::SUCCESS;
 }
