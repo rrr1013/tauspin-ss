@@ -1,0 +1,10 @@
+MakeNtuple/build/
+
+MakeNtuple/run/
+
+__pycache__/
+*.pyc
+
+*.root
+
+.DS_Store
