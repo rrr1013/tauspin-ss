@@ -1,6 +1,7 @@
 MakeNtuple/build/
 
 MakeNtuple/run/
+MakeNtuple/.asetup.save
 
 __pycache__/
 *.pyc
