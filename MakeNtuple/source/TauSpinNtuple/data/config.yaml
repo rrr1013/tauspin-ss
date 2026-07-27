@@ -1,0 +1,18 @@
+
+CommonServices:
+  runSystematics: false
+
+# TauJets
+TauJets:
+  inputContainer: TauJets
+  containerName: AnaTauJets
+
+  WorkingPoint:
+    selectionName: loose
+    quality: Loose
+    useGNTau:  false
+
+  PtEtaSelection:
+    selectionName: loose
+    minPt: 20000.0
+    maxEta: 2.5
