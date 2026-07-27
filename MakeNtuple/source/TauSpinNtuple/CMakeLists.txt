@@ -7,9 +7,16 @@ atlas_add_library(
     PUBLIC_HEADERS TauSpinNtuple
     LINK_LIBRARIES
         AnaAlgorithmLib
+        AthContainers
         SelectionHelpersLib
         SystematicsHandlesLib
+        TauAnalysisToolsLib
+        xAODEventInfo
+        xAODMissingET
+        xAODPFlow
         xAODTau
+        xAODTracking
+        xAODTruth
 )
 
 atlas_add_dictionary(
@@ -20,4 +27,4 @@ atlas_add_dictionary(
         TauSpinNtupleLib
 )
 
-atlas_install_data(data/*.yaml)
+atlas_install_data(data/*.yaml data/*.conf)

@@ -2,7 +2,70 @@
 CommonServices:
   runSystematics: false
 
-# TauJets
+# private MCでも使えるmc20e共通PRW設定
+PileupReweighting:
+  useDefaultConfig: true
+
+# Jets
+Jets:
+  jetCollection: AntiKt4EMPFlowJets
+  containerName: AnaJets
+  runJvtUpdate: false
+  runNNJvtUpdate: false
+  runJvtEfficiency: false
+  runTruthJetTagging: false
+
+  PtEtaSelection:
+    selectionName: baseline
+    minPt: 20000.0
+    maxEta: 4.5
+
+# Electrons
+Electrons:
+  containerName: AnaElectrons
+
+  WorkingPoint:
+    selectionName: loose
+    identificationWP: LooseBLayerLH
+    isolationWP: Loose_VarRad
+    noEffSF: true
+
+  PtEtaSelection:
+    selectionName: loose
+    minPt: 10000.0
+    maxEta: 2.47
+
+# Muons
+Muons:
+  containerName: AnaMuons
+
+  WorkingPoint:
+    selectionName: medium
+    quality: Medium
+    isolation: Loose_VarRad
+    noEffSF: true
+
+  PtEtaSelection:
+    selectionName: medium
+    minPt: 3000.0
+    maxEta: 2.7
+
+# Photons
+Photons:
+  containerName: AnaPhotons
+
+  WorkingPoint:
+    selectionName: tight
+    qualityWP: Tight
+    isolationWP: FixedCutTight
+    noEffSF: true
+
+  PtEtaSelection:
+    selectionName: tight
+    minPt: 10000.0
+    maxEta: 2.37
+
+# Taus
 TauJets:
   inputContainer: TauJets
   containerName: AnaTauJets
@@ -10,9 +73,37 @@ TauJets:
   WorkingPoint:
     selectionName: loose
     quality: Loose
-    useGNTau:  false
+    useGNTau: false
+    noEffSF: true
 
   PtEtaSelection:
     selectionName: loose
     minPt: 20000.0
     maxEta: 2.5
+
+# Final MET
+MissingET:
+  containerName: AnaMET
+  jets: AnaJets
+  electrons: AnaElectrons.loose
+  muons: AnaMuons.medium
+  photons: AnaPhotons.tight
+  taus: AnaTauJets.loose
+  useJVT: true
+  useFJVT: false
+  treatPUJets: false
+  setMuonJetEMScale: true
+  metWP: Tight
+  saveSignificance: false
+
+# Object overlap removal
+OverlapRemoval:
+  inputLabel: preselectOR
+  outputLabel: passesOR
+  addToAllSelections: true
+  addPreselection: true
+  jets: AnaJets
+  electrons: AnaElectrons.loose
+  muons: AnaMuons.medium
+  photons: AnaPhotons.tight
+  taus: AnaTauJets.loose
