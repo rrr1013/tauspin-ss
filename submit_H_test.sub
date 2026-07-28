@@ -1,0 +1,12 @@
+universe = vanilla
+executable = /home/rbaba/tauspin-ss/MakeNtuple/run_condor.sh
+arguments = H /home/rbaba/tauspin-ss/MakeNtuple/inputs/H_chunk_$(chunk)
+output = /home/rbaba/tauspin-ss/MakeNtuple/logs/H_$(chunk).$(ClusterId).$(ProcId).out
+error = /home/rbaba/tauspin-ss/MakeNtuple/logs/H_$(chunk).$(ClusterId).$(ProcId).err
+log = /home/rbaba/tauspin-ss/MakeNtuple/logs/H_$(ClusterId).log
+request_cpus = 1
+request_memory = 4GB
+getenv = True
+queue chunk from (
+000
+)

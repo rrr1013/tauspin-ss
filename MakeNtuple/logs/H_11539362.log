@@ -1,0 +1,32 @@
+000 (11539362.000.000) 2026-07-27 17:33:54 Job submitted from host: <157.82.112.73:961?addrs=157.82.112.73-961&alias=lxmaster02.icepp.jp&noUDP&sock=schedd_16294_e83e>
+...
+001 (11539362.000.000) 2026-07-27 17:37:08 Job executing on host: <157.82.114.12:961?addrs=157.82.114.12-961+[2404-d540-1-589-3-2-1-594]-961&alias=lxb059-4.icepp.jp&noUDP&sock=startd_16227_f365>
+	SlotName: slot1_32@lxb059-4.icepp.jp
+	CondorScratchDir = "/pool/condor/execute/dir_817736"
+	Cpus = 1
+	Disk = 2313
+	GPUs = 0
+	Memory = 5120
+...
+006 (11539362.000.000) 2026-07-27 17:37:10 Image size of job updated: 60
+	0  -  MemoryUsage of job (MB)
+	0  -  ResidentSetSize of job (KB)
+...
+005 (11539362.000.000) 2026-07-27 17:37:10 Job terminated.
+	(1) Normal termination (return value 1)
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	0  -  Total Bytes Sent By Job
+	0  -  Total Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated 
+	   Cpus                 :        0        1         1 
+	   Disk (KB)            :        1        1      2313 
+	   GPUs                 :                           0 
+	   Memory (MB)          :        0     5120      5120 
+	   TimeExecute (s)      :        2                    
+	   TimeSlotBusy (s)     :        2                    
+...

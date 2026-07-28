@@ -7,5 +7,10 @@ __pycache__/
 *.pyc
 
 *.root
+*.pt
+
+NN/.venv/
+NN/processed/
+NN/outputs/
 
 .DS_Store
