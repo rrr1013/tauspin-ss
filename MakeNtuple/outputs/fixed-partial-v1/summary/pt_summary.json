@@ -1,0 +1,16 @@
+{
+  "H": {
+    "entries": 201450,
+    "pdg_matches": 201450,
+    "pdg_mismatches": 0,
+    "truth_boson_pt_GeV": {"min": 52.6460495, "median": 269.8755341, "mean": 289.3252103, "max": 1438.904541},
+    "truth_boson_mass_GeV": {"mean": 91.18720245, "min": 91.18720245, "max": 91.18720245}
+  },
+  "Z": {
+    "entries": 204763,
+    "pdg_matches": 204763,
+    "pdg_mismatches": 0,
+    "truth_boson_pt_GeV": {"min": 39.95299911, "median": 252.4197235, "mean": 270.2105755, "max": 966.9447021},
+    "truth_boson_mass_GeV": {"mean": 91.18759918, "min": 91.18759918, "max": 91.18759918}
+  }
+}

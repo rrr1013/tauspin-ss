@@ -1,0 +1,31 @@
+{
+  "H": {
+    "discovered_files": 332,
+    "validated_files": 331,
+    "raw_entries": 661964,
+    "input_bytes": 23816626269,
+    "entry_counts": {
+      "2000": 297,
+      "1999": 32,
+      "1998": 2
+    },
+    "excluded": [
+      {
+        "path": "/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/test_999801_sub333_n2000/DAOD_PHYS.pool.root.1",
+        "status": "open_failed"
+      }
+    ]
+  },
+  "Z": {
+    "discovered_files": 300,
+    "validated_files": 300,
+    "raw_entries": 599955,
+    "input_bytes": 20200120020,
+    "entry_counts": {
+      "1999": 39,
+      "2000": 258,
+      "1998": 3
+    },
+    "excluded": []
+  }
+}

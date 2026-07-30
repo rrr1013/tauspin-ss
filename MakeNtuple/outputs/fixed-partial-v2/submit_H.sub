@@ -1,0 +1,46 @@
+universe = vanilla
+executable = /home/rbaba/tauspin-ss/MakeNtuple/run_condor.sh
+arguments = H /home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v2/input_lists/h_chunks/$(chunk) fixed-partial-v2/full
+output = /home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v2/logs/full/H_$(chunk).$(ClusterId).$(ProcId).out
+error = /home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v2/logs/full/H_$(chunk).$(ClusterId).$(ProcId).err
+log = /home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v2/logs/full/H_$(ClusterId).log
+request_cpus = 1
+request_memory = 5GB
+getenv = True
+
+queue chunk from (
+h_chunk_000.txt
+h_chunk_001.txt
+h_chunk_002.txt
+h_chunk_003.txt
+h_chunk_004.txt
+h_chunk_005.txt
+h_chunk_006.txt
+h_chunk_007.txt
+h_chunk_008.txt
+h_chunk_009.txt
+h_chunk_010.txt
+h_chunk_011.txt
+h_chunk_012.txt
+h_chunk_013.txt
+h_chunk_014.txt
+h_chunk_015.txt
+h_chunk_016.txt
+h_chunk_017.txt
+h_chunk_018.txt
+h_chunk_019.txt
+h_chunk_020.txt
+h_chunk_021.txt
+h_chunk_022.txt
+h_chunk_023.txt
+h_chunk_024.txt
+h_chunk_025.txt
+h_chunk_026.txt
+h_chunk_027.txt
+h_chunk_028.txt
+h_chunk_029.txt
+h_chunk_030.txt
+h_chunk_031.txt
+h_chunk_032.txt
+h_chunk_033.txt
+)

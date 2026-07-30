@@ -1,0 +1,48 @@
+000 (11548060.000.000) 2026-07-28 23:31:31 Job submitted from host: <157.82.112.73:961?addrs=157.82.112.73-961&alias=lxmaster02.icepp.jp&noUDP&sock=schedd_16294_e83e>
+...
+001 (11548060.000.000) 2026-07-28 23:31:37 Job executing on host: <157.82.114.27:961?addrs=157.82.114.27-961+[2404-d540-1-589-3-2-1-633]-961&alias=lxb063-3.icepp.jp&noUDP&sock=startd_16811_86b4>
+	SlotName: slot1_18@lxb063-3.icepp.jp
+	CondorScratchDir = "/pool/condor/execute/dir_4126754"
+	Cpus = 1
+	Disk = 2313
+	GPUs = 0
+	Memory = 5120
+...
+006 (11548060.000.000) 2026-07-28 23:31:46 Image size of job updated: 315224
+	308  -  MemoryUsage of job (MB)
+	315224  -  ResidentSetSize of job (KB)
+...
+006 (11548060.000.000) 2026-07-28 23:32:17 Image size of job updated: 915784
+	895  -  MemoryUsage of job (MB)
+	915784  -  ResidentSetSize of job (KB)
+...
+006 (11548060.000.000) 2026-07-28 23:32:48 Image size of job updated: 1340424
+	1310  -  MemoryUsage of job (MB)
+	1340424  -  ResidentSetSize of job (KB)
+...
+006 (11548060.000.000) 2026-07-28 23:33:19 Image size of job updated: 1497932
+	1463  -  MemoryUsage of job (MB)
+	1497932  -  ResidentSetSize of job (KB)
+...
+006 (11548060.000.000) 2026-07-28 23:33:44 Image size of job updated: 1499432
+	1463  -  MemoryUsage of job (MB)
+	1497932  -  ResidentSetSize of job (KB)
+...
+005 (11548060.000.000) 2026-07-28 23:33:44 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 00:01:53, Sys 0 00:00:03  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:01:53, Sys 0 00:00:03  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	0  -  Total Bytes Sent By Job
+	0  -  Total Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated 
+	   Cpus                 :     0.90        1         1 
+	   Disk (KB)            :     1           1      2313 
+	   GPUs                 :                           0 
+	   Memory (MB)          :  1463        5120      5120 
+	   TimeExecute (s)      :   127                       
+	   TimeSlotBusy (s)     :   127                       
+...

@@ -1,0 +1,8 @@
+Warning: unpacked repo  may be stale
+  2026Jul26 23:49 | lxcvmfs119.cern.ch | 1785102570
+Using AnalysisBase/25.2.32 [cmake] with platform x86_64-el9-gcc13-opt
+	at /cvmfs/atlas.cern.ch/repo/sw/software/25.2
+Info: CERN ROOT Certificates may not be installed on machine
+      if you have SSL issues, install it https://cern.ch/fudpr
+      or use a container setupATLAS -c <container>
+Unchanged: COOL_ORA_ENABLE_ADAPTIVE_OPT=Y

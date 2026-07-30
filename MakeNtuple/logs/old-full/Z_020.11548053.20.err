@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/rbaba/tauspin-ss/MakeNtuple/source/TauSpinNtuple/share/runTauSpin.py", line 107, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/rbaba/tauspin-ss/MakeNtuple/source/TauSpinNtuple/share/runTauSpin.py", line 102, in main
+    driver.submit(job, args.submit_dir)
+cppyy.gbl.std.runtime_error: string EL::Driver::submit(const EL::Job& job, const string& location) =>
+    runtime_error: failed to submit job

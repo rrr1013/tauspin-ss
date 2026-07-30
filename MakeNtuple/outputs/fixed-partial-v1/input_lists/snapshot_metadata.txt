@@ -1,0 +1,13 @@
+snapshot_time=2026-07-29T15:52:42+09:00
+source=/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/combined
+repo=/home/rbaba/tauspin-ss/MakeNtuple
+h_count=200
+z_count=200
+h_test_count=5
+z_test_count=5
+h_broken_links=0
+z_broken_links=0
+h_list_sha256=5cb5ffb326f52920ad11e88c1ee7ea198326513e4a4545bbaefe0c95b9eed618
+z_list_sha256=ef195545c0318b8e82b467c8ee31d7fd5020108529b404f7a51674fd67f48aac
+h_dir=/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/combined/user.shion.999801.MGPy8EG_h91p18_tautau_j200.DAOD_PHYS.v2.e8589_a907_r14861_p6355
+z_dir=/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/combined/user.shion.999802.MGPy8EG_Ztautau_j200.DAOD_PHYS.v2.e8589_a907_r14861_p6355

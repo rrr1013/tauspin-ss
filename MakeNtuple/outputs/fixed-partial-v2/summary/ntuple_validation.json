@@ -1,0 +1,26 @@
+{
+  "H": {
+    "input_DAOD_files": 331,
+    "raw_entries": 661964,
+    "ntuple_files": 34,
+    "selected_entries": 332932,
+    "selection_efficiency_percent": 50.294577952879614,
+    "branches": 84,
+    "truth_boson_pdgId_expected": 25,
+    "truth_boson_pdgId_mismatches": 0,
+    "output_bytes": 227500279,
+    "unreadable_or_schema_mismatch": []
+  },
+  "Z": {
+    "input_DAOD_files": 300,
+    "raw_entries": 599955,
+    "ntuple_files": 30,
+    "selected_entries": 306731,
+    "selection_efficiency_percent": 51.12566775841521,
+    "branches": 84,
+    "truth_boson_pdgId_expected": 23,
+    "truth_boson_pdgId_mismatches": 0,
+    "output_bytes": 208489090,
+    "unreadable_or_schema_mismatch": []
+  }
+}

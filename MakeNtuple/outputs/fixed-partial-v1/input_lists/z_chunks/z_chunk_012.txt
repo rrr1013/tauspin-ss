@@ -1,0 +1,10 @@
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/combined/user.shion.999802.MGPy8EG_Ztautau_j200.DAOD_PHYS.v2.e8589_a907_r14861_p6355/DAOD_PHYS.999802.20260723_209.pool.root.1
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/combined/user.shion.999802.MGPy8EG_Ztautau_j200.DAOD_PHYS.v2.e8589_a907_r14861_p6355/DAOD_PHYS.999802.20260723_20.pool.root.1
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/combined/user.shion.999802.MGPy8EG_Ztautau_j200.DAOD_PHYS.v2.e8589_a907_r14861_p6355/DAOD_PHYS.999802.20260723_210.pool.root.1
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/combined/user.shion.999802.MGPy8EG_Ztautau_j200.DAOD_PHYS.v2.e8589_a907_r14861_p6355/DAOD_PHYS.999802.20260723_211.pool.root.1
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/combined/user.shion.999802.MGPy8EG_Ztautau_j200.DAOD_PHYS.v2.e8589_a907_r14861_p6355/DAOD_PHYS.999802.20260723_212.pool.root.1
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/combined/user.shion.999802.MGPy8EG_Ztautau_j200.DAOD_PHYS.v2.e8589_a907_r14861_p6355/DAOD_PHYS.999802.20260723_213.pool.root.1
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/combined/user.shion.999802.MGPy8EG_Ztautau_j200.DAOD_PHYS.v2.e8589_a907_r14861_p6355/DAOD_PHYS.999802.20260723_214.pool.root.1
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/combined/user.shion.999802.MGPy8EG_Ztautau_j200.DAOD_PHYS.v2.e8589_a907_r14861_p6355/DAOD_PHYS.999802.20260723_215.pool.root.1
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/combined/user.shion.999802.MGPy8EG_Ztautau_j200.DAOD_PHYS.v2.e8589_a907_r14861_p6355/DAOD_PHYS.999802.20260723_216.pool.root.1
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/combined/user.shion.999802.MGPy8EG_Ztautau_j200.DAOD_PHYS.v2.e8589_a907_r14861_p6355/DAOD_PHYS.999802.20260723_217.pool.root.1

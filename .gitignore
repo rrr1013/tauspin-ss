@@ -10,6 +10,7 @@ __pycache__/
 *.pt
 
 NN/.venv/
+NN/.venv-gpu/
 NN/processed/
 NN/outputs/
 

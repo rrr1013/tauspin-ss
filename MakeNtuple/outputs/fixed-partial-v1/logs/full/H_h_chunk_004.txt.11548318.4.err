@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/rbaba/tauspin-ss/MakeNtuple/source/TauSpinNtuple/share/runTauSpin.py", line 107, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/rbaba/tauspin-ss/MakeNtuple/source/TauSpinNtuple/share/runTauSpin.py", line 24, in main
+    raise FileNotFoundError(f"Input list was not found: {input_list_path}")
+FileNotFoundError: Input list was not found: .

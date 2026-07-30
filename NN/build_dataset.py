@@ -49,6 +49,140 @@ from config import (
 
 
 SPLIT_NAMES = ("train", "validation", "test")
+ABSOLUTE_FEATURE_SET = "absolute-v1"
+PARENT_RELATIVE_FEATURE_SET = "absolute-plus-parent-relative-v1"
+PARENT_RELATIVE_V3_FEATURE_SET = "absolute-plus-parent-relative-v3"
+
+TRACK_PARENT_RELATIVE_INPUTS = (
+    "track_dEta",
+    "track_dPhi",
+    "track_ptFraction",
+)
+PFO_PARENT_RELATIVE_INPUTS = (
+    "pfo_dEta",
+    "pfo_dPhi",
+    "pfo_ptFraction",
+)
+TRACK_PARENT_RELATIVE_OUTPUTS = (
+    "track_dEta",
+    "sin_track_dPhi",
+    "cos_track_dPhi",
+    "log1p_track_ptFraction",
+)
+PFO_PARENT_RELATIVE_OUTPUTS = (
+    "pfo_dEta",
+    "sin_pfo_dPhi",
+    "cos_pfo_dPhi",
+    "log1p_pfo_ptFraction",
+)
+EVENT_PARENT_RELATIVE_V3_OUTPUTS = (
+    "abs_tau_pair_dEta",
+    "sin_tau_pair_dPhi",
+    "cos_tau_pair_dPhi",
+    "log_tau_minus_over_plus_pt",
+    "sin_met_tau_minus_dPhi",
+    "cos_met_tau_minus_dPhi",
+    "sin_met_tau_plus_dPhi",
+    "cos_met_tau_plus_dPhi",
+    "met_over_tau_pair_pt",
+)
+
+FEATURE_SET = ABSOLUTE_FEATURE_SET
+
+
+def configure_feature_set(feature_set: str) -> None:
+    global FEATURE_SET
+    global EVENT_OUTPUT_FEATURES, EVENT_UNSCALED_FEATURES
+    global TRACK_FEATURES, TRACK_OUTPUT_FEATURES, TRACK_UNSCALED_FEATURES
+    global PFO_FEATURES, PFO_OUTPUT_FEATURES, PFO_UNSCALED_FEATURES
+
+    FEATURE_SET = feature_set
+    if feature_set == ABSOLUTE_FEATURE_SET:
+        return
+    if feature_set not in (
+        PARENT_RELATIVE_FEATURE_SET,
+        PARENT_RELATIVE_V3_FEATURE_SET,
+    ):
+        raise ValueError(f"Unknown feature set: {feature_set}")
+
+    TRACK_FEATURES = (*TRACK_FEATURES, *TRACK_PARENT_RELATIVE_INPUTS)
+    TRACK_OUTPUT_FEATURES = (
+        *TRACK_OUTPUT_FEATURES,
+        *TRACK_PARENT_RELATIVE_OUTPUTS,
+    )
+    TRACK_UNSCALED_FEATURES = (
+        *TRACK_UNSCALED_FEATURES,
+        "sin_track_dPhi",
+        "cos_track_dPhi",
+    )
+    PFO_FEATURES = (*PFO_FEATURES, *PFO_PARENT_RELATIVE_INPUTS)
+    PFO_OUTPUT_FEATURES = (
+        *PFO_OUTPUT_FEATURES,
+        *PFO_PARENT_RELATIVE_OUTPUTS,
+    )
+    PFO_UNSCALED_FEATURES = (
+        *PFO_UNSCALED_FEATURES,
+        "sin_pfo_dPhi",
+        "cos_pfo_dPhi",
+    )
+    if feature_set == PARENT_RELATIVE_V3_FEATURE_SET:
+        EVENT_OUTPUT_FEATURES = (
+            *EVENT_OUTPUT_FEATURES,
+            *EVENT_PARENT_RELATIVE_V3_OUTPUTS,
+        )
+        EVENT_UNSCALED_FEATURES = (
+            *EVENT_UNSCALED_FEATURES,
+            "sin_tau_pair_dPhi",
+            "cos_tau_pair_dPhi",
+            "sin_met_tau_minus_dPhi",
+            "cos_met_tau_minus_dPhi",
+            "sin_met_tau_plus_dPhi",
+            "cos_met_tau_plus_dPhi",
+        )
+
+
+def load_selection_manifest(
+    path: Path,
+) -> tuple[dict, dict[tuple[str, str], set[int]]]:
+    manifest = json.loads(path.read_text())
+    if manifest.get("format_version") != 1:
+        raise ValueError(
+            "Unsupported selection manifest format: "
+            f"{manifest.get('format_version')}"
+        )
+    selected: dict[tuple[str, str], set[int]] = {}
+    for sample_name in ("H", "Z"):
+        sample_entries = manifest["selected_entries"].get(sample_name, {})
+        for file_basename, entry_indices in sample_entries.items():
+            key = (sample_name, file_basename)
+            values = {int(index) for index in entry_indices}
+            if len(values) != len(entry_indices):
+                raise ValueError(
+                    f"Duplicate selected entries for {sample_name}/"
+                    f"{file_basename}"
+                )
+            selected[key] = values
+    return manifest, selected
+
+
+def selection_mask(
+    sample_name: str,
+    file_basename: str,
+    entry_start: int,
+    n_events: int,
+    selected_entries: dict[tuple[str, str], set[int]] | None,
+) -> np.ndarray:
+    if selected_entries is None:
+        return np.ones(n_events, dtype=bool)
+    allowed = selected_entries.get((sample_name, file_basename), set())
+    return np.fromiter(
+        (
+            entry_start + offset in allowed
+            for offset in range(n_events)
+        ),
+        dtype=bool,
+        count=n_events,
+    )
 
 
 def find_input_files(pattern: str) -> list[str]:
@@ -233,32 +367,47 @@ def _log1p(values: np.ndarray, name: str) -> np.ndarray:
 
 def transform_chunk(arrays: ak.Array) -> dict[str, np.ndarray]:
     """Apply fixed, non-learned feature transformations."""
+    met_et = np.asarray(ak.to_numpy(arrays["met_et"]), dtype=np.float32)
     met_phi = np.asarray(ak.to_numpy(arrays["met_phi"]), dtype=np.float32)
-    event = np.column_stack(
-        (
-            _log1p(
-                np.asarray(ak.to_numpy(arrays["met_et"]), dtype=np.float32),
-                "met_et",
-            ),
-            np.sin(met_phi),
-            np.cos(met_phi),
-            _log1p(
-                np.asarray(
-                    ak.to_numpy(arrays["met_sumet"]), dtype=np.float32
-                ),
-                "met_sumet",
-            ),
-        )
-    ).astype(np.float32)
-
+    tau_pt = np.asarray(ak.to_numpy(arrays["tau_pt"]), dtype=np.float32)
+    tau_eta = np.asarray(ak.to_numpy(arrays["tau_eta"]), dtype=np.float32)
     tau_phi = np.asarray(ak.to_numpy(arrays["tau_phi"]), dtype=np.float32)
+    event_columns = [
+        _log1p(met_et, "met_et"),
+        np.sin(met_phi),
+        np.cos(met_phi),
+        _log1p(
+            np.asarray(
+                ak.to_numpy(arrays["met_sumet"]), dtype=np.float32
+            ),
+            "met_sumet",
+        ),
+    ]
+    if FEATURE_SET == PARENT_RELATIVE_V3_FEATURE_SET:
+        if np.any(tau_pt <= 0):
+            raise ValueError("Non-positive tau_pt found in Relative-v3")
+        tau_pair_dphi = tau_phi[:, 0] - tau_phi[:, 1]
+        met_tau_minus_dphi = met_phi - tau_phi[:, 0]
+        met_tau_plus_dphi = met_phi - tau_phi[:, 1]
+        event_columns.extend(
+            (
+                np.abs(tau_eta[:, 0] - tau_eta[:, 1]),
+                np.sin(tau_pair_dphi),
+                np.cos(tau_pair_dphi),
+                np.log(tau_pt[:, 0] / tau_pt[:, 1]),
+                np.sin(met_tau_minus_dphi),
+                np.cos(met_tau_minus_dphi),
+                np.sin(met_tau_plus_dphi),
+                np.cos(met_tau_plus_dphi),
+                met_et / (tau_pt[:, 0] + tau_pt[:, 1]),
+            )
+        )
+    event = np.column_stack(event_columns).astype(np.float32)
+
     tau = np.stack(
         (
-            _log1p(
-                np.asarray(ak.to_numpy(arrays["tau_pt"]), dtype=np.float32),
-                "tau_pt",
-            ),
-            np.asarray(ak.to_numpy(arrays["tau_eta"]), dtype=np.float32),
+            _log1p(tau_pt, "tau_pt"),
+            tau_eta,
             np.sin(tau_phi),
             np.cos(tau_phi),
             _log1p(
@@ -290,28 +439,43 @@ def transform_chunk(arrays: ak.Array) -> dict[str, np.ndarray]:
         arrays["track_pt"], axis=1, ascending=False, stable=True
     )
     track_phi = _flat_numpy(arrays["track_phi"][track_order])
-    track = np.column_stack(
-        (
-            _log1p(
-                _flat_numpy(arrays["track_pt"][track_order]),
-                "track_pt",
-            ),
-            _flat_numpy(arrays["track_eta"][track_order]),
-            np.sin(track_phi),
-            np.cos(track_phi),
-            _flat_numpy(arrays["track_charge"][track_order]),
-            _flat_numpy(arrays["track_d0"][track_order]),
-            _flat_numpy(arrays["track_z0SinTheta"][track_order]),
-            _flat_numpy(arrays["track_isCore"][track_order]),
-            _flat_numpy(arrays["track_isIsolation"][track_order]),
-            _flat_numpy(arrays["track_isConversion"][track_order]),
-            _flat_numpy(arrays["track_isFake"][track_order]),
-            _flat_numpy(arrays["track_passTrkSelector"][track_order]),
-            _flat_numpy(arrays["track_numberOfPixelHits"][track_order]),
-            _flat_numpy(arrays["track_numberOfSCTHits"][track_order]),
-            _flat_numpy(arrays["track_numberOfTRTHits"][track_order]),
+    track_columns = [
+        _log1p(
+            _flat_numpy(arrays["track_pt"][track_order]),
+            "track_pt",
+        ),
+        _flat_numpy(arrays["track_eta"][track_order]),
+        np.sin(track_phi),
+        np.cos(track_phi),
+        _flat_numpy(arrays["track_charge"][track_order]),
+        _flat_numpy(arrays["track_d0"][track_order]),
+        _flat_numpy(arrays["track_z0SinTheta"][track_order]),
+        _flat_numpy(arrays["track_isCore"][track_order]),
+        _flat_numpy(arrays["track_isIsolation"][track_order]),
+        _flat_numpy(arrays["track_isConversion"][track_order]),
+        _flat_numpy(arrays["track_isFake"][track_order]),
+        _flat_numpy(arrays["track_passTrkSelector"][track_order]),
+        _flat_numpy(arrays["track_numberOfPixelHits"][track_order]),
+        _flat_numpy(arrays["track_numberOfSCTHits"][track_order]),
+        _flat_numpy(arrays["track_numberOfTRTHits"][track_order]),
+    ]
+    if FEATURE_SET in (
+        PARENT_RELATIVE_FEATURE_SET,
+        PARENT_RELATIVE_V3_FEATURE_SET,
+    ):
+        track_dphi = _flat_numpy(arrays["track_dPhi"][track_order])
+        track_columns.extend(
+            (
+                _flat_numpy(arrays["track_dEta"][track_order]),
+                np.sin(track_dphi),
+                np.cos(track_dphi),
+                _log1p(
+                    _flat_numpy(arrays["track_ptFraction"][track_order]),
+                    "track_ptFraction",
+                ),
+            )
         )
-    ).astype(np.float32)
+    track = np.column_stack(track_columns).astype(np.float32)
     track_counts = np.asarray(
         ak.to_numpy(ak.num(arrays["track_pt"], axis=1)), dtype=np.int64
     )
@@ -320,16 +484,31 @@ def transform_chunk(arrays: ak.Array) -> dict[str, np.ndarray]:
         arrays["pfo_pt"], axis=1, ascending=False, stable=True
     )
     pfo_phi = _flat_numpy(arrays["pfo_phi"][pfo_order])
-    pfo = np.column_stack(
-        (
-            _log1p(_flat_numpy(arrays["pfo_pt"][pfo_order]), "pfo_pt"),
-            _flat_numpy(arrays["pfo_eta"][pfo_order]),
-            np.sin(pfo_phi),
-            np.cos(pfo_phi),
-            _log1p(_flat_numpy(arrays["pfo_e"][pfo_order]), "pfo_e"),
-            _flat_numpy(arrays["pfo_isPi0"][pfo_order]),
+    pfo_columns = [
+        _log1p(_flat_numpy(arrays["pfo_pt"][pfo_order]), "pfo_pt"),
+        _flat_numpy(arrays["pfo_eta"][pfo_order]),
+        np.sin(pfo_phi),
+        np.cos(pfo_phi),
+        _log1p(_flat_numpy(arrays["pfo_e"][pfo_order]), "pfo_e"),
+        _flat_numpy(arrays["pfo_isPi0"][pfo_order]),
+    ]
+    if FEATURE_SET in (
+        PARENT_RELATIVE_FEATURE_SET,
+        PARENT_RELATIVE_V3_FEATURE_SET,
+    ):
+        pfo_dphi = _flat_numpy(arrays["pfo_dPhi"][pfo_order])
+        pfo_columns.extend(
+            (
+                _flat_numpy(arrays["pfo_dEta"][pfo_order]),
+                np.sin(pfo_dphi),
+                np.cos(pfo_dphi),
+                _log1p(
+                    _flat_numpy(arrays["pfo_ptFraction"][pfo_order]),
+                    "pfo_ptFraction",
+                ),
+            )
         )
-    ).astype(np.float32)
+    pfo = np.column_stack(pfo_columns).astype(np.float32)
     pfo_counts = np.asarray(
         ak.to_numpy(ak.num(arrays["pfo_pt"], axis=1)), dtype=np.int64
     )
@@ -437,6 +616,7 @@ def make_stats() -> dict[str, RunningStats]:
 def compute_train_stats(
     samples: list[tuple[list[str], str, int]],
     step_size: str,
+    selected_entries: dict[tuple[str, str], set[int]] | None = None,
 ) -> tuple[dict[str, dict], list[int], dict[str, dict[str, int]]]:
     running = make_stats()
     decay_modes: set[int] = set()
@@ -451,7 +631,15 @@ def compute_train_stats(
         ):
             validate_chunk(arrays)
             masks = split_masks(name, basename, entry_start, len(arrays))
+            selected_mask = selection_mask(
+                name,
+                basename,
+                entry_start,
+                len(arrays),
+                selected_entries,
+            )
             for split, mask in masks.items():
+                mask &= selected_mask
                 count = int(mask.sum())
                 counts[split][sample_name] += count
                 counts[split]["total"] += count
@@ -696,6 +884,7 @@ def build_shards(
     events_per_shard: int,
     stats: dict[str, dict],
     mode_to_id: dict[int, int],
+    selected_entries: dict[tuple[str, str], set[int]] | None = None,
 ) -> dict[str, dict[str, list[dict]]]:
     writers = {
         (split, name): ShardWriter(
@@ -711,7 +900,15 @@ def build_shards(
         ):
             validate_chunk(arrays)
             masks = split_masks(name, basename, entry_start, len(arrays))
+            selected_mask = selection_mask(
+                name,
+                basename,
+                entry_start,
+                len(arrays),
+                selected_entries,
+            )
             for split, mask in masks.items():
+                mask &= selected_mask
                 selected = select_events(arrays, mask)
                 if len(selected) == 0:
                     continue
@@ -749,11 +946,34 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Replace the exact output directory if it already exists.",
     )
+    parser.add_argument(
+        "--selection-manifest",
+        type=Path,
+        help=(
+            "Optional deterministic event-selection manifest. Events not "
+            "listed in the manifest are excluded before train statistics "
+            "and shard writing."
+        ),
+    )
+    parser.add_argument(
+        "--feature-set",
+        choices=(
+            ABSOLUTE_FEATURE_SET,
+            PARENT_RELATIVE_FEATURE_SET,
+            PARENT_RELATIVE_V3_FEATURE_SET,
+        ),
+        default=ABSOLUTE_FEATURE_SET,
+        help=(
+            "Input feature schema. The default preserves the existing "
+            "absolute-only dataset."
+        ),
+    )
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
+    configure_feature_set(args.feature_set)
     if args.events_per_shard <= 0:
         raise ValueError("--events-per-shard must be positive")
     if args.output_dir.exists():
@@ -770,13 +990,19 @@ def main() -> None:
         (h_files, "H", H_LABEL),
         (z_files, "Z", Z_LABEL),
     ]
+    selection_manifest = None
+    selected_entries = None
+    if args.selection_manifest is not None:
+        selection_manifest, selected_entries = load_selection_manifest(
+            args.selection_manifest.resolve()
+        )
 
     print(
         f"Inputs: H={len(h_files)} files, Z={len(z_files)} files\n"
         "Pass 1/2: computing train-only statistics..."
     )
     stats, decay_modes, counts = compute_train_stats(
-        samples, args.step_size
+        samples, args.step_size, selected_entries
     )
     mode_to_id = {mode: index + 1 for index, mode in enumerate(decay_modes)}
     (args.output_dir / "stats.json").write_text(
@@ -791,10 +1017,12 @@ def main() -> None:
         args.events_per_shard,
         stats,
         mode_to_id,
+        selected_entries,
     )
 
     metadata = {
         "format_version": 1,
+        "feature_set": FEATURE_SET,
         "tree_name": TREE_NAME,
         "labels": {"Z": Z_LABEL, "H": H_LABEL},
         "split_fractions": {
@@ -832,18 +1060,72 @@ def main() -> None:
         },
         "root_step_size": args.step_size,
         "events_per_shard": args.events_per_shard,
+        "event_selection": (
+            {
+                "manifest_path": str(
+                    args.selection_manifest.resolve()
+                ),
+                "manifest_sha256": hashlib.sha256(
+                    args.selection_manifest.read_bytes()
+                ).hexdigest(),
+                "description": selection_manifest.get("description"),
+                "selected_counts": selection_manifest.get(
+                    "selected_counts"
+                ),
+            }
+            if selection_manifest is not None
+            else None
+        ),
+        "parent_relative_features": (
+            {
+                "reference": "reconstructed parent tau",
+                "track_inputs": list(TRACK_PARENT_RELATIVE_INPUTS),
+                "pfo_inputs": list(PFO_PARENT_RELATIVE_INPUTS),
+                "event_outputs": (
+                    list(EVENT_PARENT_RELATIVE_V3_OUTPUTS)
+                    if FEATURE_SET == PARENT_RELATIVE_V3_FEATURE_SET
+                    else []
+                ),
+                "transform": {
+                    "dEta": "train-standardized",
+                    "dPhi": "sin/cos, not standardized",
+                    "ptFraction": "log1p then train-standardized",
+                    "tau_pair": (
+                        "abs(dEta), sin/cos(dPhi), "
+                        "log(tau_minus_pt/tau_plus_pt)"
+                    ),
+                    "met_relative": (
+                        "sin/cos dPhi to each tau and "
+                        "MET/(tau_minus_pt+tau_plus_pt)"
+                    ),
+                },
+            }
+            if FEATURE_SET in (
+                PARENT_RELATIVE_FEATURE_SET,
+                PARENT_RELATIVE_V3_FEATURE_SET,
+            )
+            else None
+        ),
     }
     (args.output_dir / "metadata.json").write_text(
         json.dumps(metadata, indent=2) + "\n"
     )
 
     total = sum(counts[split]["total"] for split in SPLIT_NAMES)
-    expected = sum(
-        uproot.open(f"{path}:{TREE_NAME}").num_entries
-        for path in (*h_files, *z_files)
-    )
+    if selection_manifest is None:
+        expected = sum(
+            uproot.open(f"{path}:{TREE_NAME}").num_entries
+            for path in (*h_files, *z_files)
+        )
+    else:
+        expected = sum(
+            int(selection_manifest["selected_counts"][split]["total"])
+            for split in SPLIT_NAMES
+        )
     if total != expected:
-        raise ValueError(f"Split total {total} != ROOT total {expected}")
+        raise ValueError(
+            f"Split total {total} != expected selected total {expected}"
+        )
 
     print("\nDataset build complete:")
     for split in SPLIT_NAMES:

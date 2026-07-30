@@ -1,0 +1,11 @@
+universe = vanilla
+executable = /home/rbaba/tauspin-ss/MakeNtuple/run_condor.sh
+arguments = Z /home/rbaba/tauspin-ss/MakeNtuple/inputs/Z_chunk_020_retry old-full
+output = /home/rbaba/tauspin-ss/MakeNtuple/logs/old-full/Z_020_retry.$(ClusterId).$(ProcId).out
+error = /home/rbaba/tauspin-ss/MakeNtuple/logs/old-full/Z_020_retry.$(ClusterId).$(ProcId).err
+log = /home/rbaba/tauspin-ss/MakeNtuple/logs/old-full/Z_020_retry_$(ClusterId).log
+request_cpus = 1
+request_memory = 5GB
+getenv = True
+
+queue 1
