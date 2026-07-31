@@ -1,0 +1,10 @@
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/test_999801_sub402_n2000/DAOD_PHYS.pool.root.1
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/test_999801_sub403_n2000/DAOD_PHYS.pool.root.1
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/test_999801_sub404_n2000/DAOD_PHYS.pool.root.1
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/test_999801_sub405_n2000/DAOD_PHYS.pool.root.1
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/test_999801_sub406_n2000/DAOD_PHYS.pool.root.1
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/test_999801_sub407_n2000/DAOD_PHYS.pool.root.1
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/test_999801_sub408_n2000/DAOD_PHYS.pool.root.1
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/test_999801_sub409_n2000/DAOD_PHYS.pool.root.1
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/test_999801_sub410_n2000/DAOD_PHYS.pool.root.1
+/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2/test_999801_sub411_n2000/DAOD_PHYS.pool.root.1

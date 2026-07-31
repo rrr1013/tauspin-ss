@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import random
 from pathlib import Path
-from typing import Iterator
+from typing import Iterator, Literal
 
 import torch
 from torch.utils.data import IterableDataset, get_worker_info
@@ -21,6 +21,7 @@ CLS_TYPE = 5
 NO_SIDE = 0
 MINUS_SIDE = 1
 PLUS_SIDE = 2
+WorkerPartition = Literal["shard", "event"]
 
 
 class TauSpinDataset(IterableDataset):
@@ -34,6 +35,7 @@ class TauSpinDataset(IterableDataset):
         shuffle: bool = False,
         balanced: bool = False,
         seed: int = RANDOM_SEED,
+        worker_partition: WorkerPartition = "shard",
     ) -> None:
         super().__init__()
         self.processed_dir = Path(processed_dir)
@@ -41,6 +43,11 @@ class TauSpinDataset(IterableDataset):
         self.shuffle = shuffle
         self.balanced = balanced
         self.seed = seed
+        if worker_partition not in ("shard", "event"):
+            raise ValueError(
+                "worker_partition must be either 'shard' or 'event'"
+            )
+        self.worker_partition = worker_partition
         self.epoch = 0
         self.metadata = json.loads(
             (self.processed_dir / "metadata.json").read_text()
@@ -52,12 +59,53 @@ class TauSpinDataset(IterableDataset):
     def set_epoch(self, epoch: int) -> None:
         self.epoch = epoch
 
-    def _records_for_worker(self, sample: str) -> list[dict]:
-        records = list(self.records[sample])
+    def _record_assignments_for_worker(
+        self,
+        sample: str,
+    ) -> list[tuple[dict, int]]:
+        assignments = []
+        event_offset = 0
+        for record in self.records[sample]:
+            assignments.append((record, event_offset))
+            event_offset += int(record["events"])
         worker = get_worker_info()
-        if worker is not None:
-            records = records[worker.id :: worker.num_workers]
-        return records
+        if worker is not None and self.worker_partition == "shard":
+            assignments = assignments[worker.id :: worker.num_workers]
+        return assignments
+
+    def _indices_for_worker(
+        self,
+        n_events: int,
+        event_offset: int,
+    ) -> range:
+        worker = get_worker_info()
+        if worker is None or self.worker_partition == "shard":
+            return range(n_events)
+        return event_partition_indices(
+            n_events,
+            worker.id,
+            worker.num_workers,
+            event_offset,
+        )
+
+    def _local_event_count(self, sample: str) -> int:
+        worker = get_worker_info()
+        if worker is None or self.worker_partition == "shard":
+            return sum(
+                int(record["events"])
+                for record, _ in self._record_assignments_for_worker(sample)
+            )
+        return sum(
+            event_partition_count(
+                int(record["events"]),
+                worker.id,
+                worker.num_workers,
+                event_offset,
+            )
+            for record, event_offset in self._record_assignments_for_worker(
+                sample
+            )
+        )
 
     def _class_iterator(
         self,
@@ -65,21 +113,23 @@ class TauSpinDataset(IterableDataset):
         target: int | None,
         rng: random.Random,
     ) -> Iterator[dict[str, torch.Tensor]]:
-        records = self._records_for_worker(sample)
-        if not records:
+        assignments = self._record_assignments_for_worker(sample)
+        if not assignments:
             return
         yielded = 0
         while target is None or yielded < target:
             if self.shuffle:
-                rng.shuffle(records)
-            for record in records:
+                rng.shuffle(assignments)
+            for record, event_offset in assignments:
                 shard = torch.load(
                     self.processed_dir / record["path"],
                     map_location="cpu",
                     weights_only=True,
                 )
                 n_events = int(shard["labels"].shape[0])
-                indices = list(range(n_events))
+                indices = list(
+                    self._indices_for_worker(n_events, event_offset)
+                )
                 if self.shuffle:
                     rng.shuffle(indices)
                 for index in indices:
@@ -104,10 +154,7 @@ class TauSpinDataset(IterableDataset):
             return
 
         local_counts = {
-            sample: sum(
-                int(record["events"])
-                for record in self._records_for_worker(sample)
-            )
+            sample: self._local_event_count(sample)
             for sample in ("H", "Z")
         }
         target = max(local_counts.values())
@@ -127,6 +174,44 @@ class TauSpinDataset(IterableDataset):
         if self.balanced:
             return 2 * max(int(counts["H"]), int(counts["Z"]))
         return int(counts["total"])
+
+
+def event_partition_count(
+    n_events: int,
+    worker_id: int,
+    num_workers: int,
+    event_offset: int = 0,
+) -> int:
+    """Count indices worker_id::num_workers without materialising them."""
+    if num_workers <= 0:
+        raise ValueError("num_workers must be positive")
+    if not 0 <= worker_id < num_workers:
+        raise ValueError("worker_id must be in [0, num_workers)")
+    return len(
+        event_partition_indices(
+            n_events,
+            worker_id,
+            num_workers,
+            event_offset,
+        )
+    )
+
+
+def event_partition_indices(
+    n_events: int,
+    worker_id: int,
+    num_workers: int,
+    event_offset: int = 0,
+) -> range:
+    """Return one worker's global event stride within a shard."""
+    if n_events < 0:
+        raise ValueError("n_events cannot be negative")
+    if num_workers <= 0:
+        raise ValueError("num_workers must be positive")
+    if not 0 <= worker_id < num_workers:
+        raise ValueError("worker_id must be in [0, num_workers)")
+    local_start = (worker_id - event_offset) % num_workers
+    return range(local_start, n_events, num_workers)
 
 
 def extract_event(

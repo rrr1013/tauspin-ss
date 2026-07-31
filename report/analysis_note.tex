@@ -1,0 +1,162 @@
+\documentclass[xelatex,ja=standard,a4paper,10pt]{bxjsarticle}
+\input{preamble}
+
+\title{等質量 \(H/Z\rightarrow\tau\tau\) 分離解析\\
+\large Analysis Note：根拠・仮定・レビュー記録}
+\author{Ryunosuke Baba}
+\date{2026年7月30日}
+
+\begin{document}
+\maketitle
+
+\section{目的と判定状態}
+
+本解析の目的は、質量を約 \SI{91.2}{\GeV} に揃えた
+\(H\rightarrow\tau^+\tau^-\) と \(Z\rightarrow\tau^+\tau^-\) の
+専用Monte Carlo sampleについて、再構成されたevent、\(\tau\)、track、PFOを
+用いたTransformerの分離能を調べることである。
+検証する作業仮説は、truth親ボソン\(\pt\)をclass間でmatchingした後にも、
+再構成レベルの多変量入力にH/Z labelを識別する情報が残る、というものである。
+ここでmatchingとは各分割・\SI{20}{\GeV} bin内のH/Z事象数を
+等しくする処理であり、bin内shapeまで同一にする操作ではない。
+
+\begin{description}
+  \item[レポート作成状態] 実行済み結果を記述する準備が整っている。
+  \item[物理結論の状態] \textbf{Blocked（spin-only解釈）}。
+    spin on/off比較、feature ablation、複数seed、systematic variationが
+    未実施であるため、観測したAUCをスピン相関だけに帰属させない。
+  \item[許容する結論] 固定partial snapshotにおける、
+    再構成レベルH/Z分離の探索的proof of concept。
+\end{description}
+
+\section{サンプル、selection、評価設計}
+
+入力は \(\sqrt{s}=\SI{13}{\TeV}\) の専用H/Z sampleであり、truth質量は
+それぞれ \SI{91.1872}{\GeV} と \SI{91.1876}{\GeV} である。
+固定snapshotは生成予定量の63.1\%に相当する。
+selection効率の分母はntuple生成時に実際に読み取ったraw event数、
+分子はselection後のentry数とする。
+
+eventは決定的hashでtrain/validation/testへ80:10:10に分割してから、
+split内かつtruth親ボソン\(\pt\)の\SI{20}{\GeV} bin内でH/Zを同数に
+downsampleした。HPO、epoch選択、最終checkpointの固定にはvalidationだけを使い、
+最終checkpointをtestへ適用した。ただし同じtest splitは先行モデルにも
+使用済みであるため、解析全体から独立したblind holdoutとは扱わない。
+test上の信号効率70\%点はtest ROCそのものから記述的に選んだ値であり、
+独立に固定したworking pointとは扱わない。
+
+\section{Evidence Ledger}
+
+\small
+\noindent
+\begin{tabularx}{\textwidth}{@{}p{0.18\textwidth}X
+  >{\raggedright\arraybackslash}p{0.22\textwidth}@{}}
+  \toprule
+  種別 & 本文へ用いる根拠 & 主なsource \\
+  \midrule
+  observed &
+  Hは331 DAOD、661,964 raw、332,932 selected、
+  Zは300 DAOD、599,955 raw、306,731 selected。 &
+  \path{MakeNtuple/outputs/fixed-partial-v2/summary.json} \\
+  observed &
+  全64 jobがsuccess、schemaは84 branch、truth親PDG不一致は0。 &
+  fixed snapshot summaryとjob metadata \\
+  decision &
+  selectionは\(\pt\geq\SI{20}{\GeV}\)、\(|\eta|\leq2.5\)、
+  \(|q|=1\)、1/3 track、RNN Loose、exactly two、opposite sign。
+  truth matchとtrigger requirementは置かない。 &
+  \path{MakeNtuple/README.md}、selection実装 \\
+  observed &
+  matching後はtrain 456,720、validation 57,038、test 56,338で、
+  各split内のH/Zは同数、合計570,096 event。 &
+  matching manifest \\
+  calculated &
+  truth親\(\pt\)だけを使うclassifierのAUCはmatching前0.570524、
+  matching後0.500660。 &
+  matching report \\
+  decision &
+  final modelはtrial 5の設定で40 epochを最初から再学習し、
+  validation 3-epoch平均が最大の23--25の中央、epoch 24を固定。 &
+  final selection metadata、history \\
+  observed &
+  epoch 24のvalidation AUCは0.604712、lossは0.677076。
+  test AUCは0.608814、BCE lossは0.674915。 &
+  final metrics JSON \\
+  calculated &
+  test ROCで信号効率0.700025となる記述点は、
+  Z効率0.548972、Z除去率1.821586、threshold 0.465762。 &
+  final test metrics JSON \\
+  calculated &
+  testのtruth親\(\pt\) bin別AUC誤差棒はclass-stratified
+  bootstrap 1,000回の68\% interval。global intervalではない。 &
+  \path{pt_binned_auc_test.pdf}の生成metadata \\
+  observed &
+  最終train splitのZ event 1件に
+  track \(\pt=\SI{7.74e10}{\GeV}\) の非物理的外れ値が残る。 &
+  processed shard監査とsource entry照合 \\
+  \bottomrule
+\end{tabularx}
+\normalsize
+
+\section{仮定と既知の制約}
+
+\begin{enumerate}
+  \item selectionは再構成\(\tau\)候補へ適用しており、truth-matched候補数、
+    真のhadronic-\(\tau\)対、fake候補のH/Z別組成を監査していない。
+  \item sampleはpartialかつnominal-onlyであり、断面積、積分luminosity、
+    event weight、scale factor、systematic variationを用いない。
+  \item matchingしたのはtruth親\(\pt\)だけであり、production radiation、
+    20 GeV bin内shape、非単調な\(\pt\)依存、\(\eta\)、recoil、
+    detector response、decay-mode組成の差は個別に除いていない。
+  \item 最終学習はseed 42の1回で、AUCのglobal statistical intervalもない。
+  \item 同じtest splitはHPO直後のモデルと40-epoch最終モデルにそれぞれ1回
+    適用済みである。ただし最終checkpointはvalidation-onlyで固定し、
+    testを見た後の再選択はしない。
+  \item MetMaker error message、invalid tau-track link warning、
+    上記の非物理的track外れ値は、最終性能への影響を未評価である。
+  \item split keyはROOT basenameとfile-local entryへ依存するため、
+    fileのrename/rechunkに不変ではない。
+\end{enumerate}
+
+\section{独立レビューと反映記録}
+
+数値、物理解釈、論文形式を独立にレビューした。
+event数、split/matching数、HPO、epoch 24、AUC/loss、効率、
+主要hashについて、本文と固定成果物の数値不一致は見つからなかった。
+一方、物理レビューはspin-only解釈を\textbf{Blocked}、論文形式レビューは
+\textbf{Major revision}と判定した。
+
+本文だけで修正可能な指摘には、次を反映した。
+\begin{itemize}
+  \item ``test''を再利用済みの固定評価分割と定義し、blind性能とは呼ばない。
+  \item \(\pt\)整合の保証を20 GeV binごとの事象数一致に限定し、
+    raw-\(\pt\) AUCの診断能力にも限界を明記する。
+  \item selection効率をraw DAOD事象からの処理通過率と定義し、
+    truth \(\tau\)組成の未監査を主要制約へ置く。
+  \item HPOの設計と観測結果をMethods/Resultsへ分離し、目標100 trial、
+    時刻停止後21 trial、停止閾値、事後的な順位規則を明記する。
+  \item sigmoid出力を確率ではなくscoreと呼び、inclusive統計区間がないため
+    validation/testのcompatibilityを主張しない。
+  \item 全入力特徴量、model profile、software、hashを付録へ置き、
+    生成段階の設定不足から再現性の範囲を固定DAOD以降に限定する。
+\end{itemize}
+
+文章修正では解消できず、追加解析を要する項目は、truth-matched
+hadronic-\(\tau\)組成とfake組成の監査、より厳密なkinematic control、
+未使用holdout、inclusive metricの区間、複数seed、spin on/off、
+feature ablation、systematic variation、MET/link/outlierの影響評価である。
+したがって、論文として成立する範囲は固定partial Monte Carlo標本に対する
+再構成候補分類の探索的概念実証までであり、spin感度測定または公開論文相当の
+最終物理結果には到達していない。
+
+\section{実装・検証結果}
+
+日本語二段組の本文、構成・図表計画、レビュー前草稿、独立レビュー記録を
+TeXで作成した。本文ではMethods/Resultsの分離、二段の解析フロー図、
+自立した図表caption、再現性付録、一次文献を追加した。
+XeLaTeXで全TeX文書を再buildし、Ghostscriptで本文全ページを画像化して、
+重なり、切れ、図表の順序を確認した。remote repositoryでは
+\path{/report/}が\path{.gitignore}により無視され、
+作業前後でHEADが不変であること、すなわちcommitを作成していないことを確認した。
+
+\end{document}

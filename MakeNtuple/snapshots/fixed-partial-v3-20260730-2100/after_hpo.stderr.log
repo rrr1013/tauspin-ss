@@ -1,0 +1,30 @@
+/home/rbaba/tauspin-ss/NN/.venv-gpu/lib64/python3.9/site-packages/optuna/_experimental.py:33: ExperimentalWarning: Argument ``constant_liar`` is an experimental feature. The interface can change in the future.
+  optuna_warn(
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/usr/lib64/python3.9/multiprocessing/queues.py", line 244, in _feed
+  File "/usr/lib64/python3.9/multiprocessing/queues.py", line 244, in _feed
+  File "/usr/lib64/python3.9/multiprocessing/reduction.py", line 51, in dumps
+  File "/usr/lib64/python3.9/multiprocessing/reduction.py", line 51, in dumps
+  File "/home/rbaba/tauspin-ss/NN/.venv-gpu/lib64/python3.9/site-packages/torch/multiprocessing/reductions.py", line 618, in reduce_storage
+  File "/home/rbaba/tauspin-ss/NN/.venv-gpu/lib64/python3.9/site-packages/torch/storage.py", line 451, in wrapper
+  File "/home/rbaba/tauspin-ss/NN/.venv-gpu/lib64/python3.9/site-packages/torch/multiprocessing/reductions.py", line 618, in reduce_storage
+  File "/home/rbaba/tauspin-ss/NN/.venv-gpu/lib64/python3.9/site-packages/torch/storage.py", line 451, in wrapper
+  File "/home/rbaba/tauspin-ss/NN/.venv-gpu/lib64/python3.9/site-packages/torch/storage.py", line 526, in _share_fd_cpu_
+  File "/home/rbaba/tauspin-ss/NN/.venv-gpu/lib64/python3.9/site-packages/torch/storage.py", line 526, in _share_fd_cpu_
+RuntimeError: unable to open shared memory object </torch_1027092_4036541625_9> in read-write mode: Too many open files (24)
+RuntimeError: unable to open shared memory object </torch_1027093_4152928774_7> in read-write mode: Too many open files (24)
+Traceback (most recent call last):
+  File "/usr/lib64/python3.9/multiprocessing/queues.py", line 244, in _feed
+  File "/usr/lib64/python3.9/multiprocessing/reduction.py", line 51, in dumps
+  File "/home/rbaba/tauspin-ss/NN/.venv-gpu/lib64/python3.9/site-packages/torch/multiprocessing/reductions.py", line 619, in reduce_storage
+  File "/usr/lib64/python3.9/multiprocessing/reduction.py", line 198, in DupFd
+  File "/usr/lib64/python3.9/multiprocessing/resource_sharer.py", line 48, in __init__
+OSError: [Errno 24] Too many open files
+Traceback (most recent call last):
+  File "/usr/lib64/python3.9/multiprocessing/queues.py", line 244, in _feed
+  File "/usr/lib64/python3.9/multiprocessing/reduction.py", line 51, in dumps
+  File "/home/rbaba/tauspin-ss/NN/.venv-gpu/lib64/python3.9/site-packages/torch/multiprocessing/reductions.py", line 619, in reduce_storage
+  File "/usr/lib64/python3.9/multiprocessing/reduction.py", line 198, in DupFd
+  File "/usr/lib64/python3.9/multiprocessing/resource_sharer.py", line 48, in __init__
+OSError: [Errno 24] Too many open files

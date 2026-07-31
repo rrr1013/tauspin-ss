@@ -65,22 +65,24 @@ class TauSpinTransformer(nn.Module):
 
     def forward(self, batch: Mapping[str, torch.Tensor]) -> torch.Tensor:
         object_type = batch["object_type"]
-        tokens = torch.zeros(
-            *object_type.shape,
-            self.cls_token.shape[-1],
-            dtype=batch["event_features"].dtype,
-            device=object_type.device,
-        )
-
         projectors = (
             (EVENT_TYPE, "event_features", self.event_projector),
             (TAU_TYPE, "tau_features", self.tau_projector),
             (TRACK_TYPE, "track_features", self.track_projector),
             (PFO_TYPE, "pfo_features", self.pfo_projector),
         )
+        tokens = None
         for type_id, feature_name, projector in projectors:
-            mask = object_type == type_id
-            tokens[mask] = projector(batch[feature_name][mask])
+            projected = projector(batch[feature_name])
+            mask = (object_type == type_id).unsqueeze(-1).to(projected.dtype)
+            contribution = projected * mask
+            tokens = (
+                contribution
+                if tokens is None
+                else tokens + contribution
+            )
+        if tokens is None:
+            raise RuntimeError("No input projectors are configured")
 
         tokens = (
             tokens

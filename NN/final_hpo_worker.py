@@ -15,6 +15,7 @@ import numpy as np
 import torch
 from torch import nn
 
+from dataset import event_partition_count
 from hpo_utils import (
     MODEL_PROFILES,
     configure_tf32,
@@ -22,6 +23,7 @@ from hpo_utils import (
     create_streaming_loader,
     evaluate_model,
     learning_rate_for_step,
+    portable_model_state_dict,
     sha256_file,
     shutdown_loader_workers,
     strip_evaluation_arrays,
@@ -36,22 +38,32 @@ from train import (
 )
 
 
-BATCH_SIZE = 128
-NUM_WORKERS = 2
+BATCH_SIZE = 512
+NUM_WORKERS = 12
 PREFETCH_FACTOR = 2
+WORKER_PARTITION = "event"
 SEED = 42
 WEIGHT_DECAY = 1.0e-4
 EXPECTED_FEATURE_SET = "absolute-plus-parent-relative-v3"
+RUNTIME_PROFILE_ID = "high-throughput-v1"
+FINITE_CHECK_INTERVAL = 100
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Run one fixed-partial-v2 final-HPO trial on one GPU."
+        description="Run one hash-bound validation-only HPO trial on one GPU."
     )
     parser.add_argument("--processed-dir", type=Path, required=True)
     parser.add_argument("--trial-dir", type=Path, required=True)
     parser.add_argument("--trial-number", type=int, required=True)
     parser.add_argument("--parameters-json", type=Path, required=True)
+    parser.add_argument(
+        "--event-selection-manifest", type=Path, required=True
+    )
+    parser.add_argument("--snapshot-manifest", type=Path, required=True)
+    parser.add_argument("--expected-metadata-sha256", required=True)
+    parser.add_argument("--expected-selection-sha256", required=True)
+    parser.add_argument("--expected-snapshot-sha256", required=True)
     parser.add_argument("--max-epochs", type=int, default=32)
     parser.add_argument("--objective-start-epoch", type=int, default=8)
     parser.add_argument("--early-stop-start-epoch", type=int, default=20)
@@ -80,15 +92,22 @@ def save_csv(path: Path, rows: list[dict[str, Any]]) -> None:
 
 
 def exact_steps_per_epoch(metadata: dict[str, Any]) -> int:
-    """Mirror two-worker shard partitioning and worker-local balancing."""
+    """Mirror event-stride partitioning and worker-local balancing."""
     total_batches = 0
     for worker in range(NUM_WORKERS):
         counts = {}
         for sample in ("H", "Z"):
-            records = metadata["shards"]["train"][sample][
-                worker::NUM_WORKERS
-            ]
-            counts[sample] = sum(int(record["events"]) for record in records)
+            event_offset = 0
+            counts[sample] = 0
+            for record in metadata["shards"]["train"][sample]:
+                n_events = int(record["events"])
+                counts[sample] += event_partition_count(
+                    n_events,
+                    worker,
+                    NUM_WORKERS,
+                    event_offset,
+                )
+                event_offset += n_events
         worker_events = 2 * max(counts.values())
         total_batches += math.ceil(worker_events / BATCH_SIZE)
     return total_batches
@@ -107,15 +126,19 @@ def checkpoint_document(
     rolling_auc: float | None,
     rolling_loss: float | None,
     metadata_hash: str,
+    selection_hash: str,
+    snapshot_hash: str,
+    precision: dict[str, Any],
 ) -> dict[str, Any]:
     return {
         "format_version": 1,
         "purpose": (
-            "Summer-school final HPO on frozen fixed-partial-v2; "
+            "Hash-bound high-throughput validation-only HPO; "
             "test split was not loaded."
         ),
+        "runtime_profile_id": RUNTIME_PROFILE_ID,
         "trial_number": trial_number,
-        "model_state_dict": model.state_dict(),
+        "model_state_dict": portable_model_state_dict(model),
         "feature_set": metadata["feature_set"],
         "feature_dimensions": metadata["feature_dimensions"],
         "feature_names": metadata["feature_names"],
@@ -136,10 +159,24 @@ def checkpoint_document(
         "rolling_validation_loss_3": rolling_loss,
         "data": {
             "processed_metadata_sha256": metadata_hash,
+            "event_selection_manifest_sha256": selection_hash,
+            "snapshot_manifest_sha256": snapshot_hash,
             "event_selection": metadata["event_selection"],
             "batch_size": BATCH_SIZE,
             "balanced_sampling": True,
+            "worker_partition": WORKER_PARTITION,
             "seed": SEED,
+        },
+        "runtime": {
+            "num_workers": NUM_WORKERS,
+            "prefetch_factor": PREFETCH_FACTOR,
+            "worker_partition": WORKER_PARTITION,
+            "input_projection": "dense_masked",
+            "precision": precision,
+            "fused_adamw": True,
+            "torch_compile": True,
+            "torch_compile_dynamic": True,
+            "finite_check_interval_steps": FINITE_CHECK_INTERVAL,
         },
         "test_split_loaded": False,
     }
@@ -147,11 +184,29 @@ def checkpoint_document(
 
 def main() -> None:
     args = parse_args()
-    args.trial_dir.mkdir(parents=True, exist_ok=False)
-    parameters = json.loads(args.parameters_json.read_text())
+    parameter_document = json.loads(args.parameters_json.read_text())
+    parameters = parameter_document.get("parameters", parameter_document)
     metadata_path = args.processed_dir / "metadata.json"
     metadata = json.loads(metadata_path.read_text())
     metadata_hash = sha256_file(metadata_path)
+    selection_hash = sha256_file(args.event_selection_manifest)
+    snapshot_hash = sha256_file(args.snapshot_manifest)
+    actual_hashes = {
+        "metadata": metadata_hash,
+        "selection": selection_hash,
+        "snapshot": snapshot_hash,
+    }
+    expected_hashes = {
+        "metadata": args.expected_metadata_sha256,
+        "selection": args.expected_selection_sha256,
+        "snapshot": args.expected_snapshot_sha256,
+    }
+    if actual_hashes != expected_hashes:
+        raise RuntimeError(
+            f"Data binding hash mismatch: actual={actual_hashes}, "
+            f"expected={expected_hashes}"
+        )
+    args.trial_dir.mkdir(parents=True, exist_ok=False)
     if metadata["feature_set"] != EXPECTED_FEATURE_SET:
         raise ValueError(
             f"Expected {EXPECTED_FEATURE_SET}, got {metadata['feature_set']}"
@@ -179,7 +234,9 @@ def main() -> None:
         model.parameters(),
         lr=float(parameters["learning_rate"]),
         weight_decay=WEIGHT_DECAY,
+        fused=True,
     )
+    model = torch.compile(model, dynamic=True)
     loss_function = nn.BCEWithLogitsLoss()
     _, validation_loader = create_streaming_loader(
         args.processed_dir,
@@ -190,6 +247,7 @@ def main() -> None:
         shuffle=False,
         balanced=False,
         seed=SEED,
+        worker_partition=WORKER_PARTITION,
     )
     steps_per_epoch = exact_steps_per_epoch(metadata)
     maximum_steps = steps_per_epoch * args.max_epochs
@@ -205,12 +263,19 @@ def main() -> None:
     )
 
     config = {
+        "runtime_profile_id": RUNTIME_PROFILE_ID,
         "trial_number": args.trial_number,
         "parameters": parameters,
         "model_profile": MODEL_PROFILES[parameters["model_profile"]],
         "parameter_counts": parameter_counts,
         "processed_dir": str(args.processed_dir.resolve()),
         "processed_metadata_sha256": metadata_hash,
+        "event_selection_manifest_path": str(
+            args.event_selection_manifest.resolve()
+        ),
+        "event_selection_manifest_sha256": selection_hash,
+        "snapshot_manifest_path": str(args.snapshot_manifest.resolve()),
+        "snapshot_manifest_sha256": snapshot_hash,
         "feature_set": metadata["feature_set"],
         "steps_per_epoch": steps_per_epoch,
         "max_epochs": args.max_epochs,
@@ -221,7 +286,13 @@ def main() -> None:
             "batch_size": BATCH_SIZE,
             "num_workers": NUM_WORKERS,
             "prefetch_factor": PREFETCH_FACTOR,
+            "worker_partition": WORKER_PARTITION,
+            "input_projection": "dense_masked",
             "precision": precision,
+            "fused_adamw": True,
+            "torch_compile": True,
+            "torch_compile_dynamic": True,
+            "finite_check_interval_steps": FINITE_CHECK_INTERVAL,
             "seed": SEED,
         },
         "early_stopping": {
@@ -270,18 +341,24 @@ def main() -> None:
                 shuffle=True,
                 balanced=True,
                 seed=SEED,
+                worker_partition=WORKER_PARTITION,
             )
             train_dataset.set_epoch(epoch_index)
             train_iterator = iter(train_loader)
-            epoch_loss_sum = 0.0
+            epoch_loss_terms: list[torch.Tensor] = []
             epoch_events = 0
             epoch_steps = 0
+            last_logits: torch.Tensor | None = None
+            last_loss: torch.Tensor | None = None
             try:
                 while True:
                     try:
                         cpu_batch = next(train_iterator)
                     except StopIteration:
                         break
+                    class_counts.update(
+                        cpu_batch["labels"].to(torch.int64).tolist()
+                    )
                     batch = move_batch(cpu_batch, device)
                     global_step += 1
                     epoch_steps += 1
@@ -299,23 +376,24 @@ def main() -> None:
                     model.train()
                     optimizer.zero_grad(set_to_none=True)
                     logits = model(batch)
-                    require_finite(logits, "train logits")
                     loss = loss_function(logits, batch["labels"])
-                    require_finite(loss, "train loss")
                     loss.backward()
-                    require_finite_gradients(model)
+                    if (
+                        epoch_steps == 1
+                        or epoch_steps % FINITE_CHECK_INTERVAL == 0
+                    ):
+                        require_finite(logits, "train logits")
+                        require_finite(loss, "train loss")
+                        require_finite_gradients(model)
                     optimizer.step()
                     batch_events = int(batch["labels"].shape[0])
-                    epoch_loss_sum += float(loss.detach().cpu()) * batch_events
+                    epoch_loss_terms.append(
+                        loss.detach() * batch_events
+                    )
                     epoch_events += batch_events
                     events_seen += batch_events
-                    class_counts.update(
-                        batch["labels"]
-                        .detach()
-                        .to(torch.int64)
-                        .cpu()
-                        .tolist()
-                    )
+                    last_logits = logits
+                    last_loss = loss
             finally:
                 shutdown = shutdown_loader_workers(
                     train_loader, train_iterator
@@ -326,6 +404,13 @@ def main() -> None:
 
             if epoch_steps == 0 or epoch_events == 0:
                 raise RuntimeError("Training epoch produced no batches")
+            assert last_logits is not None and last_loss is not None
+            require_finite(last_logits, "final train logits")
+            require_finite(last_loss, "final train loss")
+            require_finite_gradients(model)
+            epoch_loss_sum = float(
+                torch.stack(epoch_loss_terms).sum().cpu()
+            )
             metrics = evaluate_model(
                 model,
                 validation_loader,
@@ -382,6 +467,9 @@ def main() -> None:
                     rolling_auc=record["rolling_auc_3"],
                     rolling_loss=record["rolling_loss_3"],
                     metadata_hash=metadata_hash,
+                    selection_hash=selection_hash,
+                    snapshot_hash=snapshot_hash,
+                    precision=precision,
                 ),
                 recent_path,
             )
@@ -497,6 +585,10 @@ def main() -> None:
         device,
     )
     reloaded_model.load_state_dict(saved["model_state_dict"])
+    reloaded_evaluation_model = torch.compile(
+        reloaded_model,
+        dynamic=True,
+    )
     _, reload_loader = create_streaming_loader(
         args.processed_dir,
         split="validation",
@@ -506,9 +598,10 @@ def main() -> None:
         shuffle=False,
         balanced=False,
         seed=SEED,
+        worker_partition=WORKER_PARTITION,
     )
     reload_metrics = evaluate_model(
-        reloaded_model,
+        reloaded_evaluation_model,
         reload_loader,
         loss_function,
         device,
@@ -534,6 +627,7 @@ def main() -> None:
     single_best = max(history, key=lambda item: item["validation_auc"])
     result = {
         "state": "COMPLETE",
+        "runtime_profile_id": RUNTIME_PROFILE_ID,
         "trial_number": args.trial_number,
         "objective": best_rolling_auc,
         "best_rolling_auc_3": best_rolling_auc,
@@ -558,6 +652,11 @@ def main() -> None:
             int(record["epoch_optimizer_steps"]) for record in history
         ],
         "checkpoint_sha256": sha256_file(best_checkpoint_path),
+        "data_binding": {
+            "processed_metadata_sha256": metadata_hash,
+            "event_selection_manifest_sha256": selection_hash,
+            "snapshot_manifest_sha256": snapshot_hash,
+        },
         "reloaded_center_auc": float(reload_metrics["auc"]),
         "reloaded_center_auc_difference": reload_difference,
         "validation_worker_shutdown": validation_shutdown,

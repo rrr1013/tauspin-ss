@@ -38,7 +38,37 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--output-dir", type=Path, default=OUTPUT_DIR)
     parser.add_argument("--epochs", type=int, default=EPOCHS)
-    parser.add_argument("--batch-size", type=int, default=BATCH_SIZE)
+    parser.add_argument(
+        "--runtime-profile",
+        choices=("compatibility", "high-throughput"),
+        default="high-throughput",
+        help=(
+            "high-throughput uses the verified GPU settings (default); "
+            "compatibility explicitly preserves the original runtime"
+        ),
+    )
+    parser.add_argument("--batch-size", type=int)
+    parser.add_argument("--num-workers", type=int)
+    parser.add_argument("--prefetch-factor", type=int)
+    parser.add_argument(
+        "--worker-partition",
+        choices=("shard", "event"),
+    )
+    parser.add_argument(
+        "--tf32",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+    )
+    parser.add_argument(
+        "--fused-adamw",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+    )
+    parser.add_argument(
+        "--compile-model",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+    )
     parser.add_argument("--learning-rate", type=float, default=LEARNING_RATE)
     parser.add_argument("--weight-decay", type=float, default=WEIGHT_DECAY)
     parser.add_argument(
@@ -46,7 +76,31 @@ def parse_args() -> argparse.Namespace:
         choices=("cuda", "cpu", "mps"),
         default="cuda",
     )
-    return parser.parse_args()
+    arguments = parser.parse_args()
+    defaults = {
+        "compatibility": {
+            "batch_size": BATCH_SIZE,
+            "num_workers": 0,
+            "prefetch_factor": 2,
+            "worker_partition": "shard",
+            "tf32": False,
+            "fused_adamw": False,
+            "compile_model": False,
+        },
+        "high-throughput": {
+            "batch_size": 512,
+            "num_workers": 12,
+            "prefetch_factor": 2,
+            "worker_partition": "event",
+            "tf32": True,
+            "fused_adamw": True,
+            "compile_model": True,
+        },
+    }[arguments.runtime_profile]
+    for name, value in defaults.items():
+        if getattr(arguments, name) is None:
+            setattr(arguments, name, value)
+    return arguments
 
 
 def set_random_seed(seed: int) -> None:
@@ -73,6 +127,35 @@ def choose_device(requested: str) -> torch.device:
     if requested == "mps" and not torch.backends.mps.is_available():
         raise RuntimeError("MPS was requested but is not available")
     return torch.device(requested)
+
+
+def configure_tf32(enabled: bool) -> dict[str, bool | str]:
+    torch.backends.cuda.matmul.allow_tf32 = enabled
+    torch.backends.cudnn.allow_tf32 = enabled
+    torch.set_float32_matmul_precision("high" if enabled else "highest")
+    return {
+        "enabled": enabled,
+        "matmul_allow_tf32": torch.backends.cuda.matmul.allow_tf32,
+        "cudnn_allow_tf32": torch.backends.cudnn.allow_tf32,
+        "float32_matmul_precision": (
+            torch.get_float32_matmul_precision()
+        ),
+    }
+
+
+def portable_model_state_dict(
+    model: nn.Module,
+) -> dict[str, torch.Tensor]:
+    original = getattr(model, "_orig_mod", None)
+    return (model if original is None else original).state_dict()
+
+
+def shutdown_loader_workers(loader: DataLoader) -> None:
+    iterator = getattr(loader, "_iterator", None)
+    if iterator is not None and hasattr(iterator, "_shutdown_workers"):
+        iterator._shutdown_workers()
+    if hasattr(loader, "_iterator"):
+        loader._iterator = None
 
 
 def move_batch(
@@ -147,26 +230,36 @@ def train_one_epoch(
     device: torch.device,
 ) -> float:
     model.train()
-    loss_sum = 0.0
+    loss_terms: list[torch.Tensor] = []
     event_count = 0
+    last_logits: torch.Tensor | None = None
+    last_loss: torch.Tensor | None = None
 
-    for batch in loader:
-        batch = move_batch(batch, device)
+    for step, cpu_batch in enumerate(loader, start=1):
+        batch = move_batch(cpu_batch, device)
         optimizer.zero_grad(set_to_none=True)
         logits = model(batch)
-        require_finite(logits, "train logits")
         loss = loss_function(logits, batch["labels"])
-        require_finite(loss, "train loss")
         loss.backward()
-        require_finite_gradients(model)
+        if step == 1 or step % 100 == 0:
+            require_finite(logits, "train logits")
+            require_finite(loss, "train loss")
+            require_finite_gradients(model)
         optimizer.step()
 
         batch_size = int(batch["labels"].shape[0])
-        loss_sum += float(loss.detach().cpu()) * batch_size
+        loss_terms.append(loss.detach() * batch_size)
         event_count += batch_size
+        last_logits = logits
+        last_loss = loss
 
     if event_count == 0:
         raise RuntimeError("Training loader produced no events")
+    assert last_logits is not None and last_loss is not None
+    require_finite(last_logits, "final train logits")
+    require_finite(last_loss, "final train loss")
+    require_finite_gradients(model)
+    loss_sum = float(torch.stack(loss_terms).sum().cpu())
     return loss_sum / event_count
 
 
@@ -245,7 +338,7 @@ def checkpoint(
 ) -> dict:
     return {
         "epoch": epoch,
-        "model_state_dict": model.state_dict(),
+        "model_state_dict": portable_model_state_dict(model),
         "optimizer_state_dict": optimizer.state_dict(),
         "metrics": metrics,
         "feature_dimensions": metadata["feature_dimensions"],
@@ -258,6 +351,16 @@ def checkpoint(
             "learning_rate": arguments.learning_rate,
             "weight_decay": arguments.weight_decay,
             "seed": RANDOM_SEED,
+            "runtime_profile": arguments.runtime_profile,
+            "num_workers": arguments.num_workers,
+            "prefetch_factor": arguments.prefetch_factor,
+            "worker_partition": arguments.worker_partition,
+            "input_projection": "dense_masked",
+            "tf32": arguments.tf32,
+            "tf32_configuration": arguments.tf32_configuration,
+            "fused_adamw": arguments.fused_adamw,
+            "torch_compile": arguments.compile_model,
+            "torch_compile_dynamic": arguments.compile_model,
         },
     }
 
@@ -283,6 +386,16 @@ def save_history(
             "batch_size": arguments.batch_size,
             "learning_rate": arguments.learning_rate,
             "weight_decay": arguments.weight_decay,
+            "runtime_profile": arguments.runtime_profile,
+            "num_workers": arguments.num_workers,
+            "prefetch_factor": arguments.prefetch_factor,
+            "worker_partition": arguments.worker_partition,
+            "input_projection": "dense_masked",
+            "tf32": arguments.tf32,
+            "tf32_configuration": arguments.tf32_configuration,
+            "fused_adamw": arguments.fused_adamw,
+            "torch_compile": arguments.compile_model,
+            "torch_compile_dynamic": arguments.compile_model,
         },
         "epochs": history,
     }
@@ -381,10 +494,21 @@ def main() -> None:
     arguments = parse_args()
     if arguments.epochs <= 0 or arguments.batch_size <= 0:
         raise ValueError("Epochs and batch size must be positive")
+    if arguments.num_workers < 0:
+        raise ValueError("Number of workers cannot be negative")
+    if arguments.prefetch_factor <= 0:
+        raise ValueError("Prefetch factor must be positive")
     arguments.output_dir.mkdir(parents=True, exist_ok=True)
 
     set_random_seed(RANDOM_SEED)
     device = choose_device(arguments.device)
+    if arguments.fused_adamw and device.type != "cuda":
+        raise ValueError("Fused AdamW requires --device cuda")
+    if arguments.compile_model and not hasattr(torch, "compile"):
+        raise RuntimeError("This PyTorch build does not provide torch.compile")
+    arguments.tf32_configuration = configure_tf32(
+        arguments.tf32 and device.type == "cuda"
+    )
     metadata = json.loads(
         (arguments.processed_dir / "metadata.json").read_text()
     )
@@ -395,6 +519,7 @@ def main() -> None:
         shuffle=True,
         balanced=True,
         seed=RANDOM_SEED,
+        worker_partition=arguments.worker_partition,
     )
     validation_dataset = TauSpinDataset(
         arguments.processed_dir,
@@ -402,6 +527,7 @@ def main() -> None:
         shuffle=False,
         balanced=False,
         seed=RANDOM_SEED,
+        worker_partition=arguments.worker_partition,
     )
     test_dataset = TauSpinDataset(
         arguments.processed_dir,
@@ -409,14 +535,21 @@ def main() -> None:
         shuffle=False,
         balanced=False,
         seed=RANDOM_SEED,
+        worker_partition=arguments.worker_partition,
     )
     loader_arguments = {
         "batch_size": arguments.batch_size,
-        "num_workers": 0,
+        "num_workers": arguments.num_workers,
         "pin_memory": device.type == "cuda",
         "collate_fn": collate_events,
     }
-    train_loader = DataLoader(train_dataset, **loader_arguments)
+    if arguments.num_workers > 0:
+        loader_arguments.update(
+            {
+                "persistent_workers": True,
+                "prefetch_factor": arguments.prefetch_factor,
+            }
+        )
     validation_loader = DataLoader(
         validation_dataset, **loader_arguments
     )
@@ -426,15 +559,33 @@ def main() -> None:
         metadata["feature_dimensions"],
         metadata["tau_decay_num_embeddings"],
     ).to(device)
+    optimizer_arguments = {
+        "lr": arguments.learning_rate,
+        "weight_decay": arguments.weight_decay,
+    }
+    if arguments.fused_adamw:
+        optimizer_arguments["fused"] = True
     optimizer = torch.optim.AdamW(
         model.parameters(),
-        lr=arguments.learning_rate,
-        weight_decay=arguments.weight_decay,
+        **optimizer_arguments,
     )
+    if arguments.compile_model:
+        model = torch.compile(model, dynamic=True)
     loss_function = nn.BCEWithLogitsLoss()
 
     print(f"PyTorch: {torch.__version__}", flush=True)
     print(f"Device: {device}", flush=True)
+    print(
+        "Runtime: "
+        f"profile={arguments.runtime_profile}, "
+        f"batch={arguments.batch_size}, "
+        f"workers={arguments.num_workers}, "
+        f"partition={arguments.worker_partition}, "
+        f"TF32={arguments.tf32_configuration['enabled']}, "
+        f"fused_AdamW={arguments.fused_adamw}, "
+        f"compile_dynamic={arguments.compile_model}",
+        flush=True,
+    )
     if device.type == "cuda":
         print(f"CUDA runtime: {torch.version.cuda}", flush=True)
         print(
@@ -459,13 +610,17 @@ def main() -> None:
     for epoch in range(1, arguments.epochs + 1):
         start_time = time.perf_counter()
         train_dataset.set_epoch(epoch - 1)
-        train_loss = train_one_epoch(
-            model,
-            train_loader,
-            optimizer,
-            loss_function,
-            device,
-        )
+        train_loader = DataLoader(train_dataset, **loader_arguments)
+        try:
+            train_loss = train_one_epoch(
+                model,
+                train_loader,
+                optimizer,
+                loss_function,
+                device,
+            )
+        finally:
+            shutdown_loader_workers(train_loader)
         (
             validation_loss,
             validation_auc,
@@ -545,6 +700,8 @@ def main() -> None:
         metadata["tau_decay_num_embeddings"],
     ).to(device)
     best_model.load_state_dict(best_checkpoint["model_state_dict"])
+    if arguments.compile_model:
+        best_model = torch.compile(best_model, dynamic=True)
 
     (
         reloaded_validation_loss,
@@ -622,6 +779,8 @@ def main() -> None:
         test_auc,
         arguments.output_dir / "training_summary.pdf",
     )
+    shutdown_loader_workers(validation_loader)
+    shutdown_loader_workers(test_loader)
     print(
         f"Training complete. Best epoch: {best_epoch} "
         f"(validation_loss={best_validation_loss:.6f}). "

@@ -1,0 +1,61 @@
+\geometry{margin=18mm,top=20mm,bottom=22mm,columnsep=7mm}
+\usepackage{amsmath,amssymb,mathtools,bm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,shapes.geometric}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{url}
+\usepackage[
+  colorlinks=true,
+  linkcolor=blue!45!black,
+  citecolor=blue!45!black,
+  urlcolor=blue!55!black
+]{hyperref}
+\ifpTeX
+  \usepackage{pxjahyper}
+\fi
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\captionsetup{font=small,labelfont=bf}
+\setlength{\emergencystretch}{2em}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{0pt}
+\setlist{nosep,leftmargin=1.8em}
+\sisetup{
+  detect-all,
+  group-separator={,},
+  group-minimum-digits=4,
+  range-phrase={--},
+  range-units=single
+}
+
+\newcommand{\pt}{p_{\mathrm{T}}}
+\newcommand{\met}{E_{\mathrm{T}}^{\mathrm{miss}}}
+\newcommand{\Htt}{H\rightarrow\tau^{+}\tau^{-}}
+\newcommand{\Ztt}{Z\rightarrow\tau^{+}\tau^{-}}
+\newcommand{\epssig}{\varepsilon_{\mathrm{sig}}}
+\newcommand{\epsbkg}{\varepsilon_{\mathrm{bkg}}}
+\DeclareSIUnit{\GeV}{GeV}
+\DeclareSIUnit{\TeV}{TeV}
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+\newcommand{\todo}[1]{\textcolor{red!70!black}{[要確認: #1]}}
+
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{節}{節}
+\crefname{equation}{式}{式}
+
+\hypersetup{
+  pdftitle={再構成されたタウ対による等質量H/Z分離の探索},
+  pdfauthor={Ryunosuke Baba}
+}

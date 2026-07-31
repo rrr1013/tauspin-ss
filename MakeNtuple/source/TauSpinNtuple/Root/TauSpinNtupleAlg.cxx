@@ -474,7 +474,10 @@ void TauSpinNtupleAlg::fillTau(const xAOD::TauJet* tau, std::size_t tauIndex){
         m_tauRNNJetScoreSigTrans[tauIndex] = rnnJetScoreSigTrans(*tau);
     }
     if (gnTauScore.isAvailable(*tau)){
-        m_tauGNTauScoreV0[tauIndex] = gnTauScore(*tau);
+        const float score = gnTauScore(*tau);
+        if (std::isfinite(score)){
+            m_tauGNTauScoreV0[tauIndex] = score;
+        }
     }
     if (gnTauScoreSigTrans.isAvailable(*tau)){
         m_tauGNTauScoreSigTransV0[tauIndex] = gnTauScoreSigTrans(*tau);

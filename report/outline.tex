@@ -1,0 +1,119 @@
+\documentclass[xelatex,ja=standard,a4paper,10pt]{bxjsarticle}
+\input{preamble}
+
+\title{等質量 \(H/Z\rightarrow\tau^{+}\tau^{-}\) 分離レポート\\
+\large 論文構成・図表計画}
+\author{Ryunosuke Baba}
+\date{2026年7月30日}
+
+\begin{document}
+\maketitle
+
+\section{論文の中心メッセージ}
+
+truth質量をそれぞれ \(\SI{91.1872}{\GeV}\) と
+\(\SI{91.1876}{\GeV}\) に設定した \(H\) と \(Z\) の再構成
+\(\tau\)候補を含むMonte Carlo事象を用いた。各データ分割・truth親ボソン
+\(\pt\) の20 GeV binごとにH/Z事象数を等しくした後でも、再構成された
+\(\tau\)候補、track、PFO、\(\met\) にはH/Z labelを分離する情報が残った。
+最終Transformerの固定評価分割ROC AUCは \(0.6088\) であった。
+
+ただし、本解析はスピン相関だけを明示的に抽出した測定ではない。
+20 GeV bin内部を含む生成・再構成差を除き切っておらず、再構成
+\(\tau\)候補のtruth組成、系統誤差、複数seedも評価していない。
+固定評価分割も先行モデルに使用済みである。したがって、結果は
+固定partial Monte Carlo標本に対する再構成候補分類の探索的な概念実証として
+提示する。
+
+\section{章立て}
+
+\begin{table}[H]
+  \centering
+  \small
+  \begin{tabularx}{\textwidth}{@{}p{0.15\textwidth}X X@{}}
+    \toprule
+    章 & 書く内容 & 読者に答える問い \\
+    \midrule
+    要旨
+      & sample、\(\pt\) matching、最終AUC、解釈上の限界を数値とともに要約する。
+      & 何を行い、何が分かり、どこまで主張できるか。\\
+    1. 序論
+      & \(\tau\) 崩壊が親粒子のスピン情報を運ぶこと、等質量 \(H/Z\) 比較の動機、
+        Transformerを使う理由を説明する。
+      & なぜ質量差を消して \(H/Z\) を分けるのか。\\
+    2. MCと再構成
+      & \(H/Z+j\) 生成、TauDecay、AF3、63.1\% snapshot、CP object処理、
+        再構成\(\tau\)候補selection、ntuple検証を書く。
+      & 入力事象はどのように作られ、どの事象を使ったか。\\
+    3. 解析手法
+      & 決定的分割、分割内20 GeV-bin \(\pt\)整合、入力変数、
+        前処理、token列、Transformer、HPOの探索・停止・選択規則を定義する。
+      & 解析手順をどう固定し、どこまで再現できるか。\\
+    4. 結果
+      & \(\pt\)整合診断、HPOの完了数と選択結果、40 epoch学習曲線、ROC、
+        score、70\%信号効率点、\(\pt\)-bin AUCを示す。
+      & 最終分離性能はいくらで、学習は安定しているか。\\
+    5. 解釈と制約
+      & 粗い親\(\pt\)整合の効果と限界、候補組成、partial sample、
+        nominal-only、single seed、評価分割の再利用、MET・trackの未監査点を整理する。
+      & 何をスピン効果と呼べず、次に何を検証すべきか。\\
+    6. 結論
+      & 数値結果と限定付き結論を短く再掲する。
+      & この実習から得られた最終的な到達点は何か。\\
+    付録
+      & 全入力特徴量、model profile、HPO停止条件、software、成果物hashを置く。
+      & 本文を切らずに再現性をどう担保するか。\\
+    \bottomrule
+  \end{tabularx}
+  \caption{本文の構成と各章の役割。}
+\end{table}
+
+\section{図の計画}
+
+\begin{enumerate}
+  \item \textbf{解析フローとtoken表現（新規TikZ図）}: DAODからselection、
+    split、\(\pt\)整合、Tensor化、Transformer、validation選択、
+    固定評価までを二段で示す。
+  \item \textbf{HPOのlearning-rate--dropout散布図}: 21 trialの観測点とtrial 5を示す。
+    TPEの点密度を性能面と解釈しない旨を図注へ入れる。
+  \item \textbf{40 epoch学習曲線}: epoch 24以降、train lossだけが下がり、
+    validation lossとAUCが悪化する過学習を示す。
+  \item \textbf{検証/固定評価ROC}: 固定評価AUC \(0.6088\) を主要性能として示す。
+    70\%信号効率点は固定評価ROC内部で読み取った記述値であり、
+    事前固定閾値ではないと明記する。
+  \item \textbf{固定評価score分布}: H/Zの重なりが大きい一方、分布がずれることを示す。
+    sigmoid出力の確率calibrationは未評価と明記する。
+  \item \textbf{固定評価 \(\pt\)-bin AUC}: class-stratified bootstrap 1000回の68\%区間を示し、
+    error barは系統誤差でないと明記する。
+\end{enumerate}
+
+本文では個別図を読みやすい大きさで使い、同じ内容を縮小再掲する
+summary panelは採用しない。
+
+\section{表の計画}
+
+\begin{enumerate}
+  \item H/ZのDAOD数、raw event、selection後event、selection効率。
+  \item 再構成\(\tau\)候補とeventのselection条件。
+  \item \(\pt\)整合前後およびtrain/validation/testの事象数。
+  \item EVENT/TAU/TRACK/PFOの入力と次元、Transformerの最終構成。
+  \item HPO範囲とvalidation-onlyで選ばれたtrial 5の設定。
+  \item 検証/固定評価のAUC、BCE loss、固定評価ROC上の70\%信号効率点。
+  \item 付録にmodel profile、dataset、manifest、checkpointのSHA-256。
+\end{enumerate}
+
+\section{論文中で避ける主張}
+
+\begin{itemize}
+  \item 「スピン相関だけでAUC \(0.6088\) を得た」とは書かない。
+  \item 「20 GeV bin整合で親\(\pt\)分布を完全に同一にした」とは書かない。
+  \item 「解析全体でtestを一度しか見ていない」とは書かない。同じtest splitは、
+    HPO直後モデルと40 epoch最終モデルのそれぞれで評価済みである。
+  \item 再構成\(\tau\)候補selectionの通過率を、真の
+    \(\tau_{\mathrm{had}}\tau_{\mathrm{had}}\)信号効率とは呼ばない。
+  \item 70\%信号効率点をvalidationで固定したoperating pointとは呼ばない。
+  \item bootstrap区間をsystematic uncertaintyと呼ばない。
+  \item 63.1\% snapshotを完成sampleまたは実データ性能として扱わない。
+\end{itemize}
+
+\end{document}

@@ -17,7 +17,12 @@ import torch
 from torch import nn
 from torch.utils.data import DataLoader
 
-from dataset import TauSpinDataset, collate_events, extract_event
+from dataset import (
+    TauSpinDataset,
+    WorkerPartition,
+    collate_events,
+    extract_event,
+)
 from model import TauSpinTransformer
 from train import binary_roc_auc, move_batch, require_finite, roc_curve
 
@@ -186,6 +191,7 @@ def create_streaming_loader(
     shuffle: bool,
     balanced: bool,
     seed: int,
+    worker_partition: WorkerPartition = "shard",
 ) -> tuple[TauSpinDataset, DataLoader]:
     dataset = TauSpinDataset(
         processed_dir,
@@ -193,6 +199,7 @@ def create_streaming_loader(
         shuffle=shuffle,
         balanced=balanced,
         seed=seed,
+        worker_partition=worker_partition,
     )
     options: dict[str, Any] = {
         "batch_size": batch_size,
@@ -471,13 +478,24 @@ def set_optimizer_learning_rate(
 
 def parameter_fingerprint(model: nn.Module) -> str:
     digest = hashlib.sha256()
-    for name, parameter in model.state_dict().items():
+    for name, parameter in portable_model_state_dict(model).items():
         tensor = parameter.detach().cpu().contiguous()
         digest.update(name.encode())
         digest.update(str(tensor.dtype).encode())
         digest.update(str(tuple(tensor.shape)).encode())
         digest.update(tensor.numpy().tobytes())
     return digest.hexdigest()
+
+
+def unwrapped_model(model: nn.Module) -> nn.Module:
+    """Return the eager module behind torch.compile, when present."""
+    original = getattr(model, "_orig_mod", None)
+    return model if original is None else original
+
+
+def portable_model_state_dict(model: nn.Module) -> dict[str, torch.Tensor]:
+    """Save keys accepted by the ordinary, uncompiled model."""
+    return unwrapped_model(model).state_dict()
 
 
 def background_rejection_at_signal_efficiency(
@@ -606,7 +624,7 @@ def make_checkpoint(
             "Old-sample HPO smoke test only; not a physics result."
         ),
         "trial_number": trial_number,
-        "model_state_dict": model.state_dict(),
+        "model_state_dict": portable_model_state_dict(model),
         "optimizer_state_dict": optimizer.state_dict(),
         "feature_dimensions": metadata["feature_dimensions"],
         "tau_decay_num_embeddings": metadata[

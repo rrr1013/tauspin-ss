@@ -1,0 +1,218 @@
+\documentclass[xelatex,ja=standard,a4paper,10pt]{bxjsarticle}
+\input{preamble}
+\hypersetup{
+  pdftitle={等質量H/Zタウ対分離解析：独立物理・論文形式レビュー記録},
+  pdfauthor={Independent review record}
+}
+
+\title{等質量 \(H/Z\rightarrow\tau\tau\) 分離解析\\
+\large 独立物理・論文形式レビュー記録}
+\author{Independent review record}
+\date{2026年7月30日}
+
+\begin{document}
+\maketitle
+
+\section{レビュー対象と総合判定}
+
+本記録は、固定された解析成果物、解析ノートおよび日本語論文草稿を対象に、
+物理内容と論文形式を独立に点検した結果をまとめるものである。
+保存済みの表、JSON、学習履歴および図との数値照合を行ったが、
+事象処理または学習そのものを独立に再実行した検証ではない。
+
+\begin{table}[H]
+  \centering
+  \caption{レビュー判定の要約。``条件付き可''は、本文の主張範囲を
+    固定partial Monte Carlo sampleにおける探索的分類へ限定することを
+    条件とする。}
+  \label{tab:review_summary}
+  \begin{tabularx}{0.92\textwidth}{@{}p{0.29\textwidth}
+    p{0.19\textwidth}X@{}}
+    \toprule
+    評価項目 & 判定 & 根拠 \\
+    \midrule
+    保存済み成果物との数値整合性 & Pass &
+      本文の主要な事象数、AUC、lossおよびworking pointは成果物と一致した。\\
+    探索的分類結果としての物理結論 & 条件付き可 &
+      等質量H/Z候補を再構成量で統計的に分離できることは示すが、
+      原因をスピン相関だけに帰属させない。\\
+    spin-only解釈 & Blocked &
+      spin on/off比較、feature ablationおよび候補組成の監査がない。\\
+    論文形式 & Major revision &
+      基本構成は論文として妥当である一方、手法節と結果節の分離、
+      再現性情報、図表説明、付録および引用の整備が必要である。\\
+    公開論文としての完成度 & 未到達 &
+      統計的不確かさ、複数seed、系統変動、独立holdoutおよび
+      residual shortcutの評価が不足する。\\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+したがって、現状の成果は
+\textbf{固定partial snapshotを用いた再構成候補レベルの探索的
+proof of conceptを報告する日本語HEP論文・analysis note}
+としては成立し得る。一方、スピン相関の測定、スピン情報だけによる分離能、
+または公開可能な最終感度を主張する論文としては成立しない。
+
+\section{数値整合性}
+
+独立照合では、草稿に現れる次の主要数値に不一致を認めなかった。
+
+\begin{itemize}
+  \item 固定snapshotはH 331ファイル、Z 300ファイルの計631ファイルで、
+    生成予定量の63.1\%に相当する。raw事象数はH 661,964、Z 599,955、
+    selection後はH 332,932、Z 306,731である。
+  \item split内のtruth親ボソン \(\pt\) matching後は、train 456,720、
+    validation 57,038、test 56,338事象であり、各split内のH/Z数は等しい。
+    合計は570,096事象である。
+  \item 親ボソン \(\pt\) だけをscoreとするAUCは、matching前0.570524から
+    matching後0.500660へ低下する。
+  \item HPOで採用したtrial 5のobjectiveは0.604504であり、40 epoch再学習では
+    epoch 23--25のvalidation AUC平均0.6044569を最大として中央のepoch 24を
+    選択している。
+  \item epoch 24におけるvalidation AUCは0.6047115、lossは0.6770760、
+    固定evaluation splitにおけるAUCは0.6088142、BCE lossは0.6749150である。
+  \item evaluation split上で読み取った信号効率0.700025の点では、
+    Z効率0.548972、Z除去率1.821586、threshold 0.465762である。
+\end{itemize}
+
+これらは成果物の転記整合性に関する確認であり、inclusive AUCの統計区間や
+異なる学習seed間の変動を保証するものではない。また、\(\pt\)-bin別AUCの
+誤差棒は1,000回のclass-stratified bootstrapによる16--84 percentile区間で
+あり、inclusive指標の区間または系統不確かさではない。
+
+\section{Major comments}
+
+\begin{enumerate}
+  \item \textbf{解析対象の物理組成が未確定である。}
+    selectionはtruth matchingも真のhadronic-\(\tau\)崩壊も要求しない。
+    0、1、2本のtruth-matched \(\tau\)候補の割合、fake候補の起源および
+    崩壊mode組成が未監査であるため、結果を真の
+    \(H/Z\rightarrow\tau_{\mathrm{had}}\tau_{\mathrm{had}}\)効率または
+    スピン感度と解釈できない。
+
+  \item \textbf{\(\pt\) matchingだけではresidual shortcutを排除できない。}
+    \(\SI{20}{\GeV}\) binごとのH/Z事象数を揃え、
+    \(\pt\)を単調なscoreとしたAUCが約0.5になることは有用な診断である。
+    しかし、bin内の形状差、overflow、非単調な差、\(\eta\)、recoil、
+    production radiation、detector responseおよびdecay-mode組成の差は
+    残り得る。この診断だけから親運動学のshortcutが除去されたとは言えない。
+
+  \item \textbf{最終評価は完全なblind holdoutではない。}
+    同一のtest splitがHPO直後のモデルと40 epoch最終モデルの両方に
+    適用済みである。最終checkpointをvalidationだけで固定し、
+    testを見た後に再選択していないことは重要であるが、解析全体を通じて
+    一度も見ていない独立testとは区別しなければならない。
+
+  \item \textbf{精度と頑健性の定量化が不足する。}
+    inclusive AUC、BCE lossおよび背景除去率の統計区間がなく、
+    最終学習もseed 42の1回である。複数seed、完成sampleおよび
+    detector/modeling systematic variationがないため、小さな性能差の
+    有意性と一般化可能性を評価できない。
+
+  \item \textbf{生成・解析の再現性情報が不十分である。}
+    generator名とversionだけでなく、process card、結合・摂動次数、
+    decay/filter設定、PDF、tuneおよび入力manifestが必要である。
+    これらが回収できない範囲は明示し、再現性をDAOD以降へ限定すべきである。
+    また、split規則、入力feature順序、前処理、停止条件、software version、
+    repository revisionおよびartifact hashをMethodsまたは付録へ集約する
+    必要がある。
+
+  \item \textbf{HPOの完了条件とモデル選択を正確に記述する必要がある。}
+    studyは100 trialを目標としたが、時間制約により21 trialで終了し、
+    うち18 trialがearly stoppingとなった。これを100 trialを完遂した
+    studyとして書いてはならない。また、trial順位規則がstudy設定に
+    保存されていない場合、``事前定義済み''とは呼ばず、解析時に適用した
+    選択規則として記述する。
+
+  \item \textbf{既知のdata-quality問題の影響が未評価である。}
+    MetMaker error message、invalid tau--track link warning、およびtrainの
+    Z事象1件に残る非物理的なtrack
+    \(\pt=\SI{7.74e10}{\GeV}\)について、発生率、入力への伝播および
+    性能への影響を定量化する必要がある。
+
+  \item \textbf{論文の情報配置を整理する必要がある。}
+    Methodsには分割・matching規則、入力、前処理、model、HPO設計を置き、
+    matching後事象数、\(\pt\)-only AUC、trial 5の成績など観測結果は
+    Resultsへ移すべきである。付録は本文の図を重複させず、
+    完全な再現性情報と補助結果を担わせる。
+\end{enumerate}
+
+\section{Minor comments}
+
+\begin{enumerate}
+  \item sigmoid出力は較正済み確率ではないため、\(P(H)\)ではなく
+    ``H-class score \(s\)''と呼ぶ。
+  \item figure captionだけで、対象split、signal/background、軸、規格化、
+    誤差棒およびworking pointの定義が分かるようにする。
+  \item workflow図は小さい横一列配置を避け、二段または縦方向にして
+    印刷時の可読性を確保する。
+  \item abstractは主要結論と制約を優先して短くし、631/1,000ファイルと
+    test由来working pointの意味を明確にする。
+  \item TauDecayとEvtGenを引用し、固有名詞の大文字小文字を保つ。
+    preprintにはarXiv識別子を示す。
+  \item 英語の一般名詞を必要以上に混在させず、日本語として自然な語順へ
+    整える。ただしsoftware名、変数名および物理用語は一貫して保持する。
+\end{enumerate}
+
+\section{本文修正で限定できる主張}
+
+以下は新しい解析を追加せず、本文の記述と構成を修正することで
+誤解を避けられる事項である。
+
+\begin{itemize}
+  \item 対象を真の\(\tau_{\mathrm{had}}\tau_{\mathrm{had}}\)事象ではなく、
+    指定selectionを通過した再構成\(\tau\)候補対と明記する。
+  \item 631ファイル、63.1\%の固定partial snapshotであり、完成sampleの
+    最終性能ではないことをabstract、sample節および結論に示す。
+  \item ``\(\pt\)分布を一致させた''ではなく、
+    ``各splitの\(\SI{20}{\GeV}\) binごとにH/Z事象数を等しくした''と記し、
+    \(\pt\)-only AUCは限定的な診断と位置付ける。
+  \item repository内でtestと呼ばれるsplitを``固定evaluation split''として
+    扱い、既に別モデルの評価にも使用したため完全なblind holdoutではない
+    ことを結果提示前に開示する。
+  \item working pointはevaluation splitのROCから読み取った記述点であり、
+    validationで固定して独立testへ移した動作点ではないと明記する。
+  \item classifier出力を較正確率と解釈せず、H-class scoreとして記述する。
+  \item 結論を``広い再構成情報を用いた分類器が固定sample内のH/Z labelを
+    統計的に分離した''に限定し、AUCをspin-only性能と同一視しない。
+  \item 回収できない生成設定を明示し、完全再現可能とする範囲を
+    固定DAODから後段の処理へ限定する。
+\end{itemize}
+
+\section{追加解析が必要な未解決事項}
+
+次の項目は文章上の但し書きだけでは解消せず、物理主張を進めるための
+追加解析を必要とする。
+
+\begin{enumerate}
+  \item truth-matched \(\tau\)本数、fake起源およびhadronic decay-mode組成の監査。
+  \item より細かな再重み付けまたは多変量診断によるresidual shortcutの検証。
+  \item spin correlationを保持したsampleと除去・再重み付けしたsampleの比較。
+  \item event、\(\tau\)、track、PFOなどのfeature group ablationと、
+    理論的spin observableを用いたbaseline比較。
+  \item 複数seed、inclusive metricの統計区間、完成sampleおよび
+    systematic variationによる頑健性評価。
+  \item validationでmodelとthresholdを固定した後に一度だけ用いる、
+    未見の独立holdoutによる最終評価。
+  \item 警告、無効linkおよび非物理的外れ値を除外・修復した場合の
+    性能変化の評価。
+  \item event weight、断面積および積分luminosityを含む物理的yieldまたは
+    sensitivityを論じる場合は、それらを用いた別途の統計解析。
+\end{enumerate}
+
+\section{論文として成立する範囲}
+
+標題、abstract、Introduction、Samples、Methods、Results、Discussion、
+Conclusion、AppendixおよびReferencesという基本的な章構成は、
+HEP論文の形式として妥当である。MethodsとResultsを分離し、captionを
+自己完結させ、再現性情報と引用を補えば、\textbf{再構成候補を用いた
+H/Z分類器の探索的研究を報告する内部論文またはanalysis note}として
+首尾一貫した文書になる。
+
+ただし、現時点で論文が支持するのは、固定した部分sampleと既定の処理条件の
+もとで得られた分類性能の点推定である。spin-only解釈、実データへの適用可能性、
+detector/modeling uncertaintyを含む最終性能、または物理感度を主題とする
+公開論文へ進めるには、前節の未解決事項を満たした再解析が必要である。
+
+\end{document}

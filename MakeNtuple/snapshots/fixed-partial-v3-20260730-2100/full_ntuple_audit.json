@@ -1,0 +1,1741 @@
+{
+  "format_version": 1,
+  "completed_at": "2026-07-30T21:53:13.832312+09:00",
+  "snapshot_id": "fixed-partial-v3-20260730-2100",
+  "snapshot_manifest_path": "/home/rbaba/tauspin-ss/MakeNtuple/snapshots/fixed-partial-v3-20260730-2100/snapshot_manifest.json",
+  "snapshot_manifest_sha256": "832bef0ec3f69fd52dcbec91927adcc7cb2de9925f6bd6efbba688502a568019",
+  "samples": {
+    "H": {
+      "expected_chunk_count": 50,
+      "actual_root_count": 50,
+      "input_file_count": 499,
+      "unique_input_file_count": 499,
+      "selected_entries": 502038,
+      "output_bytes": 342985685,
+      "coverage_failures": [],
+      "condor": {
+        "cluster": 11557698,
+        "expected_jobs": 50,
+        "termination_count": 50,
+        "return_zero_count": 50,
+        "held_count": 0,
+        "stderr_log_count": 50,
+        "stdout_log_count": 50,
+        "nonempty_stderr_logs": [],
+        "failures": []
+      },
+      "root_outputs": [
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_000.root",
+          "sha256": "2b648482a845213671461d49eec907487582133bebb80632bd962b125fb0b554",
+          "open": true,
+          "tree": true,
+          "entries": 10002,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_001.root",
+          "sha256": "bac5073d46bdf84938cb08df628bfbb3cb249d02e5164ed5960943117f6484c1",
+          "open": true,
+          "tree": true,
+          "entries": 10046,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_002.root",
+          "sha256": "6d417c63cb80484c86cea0bfded2bcb635131c4908345fd34c54f135b77f6de3",
+          "open": true,
+          "tree": true,
+          "entries": 10020,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_003.root",
+          "sha256": "86e3456914c6e7ce5c08f93ef2329faea56bafe2b75627f2c38ff65ffc069fcd",
+          "open": true,
+          "tree": true,
+          "entries": 10024,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_004.root",
+          "sha256": "04f7654dc301f202e8de880f55244b665261cc1c2c250f03e1f4278f9a69f169",
+          "open": true,
+          "tree": true,
+          "entries": 9994,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_005.root",
+          "sha256": "a549891b46b2a83a1d5579c6f4c4e40cf54c5ac8eb81b7cdb31ee9a1c5eb36c4",
+          "open": true,
+          "tree": true,
+          "entries": 10045,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_006.root",
+          "sha256": "de9dbafd85a86660b0465e9550b117df1ecd9b05f62eb16183205f8789260e14",
+          "open": true,
+          "tree": true,
+          "entries": 10102,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_007.root",
+          "sha256": "a989221fc1b549bbfdc3ea4154618e1a9eed01a62cc10f6e3cbbe4f3f4828c50",
+          "open": true,
+          "tree": true,
+          "entries": 9933,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_008.root",
+          "sha256": "0fa51a00d6d6276c463d2ff132ae3175ee793f60a945526271ee94028d986bc0",
+          "open": true,
+          "tree": true,
+          "entries": 9992,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_009.root",
+          "sha256": "0159edb07a38552bd6b5d0eb9ab05e211f7bfb5eb2a6e955b83e83abe1c4818a",
+          "open": true,
+          "tree": true,
+          "entries": 10023,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_010.root",
+          "sha256": "287993602508702f5ab75c8a29c654a5d1a0f7892e667fc0606dfaecca3d0fe5",
+          "open": true,
+          "tree": true,
+          "entries": 9952,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_011.root",
+          "sha256": "a07b65a4fb9e8873a12a78b7aea36455661655f1913e73b958cd7cc6971b70e7",
+          "open": true,
+          "tree": true,
+          "entries": 10051,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_012.root",
+          "sha256": "dfae19dfe1557830a2023225bd9fa425fc560b460b2fb060994b5e7c406a7a3d",
+          "open": true,
+          "tree": true,
+          "entries": 10120,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_013.root",
+          "sha256": "2c63b4060062757d148273dccd74ae7d8d021a1d192e165ed3a5a7653a3ed0ce",
+          "open": true,
+          "tree": true,
+          "entries": 10109,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_014.root",
+          "sha256": "380958eb6d7ab691b64110230faed3e3805b90388cecb5d55464612530085774",
+          "open": true,
+          "tree": true,
+          "entries": 10109,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_015.root",
+          "sha256": "bbfcd02cc043fdad9ed03f401a971e6f546795e69a8895c17124b0e64f3ec33f",
+          "open": true,
+          "tree": true,
+          "entries": 10068,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_016.root",
+          "sha256": "283694a92628339052db5d4a0334d80ce66d954ce25bbe13d42e97a1c9dba22e",
+          "open": true,
+          "tree": true,
+          "entries": 10049,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_017.root",
+          "sha256": "11de3db458df65fa876b69f207356056b16f26c98c4c0720dbfb698f01246da6",
+          "open": true,
+          "tree": true,
+          "entries": 10091,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_018.root",
+          "sha256": "9c53de50fd3d65fc55cbd382582d608f6ecba80c447a076fc383412fee045cbc",
+          "open": true,
+          "tree": true,
+          "entries": 10045,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_019.root",
+          "sha256": "7f4ffa13319f5c2ec88a65ea57eceba0c5f6823de28fb6ec0931a05396cb4dad",
+          "open": true,
+          "tree": true,
+          "entries": 10040,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_020.root",
+          "sha256": "fd52c7fd32681e7b030422756407997cd66d426db246f07623eef616b4c94473",
+          "open": true,
+          "tree": true,
+          "entries": 10073,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_021.root",
+          "sha256": "d00dc1ac21ecd5f76ea7f269a7706fd9ef66ff1b635cd6341c143a0750700300",
+          "open": true,
+          "tree": true,
+          "entries": 10064,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_022.root",
+          "sha256": "fc70176a910d70cea00df2aa2621f29eb0b003fe98786e2fcd7442397d50ea0a",
+          "open": true,
+          "tree": true,
+          "entries": 10100,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_023.root",
+          "sha256": "b08796e61f0f9d98cafef26900bfaf1c0a4689224d5ee205f855eaec76886272",
+          "open": true,
+          "tree": true,
+          "entries": 10092,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_024.root",
+          "sha256": "081c003eb3e472132f59aede5f9042d02de453d2b73bea4e43908e4d4d504d37",
+          "open": true,
+          "tree": true,
+          "entries": 10065,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_025.root",
+          "sha256": "828d21875143dbe518aa316b57d3b06ab52200cecc1f331c59f9751dfa4085dc",
+          "open": true,
+          "tree": true,
+          "entries": 10130,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_026.root",
+          "sha256": "8dea0f27c6a92f3c2d14c1b9e72f0b6805e2d34c092ea36ab10c7625d600bdde",
+          "open": true,
+          "tree": true,
+          "entries": 10184,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_027.root",
+          "sha256": "37b2eab2f09e54a73941f8b9fdb346009c07405e00ffd9411fd7c901e7bb8815",
+          "open": true,
+          "tree": true,
+          "entries": 10058,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_028.root",
+          "sha256": "dbf9e26603ee30e73a482a48f4fe00a0a77ebb55b44e073980729a3800bb0d07",
+          "open": true,
+          "tree": true,
+          "entries": 10091,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_029.root",
+          "sha256": "4753b1802ad77027acbed919eefeb8603f617bd38e0abd61f05ac0635247f2d0",
+          "open": true,
+          "tree": true,
+          "entries": 10143,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_030.root",
+          "sha256": "e077e717b872165d73a38ddb99f3e94aa6a31bd781e76700d1b27a47db2a4cba",
+          "open": true,
+          "tree": true,
+          "entries": 10038,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_031.root",
+          "sha256": "76ae26496309eeea79ffb358190561aa0352738f1f82b59a714a956b67d081c1",
+          "open": true,
+          "tree": true,
+          "entries": 10119,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_032.root",
+          "sha256": "9918512d88d0f87bbac64dbb42bae65b2c68853ec67e89a3d2f351a843fc601b",
+          "open": true,
+          "tree": true,
+          "entries": 9971,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_033.root",
+          "sha256": "beb0ea1322980f625e2b5624908cea612a8184a8e34a2d42a8ed46ea5202998a",
+          "open": true,
+          "tree": true,
+          "entries": 10074,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_034.root",
+          "sha256": "48e88352afd32471f98e1fe91f93582fe56c27ef8dc0be90445dc18b49d1411d",
+          "open": true,
+          "tree": true,
+          "entries": 10067,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_035.root",
+          "sha256": "56c5961cf1bc87006eb06e135de91614b366f0c0ed1e20575cf5b38e2f9a610e",
+          "open": true,
+          "tree": true,
+          "entries": 10056,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_036.root",
+          "sha256": "81b337278f00f79ea4e85b80f4fc26382f456e7526c90ea85e179ba7962b3f2d",
+          "open": true,
+          "tree": true,
+          "entries": 10133,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_037.root",
+          "sha256": "684bcfe5f4b1b297ead44e8cdb51f6104b8698e09dd3ff124d9cda838aa01838",
+          "open": true,
+          "tree": true,
+          "entries": 10091,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_038.root",
+          "sha256": "419516f22ac647fcf1d6f9ef889d23e4d902d3d4f9dc1c153624e40a7277120b",
+          "open": true,
+          "tree": true,
+          "entries": 10073,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_039.root",
+          "sha256": "a60143d4bfb7f23be7744bb5e2d271a305184f7d2f1569d07d3af8d27eac5de8",
+          "open": true,
+          "tree": true,
+          "entries": 10063,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_040.root",
+          "sha256": "dce8287e0806ed8445234e433f4dcb8bf597e2a1fab60b30270b86eda14a7137",
+          "open": true,
+          "tree": true,
+          "entries": 9914,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_041.root",
+          "sha256": "bfbe2909d1165e89944749dc95530c011465112c0950a9e1315f434d83b889a9",
+          "open": true,
+          "tree": true,
+          "entries": 9962,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_042.root",
+          "sha256": "cc9f846acc4dd94019d84bfed9f5e85f9c32acf9f282cbfd9a25c24d99be26a5",
+          "open": true,
+          "tree": true,
+          "entries": 9936,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_043.root",
+          "sha256": "ac5480a5615e1433053bc0562381462825a90d34755d943d9bb8f8c3685cfd91",
+          "open": true,
+          "tree": true,
+          "entries": 10088,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_044.root",
+          "sha256": "471668240084263d5fb3e149d02e60e0451afe654608efb232768d05ef2dd4bf",
+          "open": true,
+          "tree": true,
+          "entries": 10160,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_045.root",
+          "sha256": "9b9fbf940a99c9c7b0bd27b187a7e170f5428037cdad6123dd556d4b4c200a13",
+          "open": true,
+          "tree": true,
+          "entries": 10143,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_046.root",
+          "sha256": "028a22a1dc6a01a2702c69e3ebc081c875b53e97be1a0f5ec6acd226715d9cae",
+          "open": true,
+          "tree": true,
+          "entries": 10145,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_047.root",
+          "sha256": "75ea0bdeb16886bf88967f5a930865622636e0582075874a19e5e9c9d78c072a",
+          "open": true,
+          "tree": true,
+          "entries": 10005,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_048.root",
+          "sha256": "235bdf23f3ce328c87498553c865648735a3e941e24553e0a4bd83c63b0257ae",
+          "open": true,
+          "tree": true,
+          "entries": 10114,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/H/H_chunk_049.root",
+          "sha256": "c45362f4a5c817c81b12566b980a27371106c8e1f41cc5036b79b6c70c578eaf",
+          "open": true,
+          "tree": true,
+          "entries": 9071,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            25
+          ],
+          "failures": []
+        }
+      ],
+      "failures": []
+    },
+    "Z": {
+      "expected_chunk_count": 49,
+      "actual_root_count": 49,
+      "input_file_count": 489,
+      "unique_input_file_count": 489,
+      "selected_entries": 500422,
+      "output_bytes": 340180224,
+      "coverage_failures": [],
+      "condor": {
+        "cluster": 11557699,
+        "expected_jobs": 49,
+        "termination_count": 49,
+        "return_zero_count": 49,
+        "held_count": 0,
+        "stderr_log_count": 49,
+        "stdout_log_count": 49,
+        "nonempty_stderr_logs": [],
+        "failures": []
+      },
+      "root_outputs": [
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_000.root",
+          "sha256": "d849a009240ecb285d0d7eae68389fd1e9857038f54007813c58b4e24a0ca2af",
+          "open": true,
+          "tree": true,
+          "entries": 10175,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_001.root",
+          "sha256": "425f7c6b86c70856e842ac3225fc0e33900a5d7c914e5bcfeaa3b9bfeffe1da3",
+          "open": true,
+          "tree": true,
+          "entries": 10179,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_002.root",
+          "sha256": "25ec8c35afc0f5de62383de381fc245285802b2f38c0504239ae2dacde829081",
+          "open": true,
+          "tree": true,
+          "entries": 10285,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_003.root",
+          "sha256": "06909371ffbce38f0c05fdf4f353b89da048c1898fc502a7650fe246ce7682f0",
+          "open": true,
+          "tree": true,
+          "entries": 10195,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_004.root",
+          "sha256": "9ba33ae9ce670c7470ba6135e56b602c6eea4a751577e135d4c2423d779b23fb",
+          "open": true,
+          "tree": true,
+          "entries": 10182,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_005.root",
+          "sha256": "4a2838d9594dd996e69683d29086db34043accd158a47ca1698d03e578cc9ce5",
+          "open": true,
+          "tree": true,
+          "entries": 10210,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_006.root",
+          "sha256": "cac8a5719190cd3e6595ec6cbd90915b19200c139ed039d001c50b47e8ea49f9",
+          "open": true,
+          "tree": true,
+          "entries": 10197,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_007.root",
+          "sha256": "84dd329ebe5f4769484c371fdc00896d00340a7776c3e0251e5822e583290e31",
+          "open": true,
+          "tree": true,
+          "entries": 10093,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_008.root",
+          "sha256": "b6a0fd43faa866a86ef55e67c620af8e06980c232b3a72be6d30ff647982b663",
+          "open": true,
+          "tree": true,
+          "entries": 10217,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_009.root",
+          "sha256": "ea02540a179fcc38637d101494a8a0407f9f273a55dd4f2041802611201f342c",
+          "open": true,
+          "tree": true,
+          "entries": 10173,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_010.root",
+          "sha256": "5c6e1241afdbe3bf4a88d13ffe66d588c1ece980324bc7bf4c1eca129eb9f5da",
+          "open": true,
+          "tree": true,
+          "entries": 10248,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_011.root",
+          "sha256": "d4f09eb3b1f3db5cd54be042a40048c82f3ce7877dc6a56862e100a0788753e5",
+          "open": true,
+          "tree": true,
+          "entries": 10160,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_012.root",
+          "sha256": "243e1eeba21f65933411488f78ec497f87fce993d557b6a56f78fe65b23d0a56",
+          "open": true,
+          "tree": true,
+          "entries": 10298,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_013.root",
+          "sha256": "8e36ba8c81a98a6615ff679d945181b901f99a5b890c7aaf4918c84dd9c48b01",
+          "open": true,
+          "tree": true,
+          "entries": 10258,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_014.root",
+          "sha256": "14c3e0a3f28a3835ec7ed822b05787db29e3abcbfbfa5d48b3d4e7c4fc1479c7",
+          "open": true,
+          "tree": true,
+          "entries": 10250,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_015.root",
+          "sha256": "ff32d7d0eb0f1fb56f995c8781aca1a69dbe12c991f9b0b07fd680fe4bd9b7bd",
+          "open": true,
+          "tree": true,
+          "entries": 10204,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_016.root",
+          "sha256": "bac85bbaecb747d6d5e1b2b36c7299e9eabcbbbb8d43544c4983a9c4286531a6",
+          "open": true,
+          "tree": true,
+          "entries": 10273,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_017.root",
+          "sha256": "bcac1ab6ba9967887a0a89a0ef968c25be7cd962a56cf428d4b7806b0f3351ab",
+          "open": true,
+          "tree": true,
+          "entries": 10286,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_018.root",
+          "sha256": "76a5f5c3be34d72fa89d956cd2cc20adbbe282e5b9977015032951fd9de6d851",
+          "open": true,
+          "tree": true,
+          "entries": 10107,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_019.root",
+          "sha256": "b4bd1a55b1a836b18d55f7a0bb610024aa6b2977dae6b1bfc09af12e75b5375d",
+          "open": true,
+          "tree": true,
+          "entries": 10231,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_020.root",
+          "sha256": "8b479b05107d437ad40fe5e2797838996836d4563d45525490d4d82c5f758299",
+          "open": true,
+          "tree": true,
+          "entries": 10272,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_021.root",
+          "sha256": "2a6fb28625113a7767daf16dcfe1bba780f16c820cd29436e2414ff0e66e4200",
+          "open": true,
+          "tree": true,
+          "entries": 10231,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_022.root",
+          "sha256": "1da6c3fd28e257f08ea03a0913643b44b12a3e3718343a1dbecf9fa26123864c",
+          "open": true,
+          "tree": true,
+          "entries": 10226,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_023.root",
+          "sha256": "66e62c0cbcfead3fa6ffa3289e196672292572d1575505c98a50a8678cf48abb",
+          "open": true,
+          "tree": true,
+          "entries": 10297,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_024.root",
+          "sha256": "19443b008d15cf790550c65984c1323e6ef7598bda2fe04b9f481a7334d4c453",
+          "open": true,
+          "tree": true,
+          "entries": 10277,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_025.root",
+          "sha256": "5a18f1c83947c985fa7f76d9571bedc8da0ab7f3977b0e8e3e391e9bb7e4f48c",
+          "open": true,
+          "tree": true,
+          "entries": 10232,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_026.root",
+          "sha256": "8d0eff82a738378f6a11478a1588f38b58b6e6738dca3bd3be82ed5e8d2921d5",
+          "open": true,
+          "tree": true,
+          "entries": 10280,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_027.root",
+          "sha256": "5e53965c22dfa017b2f3f1d9aaca901c995426a0e326e666194d6c9aa0027bac",
+          "open": true,
+          "tree": true,
+          "entries": 10233,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_028.root",
+          "sha256": "b81c86561abfbd21f8b0a26d559faf05a9bd09d49b2cb18bc0d07a03584f2258",
+          "open": true,
+          "tree": true,
+          "entries": 10275,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_029.root",
+          "sha256": "16033c469974d679ff310d527dc74fe1d8f0941e2d4c3a70e6f328e502b51691",
+          "open": true,
+          "tree": true,
+          "entries": 10187,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_030.root",
+          "sha256": "b39967ace0add5b83ee830d61e547a9ecd80786ef4539cc91e86dc9b26b4cd41",
+          "open": true,
+          "tree": true,
+          "entries": 10386,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_031.root",
+          "sha256": "72daf222f3c25216fc1fcc8126a105ee4bf30f0c49975ba23305e35d5cb399de",
+          "open": true,
+          "tree": true,
+          "entries": 10303,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_032.root",
+          "sha256": "d6bf23e8faf89471cc51f18ea611ca94ec97515bdf3a5e53007a9048a064022a",
+          "open": true,
+          "tree": true,
+          "entries": 10239,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_033.root",
+          "sha256": "77a5ea9e2a7c6ad96c39db1410d8d8d1a138e787465facbd1e402ccbe0eb4562",
+          "open": true,
+          "tree": true,
+          "entries": 10304,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_034.root",
+          "sha256": "20b15b4db0c9a64f94a2b81a2309932ff8c6929c67017fd1a256089975109dce",
+          "open": true,
+          "tree": true,
+          "entries": 10249,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_035.root",
+          "sha256": "e2ea5047bef6b75081c94307215ed8f977a5b51db726148c94245ebd8b126015",
+          "open": true,
+          "tree": true,
+          "entries": 10233,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_036.root",
+          "sha256": "2e861c11ea91749972601c7c6980a0f0737488965c3b8403862a1319410ac2bd",
+          "open": true,
+          "tree": true,
+          "entries": 10262,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_037.root",
+          "sha256": "443ced47237ac39b49e904f23c2978fe09b08148261f5b33404e544346943008",
+          "open": true,
+          "tree": true,
+          "entries": 10238,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_038.root",
+          "sha256": "e5e2f471a5663446a1e60e3d1b2abe2858813e581a7a572a48b9ce12ec9e151f",
+          "open": true,
+          "tree": true,
+          "entries": 10210,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_039.root",
+          "sha256": "a54533199e37d73f8514eab160bd6e6892a8e7fb087defcbcf456e64307693b5",
+          "open": true,
+          "tree": true,
+          "entries": 10253,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_040.root",
+          "sha256": "36d9a511fb64556d3457705bbe4b51a471f7a8ae78ac2547c76ba10c38a5fb5d",
+          "open": true,
+          "tree": true,
+          "entries": 10142,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_041.root",
+          "sha256": "f747b925d67d896bbe72070aa9558f10c9d0acb43def2552a4279b285c2ac4c9",
+          "open": true,
+          "tree": true,
+          "entries": 10226,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_042.root",
+          "sha256": "de7efb4af28fa5b8808d602d35f7feed092c9b321ce95c76fa5e094663503aa7",
+          "open": true,
+          "tree": true,
+          "entries": 10167,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_043.root",
+          "sha256": "2c8c794339225a89b595d4f6835f55280df9acc6f8a449ccf28d5548e47ee5be",
+          "open": true,
+          "tree": true,
+          "entries": 10226,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_044.root",
+          "sha256": "2b2f02cbf9ab00846e82d371b147c1948244ffeeb90369dfec2723e5ca1b2389",
+          "open": true,
+          "tree": true,
+          "entries": 10358,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_045.root",
+          "sha256": "411a7b8064a801959fd9213e9fbbf142901a6a2bb838f63da14a7f77025b81ab",
+          "open": true,
+          "tree": true,
+          "entries": 10181,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_046.root",
+          "sha256": "b393e70da2cb9fb24baa52c84fb60c99091e7c4b0e1273b85904b151ad89662d",
+          "open": true,
+          "tree": true,
+          "entries": 10291,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_047.root",
+          "sha256": "d7164774119c7715b402664e685ff0d151ac730be6f6316f2133278c2a8d9074",
+          "open": true,
+          "tree": true,
+          "entries": 10234,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        },
+        {
+          "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100/Z/Z_chunk_048.root",
+          "sha256": "ba2f7b6f1413d69383de05a35744f788dfb69082cd8d14ddc5bab9de9267d57b",
+          "open": true,
+          "tree": true,
+          "entries": 9189,
+          "branch_count": 84,
+          "nonfinite_values": 0,
+          "track_shape_failures": 0,
+          "pfo_shape_failures": 0,
+          "invalid_track_tau_index": 0,
+          "invalid_pfo_tau_index": 0,
+          "truth_boson_pdg_ids": [
+            23
+          ],
+          "failures": []
+        }
+      ],
+      "failures": []
+    }
+  },
+  "schema_equal": true,
+  "submission_allowed_for_dataset": true,
+  "failures": []
+}

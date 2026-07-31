@@ -1,0 +1,20 @@
+universe = vanilla
+executable = /home/rbaba/tauspin-ss/MakeNtuple/run_condor.sh
+arguments = $(sample) /home/rbaba/tauspin-ss/MakeNtuple/snapshots/fixed-partial-v3-20260730-2100/inputs/$(sample)_chunk_$(chunk).txt fixed-partial-v3-20260730-2100
+output = /home/rbaba/tauspin-ss/MakeNtuple/snapshots/fixed-partial-v3-20260730-2100/logs/retry_nonfinite_$(sample)_$(chunk).$(ClusterId).$(ProcId).out
+error = /home/rbaba/tauspin-ss/MakeNtuple/snapshots/fixed-partial-v3-20260730-2100/logs/retry_nonfinite_$(sample)_$(chunk).$(ClusterId).$(ProcId).err
+log = /home/rbaba/tauspin-ss/MakeNtuple/snapshots/fixed-partial-v3-20260730-2100/logs/retry_nonfinite_$(ClusterId).log
+request_cpus = 1
+request_memory = 5GB
+getenv = True
+
+queue sample,chunk from (
+H 020
+H 031
+Z 014
+Z 027
+Z 029
+Z 041
+Z 042
+Z 045
+)

@@ -1,0 +1,37 @@
+{
+  "format_version": 1,
+  "snapshot_id": "fixed-partial-v3-20260730-2100",
+  "cutoff": "2026-07-30T21:00:00+09:00",
+  "base_directory": "/gpfs/fs5001/chen/mySamples/gen_higgs_91p18_v2",
+  "tree_name": "CollectionTree",
+  "chunk_size": 10,
+  "samples": {
+    "H": {
+      "dataset_id": "999801",
+      "candidate_sub_ranges_inclusive": [
+        [1, 297],
+        [299, 500]
+      ],
+      "expected_candidate_count": 499,
+      "excluded_at_cutoff": [
+        {
+          "sub_range_inclusive": [298, 298],
+          "reason": "DAOD was not present at the 2026-07-30 21:00 JST cutoff"
+        }
+      ]
+    },
+    "Z": {
+      "dataset_id": "999802",
+      "candidate_sub_ranges_inclusive": [
+        [1, 489]
+      ],
+      "expected_candidate_count": 489,
+      "excluded_at_cutoff": [
+        {
+          "sub_range_inclusive": [490, 500],
+          "reason": "DAOD was not present at the 2026-07-30 21:00 JST cutoff"
+        }
+      ]
+    }
+  }
+}

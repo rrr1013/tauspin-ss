@@ -1,0 +1,51 @@
+{
+  "snapshot_id": "fixed-partial-v3-20260730-2100",
+  "completed_at_jst": "2026-07-30T21:28:19+09:00",
+  "condor": {
+    "H": {
+      "cluster_id": 11557695,
+      "proc_id": 0,
+      "job_status": 4,
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "eventloop_real_seconds": 88
+    },
+    "Z": {
+      "cluster_id": 11557696,
+      "proc_id": 0,
+      "job_status": 4,
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "eventloop_real_seconds": 82
+    }
+  },
+  "outputs": {
+    "H": {
+      "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100-smoke/H/H_chunk_000.root",
+      "sha256": "5706a7cb5d251b5a9d9b166f0e7ee8588c9805344054e9306b2c0e84d0d83f40",
+      "tree": "tauspin",
+      "entries": 10002,
+      "branches": 84,
+      "truth_boson_pdg_id_values": [25],
+      "nonfinite_float_branches": []
+    },
+    "Z": {
+      "path": "/home/rbaba/tauspin-ss/MakeNtuple/outputs/fixed-partial-v3-20260730-2100-smoke/Z/Z_chunk_000.root",
+      "sha256": "005c15d3d181efab382107900db65d6a55f60cf1ea8f298d697563a11d81b9a8",
+      "tree": "tauspin",
+      "entries": 10175,
+      "branches": 84,
+      "truth_boson_pdg_id_values": [23],
+      "nonfinite_float_branches": []
+    }
+  },
+  "schema_equal": true,
+  "submission_preflight": {
+    "path": "/home/rbaba/tauspin-ss/MakeNtuple/snapshots/fixed-partial-v3-20260730-2100/preflight_report.json",
+    "candidate_count": 988,
+    "passed_count": 988,
+    "failed_count": 0,
+    "submission_allowed": true,
+    "sha256": "bfa90e9f41cdb924927fb57949860367ac13cf8a30420167d2031875acef430d"
+  }
+}
