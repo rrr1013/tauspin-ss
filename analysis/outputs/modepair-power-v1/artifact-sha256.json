@@ -1,0 +1,19 @@
+{
+  "cell-data.npz": "5462f11650c1f69cefb43c9f6b9f1891718c3c929534d3722b874d146c8be3a8",
+  "cell-summary.csv": "da882530b4726784839892375372ec02314e63c60e7428db8a02488f70a8f430",
+  "manifest.json": "7a20b3f8ab95da9f03641e3188157204398e9c9e0644ba7a15b6e98b0aefc49f",
+  "modepair-auc-forest.png": "153f9466c1ae34a56719ac1358422df0770cc992f24d649c811adf2c9c7b09c4",
+  "modepair-auc-forest.svg": "ce7cbc382c5ee9eb66688389978d67d537e743f8ff6c0d4a8945f07957250de4",
+  "modepair-confounds.png": "33b42664f38aab34f6b0cd337f9d8aa7e2d4d1215b7efb6223fe754bbceb174b",
+  "modepair-confounds.svg": "0ea02c32169f011e75998c7ccadfa1fce24ccbcfbfe92fdb22d947133d001a78",
+  "modepair-delta-vs-power.png": "a71ac98a2cd3b0cc8b5572af58d2b0b3dae4a090ce31eac87c4d622ab9eb745d",
+  "modepair-delta-vs-power.svg": "e0357324b0edb71256fdda31af4c2e3270117485b5566958001ae775b4a516ec",
+  "modepair-link-functions.png": "219bfe255219ee4f3c3fdd24734eb23e79bdc168a212e1a06203fc9206263ebf",
+  "modepair-link-functions.svg": "a20a0334219126c143c373c35cf69e363a574eb000c603990f7b4cf3282b52ee",
+  "modepair-occupancy.png": "9e464e78a22ad24a149ed7021e4b26ba48be82c563572affaf3d5650e75e5d7b",
+  "modepair-occupancy.svg": "00768af424b8620da11eb3bac57be0279b143711f3b94e3a54573309ac26f782",
+  "modepair-score-distributions.png": "3f33dbcc871bd612142885f99d99a76c15d14ca0facbfe672cd95d7f1f4820ef",
+  "modepair-score-distributions.svg": "8c1cb9f8f8688a93d983eb328190884aeb89fc3282b3edf88c553efe8b99614f",
+  "modepair-spread-null.png": "4f61b806d37942ede331f692c1ad15a86de7d1d76cb9f82edb7266cbde111a75",
+  "modepair-spread-null.svg": "3fa3900dd1aca6e534c0a9290d4cd6afd9ef839ad2ce5f7bb0672b7f1a45ff7e"
+}

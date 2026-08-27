@@ -1,0 +1,1114 @@
+{
+  "cells": [
+    {
+      "auc": {
+        "event_only": {
+          "ci": [
+            0.5500023786211669,
+            0.6044446057973083
+          ],
+          "estimate": 0.5766703988992162
+        },
+        "full_reco": {
+          "ci": [
+            0.6168296560599107,
+            0.6654685016894998
+          ],
+          "estimate": 0.641257132836002
+        },
+        "met_only": {
+          "ci": [
+            0.5174398407141537,
+            0.5692014140486888
+          ],
+          "estimate": 0.5426559331255874
+        },
+        "tau_object_only": {
+          "ci": [
+            0.5817136472486648,
+            0.632916540997264
+          ],
+          "estimate": 0.6069183450471476
+        }
+      },
+      "auc_met_only": 0.5426559331255874,
+      "cell": "1p0n x 1p0n",
+      "cell_index": 0,
+      "delta_full_minus_event": {
+        "ci": [
+          0.038589089784457103,
+          0.09211825024656821
+        ],
+        "estimate": 0.06458673393678582
+      },
+      "masked": false,
+      "mean_met_gev": 122.69930312711715,
+      "mean_tau_pt_gev": 81.63642913602612,
+      "mode_a": "1p0n",
+      "mode_b": "1p0n",
+      "n_H": 879,
+      "n_Z": 1012,
+      "n_total": 1891,
+      "power_link": {
+        "max": 1.0,
+        "mean": 1.0,
+        "product": 1.0
+      },
+      "power_product_primary": 1.0,
+      "power_product_sensitivity": 1.0
+    },
+    {
+      "auc": {
+        "event_only": {
+          "ci": [
+            0.5586981285415655,
+            0.5823480864065139
+          ],
+          "estimate": 0.57064398733337
+        },
+        "full_reco": {
+          "ci": [
+            0.6219082180430673,
+            0.6444452718738618
+          ],
+          "estimate": 0.6331486952312902
+        },
+        "met_only": {
+          "ci": [
+            0.4871635425148061,
+            0.5093814038267713
+          ],
+          "estimate": 0.4982385332323999
+        },
+        "tau_object_only": {
+          "ci": [
+            0.6034283888672028,
+            0.6261248576122918
+          ],
+          "estimate": 0.614857122796335
+        }
+      },
+      "auc_met_only": 0.4982385332323999,
+      "cell": "1p0n x 1p1n",
+      "cell_index": 1,
+      "delta_full_minus_event": {
+        "ci": [
+          0.05082502221393861,
+          0.07452090408483732
+        ],
+        "estimate": 0.06250470789792029
+      },
+      "masked": false,
+      "mean_met_gev": 114.47806829426302,
+      "mean_tau_pt_gev": 84.31638210416854,
+      "mode_a": "1p0n",
+      "mode_b": "1p1n",
+      "n_H": 4554,
+      "n_Z": 4466,
+      "n_total": 9020,
+      "power_link": {
+        "max": 1.0,
+        "mean": 0.73,
+        "product": 0.46
+      },
+      "power_product_primary": 0.46,
+      "power_product_sensitivity": 0.46
+    },
+    {
+      "auc": {
+        "event_only": {
+          "ci": [
+            0.5274133749930189,
+            0.5710289638735135
+          ],
+          "estimate": 0.5488779036450042
+        },
+        "full_reco": {
+          "ci": [
+            0.5944589925020849,
+            0.6363656822967467
+          ],
+          "estimate": 0.615252638098601
+        },
+        "met_only": {
+          "ci": [
+            0.44368754988647496,
+            0.48803244246616195
+          ],
+          "estimate": 0.465238166904959
+        },
+        "tau_object_only": {
+          "ci": [
+            0.5844720121285484,
+            0.6266713190093857
+          ],
+          "estimate": 0.6048918422987202
+        }
+      },
+      "auc_met_only": 0.465238166904959,
+      "cell": "1p0n x 1pXn",
+      "cell_index": 2,
+      "delta_full_minus_event": {
+        "ci": [
+          0.047358257597894055,
+          0.08510333022538644
+        ],
+        "estimate": 0.06637473445359676
+      },
+      "masked": false,
+      "mean_met_gev": 104.26573626076895,
+      "mean_tau_pt_gev": 90.2582545714975,
+      "mode_a": "1p0n",
+      "mode_b": "1pXn",
+      "n_H": 1370,
+      "n_Z": 1261,
+      "n_total": 2631,
+      "power_link": {
+        "max": 1.0,
+        "mean": 0.73,
+        "product": 0.46
+      },
+      "power_product_primary": 0.46,
+      "power_product_sensitivity": 0.2
+    },
+    {
+      "auc": {
+        "event_only": {
+          "ci": [
+            0.5404591850219227,
+            0.5839839926776956
+          ],
+          "estimate": 0.5622434395439161
+        },
+        "full_reco": {
+          "ci": [
+            0.5950912325298446,
+            0.6370338965256851
+          ],
+          "estimate": 0.6162647241659627
+        },
+        "met_only": {
+          "ci": [
+            0.45247275866986986,
+            0.4950569669433047
+          ],
+          "estimate": 0.47383707647268225
+        },
+        "tau_object_only": {
+          "ci": [
+            0.5838197219936451,
+            0.626250423797409
+          ],
+          "estimate": 0.6052892763972351
+        }
+      },
+      "auc_met_only": 0.47383707647268225,
+      "cell": "1p0n x 3p0n",
+      "cell_index": 3,
+      "delta_full_minus_event": {
+        "ci": [
+          0.035761828900119794,
+          0.07385885441899498
+        ],
+        "estimate": 0.054021284622046584
+      },
+      "masked": false,
+      "mean_met_gev": 104.85843501963056,
+      "mean_tau_pt_gev": 90.30345999818793,
+      "mode_a": "1p0n",
+      "mode_b": "3p0n",
+      "n_H": 1459,
+      "n_Z": 1290,
+      "n_total": 2749,
+      "power_link": {
+        "max": 1.0,
+        "mean": 0.51,
+        "product": 0.02
+      },
+      "power_product_primary": 0.02,
+      "power_product_sensitivity": 0.02
+    },
+    {
+      "auc": {
+        "event_only": {
+          "ci": [
+            0.4678885977944799,
+            0.6288301516168515
+          ],
+          "estimate": 0.5461207738909517
+        },
+        "full_reco": {
+          "ci": [
+            0.5240938348476584,
+            0.6765817947941887
+          ],
+          "estimate": 0.5991792065663475
+        },
+        "met_only": {
+          "ci": [
+            0.5347094715812747,
+            0.6822605532066909
+          ],
+          "estimate": 0.6088528434629665
+        },
+        "tau_object_only": {
+          "ci": [
+            0.4823901098901099,
+            0.6305730452554421
+          ],
+          "estimate": 0.5559898377955833
+        }
+      },
+      "auc_met_only": 0.6088528434629665,
+      "cell": "1p0n x 3pXn",
+      "cell_index": 4,
+      "delta_full_minus_event": {
+        "ci": [
+          -0.017751551521637845,
+          0.12550545378055217
+        ],
+        "estimate": 0.053058432675395784
+      },
+      "masked": true,
+      "mean_met_gev": 100.80275432985889,
+      "mean_tau_pt_gev": 88.40815881350152,
+      "mode_a": "1p0n",
+      "mode_b": "3pXn",
+      "n_H": 119,
+      "n_Z": 86,
+      "n_total": 205,
+      "power_link": {
+        "max": 1.0,
+        "mean": 0.51,
+        "product": 0.02
+      },
+      "power_product_primary": 0.02,
+      "power_product_sensitivity": 0.02
+    },
+    {
+      "auc": {
+        "event_only": {
+          "ci": [
+            0.5549048019024022,
+            0.5760232702859848
+          ],
+          "estimate": 0.5653855568635885
+        },
+        "full_reco": {
+          "ci": [
+            0.6084575408929149,
+            0.6291531435719873
+          ],
+          "estimate": 0.6192595373996808
+        },
+        "met_only": {
+          "ci": [
+            0.47764582763680996,
+            0.5005398342261256
+          ],
+          "estimate": 0.48903611137837744
+        },
+        "tau_object_only": {
+          "ci": [
+            0.5930176180574488,
+            0.6152790640902086
+          ],
+          "estimate": 0.604460614451626
+        }
+      },
+      "auc_met_only": 0.48903611137837744,
+      "cell": "1p1n x 1p1n",
+      "cell_index": 5,
+      "delta_full_minus_event": {
+        "ci": [
+          0.04339478189634978,
+          0.06452887409149341
+        ],
+        "estimate": 0.05387398053609227
+      },
+      "masked": false,
+      "mean_met_gev": 106.5614332195536,
+      "mean_tau_pt_gev": 88.25693484386801,
+      "mode_a": "1p1n",
+      "mode_b": "1p1n",
+      "n_H": 5290,
+      "n_Z": 5344,
+      "n_total": 10634,
+      "power_link": {
+        "max": 0.46,
+        "mean": 0.46,
+        "product": 0.2116
+      },
+      "power_product_primary": 0.2116,
+      "power_product_sensitivity": 0.2116
+    },
+    {
+      "auc": {
+        "event_only": {
+          "ci": [
+            0.5436630327392361,
+            0.5708790361337762
+          ],
+          "estimate": 0.5573213854930422
+        },
+        "full_reco": {
+          "ci": [
+            0.5924905409100297,
+            0.6186144971449713
+          ],
+          "estimate": 0.6051450978981616
+        },
+        "met_only": {
+          "ci": [
+            0.4738741205563295,
+            0.5035706531597425
+          ],
+          "estimate": 0.4887212515816449
+        },
+        "tau_object_only": {
+          "ci": [
+            0.5784556195916731,
+            0.6047880157758171
+          ],
+          "estimate": 0.591907083929454
+        }
+      },
+      "auc_met_only": 0.4887212515816449,
+      "cell": "1p1n x 1pXn",
+      "cell_index": 6,
+      "delta_full_minus_event": {
+        "ci": [
+          0.03430899631284117,
+          0.06075790724260984
+        ],
+        "estimate": 0.0478237124051194
+      },
+      "masked": false,
+      "mean_met_gev": 95.45453586614035,
+      "mean_tau_pt_gev": 93.62302743883156,
+      "mode_a": "1p1n",
+      "mode_b": "1pXn",
+      "n_H": 3098,
+      "n_Z": 3123,
+      "n_total": 6221,
+      "power_link": {
+        "max": 0.46,
+        "mean": 0.46,
+        "product": 0.2116
+      },
+      "power_product_primary": 0.2116,
+      "power_product_sensitivity": 0.09200000000000001
+    },
+    {
+      "auc": {
+        "event_only": {
+          "ci": [
+            0.545305536255648,
+            0.573035091794602
+          ],
+          "estimate": 0.5590452000215721
+        },
+        "full_reco": {
+          "ci": [
+            0.5872998597464903,
+            0.6143260643706752
+          ],
+          "estimate": 0.6010098963971607
+        },
+        "met_only": {
+          "ci": [
+            0.4679466957944457,
+            0.4948224526880354
+          ],
+          "estimate": 0.4812105690768171
+        },
+        "tau_object_only": {
+          "ci": [
+            0.5756881148358618,
+            0.6042681653686751
+          ],
+          "estimate": 0.5906375987677625
+        }
+      },
+      "auc_met_only": 0.4812105690768171,
+      "cell": "1p1n x 3p0n",
+      "cell_index": 7,
+      "delta_full_minus_event": {
+        "ci": [
+          0.02916626920144568,
+          0.05410124830615717
+        ],
+        "estimate": 0.04196469637558864
+      },
+      "masked": false,
+      "mean_met_gev": 94.43998480420595,
+      "mean_tau_pt_gev": 94.83185441149959,
+      "mode_a": "1p1n",
+      "mode_b": "3p0n",
+      "n_H": 3399,
+      "n_Z": 3355,
+      "n_total": 6754,
+      "power_link": {
+        "max": 0.46,
+        "mean": 0.24000000000000002,
+        "product": 0.0092
+      },
+      "power_product_primary": 0.0092,
+      "power_product_sensitivity": 0.0092
+    },
+    {
+      "auc": {
+        "event_only": {
+          "ci": [
+            0.5137325914693269,
+            0.6167179139090967
+          ],
+          "estimate": 0.564573268921095
+        },
+        "full_reco": {
+          "ci": [
+            0.5083448652970096,
+            0.6105178126774393
+          ],
+          "estimate": 0.5593666129898014
+        },
+        "met_only": {
+          "ci": [
+            0.4138370116336643,
+            0.5181753123478625
+          ],
+          "estimate": 0.46546788334227945
+        },
+        "tau_object_only": {
+          "ci": [
+            0.4918351902307043,
+            0.5944984504946776
+          ],
+          "estimate": 0.5429951690821256
+        }
+      },
+      "auc_met_only": 0.46546788334227945,
+      "cell": "1p1n x 3pXn",
+      "cell_index": 8,
+      "delta_full_minus_event": {
+        "ci": [
+          -0.051750130320530226,
+          0.039993079183190484
+        ],
+        "estimate": -0.005206655931293658
+      },
+      "masked": false,
+      "mean_met_gev": 96.36981484856032,
+      "mean_tau_pt_gev": 95.52783109389925,
+      "mode_a": "1p1n",
+      "mode_b": "3pXn",
+      "n_H": 230,
+      "n_Z": 243,
+      "n_total": 473,
+      "power_link": {
+        "max": 0.46,
+        "mean": 0.24000000000000002,
+        "product": 0.0092
+      },
+      "power_product_primary": 0.0092,
+      "power_product_sensitivity": 0.0092
+    },
+    {
+      "auc": {
+        "event_only": {
+          "ci": [
+            0.5279476070760722,
+            0.5987832988406759
+          ],
+          "estimate": 0.5647454545454546
+        },
+        "full_reco": {
+          "ci": [
+            0.5770957462788872,
+            0.6480357526335111
+          ],
+          "estimate": 0.6126454545454545
+        },
+        "met_only": {
+          "ci": [
+            0.4248820943876616,
+            0.5033226834678592
+          ],
+          "estimate": 0.46331363636363637
+        },
+        "tau_object_only": {
+          "ci": [
+            0.5659138307181887,
+            0.6355383213462921
+          ],
+          "estimate": 0.5991545454545455
+        }
+      },
+      "auc_met_only": 0.46331363636363637,
+      "cell": "1pXn x 1pXn",
+      "cell_index": 9,
+      "delta_full_minus_event": {
+        "ci": [
+          0.013410402086652761,
+          0.08439843522740982
+        ],
+        "estimate": 0.04789999999999994
+      },
+      "masked": false,
+      "mean_met_gev": 83.67329360405327,
+      "mean_tau_pt_gev": 98.497318172127,
+      "mode_a": "1pXn",
+      "mode_b": "1pXn",
+      "n_H": 440,
+      "n_Z": 500,
+      "n_total": 940,
+      "power_link": {
+        "max": 0.46,
+        "mean": 0.46,
+        "product": 0.2116
+      },
+      "power_product_primary": 0.2116,
+      "power_product_sensitivity": 0.04000000000000001
+    },
+    {
+      "auc": {
+        "event_only": {
+          "ci": [
+            0.5289365951462457,
+            0.5766873857107427
+          ],
+          "estimate": 0.5532102899359537
+        },
+        "full_reco": {
+          "ci": [
+            0.584651655019005,
+            0.6299056833351704
+          ],
+          "estimate": 0.6071570938827576
+        },
+        "met_only": {
+          "ci": [
+            0.45022136696104725,
+            0.49677442016877565
+          ],
+          "estimate": 0.4728756885836532
+        },
+        "tau_object_only": {
+          "ci": [
+            0.5729649611710195,
+            0.6182972420598182
+          ],
+          "estimate": 0.5959233569853039
+        }
+      },
+      "auc_met_only": 0.4728756885836532,
+      "cell": "1pXn x 3p0n",
+      "cell_index": 10,
+      "delta_full_minus_event": {
+        "ci": [
+          0.031251893897084645,
+          0.07577083026531246
+        ],
+        "estimate": 0.053946803946803956
+      },
+      "masked": false,
+      "mean_met_gev": 82.15771586676215,
+      "mean_tau_pt_gev": 100.24504456488692,
+      "mode_a": "1pXn",
+      "mode_b": "3p0n",
+      "n_H": 1036,
+      "n_Z": 1017,
+      "n_total": 2053,
+      "power_link": {
+        "max": 0.46,
+        "mean": 0.24000000000000002,
+        "product": 0.0092
+      },
+      "power_product_primary": 0.0092,
+      "power_product_sensitivity": 0.004
+    },
+    {
+      "auc": {
+        "event_only": {
+          "ci": [
+            0.5020642855558514,
+            0.6979605349597882
+          ],
+          "estimate": 0.6011620668188421
+        },
+        "full_reco": {
+          "ci": [
+            0.5320097393012572,
+            0.722823547979798
+          ],
+          "estimate": 0.6314588088815107
+        },
+        "met_only": {
+          "ci": [
+            0.3780089716380474,
+            0.577968514722544
+          ],
+          "estimate": 0.4762398837933181
+        },
+        "tau_object_only": {
+          "ci": [
+            0.47482793532666534,
+            0.6624259259259258
+          ],
+          "estimate": 0.57211039634779
+        }
+      },
+      "auc_met_only": 0.4762398837933181,
+      "cell": "1pXn x 3pXn",
+      "cell_index": 11,
+      "delta_full_minus_event": {
+        "ci": [
+          -0.04690213612627399,
+          0.10702774498229041
+        ],
+        "estimate": 0.030296742062668636
+      },
+      "masked": true,
+      "mean_met_gev": 73.74233744078334,
+      "mean_tau_pt_gev": 97.83652717707606,
+      "mode_a": "1pXn",
+      "mode_b": "3pXn",
+      "n_H": 79,
+      "n_Z": 61,
+      "n_total": 140,
+      "power_link": {
+        "max": 0.46,
+        "mean": 0.24000000000000002,
+        "product": 0.0092
+      },
+      "power_product_primary": 0.0092,
+      "power_product_sensitivity": 0.004
+    },
+    {
+      "auc": {
+        "event_only": {
+          "ci": [
+            0.45387921905269873,
+            0.524266455967204
+          ],
+          "estimate": 0.4892109272579102
+        },
+        "full_reco": {
+          "ci": [
+            0.49487668190081663,
+            0.5673597712882765
+          ],
+          "estimate": 0.53045388512915
+        },
+        "met_only": {
+          "ci": [
+            0.5103893786332646,
+            0.5795896762539955
+          ],
+          "estimate": 0.5456030739310334
+        },
+        "tau_object_only": {
+          "ci": [
+            0.5165213789310416,
+            0.5874572992793894
+          ],
+          "estimate": 0.5512879566311165
+        }
+      },
+      "auc_met_only": 0.5456030739310334,
+      "cell": "3p0n x 3p0n",
+      "cell_index": 12,
+      "delta_full_minus_event": {
+        "ci": [
+          0.009664863258406675,
+          0.06972417612806624
+        ],
+        "estimate": 0.04124295787123983
+      },
+      "masked": false,
+      "mean_met_gev": 78.61824586609733,
+      "mean_tau_pt_gev": 100.24174280270624,
+      "mode_a": "3p0n",
+      "mode_b": "3p0n",
+      "n_H": 507,
+      "n_Z": 501,
+      "n_total": 1008,
+      "power_link": {
+        "max": 0.02,
+        "mean": 0.02,
+        "product": 0.0004
+      },
+      "power_product_primary": 0.0004,
+      "power_product_sensitivity": 0.0004
+    },
+    {
+      "auc": {
+        "event_only": {
+          "ci": [
+            0.5008420948928121,
+            0.668154769364591
+          ],
+          "estimate": 0.5846153846153846
+        },
+        "full_reco": {
+          "ci": [
+            0.47641505821078434,
+            0.6471481036859188
+          ],
+          "estimate": 0.5624908424908425
+        },
+        "met_only": {
+          "ci": [
+            0.38446759777578743,
+            0.5487780743740795
+          ],
+          "estimate": 0.4693040293040293
+        },
+        "tau_object_only": {
+          "ci": [
+            0.47212217542519397,
+            0.6390919125412796
+          ],
+          "estimate": 0.5556043956043956
+        }
+      },
+      "auc_met_only": 0.4693040293040293,
+      "cell": "3p0n x 3pXn",
+      "cell_index": 13,
+      "delta_full_minus_event": {
+        "ci": [
+          -0.09738335465284172,
+          0.05368161389662479
+        ],
+        "estimate": -0.02212454212454218
+      },
+      "masked": true,
+      "mean_met_gev": 80.78932664637065,
+      "mean_tau_pt_gev": 101.59548763344254,
+      "mode_a": "3p0n",
+      "mode_b": "3pXn",
+      "n_H": 91,
+      "n_Z": 75,
+      "n_total": 166,
+      "power_link": {
+        "max": 0.02,
+        "mean": 0.02,
+        "product": 0.0004
+      },
+      "power_product_primary": 0.0004,
+      "power_product_sensitivity": 0.0004
+    },
+    {
+      "auc": {
+        "event_only": {
+          "ci": [
+            1.0,
+            1.0
+          ],
+          "estimate": 1.0
+        },
+        "full_reco": {
+          "ci": [
+            1.0,
+            1.0
+          ],
+          "estimate": 1.0
+        },
+        "met_only": {
+          "ci": [
+            1.0,
+            1.0
+          ],
+          "estimate": 1.0
+        },
+        "tau_object_only": {
+          "ci": [
+            1.0,
+            1.0
+          ],
+          "estimate": 1.0
+        }
+      },
+      "auc_met_only": 1.0,
+      "cell": "3pXn x 3pXn",
+      "cell_index": 14,
+      "delta_full_minus_event": {
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "estimate": 0.0
+      },
+      "masked": true,
+      "mean_met_gev": 63.402851501102305,
+      "mean_tau_pt_gev": 88.54563539995868,
+      "mode_a": "3pXn",
+      "mode_b": "3pXn",
+      "n_H": 1,
+      "n_Z": 1,
+      "n_total": 2,
+      "power_link": {
+        "max": 0.02,
+        "mean": 0.02,
+        "product": 0.0004
+      },
+      "power_product_primary": 0.0004,
+      "power_product_sensitivity": 0.0004
+    }
+  ],
+  "claim_boundary": "Within-cell association between frozen classifier scores and reconstructed decay-mode categories in selected simulated events. Not a spin fraction, not a causal statement that the classifier uses spin, and not an information decomposition. Reconstructed decay mode is not truth decay mode.",
+  "definition": {
+    "analyzing_power_note": "energy-fraction single-observable analyzing power used only as an ordering proxy; a network that sees tracks and PFOs is not bounded by it",
+    "analyzing_power_primary": {
+      "0": 1.0,
+      "1": 0.46,
+      "2": 0.46,
+      "3": 0.02,
+      "4": 0.02
+    },
+    "analyzing_power_sensitivity": {
+      "0": 1.0,
+      "1": 0.46,
+      "2": 0.2,
+      "3": 0.02,
+      "4": 0.02
+    },
+    "auc": "Mann-Whitney AUC with tie-corrected average ranks; H is the positive class",
+    "cell": "unordered pair of reconstructed tau decay modes; tau-side ordering is not retained",
+    "kinematic_reference": "within-cell AUC of reconstructed MET as a single variable",
+    "min_class_occupancy": 200,
+    "modes": {
+      "0": "1p0n",
+      "1": "1p1n",
+      "2": "1pXn",
+      "3": "3p0n",
+      "4": "3pXn"
+    }
+  },
+  "figures": {
+    "auc_forest": {
+      "png": "modepair-auc-forest.png",
+      "svg": "modepair-auc-forest.svg"
+    },
+    "confounds": {
+      "png": "modepair-confounds.png",
+      "svg": "modepair-confounds.svg"
+    },
+    "delta_vs_power": {
+      "png": "modepair-delta-vs-power.png",
+      "svg": "modepair-delta-vs-power.svg"
+    },
+    "link_functions": {
+      "png": "modepair-link-functions.png",
+      "svg": "modepair-link-functions.svg"
+    },
+    "occupancy": {
+      "png": "modepair-occupancy.png",
+      "svg": "modepair-occupancy.svg"
+    },
+    "score_distributions": {
+      "png": "modepair-score-distributions.png",
+      "svg": "modepair-score-distributions.svg"
+    },
+    "spread_null": {
+      "png": "modepair-spread-null.png",
+      "svg": "modepair-spread-null.svg"
+    }
+  },
+  "format_version": 1,
+  "identity_join": {
+    "ensemble_key": [
+      "sample_id",
+      "ntuple_file_index",
+      "ntuple_entry"
+    ],
+    "event_number_caveat": "source_event_number is diagnostic and non-unique, so it is never a join key",
+    "semantics": "missing, duplicate, or label-mismatched rows fail closed; ensemble row order is not used"
+  },
+  "input_sha256": {
+    "comparison-summary.json": "9437fe655b2dbad8f892b4ae99ce46661a4ab4e80a65b86af9ef6c03937b1db0",
+    "identity-reference.npz": "534ca1511b18477cfd49a9cbe675adb8d6b11b413d7a969ef5cbdafadad6e01d",
+    "metadata.json": "2cbf5a5480f38e43b3c53e80482b085cfe0b03a3e1ad800c95f13d62341fe648",
+    "stats.json": "84bfb51d835a1fc89bbf964c01107c553e5b50ef48cf51928870d300f4701d9d",
+    "terminal-ensembles.npz": "bcb87013ee097a3d1f7ca9709c99ecda654c1817f6c569274b8baaa580e1a63d",
+    "validation/H_0000.pt": "4860a8de4a37b851ea245272e715fd40123e2a00bc08ca627072248628cda5a6",
+    "validation/Z_0000.pt": "ff221c69155605c48173b1e7b8b3fd7129cf912b977853ca5a6d98661f66031a"
+  },
+  "limitations": [
+    "Reconstructed decay mode is not truth decay mode; 1p1n and 1pXn migration is not corrected.",
+    "The event-only arm is a same-schedule comparator, not a sufficient statistic for production kinematics.",
+    "Cells are unordered mode pairs, so a tau-charge asymmetry would be averaged away.",
+    "The analyzing-power values are textbook energy-fraction values, not a fit to this sample.",
+    "Fifteen cells are inspected; the intervals are not adjusted for multiplicity.",
+    "No parent pT-|eta| overlap weight is applied and the H/Z mass supports remain non-overlapping."
+  ],
+  "lineage": {
+    "comparison_claim_boundary": "three-seed ensemble AUC ordering at the terminal endpoint of the common adaptive-v1 schedule on the held-out report partition; not whole-ROC dominance, asymptotic performance, retraining uncertainty, causal attribution or a spin fraction",
+    "comparison_protocol_sha256": "5e878e64ec5ce9e8c9162eb29f339acb6689c26bb25d69446080ff6adeaea5f8",
+    "ensemble_artifact_sha256": "bcb87013ee097a3d1f7ca9709c99ecda654c1817f6c569274b8baaa580e1a63d",
+    "frozen_terminal_ensemble_auc": {
+      "event_only": 0.5616469239203451,
+      "full_reco": 0.6150930579720123,
+      "tau_object_only": 0.6008338304557016
+    },
+    "recomputation_note": "the whole-report-subset AUC of every arm is recomputed here and required to agree with the frozen comparison summary, which closes the identity join and the report mask",
+    "recomputed_terminal_ensemble_auc": {
+      "event_only": 0.5616469239203451,
+      "full_reco": 0.6150930579720123,
+      "tau_object_only": 0.6008338304557016
+    }
+  },
+  "population": {
+    "counts": {
+      "per_cell": {
+        "1p0n x 1p0n": {
+          "H": 879,
+          "Z": 1012
+        },
+        "1p0n x 1p1n": {
+          "H": 4554,
+          "Z": 4466
+        },
+        "1p0n x 1pXn": {
+          "H": 1370,
+          "Z": 1261
+        },
+        "1p0n x 3p0n": {
+          "H": 1459,
+          "Z": 1290
+        },
+        "1p0n x 3pXn": {
+          "H": 119,
+          "Z": 86
+        },
+        "1p1n x 1p1n": {
+          "H": 5290,
+          "Z": 5344
+        },
+        "1p1n x 1pXn": {
+          "H": 3098,
+          "Z": 3123
+        },
+        "1p1n x 3p0n": {
+          "H": 3399,
+          "Z": 3355
+        },
+        "1p1n x 3pXn": {
+          "H": 230,
+          "Z": 243
+        },
+        "1pXn x 1pXn": {
+          "H": 440,
+          "Z": 500
+        },
+        "1pXn x 3p0n": {
+          "H": 1036,
+          "Z": 1017
+        },
+        "1pXn x 3pXn": {
+          "H": 79,
+          "Z": 61
+        },
+        "3p0n x 3p0n": {
+          "H": 507,
+          "Z": 501
+        },
+        "3p0n x 3pXn": {
+          "H": 91,
+          "Z": 75
+        },
+        "3pXn x 3pXn": {
+          "H": 1,
+          "Z": 1
+        }
+      },
+      "primary": {
+        "H": 22552,
+        "Z": 22335
+      },
+      "report": {
+        "H": 22552,
+        "Z": 22335
+      },
+      "unknown_mode_dropped": {
+        "H": 0,
+        "Z": 0
+      }
+    },
+    "partition": "held-out report subset of validation",
+    "weights": "unit weight; no parent-overlap weight"
+  },
+  "primary_estimand": "within-cell unit-weight H-versus-Z AUC of each frozen arm on the held-out report subset of the fixed-v3 pT-matched validation surface",
+  "spearman_delta_versus_link_function": {
+    "max": {
+      "ci": [
+        0.07619225511992504,
+        0.856207281615211
+      ],
+      "description": "max[P(a), P(b)]   \u2014 stronger side only",
+      "estimate": 0.856207281615211
+    },
+    "mean": {
+      "ci": [
+        0.14852426445044992,
+        0.9050697364949292
+      ],
+      "description": "[P(a) + P(b)] / 2   \u2014 polarisation-like",
+      "estimate": 0.86329728711824
+    },
+    "note": "Post-hoc: the link-function comparison was added after the prespecified product panel was seen. It is a description of the observed cell pattern, not a prespecified test.",
+    "product": {
+      "ci": [
+        0.12531734813006712,
+        0.8865042034386229
+      ],
+      "description": "P(a) \u00d7 P(b)   \u2014 spin-correlation-like",
+      "estimate": 0.779752388364862
+    }
+  },
+  "spearman_delta_versus_power": {
+    "primary": {
+      "ci": [
+        0.12531734813006712,
+        0.8865042034386229
+      ],
+      "estimate": 0.779752388364862
+    },
+    "sensitivity": {
+      "ci": [
+        0.050114025233602574,
+        0.8337151470681156
+      ],
+      "estimate": 0.6742614304157437
+    }
+  },
+  "status": "completed",
+  "tables": [
+    "cell-summary.csv",
+    "cell-data.npz"
+  ],
+  "uncertainty": {
+    "bootstrap": {
+      "interval": "percentile 2.5 / 97.5 of the replicate distribution",
+      "pairing": "all arms are recomputed on the same resampled events, so arm differences are paired",
+      "replicates": 2000,
+      "seed": 20260828,
+      "unit": "source_file_index cluster, resampled with replacement independently within truth class"
+    },
+    "permutation_null": {
+      "observed": {
+        "event_only": 0.012862938084444617,
+        "full_reco": 0.018500123461433815,
+        "tau_object_only": 0.01289981660917617
+      },
+      "p_ge_observed": {
+        "event_only": 0.015984015984015984,
+        "full_reco": 0.000999000999000999,
+        "tau_object_only": 0.01098901098901099
+      },
+      "replicates": 1000,
+      "seed": 20260829,
+      "statistic": "occupancy-weighted standard deviation of within-cell AUC over unmasked cells"
+    }
+  }
+}
