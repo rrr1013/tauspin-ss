@@ -1,0 +1,1500 @@
+{
+  "bins_per_axis": 20,
+  "checkpoint_sha256": {
+    "seed42": "35972ce70c1703d816cc8a71dfae40663c98f7742d7364cf06810b7b46447a59",
+    "seed43": "6ae5dca2bf70cc578c1aed5b6b93f5caed350ec883be7925bada3dc300e72e3a",
+    "seed44": "91e23e570dc607891b6f5e407e1f7bfd1389954d0b903524f584e8adb615cad9"
+  },
+  "definitions": {
+    "axis": "x=tau- cos(psi), y=tau+ cos(psi); charged pion is charge matched and neutral pion has PDG 111",
+    "cospsi": "Oshihara thesis Eq. 3.5 evaluated in the lab frame: [m_rho/sqrt(m_rho^2-4*m_pi^2)] * [(E_charged-E_pi0)/|p_charged+p_pi0|], with m_rho=0.778 GeV and m_pi=0.13957039 GeV",
+    "excluded_observables": "cos(theta), A_pair, and other polarimeters are not computed",
+    "normalization": "inclusive and tertile panels normalized independently to unit sum; mean maps show raw mean H-like score; scatter contains every final selected event",
+    "population": "same canonical sample/split surface and fixed classifier scores as the preceding truth pi-nu maps; truth 1p1n x 1p1n is independently selected without reco intersection",
+    "score": "arithmetic mean of frozen full-reco seeds 42, 43, and 44 terminal checkpoints; eval-only inference; H-like score",
+    "tertiles": "unit-weight score tertiles defined separately within each truth class and each population after cos(psi) physical validity",
+    "truth_selection": "clean boson tau pair; charge-ordered PDG 15 (tau-) and -15 (tau+); each tau has exactly one generator-level charged pion, one neutral pion, and one tau neutrino, no other preserved decay objects, and three-daughter four-vector closure <=1e-4"
+  },
+  "device": "mps",
+  "formula_synthetic_max_abs_error": 2.220446049250313e-16,
+  "populations": {
+    "all-data": {
+      "class_counts": {
+        "H": 88500,
+        "Z": 89497
+      },
+      "cospsi_min_max_tau_minus": [
+        -1.0,
+        1.0
+      ],
+      "cospsi_min_max_tau_plus": [
+        -1.0,
+        1.0
+      ],
+      "events": 177997,
+      "inclusive": {
+        "H": {
+          "empty_bins": 0,
+          "events": 88500
+        },
+        "Z": {
+          "empty_bins": 0,
+          "events": 89497
+        }
+      },
+      "mean_score": {
+        "H": {
+          "empty_bins": 0,
+          "nan_bins": 0,
+          "occupied_mean_score_max": 0.6353457926746353,
+          "occupied_mean_score_min": 0.4114670674173104
+        },
+        "Z": {
+          "empty_bins": 0,
+          "nan_bins": 0,
+          "occupied_mean_score_max": 0.5800998031514364,
+          "occupied_mean_score_min": 0.3842661811038853
+        }
+      },
+      "png": [
+        "truth-1p1n-cospsi-all-data-inclusive.png",
+        "truth-1p1n-cospsi-all-data-score-tertiles.png",
+        "truth-1p1n-cospsi-all-data-mean-score.png",
+        "truth-1p1n-cospsi-all-data-scatter.png"
+      ],
+      "scatter": {
+        "H": 88500,
+        "Z": 89497
+      },
+      "tertile_edges": {
+        "H": [
+          0.4742538796530829,
+          0.5703344013955858
+        ],
+        "Z": [
+          0.421682467063268,
+          0.5153895318508148
+        ]
+      },
+      "tertiles": {
+        "H": {
+          "0": {
+            "empty_bins": 0,
+            "events": 29500
+          },
+          "1": {
+            "empty_bins": 0,
+            "events": 29500
+          },
+          "2": {
+            "empty_bins": 0,
+            "events": 29500
+          }
+        },
+        "Z": {
+          "0": {
+            "empty_bins": 0,
+            "events": 29833
+          },
+          "1": {
+            "empty_bins": 0,
+            "events": 29832
+          },
+          "2": {
+            "empty_bins": 0,
+            "events": 29832
+          }
+        }
+      }
+    },
+    "validation-test": {
+      "class_counts": {
+        "H": 17669,
+        "Z": 17930
+      },
+      "cospsi_min_max_tau_minus": [
+        -1.0,
+        0.9999253199336755
+      ],
+      "cospsi_min_max_tau_plus": [
+        -0.99990699885547,
+        0.999967933059211
+      ],
+      "events": 35599,
+      "inclusive": {
+        "H": {
+          "empty_bins": 0,
+          "events": 17669
+        },
+        "Z": {
+          "empty_bins": 0,
+          "events": 17930
+        }
+      },
+      "mean_score": {
+        "H": {
+          "empty_bins": 0,
+          "nan_bins": 0,
+          "occupied_mean_score_max": 0.6450889840340004,
+          "occupied_mean_score_min": 0.38916307545843576
+        },
+        "Z": {
+          "empty_bins": 0,
+          "nan_bins": 0,
+          "occupied_mean_score_max": 0.6169648445916898,
+          "occupied_mean_score_min": 0.3699583927112998
+        }
+      },
+      "png": [
+        "truth-1p1n-cospsi-validation-test-inclusive.png",
+        "truth-1p1n-cospsi-validation-test-score-tertiles.png",
+        "truth-1p1n-cospsi-validation-test-mean-score.png",
+        "truth-1p1n-cospsi-validation-test-scatter.png"
+      ],
+      "scatter": {
+        "H": 17669,
+        "Z": 17930
+      },
+      "tertile_edges": {
+        "H": [
+          0.4717683527204726,
+          0.5677425397766961
+        ],
+        "Z": [
+          0.42458391189575195,
+          0.5174013707372878
+        ]
+      },
+      "tertiles": {
+        "H": {
+          "0": {
+            "empty_bins": 1,
+            "events": 5890
+          },
+          "1": {
+            "empty_bins": 0,
+            "events": 5889
+          },
+          "2": {
+            "empty_bins": 17,
+            "events": 5890
+          }
+        },
+        "Z": {
+          "0": {
+            "empty_bins": 0,
+            "events": 5977
+          },
+          "1": {
+            "empty_bins": 0,
+            "events": 5976
+          },
+          "2": {
+            "empty_bins": 1,
+            "events": 5977
+          }
+        }
+      }
+    }
+  },
+  "status": "completed",
+  "truth_audit": {
+    "canonical_rows_seen_once": 892304,
+    "shard_count": 99,
+    "shards": {
+      "H-000.npz": {
+        "events": 8902,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 31,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1870,
+        "max_finite_cospsi_range_excess": 0.03321912083938505,
+        "max_relative_three_daughter_closure_before_selection": 4.5695014660269305e-05,
+        "max_relative_three_daughter_closure_selected": 4.5695014660269305e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1839,
+        "structural_truth_1p1n_x_1p1n_candidates": 1870
+      },
+      "H-001.npz": {
+        "events": 8928,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 34,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1820,
+        "max_finite_cospsi_range_excess": 0.04111416537991741,
+        "max_relative_three_daughter_closure_before_selection": 6.0668638963875024e-05,
+        "max_relative_three_daughter_closure_selected": 6.0668638963875024e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1786,
+        "structural_truth_1p1n_x_1p1n_candidates": 1820
+      },
+      "H-002.npz": {
+        "events": 8884,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 36,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1845,
+        "max_finite_cospsi_range_excess": 0.04318452377411908,
+        "max_relative_three_daughter_closure_before_selection": 3.3707075133518494e-05,
+        "max_relative_three_daughter_closure_selected": 3.3707075133518494e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1809,
+        "structural_truth_1p1n_x_1p1n_candidates": 1845
+      },
+      "H-003.npz": {
+        "events": 8903,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 33,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1855,
+        "max_finite_cospsi_range_excess": 0.0352807508086177,
+        "max_relative_three_daughter_closure_before_selection": 4.739602330912924e-05,
+        "max_relative_three_daughter_closure_selected": 4.739602330912924e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1822,
+        "structural_truth_1p1n_x_1p1n_candidates": 1855
+      },
+      "H-004.npz": {
+        "events": 8947,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 38,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1754,
+        "max_finite_cospsi_range_excess": 0.04710368430373579,
+        "max_relative_three_daughter_closure_before_selection": 4.013504866855502e-05,
+        "max_relative_three_daughter_closure_selected": 4.013504866855502e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1716,
+        "structural_truth_1p1n_x_1p1n_candidates": 1754
+      },
+      "H-005.npz": {
+        "events": 8927,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 38,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1784,
+        "max_finite_cospsi_range_excess": 0.042061328108224716,
+        "max_relative_three_daughter_closure_before_selection": 3.941896747699426e-05,
+        "max_relative_three_daughter_closure_selected": 3.941896747699426e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1746,
+        "structural_truth_1p1n_x_1p1n_candidates": 1784
+      },
+      "H-006.npz": {
+        "events": 9022,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 31,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1863,
+        "max_finite_cospsi_range_excess": 0.03179827613841235,
+        "max_relative_three_daughter_closure_before_selection": 7.258293105119281e-05,
+        "max_relative_three_daughter_closure_selected": 7.258293105119281e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1832,
+        "structural_truth_1p1n_x_1p1n_candidates": 1863
+      },
+      "H-007.npz": {
+        "events": 8806,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 33,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1767,
+        "max_finite_cospsi_range_excess": 0.03339578502160734,
+        "max_relative_three_daughter_closure_before_selection": 5.584740508745108e-05,
+        "max_relative_three_daughter_closure_selected": 5.584740508745108e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1734,
+        "structural_truth_1p1n_x_1p1n_candidates": 1767
+      },
+      "H-008.npz": {
+        "events": 8843,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 33,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1742,
+        "max_finite_cospsi_range_excess": 0.045816540123365,
+        "max_relative_three_daughter_closure_before_selection": 7.369903877717861e-05,
+        "max_relative_three_daughter_closure_selected": 7.369903877717861e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1709,
+        "structural_truth_1p1n_x_1p1n_candidates": 1742
+      },
+      "H-009.npz": {
+        "events": 8955,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 24,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1790,
+        "max_finite_cospsi_range_excess": 0.04158165780144252,
+        "max_relative_three_daughter_closure_before_selection": 5.71308712536612e-05,
+        "max_relative_three_daughter_closure_selected": 5.71308712536612e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1766,
+        "structural_truth_1p1n_x_1p1n_candidates": 1790
+      },
+      "H-010.npz": {
+        "events": 8855,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 35,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1750,
+        "max_finite_cospsi_range_excess": 0.038884931390284816,
+        "max_relative_three_daughter_closure_before_selection": 7.874276492585006e-05,
+        "max_relative_three_daughter_closure_selected": 7.874276492585006e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1715,
+        "structural_truth_1p1n_x_1p1n_candidates": 1750
+      },
+      "H-011.npz": {
+        "events": 8929,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 21,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1803,
+        "max_finite_cospsi_range_excess": 0.04067946089513996,
+        "max_relative_three_daughter_closure_before_selection": 6.037663177886773e-05,
+        "max_relative_three_daughter_closure_selected": 6.037663177886773e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1782,
+        "structural_truth_1p1n_x_1p1n_candidates": 1803
+      },
+      "H-012.npz": {
+        "events": 8985,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 39,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1871,
+        "max_finite_cospsi_range_excess": 0.04293779711631096,
+        "max_relative_three_daughter_closure_before_selection": 7.41755039932375e-05,
+        "max_relative_three_daughter_closure_selected": 7.41755039932375e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1832,
+        "structural_truth_1p1n_x_1p1n_candidates": 1871
+      },
+      "H-013.npz": {
+        "events": 8978,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 29,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1799,
+        "max_finite_cospsi_range_excess": 0.048694622488728134,
+        "max_relative_three_daughter_closure_before_selection": 4.833983493967682e-05,
+        "max_relative_three_daughter_closure_selected": 4.833983493967682e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1770,
+        "structural_truth_1p1n_x_1p1n_candidates": 1799
+      },
+      "H-014.npz": {
+        "events": 8962,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 29,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1790,
+        "max_finite_cospsi_range_excess": 0.023599674036894003,
+        "max_relative_three_daughter_closure_before_selection": 6.271077004299091e-05,
+        "max_relative_three_daughter_closure_selected": 6.271077004299091e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1761,
+        "structural_truth_1p1n_x_1p1n_candidates": 1790
+      },
+      "H-015.npz": {
+        "events": 8909,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 28,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1733,
+        "max_finite_cospsi_range_excess": 0.05163992539748641,
+        "max_relative_three_daughter_closure_before_selection": 5.220124954855639e-05,
+        "max_relative_three_daughter_closure_selected": 5.220124954855639e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1705,
+        "structural_truth_1p1n_x_1p1n_candidates": 1733
+      },
+      "H-016.npz": {
+        "events": 8931,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 42,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1869,
+        "max_finite_cospsi_range_excess": 0.03211820198489446,
+        "max_relative_three_daughter_closure_before_selection": 5.575181090331749e-05,
+        "max_relative_three_daughter_closure_selected": 5.575181090331749e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1827,
+        "structural_truth_1p1n_x_1p1n_candidates": 1869
+      },
+      "H-017.npz": {
+        "events": 8925,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 32,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1807,
+        "max_finite_cospsi_range_excess": 0.04043422379154271,
+        "max_relative_three_daughter_closure_before_selection": 6.169514688635787e-05,
+        "max_relative_three_daughter_closure_selected": 6.169514688635787e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1775,
+        "structural_truth_1p1n_x_1p1n_candidates": 1807
+      },
+      "H-018.npz": {
+        "events": 8940,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 25,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1800,
+        "max_finite_cospsi_range_excess": 0.03920782380856358,
+        "max_relative_three_daughter_closure_before_selection": 4.799440554149368e-05,
+        "max_relative_three_daughter_closure_selected": 4.799440554149368e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1775,
+        "structural_truth_1p1n_x_1p1n_candidates": 1800
+      },
+      "H-019.npz": {
+        "events": 8954,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 32,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1773,
+        "max_finite_cospsi_range_excess": 0.04670439496764911,
+        "max_relative_three_daughter_closure_before_selection": 4.452238656925306e-05,
+        "max_relative_three_daughter_closure_selected": 4.452238656925306e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1741,
+        "structural_truth_1p1n_x_1p1n_candidates": 1773
+      },
+      "H-020.npz": {
+        "events": 8955,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 31,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1766,
+        "max_finite_cospsi_range_excess": 0.04106889428909044,
+        "max_relative_three_daughter_closure_before_selection": 5.23200814075048e-05,
+        "max_relative_three_daughter_closure_selected": 5.23200814075048e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1735,
+        "structural_truth_1p1n_x_1p1n_candidates": 1766
+      },
+      "H-021.npz": {
+        "events": 8957,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 29,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1746,
+        "max_finite_cospsi_range_excess": 0.032765719067502586,
+        "max_relative_three_daughter_closure_before_selection": 3.83585202030211e-05,
+        "max_relative_three_daughter_closure_selected": 3.83585202030211e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1717,
+        "structural_truth_1p1n_x_1p1n_candidates": 1746
+      },
+      "H-022.npz": {
+        "events": 8939,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 30,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1792,
+        "max_finite_cospsi_range_excess": 0.04315213263002038,
+        "max_relative_three_daughter_closure_before_selection": 7.327623772226256e-05,
+        "max_relative_three_daughter_closure_selected": 7.327623772226256e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1762,
+        "structural_truth_1p1n_x_1p1n_candidates": 1792
+      },
+      "H-023.npz": {
+        "events": 8988,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 30,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1877,
+        "max_finite_cospsi_range_excess": 0.04942667595915817,
+        "max_relative_three_daughter_closure_before_selection": 4.617341689464003e-05,
+        "max_relative_three_daughter_closure_selected": 4.617341689464003e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1847,
+        "structural_truth_1p1n_x_1p1n_candidates": 1877
+      },
+      "H-024.npz": {
+        "events": 8953,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 30,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1808,
+        "max_finite_cospsi_range_excess": 0.04928315410982398,
+        "max_relative_three_daughter_closure_before_selection": 6.026632249586978e-05,
+        "max_relative_three_daughter_closure_selected": 6.026632249586978e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1778,
+        "structural_truth_1p1n_x_1p1n_candidates": 1808
+      },
+      "H-025.npz": {
+        "events": 9018,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 24,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1788,
+        "max_finite_cospsi_range_excess": 0.0348115986813855,
+        "max_relative_three_daughter_closure_before_selection": 6.413472214627234e-05,
+        "max_relative_three_daughter_closure_selected": 6.413472214627234e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1764,
+        "structural_truth_1p1n_x_1p1n_candidates": 1788
+      },
+      "H-026.npz": {
+        "events": 9036,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 33,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1849,
+        "max_finite_cospsi_range_excess": 0.04607401346101003,
+        "max_relative_three_daughter_closure_before_selection": 6.22018097561458e-05,
+        "max_relative_three_daughter_closure_selected": 6.22018097561458e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1816,
+        "structural_truth_1p1n_x_1p1n_candidates": 1849
+      },
+      "H-027.npz": {
+        "events": 8934,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 38,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1788,
+        "max_finite_cospsi_range_excess": 0.03126048892331368,
+        "max_relative_three_daughter_closure_before_selection": 5.154914618880747e-05,
+        "max_relative_three_daughter_closure_selected": 5.154914618880747e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1750,
+        "structural_truth_1p1n_x_1p1n_candidates": 1788
+      },
+      "H-028.npz": {
+        "events": 8982,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 32,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1832,
+        "max_finite_cospsi_range_excess": 0.0370230439856023,
+        "max_relative_three_daughter_closure_before_selection": 5.7369532869138584e-05,
+        "max_relative_three_daughter_closure_selected": 5.7369532869138584e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1800,
+        "structural_truth_1p1n_x_1p1n_candidates": 1832
+      },
+      "H-029.npz": {
+        "events": 8997,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 35,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1755,
+        "max_finite_cospsi_range_excess": 0.025429669305771396,
+        "max_relative_three_daughter_closure_before_selection": 4.9296870319985544e-05,
+        "max_relative_three_daughter_closure_selected": 4.9296870319985544e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1720,
+        "structural_truth_1p1n_x_1p1n_candidates": 1755
+      },
+      "H-030.npz": {
+        "events": 8898,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 29,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1790,
+        "max_finite_cospsi_range_excess": 0.04567770908170976,
+        "max_relative_three_daughter_closure_before_selection": 5.797611832496759e-05,
+        "max_relative_three_daughter_closure_selected": 5.797611832496759e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1761,
+        "structural_truth_1p1n_x_1p1n_candidates": 1790
+      },
+      "H-031.npz": {
+        "events": 8981,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 36,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1792,
+        "max_finite_cospsi_range_excess": 0.041117218169230974,
+        "max_relative_three_daughter_closure_before_selection": 7.497565453271044e-05,
+        "max_relative_three_daughter_closure_selected": 7.497565453271044e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1756,
+        "structural_truth_1p1n_x_1p1n_candidates": 1792
+      },
+      "H-032.npz": {
+        "events": 8864,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 29,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1809,
+        "max_finite_cospsi_range_excess": 0.03933986949101986,
+        "max_relative_three_daughter_closure_before_selection": 3.836328312290235e-05,
+        "max_relative_three_daughter_closure_selected": 3.836328312290235e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1780,
+        "structural_truth_1p1n_x_1p1n_candidates": 1809
+      },
+      "H-033.npz": {
+        "events": 8963,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 37,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1799,
+        "max_finite_cospsi_range_excess": 0.04894363462523321,
+        "max_relative_three_daughter_closure_before_selection": 6.3952549193452e-05,
+        "max_relative_three_daughter_closure_selected": 6.3952549193452e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1762,
+        "structural_truth_1p1n_x_1p1n_candidates": 1799
+      },
+      "H-034.npz": {
+        "events": 8935,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 26,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1757,
+        "max_finite_cospsi_range_excess": 0.039849508154246926,
+        "max_relative_three_daughter_closure_before_selection": 6.275492563002565e-05,
+        "max_relative_three_daughter_closure_selected": 6.275492563002565e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1731,
+        "structural_truth_1p1n_x_1p1n_candidates": 1757
+      },
+      "H-035.npz": {
+        "events": 8918,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 26,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1777,
+        "max_finite_cospsi_range_excess": 0.04704643095437633,
+        "max_relative_three_daughter_closure_before_selection": 4.7179096214014685e-05,
+        "max_relative_three_daughter_closure_selected": 4.7179096214014685e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1751,
+        "structural_truth_1p1n_x_1p1n_candidates": 1777
+      },
+      "H-036.npz": {
+        "events": 9042,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 40,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1883,
+        "max_finite_cospsi_range_excess": 0.0379021079999895,
+        "max_relative_three_daughter_closure_before_selection": 5.800803534673929e-05,
+        "max_relative_three_daughter_closure_selected": 5.800803534673929e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1843,
+        "structural_truth_1p1n_x_1p1n_candidates": 1883
+      },
+      "H-037.npz": {
+        "events": 9028,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 22,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1820,
+        "max_finite_cospsi_range_excess": 0.028379234686763066,
+        "max_relative_three_daughter_closure_before_selection": 4.566246179912666e-05,
+        "max_relative_three_daughter_closure_selected": 4.566246179912666e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1798,
+        "structural_truth_1p1n_x_1p1n_candidates": 1820
+      },
+      "H-038.npz": {
+        "events": 8954,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 26,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1804,
+        "max_finite_cospsi_range_excess": 0.03932615007416462,
+        "max_relative_three_daughter_closure_before_selection": 4.5579090682598134e-05,
+        "max_relative_three_daughter_closure_selected": 4.5579090682598134e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1778,
+        "structural_truth_1p1n_x_1p1n_candidates": 1804
+      },
+      "H-039.npz": {
+        "events": 8945,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 30,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1769,
+        "max_finite_cospsi_range_excess": 0.030293838643527637,
+        "max_relative_three_daughter_closure_before_selection": 5.0478724814159735e-05,
+        "max_relative_three_daughter_closure_selected": 5.0478724814159735e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1739,
+        "structural_truth_1p1n_x_1p1n_candidates": 1769
+      },
+      "H-040.npz": {
+        "events": 8812,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 43,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1806,
+        "max_finite_cospsi_range_excess": 0.04293532777047426,
+        "max_relative_three_daughter_closure_before_selection": 5.724467367428931e-05,
+        "max_relative_three_daughter_closure_selected": 5.724467367428931e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1763,
+        "structural_truth_1p1n_x_1p1n_candidates": 1806
+      },
+      "H-041.npz": {
+        "events": 8870,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 28,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1764,
+        "max_finite_cospsi_range_excess": 0.033309043847606246,
+        "max_relative_three_daughter_closure_before_selection": 5.821954983101996e-05,
+        "max_relative_three_daughter_closure_selected": 5.821954983101996e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1736,
+        "structural_truth_1p1n_x_1p1n_candidates": 1764
+      },
+      "H-042.npz": {
+        "events": 8843,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 27,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1804,
+        "max_finite_cospsi_range_excess": 0.04641226009175092,
+        "max_relative_three_daughter_closure_before_selection": 6.59525854302052e-05,
+        "max_relative_three_daughter_closure_selected": 6.59525854302052e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1777,
+        "structural_truth_1p1n_x_1p1n_candidates": 1804
+      },
+      "H-043.npz": {
+        "events": 8956,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 25,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1803,
+        "max_finite_cospsi_range_excess": 0.03562514483176238,
+        "max_relative_three_daughter_closure_before_selection": 5.3581781316404445e-05,
+        "max_relative_three_daughter_closure_selected": 5.3581781316404445e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1778,
+        "structural_truth_1p1n_x_1p1n_candidates": 1803
+      },
+      "H-044.npz": {
+        "events": 8995,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 26,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1737,
+        "max_finite_cospsi_range_excess": 0.03252410720524401,
+        "max_relative_three_daughter_closure_before_selection": 3.531675241374817e-05,
+        "max_relative_three_daughter_closure_selected": 3.531675241374817e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1711,
+        "structural_truth_1p1n_x_1p1n_candidates": 1737
+      },
+      "H-045.npz": {
+        "events": 9027,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 32,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1832,
+        "max_finite_cospsi_range_excess": 0.03928566460881333,
+        "max_relative_three_daughter_closure_before_selection": 7.913574155598064e-05,
+        "max_relative_three_daughter_closure_selected": 7.913574155598064e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1800,
+        "structural_truth_1p1n_x_1p1n_candidates": 1832
+      },
+      "H-046.npz": {
+        "events": 8990,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 29,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1853,
+        "max_finite_cospsi_range_excess": 0.038123379196743024,
+        "max_relative_three_daughter_closure_before_selection": 5.985654363652174e-05,
+        "max_relative_three_daughter_closure_selected": 5.985654363652174e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1824,
+        "structural_truth_1p1n_x_1p1n_candidates": 1853
+      },
+      "H-047.npz": {
+        "events": 8888,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 32,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1859,
+        "max_finite_cospsi_range_excess": 0.02656666815336317,
+        "max_relative_three_daughter_closure_before_selection": 7.146986913205778e-05,
+        "max_relative_three_daughter_closure_selected": 7.146986913205778e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1827,
+        "structural_truth_1p1n_x_1p1n_candidates": 1859
+      },
+      "H-048.npz": {
+        "events": 8990,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 27,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1890,
+        "max_finite_cospsi_range_excess": 0.0309717243282448,
+        "max_relative_three_daughter_closure_before_selection": 4.427576601671309e-05,
+        "max_relative_three_daughter_closure_selected": 4.427576601671309e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1863,
+        "structural_truth_1p1n_x_1p1n_candidates": 1890
+      },
+      "H-049.npz": {
+        "events": 8009,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 24,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1615,
+        "max_finite_cospsi_range_excess": 0.03500362026795645,
+        "max_relative_three_daughter_closure_before_selection": 5.114269919816989e-05,
+        "max_relative_three_daughter_closure_selected": 5.114269919816989e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1591,
+        "structural_truth_1p1n_x_1p1n_candidates": 1615
+      },
+      "Z-000.npz": {
+        "events": 9086,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 31,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1863,
+        "max_finite_cospsi_range_excess": 0.03544066786924116,
+        "max_relative_three_daughter_closure_before_selection": 5.337530940244593e-05,
+        "max_relative_three_daughter_closure_selected": 5.337530940244593e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1832,
+        "structural_truth_1p1n_x_1p1n_candidates": 1863
+      },
+      "Z-001.npz": {
+        "events": 9080,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 22,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1831,
+        "max_finite_cospsi_range_excess": 0.03494605445824317,
+        "max_relative_three_daughter_closure_before_selection": 5.5315473023900656e-05,
+        "max_relative_three_daughter_closure_selected": 5.5315473023900656e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1809,
+        "structural_truth_1p1n_x_1p1n_candidates": 1831
+      },
+      "Z-002.npz": {
+        "events": 9169,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 35,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1860,
+        "max_finite_cospsi_range_excess": 0.03977748172651241,
+        "max_relative_three_daughter_closure_before_selection": 3.040395928082855e-05,
+        "max_relative_three_daughter_closure_selected": 3.040395928082855e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1825,
+        "structural_truth_1p1n_x_1p1n_candidates": 1860
+      },
+      "Z-003.npz": {
+        "events": 9048,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 27,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1872,
+        "max_finite_cospsi_range_excess": 0.05019631000907987,
+        "max_relative_three_daughter_closure_before_selection": 4.2321354346537223e-05,
+        "max_relative_three_daughter_closure_selected": 4.2321354346537223e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1845,
+        "structural_truth_1p1n_x_1p1n_candidates": 1872
+      },
+      "Z-004.npz": {
+        "events": 9083,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 24,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1858,
+        "max_finite_cospsi_range_excess": 0.03587112841914064,
+        "max_relative_three_daughter_closure_before_selection": 6.566973379562604e-05,
+        "max_relative_three_daughter_closure_selected": 6.566973379562604e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1834,
+        "structural_truth_1p1n_x_1p1n_candidates": 1858
+      },
+      "Z-005.npz": {
+        "events": 9107,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 25,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1829,
+        "max_finite_cospsi_range_excess": 0.0387986733449901,
+        "max_relative_three_daughter_closure_before_selection": 4.9524247352991756e-05,
+        "max_relative_three_daughter_closure_selected": 4.9524247352991756e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1804,
+        "structural_truth_1p1n_x_1p1n_candidates": 1829
+      },
+      "Z-006.npz": {
+        "events": 9135,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 28,
+        "failed_three_daughter_four_vector_closure": 1,
+        "finite_cospsi_events_after_closure": 1880,
+        "max_finite_cospsi_range_excess": 0.03779852742255807,
+        "max_relative_three_daughter_closure_before_selection": 0.009867799125555713,
+        "max_relative_three_daughter_closure_selected": 4.122258095424885e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1852,
+        "structural_truth_1p1n_x_1p1n_candidates": 1881
+      },
+      "Z-007.npz": {
+        "events": 8970,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 24,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1797,
+        "max_finite_cospsi_range_excess": 0.03822040599907095,
+        "max_relative_three_daughter_closure_before_selection": 6.608256148509629e-05,
+        "max_relative_three_daughter_closure_selected": 6.608256148509629e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1773,
+        "structural_truth_1p1n_x_1p1n_candidates": 1797
+      },
+      "Z-008.npz": {
+        "events": 9183,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 51,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1867,
+        "max_finite_cospsi_range_excess": 0.03759377084713589,
+        "max_relative_three_daughter_closure_before_selection": 4.350110616529012e-05,
+        "max_relative_three_daughter_closure_selected": 4.350110616529012e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1816,
+        "structural_truth_1p1n_x_1p1n_candidates": 1867
+      },
+      "Z-009.npz": {
+        "events": 9008,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 28,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1771,
+        "max_finite_cospsi_range_excess": 0.03852634705167257,
+        "max_relative_three_daughter_closure_before_selection": 6.911195524260117e-05,
+        "max_relative_three_daughter_closure_selected": 6.911195524260117e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1743,
+        "structural_truth_1p1n_x_1p1n_candidates": 1771
+      },
+      "Z-010.npz": {
+        "events": 9132,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 30,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1794,
+        "max_finite_cospsi_range_excess": 0.04046305051777588,
+        "max_relative_three_daughter_closure_before_selection": 3.41262062696844e-05,
+        "max_relative_three_daughter_closure_selected": 3.41262062696844e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1764,
+        "structural_truth_1p1n_x_1p1n_candidates": 1794
+      },
+      "Z-011.npz": {
+        "events": 9039,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 21,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1859,
+        "max_finite_cospsi_range_excess": 0.03195833516273616,
+        "max_relative_three_daughter_closure_before_selection": 3.000990748517093e-05,
+        "max_relative_three_daughter_closure_selected": 3.000990748517093e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1838,
+        "structural_truth_1p1n_x_1p1n_candidates": 1859
+      },
+      "Z-012.npz": {
+        "events": 9190,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 34,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1894,
+        "max_finite_cospsi_range_excess": 0.045624443378602164,
+        "max_relative_three_daughter_closure_before_selection": 7.075802951290567e-05,
+        "max_relative_three_daughter_closure_selected": 7.075802951290567e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1860,
+        "structural_truth_1p1n_x_1p1n_candidates": 1894
+      },
+      "Z-013.npz": {
+        "events": 9122,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 31,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1910,
+        "max_finite_cospsi_range_excess": 0.04600982622477412,
+        "max_relative_three_daughter_closure_before_selection": 4.993413212883657e-05,
+        "max_relative_three_daughter_closure_selected": 4.993413212883657e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1879,
+        "structural_truth_1p1n_x_1p1n_candidates": 1910
+      },
+      "Z-014.npz": {
+        "events": 9181,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 25,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1936,
+        "max_finite_cospsi_range_excess": 0.03439604656240336,
+        "max_relative_three_daughter_closure_before_selection": 4.215862150064676e-05,
+        "max_relative_three_daughter_closure_selected": 4.215862150064676e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1911,
+        "structural_truth_1p1n_x_1p1n_candidates": 1936
+      },
+      "Z-015.npz": {
+        "events": 9152,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 32,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1867,
+        "max_finite_cospsi_range_excess": 0.045478372334379236,
+        "max_relative_three_daughter_closure_before_selection": 6.376920479952907e-05,
+        "max_relative_three_daughter_closure_selected": 6.376920479952907e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1835,
+        "structural_truth_1p1n_x_1p1n_candidates": 1867
+      },
+      "Z-016.npz": {
+        "events": 9200,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 22,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1835,
+        "max_finite_cospsi_range_excess": 0.02084011219758186,
+        "max_relative_three_daughter_closure_before_selection": 5.377960678572747e-05,
+        "max_relative_three_daughter_closure_selected": 5.377960678572747e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1813,
+        "structural_truth_1p1n_x_1p1n_candidates": 1835
+      },
+      "Z-017.npz": {
+        "events": 9206,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 36,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1897,
+        "max_finite_cospsi_range_excess": 0.0473279536529565,
+        "max_relative_three_daughter_closure_before_selection": 6.322596061140209e-05,
+        "max_relative_three_daughter_closure_selected": 6.322596061140209e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1861,
+        "structural_truth_1p1n_x_1p1n_candidates": 1897
+      },
+      "Z-018.npz": {
+        "events": 9012,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 34,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1858,
+        "max_finite_cospsi_range_excess": 0.03836742086854783,
+        "max_relative_three_daughter_closure_before_selection": 6.041190475762968e-05,
+        "max_relative_three_daughter_closure_selected": 6.041190475762968e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1824,
+        "structural_truth_1p1n_x_1p1n_candidates": 1858
+      },
+      "Z-019.npz": {
+        "events": 9082,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 28,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1884,
+        "max_finite_cospsi_range_excess": 0.042636160099787324,
+        "max_relative_three_daughter_closure_before_selection": 5.1371746769758505e-05,
+        "max_relative_three_daughter_closure_selected": 5.1371746769758505e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1856,
+        "structural_truth_1p1n_x_1p1n_candidates": 1884
+      },
+      "Z-020.npz": {
+        "events": 9179,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 34,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1852,
+        "max_finite_cospsi_range_excess": 0.03170729404269568,
+        "max_relative_three_daughter_closure_before_selection": 3.0235852612158312e-05,
+        "max_relative_three_daughter_closure_selected": 3.0235852612158312e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1818,
+        "structural_truth_1p1n_x_1p1n_candidates": 1852
+      },
+      "Z-021.npz": {
+        "events": 9122,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 30,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1813,
+        "max_finite_cospsi_range_excess": 0.037251987197690184,
+        "max_relative_three_daughter_closure_before_selection": 5.6175667747152795e-05,
+        "max_relative_three_daughter_closure_selected": 5.6175667747152795e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1783,
+        "structural_truth_1p1n_x_1p1n_candidates": 1813
+      },
+      "Z-022.npz": {
+        "events": 9043,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 31,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1865,
+        "max_finite_cospsi_range_excess": 0.043813336632169575,
+        "max_relative_three_daughter_closure_before_selection": 4.5782542472231336e-05,
+        "max_relative_three_daughter_closure_selected": 4.5782542472231336e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1834,
+        "structural_truth_1p1n_x_1p1n_candidates": 1865
+      },
+      "Z-023.npz": {
+        "events": 9140,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 27,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1901,
+        "max_finite_cospsi_range_excess": 0.04134808084722774,
+        "max_relative_three_daughter_closure_before_selection": 6.117635085680888e-05,
+        "max_relative_three_daughter_closure_selected": 6.117635085680888e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1874,
+        "structural_truth_1p1n_x_1p1n_candidates": 1901
+      },
+      "Z-024.npz": {
+        "events": 9155,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 28,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1874,
+        "max_finite_cospsi_range_excess": 0.046416629610465554,
+        "max_relative_three_daughter_closure_before_selection": 4.6535484929787e-05,
+        "max_relative_three_daughter_closure_selected": 4.6535484929787e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1846,
+        "structural_truth_1p1n_x_1p1n_candidates": 1874
+      },
+      "Z-025.npz": {
+        "events": 9124,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 27,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1844,
+        "max_finite_cospsi_range_excess": 0.03073009950970773,
+        "max_relative_three_daughter_closure_before_selection": 4.0724063773030874e-05,
+        "max_relative_three_daughter_closure_selected": 4.0724063773030874e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1817,
+        "structural_truth_1p1n_x_1p1n_candidates": 1844
+      },
+      "Z-026.npz": {
+        "events": 9121,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 26,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1815,
+        "max_finite_cospsi_range_excess": 0.037155567228411845,
+        "max_relative_three_daughter_closure_before_selection": 4.5435415052731504e-05,
+        "max_relative_three_daughter_closure_selected": 4.5435415052731504e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1789,
+        "structural_truth_1p1n_x_1p1n_candidates": 1815
+      },
+      "Z-027.npz": {
+        "events": 9151,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 26,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1911,
+        "max_finite_cospsi_range_excess": 0.04006390699475482,
+        "max_relative_three_daughter_closure_before_selection": 3.810296005251864e-05,
+        "max_relative_three_daughter_closure_selected": 3.810296005251864e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1885,
+        "structural_truth_1p1n_x_1p1n_candidates": 1911
+      },
+      "Z-028.npz": {
+        "events": 9165,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 23,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1954,
+        "max_finite_cospsi_range_excess": 0.04015914744495808,
+        "max_relative_three_daughter_closure_before_selection": 7.387989350190964e-05,
+        "max_relative_three_daughter_closure_selected": 7.387989350190964e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1931,
+        "structural_truth_1p1n_x_1p1n_candidates": 1954
+      },
+      "Z-029.npz": {
+        "events": 9060,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 21,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1817,
+        "max_finite_cospsi_range_excess": 0.03753599959152121,
+        "max_relative_three_daughter_closure_before_selection": 6.558532701464398e-05,
+        "max_relative_three_daughter_closure_selected": 6.558532701464398e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1796,
+        "structural_truth_1p1n_x_1p1n_candidates": 1817
+      },
+      "Z-030.npz": {
+        "events": 9267,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 34,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1867,
+        "max_finite_cospsi_range_excess": 0.03589114016201833,
+        "max_relative_three_daughter_closure_before_selection": 7.56341797744134e-05,
+        "max_relative_three_daughter_closure_selected": 7.56341797744134e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1833,
+        "structural_truth_1p1n_x_1p1n_candidates": 1867
+      },
+      "Z-031.npz": {
+        "events": 9183,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 27,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1887,
+        "max_finite_cospsi_range_excess": 0.03398847263969462,
+        "max_relative_three_daughter_closure_before_selection": 6.066255970629787e-05,
+        "max_relative_three_daughter_closure_selected": 6.066255970629787e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1860,
+        "structural_truth_1p1n_x_1p1n_candidates": 1887
+      },
+      "Z-032.npz": {
+        "events": 9136,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 32,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1857,
+        "max_finite_cospsi_range_excess": 0.04496413386482301,
+        "max_relative_three_daughter_closure_before_selection": 5.795376902537275e-05,
+        "max_relative_three_daughter_closure_selected": 5.795376902537275e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1825,
+        "structural_truth_1p1n_x_1p1n_candidates": 1857
+      },
+      "Z-033.npz": {
+        "events": 9199,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 32,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1884,
+        "max_finite_cospsi_range_excess": 0.04716363567814885,
+        "max_relative_three_daughter_closure_before_selection": 3.1484971173759724e-05,
+        "max_relative_three_daughter_closure_selected": 3.1484971173759724e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1852,
+        "structural_truth_1p1n_x_1p1n_candidates": 1884
+      },
+      "Z-034.npz": {
+        "events": 9184,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 25,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1878,
+        "max_finite_cospsi_range_excess": 0.03290796193882972,
+        "max_relative_three_daughter_closure_before_selection": 4.556677079472133e-05,
+        "max_relative_three_daughter_closure_selected": 4.556677079472133e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1853,
+        "structural_truth_1p1n_x_1p1n_candidates": 1878
+      },
+      "Z-035.npz": {
+        "events": 9123,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 31,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1868,
+        "max_finite_cospsi_range_excess": 0.041632042981836426,
+        "max_relative_three_daughter_closure_before_selection": 5.684715318756985e-05,
+        "max_relative_three_daughter_closure_selected": 5.684715318756985e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1837,
+        "structural_truth_1p1n_x_1p1n_candidates": 1868
+      },
+      "Z-036.npz": {
+        "events": 9080,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 24,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1886,
+        "max_finite_cospsi_range_excess": 0.04638389265393328,
+        "max_relative_three_daughter_closure_before_selection": 7.241931258502481e-05,
+        "max_relative_three_daughter_closure_selected": 7.241931258502481e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1862,
+        "structural_truth_1p1n_x_1p1n_candidates": 1886
+      },
+      "Z-037.npz": {
+        "events": 9135,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 27,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1909,
+        "max_finite_cospsi_range_excess": 0.034108802419369644,
+        "max_relative_three_daughter_closure_before_selection": 3.211173667393743e-05,
+        "max_relative_three_daughter_closure_selected": 3.211173667393743e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1882,
+        "structural_truth_1p1n_x_1p1n_candidates": 1909
+      },
+      "Z-038.npz": {
+        "events": 9112,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 33,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1778,
+        "max_finite_cospsi_range_excess": 0.032022403617189,
+        "max_relative_three_daughter_closure_before_selection": 5.291114894092692e-05,
+        "max_relative_three_daughter_closure_selected": 5.291114894092692e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1745,
+        "structural_truth_1p1n_x_1p1n_candidates": 1778
+      },
+      "Z-039.npz": {
+        "events": 9125,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 32,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1839,
+        "max_finite_cospsi_range_excess": 0.045069747411245586,
+        "max_relative_three_daughter_closure_before_selection": 7.188715322983664e-05,
+        "max_relative_three_daughter_closure_selected": 7.188715322983664e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1807,
+        "structural_truth_1p1n_x_1p1n_candidates": 1839
+      },
+      "Z-040.npz": {
+        "events": 9057,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 26,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1796,
+        "max_finite_cospsi_range_excess": 0.046835532915657785,
+        "max_relative_three_daughter_closure_before_selection": 6.7364327768222e-05,
+        "max_relative_three_daughter_closure_selected": 6.7364327768222e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1770,
+        "structural_truth_1p1n_x_1p1n_candidates": 1796
+      },
+      "Z-041.npz": {
+        "events": 9147,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 34,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1906,
+        "max_finite_cospsi_range_excess": 0.03295176087530227,
+        "max_relative_three_daughter_closure_before_selection": 4.925177695727586e-05,
+        "max_relative_three_daughter_closure_selected": 4.925177695727586e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1872,
+        "structural_truth_1p1n_x_1p1n_candidates": 1906
+      },
+      "Z-042.npz": {
+        "events": 9026,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 33,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1818,
+        "max_finite_cospsi_range_excess": 0.03463051689748475,
+        "max_relative_three_daughter_closure_before_selection": 4.114683672510127e-05,
+        "max_relative_three_daughter_closure_selected": 4.114683672510127e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1785,
+        "structural_truth_1p1n_x_1p1n_candidates": 1818
+      },
+      "Z-043.npz": {
+        "events": 9135,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 28,
+        "failed_three_daughter_four_vector_closure": 1,
+        "finite_cospsi_events_after_closure": 1834,
+        "max_finite_cospsi_range_excess": 0.049579923719595076,
+        "max_relative_three_daughter_closure_before_selection": 0.009558277064040612,
+        "max_relative_three_daughter_closure_selected": 3.2745120136339074e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1806,
+        "structural_truth_1p1n_x_1p1n_candidates": 1835
+      },
+      "Z-044.npz": {
+        "events": 9248,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 29,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1911,
+        "max_finite_cospsi_range_excess": 0.030248361145996494,
+        "max_relative_three_daughter_closure_before_selection": 6.498277344673783e-05,
+        "max_relative_three_daughter_closure_selected": 6.498277344673783e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1882,
+        "structural_truth_1p1n_x_1p1n_candidates": 1911
+      },
+      "Z-045.npz": {
+        "events": 9073,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 28,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1854,
+        "max_finite_cospsi_range_excess": 0.03771167044193269,
+        "max_relative_three_daughter_closure_before_selection": 5.803553337694441e-05,
+        "max_relative_three_daughter_closure_selected": 5.803553337694441e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1826,
+        "structural_truth_1p1n_x_1p1n_candidates": 1854
+      },
+      "Z-046.npz": {
+        "events": 9200,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 36,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1805,
+        "max_finite_cospsi_range_excess": 0.052289682039129426,
+        "max_relative_three_daughter_closure_before_selection": 6.886844516316183e-05,
+        "max_relative_three_daughter_closure_selected": 6.886844516316183e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1769,
+        "structural_truth_1p1n_x_1p1n_candidates": 1805
+      },
+      "Z-047.npz": {
+        "events": 9120,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 24,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1866,
+        "max_finite_cospsi_range_excess": 0.03390148257380887,
+        "max_relative_three_daughter_closure_before_selection": 4.368744702643051e-05,
+        "max_relative_three_daughter_closure_selected": 4.368744702643051e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1842,
+        "structural_truth_1p1n_x_1p1n_candidates": 1866
+      },
+      "Z-048.npz": {
+        "events": 8157,
+        "failed_cospsi_finite_or_denominator": 0,
+        "failed_cospsi_physical_range": 28,
+        "failed_three_daughter_four_vector_closure": 0,
+        "finite_cospsi_events_after_closure": 1670,
+        "max_finite_cospsi_range_excess": 0.023398893024519918,
+        "max_relative_three_daughter_closure_before_selection": 4.8582036152587465e-05,
+        "max_relative_three_daughter_closure_selected": 4.8582036152587465e-05,
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_1p1n_x_1p1n": 1642,
+        "structural_truth_1p1n_x_1p1n_candidates": 1670
+      }
+    }
+  },
+  "validation_inference_parity": {
+    "allclose_atol_5e-4": true,
+    "max_abs_difference": 0.00036647915840148926,
+    "mean_abs_difference": 3.9318859854667914e-05
+  },
+  "validation_reference_sha256": "bcb87013ee097a3d1f7ca9709c99ecda654c1817f6c569274b8baaa580e1a63d"
+}
