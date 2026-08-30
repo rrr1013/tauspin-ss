@@ -1,0 +1,2391 @@
+{
+  "bins_per_axis": 20,
+  "checkpoint_sha256": {
+    "seed42": "35972ce70c1703d816cc8a71dfae40663c98f7742d7364cf06810b7b46447a59",
+    "seed43": "6ae5dca2bf70cc578c1aed5b6b93f5caed350ec883be7925bada3dc300e72e3a",
+    "seed44": "91e23e570dc607891b6f5e407e1f7bfd1389954d0b903524f584e8adb615cad9"
+  },
+  "definitions": {
+    "axis": "x=tau- cos(theta), y=tau+ cos(theta); rho four-vector is the charge-matched charged pion plus PDG-111 neutral pion",
+    "costheta": "Oshihara thesis Eq. 3.4 for 1pn: x=E_rho/E_tau, a=m_rho/m_tau, beta=sqrt(1-m_tau^2/E_tau^2), cos(theta)=(2x-1-a^2)/(beta*(1-a^2)); m_rho=0.778 GeV, m_tau=1.77686 GeV",
+    "excluded_observables": "cos(psi) is used only to reproduce the preceding final event cohort; no cos(theta) x cos(psi), A_pair, or other polarimeter is computed",
+    "normalization": "inclusive and tertile panels normalized independently to unit sum; mean maps show raw mean H-like score; scatter contains every final selected event",
+    "population": "exact final cohort from the preceding truth 1p1n x 1p1n cos(psi) maps, followed only by cos(theta) finite and physical-range validity",
+    "score": "arithmetic mean of frozen full-reco seeds 42, 43, and 44 terminal checkpoints; eval-only inference; H-like score",
+    "tertiles": "unit-weight score tertiles defined separately within each truth class and each population after final cos(theta) validity",
+    "truth_selection": "clean boson tau pair; charge-ordered PDG 15 (tau-) and -15 (tau+); each tau has exactly one charged pion, one neutral pion, and one tau neutrino; tau -> rho nu closure <=1e-4"
+  },
+  "device": "mps",
+  "formula_synthetic_max_abs_error": 6.661338147750939e-16,
+  "populations": {
+    "all-data": {
+      "class_counts": {
+        "H": 86592,
+        "Z": 87414
+      },
+      "costheta_min_max_tau_minus": [
+        -1.0,
+        0.9999977307765899
+      ],
+      "costheta_min_max_tau_plus": [
+        -1.0,
+        0.9999904993944265
+      ],
+      "events": 174006,
+      "inclusive": {
+        "H": {
+          "empty_bins": 0,
+          "events": 86592
+        },
+        "Z": {
+          "empty_bins": 0,
+          "events": 87414
+        }
+      },
+      "mean_score": {
+        "H": {
+          "empty_bins": 0,
+          "nan_bins": 0,
+          "occupied_mean_score_max": 0.5630403636158379,
+          "occupied_mean_score_min": 0.3663517687565242
+        },
+        "Z": {
+          "empty_bins": 0,
+          "nan_bins": 0,
+          "occupied_mean_score_max": 0.5168634159803754,
+          "occupied_mean_score_min": 0.3530519258851806
+        }
+      },
+      "png": [
+        "truth-1p1n-costheta-all-data-inclusive.png",
+        "truth-1p1n-costheta-all-data-score-tertiles.png",
+        "truth-1p1n-costheta-all-data-mean-score.png",
+        "truth-1p1n-costheta-all-data-scatter.png"
+      ],
+      "scatter": {
+        "H": 86592,
+        "Z": 87414
+      },
+      "tertile_edges": {
+        "H": [
+          0.4753126833173964,
+          0.5710264046986898
+        ],
+        "Z": [
+          0.4229297406143612,
+          0.5164902243349287
+        ]
+      },
+      "tertiles": {
+        "H": {
+          "0": {
+            "empty_bins": 0,
+            "events": 28864
+          },
+          "1": {
+            "empty_bins": 0,
+            "events": 28864
+          },
+          "2": {
+            "empty_bins": 2,
+            "events": 28864
+          }
+        },
+        "Z": {
+          "0": {
+            "empty_bins": 0,
+            "events": 29138
+          },
+          "1": {
+            "empty_bins": 0,
+            "events": 29138
+          },
+          "2": {
+            "empty_bins": 1,
+            "events": 29138
+          }
+        }
+      }
+    },
+    "validation-test": {
+      "class_counts": {
+        "H": 17305,
+        "Z": 17475
+      },
+      "costheta_min_max_tau_minus": [
+        -0.9997344421629587,
+        0.9999752187890918
+      ],
+      "costheta_min_max_tau_plus": [
+        -0.9999169021437554,
+        0.9999884604645528
+      ],
+      "events": 34780,
+      "inclusive": {
+        "H": {
+          "empty_bins": 0,
+          "events": 17305
+        },
+        "Z": {
+          "empty_bins": 0,
+          "events": 17475
+        }
+      },
+      "mean_score": {
+        "H": {
+          "empty_bins": 0,
+          "nan_bins": 0,
+          "occupied_mean_score_max": 0.5787184404002296,
+          "occupied_mean_score_min": 0.3544801686491285
+        },
+        "Z": {
+          "empty_bins": 0,
+          "nan_bins": 0,
+          "occupied_mean_score_max": 0.540765299490004,
+          "occupied_mean_score_min": 0.3408000039912406
+        }
+      },
+      "png": [
+        "truth-1p1n-costheta-validation-test-inclusive.png",
+        "truth-1p1n-costheta-validation-test-score-tertiles.png",
+        "truth-1p1n-costheta-validation-test-mean-score.png",
+        "truth-1p1n-costheta-validation-test-scatter.png"
+      ],
+      "scatter": {
+        "H": 17305,
+        "Z": 17475
+      },
+      "tertile_edges": {
+        "H": [
+          0.472969909509023,
+          0.5685897668202718
+        ],
+        "Z": [
+          0.4257086979018317,
+          0.5185463627179463
+        ]
+      },
+      "tertiles": {
+        "H": {
+          "0": {
+            "empty_bins": 0,
+            "events": 5769
+          },
+          "1": {
+            "empty_bins": 2,
+            "events": 5768
+          },
+          "2": {
+            "empty_bins": 15,
+            "events": 5768
+          }
+        },
+        "Z": {
+          "0": {
+            "empty_bins": 0,
+            "events": 5825
+          },
+          "1": {
+            "empty_bins": 0,
+            "events": 5825
+          },
+          "2": {
+            "empty_bins": 6,
+            "events": 5825
+          }
+        }
+      }
+    }
+  },
+  "status": "completed",
+  "truth_audit": {
+    "canonical_rows_seen_once": 892304,
+    "shard_count": 99,
+    "shards": {
+      "H-000.npz": {
+        "cospsi_base_audit": {
+          "events": 8902,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 31,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1870,
+          "max_finite_cospsi_range_excess": 0.03321912083938505,
+          "max_relative_three_daughter_closure_before_selection": 4.5695014660269305e-05,
+          "max_relative_three_daughter_closure_selected": 4.5695014660269305e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1839,
+          "structural_truth_1p1n_x_1p1n_candidates": 1870
+        },
+        "cospsi_base_events": 1839,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 36,
+        "max_finite_costheta_range_excess": 0.17961065618558636,
+        "max_relative_tau_rho_nu_closure": 4.5695014660269305e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1803
+      },
+      "H-001.npz": {
+        "cospsi_base_audit": {
+          "events": 8928,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 34,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1820,
+          "max_finite_cospsi_range_excess": 0.04111416537991741,
+          "max_relative_three_daughter_closure_before_selection": 6.0668638963875024e-05,
+          "max_relative_three_daughter_closure_selected": 6.0668638963875024e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1786,
+          "structural_truth_1p1n_x_1p1n_candidates": 1820
+        },
+        "cospsi_base_events": 1786,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 48,
+        "max_finite_costheta_range_excess": 0.20904015982091106,
+        "max_relative_tau_rho_nu_closure": 6.0668638963875024e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1738
+      },
+      "H-002.npz": {
+        "cospsi_base_audit": {
+          "events": 8884,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 36,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1845,
+          "max_finite_cospsi_range_excess": 0.04318452377411908,
+          "max_relative_three_daughter_closure_before_selection": 3.3707075133518494e-05,
+          "max_relative_three_daughter_closure_selected": 3.3707075133518494e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1809,
+          "structural_truth_1p1n_x_1p1n_candidates": 1845
+        },
+        "cospsi_base_events": 1809,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 41,
+        "max_finite_costheta_range_excess": 0.20217286923940003,
+        "max_relative_tau_rho_nu_closure": 3.3707075133518494e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1768
+      },
+      "H-003.npz": {
+        "cospsi_base_audit": {
+          "events": 8903,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 33,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1855,
+          "max_finite_cospsi_range_excess": 0.0352807508086177,
+          "max_relative_three_daughter_closure_before_selection": 4.739602330912924e-05,
+          "max_relative_three_daughter_closure_selected": 4.739602330912924e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1822,
+          "structural_truth_1p1n_x_1p1n_candidates": 1855
+        },
+        "cospsi_base_events": 1822,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 48,
+        "max_finite_costheta_range_excess": 0.11570070476636607,
+        "max_relative_tau_rho_nu_closure": 4.739602330912924e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1774
+      },
+      "H-004.npz": {
+        "cospsi_base_audit": {
+          "events": 8947,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 38,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1754,
+          "max_finite_cospsi_range_excess": 0.04710368430373579,
+          "max_relative_three_daughter_closure_before_selection": 4.013504866855502e-05,
+          "max_relative_three_daughter_closure_selected": 4.013504866855502e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1716,
+          "structural_truth_1p1n_x_1p1n_candidates": 1754
+        },
+        "cospsi_base_events": 1716,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 39,
+        "max_finite_costheta_range_excess": 0.164750549101645,
+        "max_relative_tau_rho_nu_closure": 4.013504866855502e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1677
+      },
+      "H-005.npz": {
+        "cospsi_base_audit": {
+          "events": 8927,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 38,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1784,
+          "max_finite_cospsi_range_excess": 0.042061328108224716,
+          "max_relative_three_daughter_closure_before_selection": 3.941896747699426e-05,
+          "max_relative_three_daughter_closure_selected": 3.941896747699426e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1746,
+          "structural_truth_1p1n_x_1p1n_candidates": 1784
+        },
+        "cospsi_base_events": 1746,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 36,
+        "max_finite_costheta_range_excess": 0.2563694407457562,
+        "max_relative_tau_rho_nu_closure": 3.941896747699426e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1710
+      },
+      "H-006.npz": {
+        "cospsi_base_audit": {
+          "events": 9022,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 31,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1863,
+          "max_finite_cospsi_range_excess": 0.03179827613841235,
+          "max_relative_three_daughter_closure_before_selection": 7.258293105119281e-05,
+          "max_relative_three_daughter_closure_selected": 7.258293105119281e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1832,
+          "structural_truth_1p1n_x_1p1n_candidates": 1863
+        },
+        "cospsi_base_events": 1832,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 45,
+        "max_finite_costheta_range_excess": 0.1934164393208757,
+        "max_relative_tau_rho_nu_closure": 7.258293105119281e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1787
+      },
+      "H-007.npz": {
+        "cospsi_base_audit": {
+          "events": 8806,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 33,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1767,
+          "max_finite_cospsi_range_excess": 0.03339578502160734,
+          "max_relative_three_daughter_closure_before_selection": 5.584740508745108e-05,
+          "max_relative_three_daughter_closure_selected": 5.584740508745108e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1734,
+          "structural_truth_1p1n_x_1p1n_candidates": 1767
+        },
+        "cospsi_base_events": 1734,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 30,
+        "max_finite_costheta_range_excess": 0.2552403159502019,
+        "max_relative_tau_rho_nu_closure": 5.584740508745108e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1704
+      },
+      "H-008.npz": {
+        "cospsi_base_audit": {
+          "events": 8843,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 33,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1742,
+          "max_finite_cospsi_range_excess": 0.045816540123365,
+          "max_relative_three_daughter_closure_before_selection": 7.369903877717861e-05,
+          "max_relative_three_daughter_closure_selected": 7.369903877717861e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1709,
+          "structural_truth_1p1n_x_1p1n_candidates": 1742
+        },
+        "cospsi_base_events": 1709,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 35,
+        "max_finite_costheta_range_excess": 0.24565819985949622,
+        "max_relative_tau_rho_nu_closure": 7.369903877717861e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1674
+      },
+      "H-009.npz": {
+        "cospsi_base_audit": {
+          "events": 8955,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 24,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1790,
+          "max_finite_cospsi_range_excess": 0.04158165780144252,
+          "max_relative_three_daughter_closure_before_selection": 5.71308712536612e-05,
+          "max_relative_three_daughter_closure_selected": 5.71308712536612e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1766,
+          "structural_truth_1p1n_x_1p1n_candidates": 1790
+        },
+        "cospsi_base_events": 1766,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 48,
+        "max_finite_costheta_range_excess": 0.2404175343607271,
+        "max_relative_tau_rho_nu_closure": 5.71308712536612e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1718
+      },
+      "H-010.npz": {
+        "cospsi_base_audit": {
+          "events": 8855,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 35,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1750,
+          "max_finite_cospsi_range_excess": 0.038884931390284816,
+          "max_relative_three_daughter_closure_before_selection": 7.874276492585006e-05,
+          "max_relative_three_daughter_closure_selected": 7.874276492585006e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1715,
+          "structural_truth_1p1n_x_1p1n_candidates": 1750
+        },
+        "cospsi_base_events": 1715,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 32,
+        "max_finite_costheta_range_excess": 0.16832234170280347,
+        "max_relative_tau_rho_nu_closure": 7.874276492585006e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1683
+      },
+      "H-011.npz": {
+        "cospsi_base_audit": {
+          "events": 8929,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 21,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1803,
+          "max_finite_cospsi_range_excess": 0.04067946089513996,
+          "max_relative_three_daughter_closure_before_selection": 6.037663177886773e-05,
+          "max_relative_three_daughter_closure_selected": 6.037663177886773e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1782,
+          "structural_truth_1p1n_x_1p1n_candidates": 1803
+        },
+        "cospsi_base_events": 1782,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 37,
+        "max_finite_costheta_range_excess": 0.19787833846239056,
+        "max_relative_tau_rho_nu_closure": 6.037663177886773e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1745
+      },
+      "H-012.npz": {
+        "cospsi_base_audit": {
+          "events": 8985,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 39,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1871,
+          "max_finite_cospsi_range_excess": 0.04293779711631096,
+          "max_relative_three_daughter_closure_before_selection": 7.41755039932375e-05,
+          "max_relative_three_daughter_closure_selected": 7.41755039932375e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1832,
+          "structural_truth_1p1n_x_1p1n_candidates": 1871
+        },
+        "cospsi_base_events": 1832,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 35,
+        "max_finite_costheta_range_excess": 0.12340332196108661,
+        "max_relative_tau_rho_nu_closure": 7.41755039932375e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1797
+      },
+      "H-013.npz": {
+        "cospsi_base_audit": {
+          "events": 8978,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 29,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1799,
+          "max_finite_cospsi_range_excess": 0.048694622488728134,
+          "max_relative_three_daughter_closure_before_selection": 4.833983493967682e-05,
+          "max_relative_three_daughter_closure_selected": 4.833983493967682e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1770,
+          "structural_truth_1p1n_x_1p1n_candidates": 1799
+        },
+        "cospsi_base_events": 1770,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 34,
+        "max_finite_costheta_range_excess": 0.15097845776757102,
+        "max_relative_tau_rho_nu_closure": 4.833983493967682e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1736
+      },
+      "H-014.npz": {
+        "cospsi_base_audit": {
+          "events": 8962,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 29,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1790,
+          "max_finite_cospsi_range_excess": 0.023599674036894003,
+          "max_relative_three_daughter_closure_before_selection": 6.271077004299091e-05,
+          "max_relative_three_daughter_closure_selected": 6.271077004299091e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1761,
+          "structural_truth_1p1n_x_1p1n_candidates": 1790
+        },
+        "cospsi_base_events": 1761,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 36,
+        "max_finite_costheta_range_excess": 0.1087115483918275,
+        "max_relative_tau_rho_nu_closure": 6.271077004299091e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1725
+      },
+      "H-015.npz": {
+        "cospsi_base_audit": {
+          "events": 8909,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 28,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1733,
+          "max_finite_cospsi_range_excess": 0.05163992539748641,
+          "max_relative_three_daughter_closure_before_selection": 5.220124954855639e-05,
+          "max_relative_three_daughter_closure_selected": 5.220124954855639e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1705,
+          "structural_truth_1p1n_x_1p1n_candidates": 1733
+        },
+        "cospsi_base_events": 1705,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 31,
+        "max_finite_costheta_range_excess": 0.21371676154471309,
+        "max_relative_tau_rho_nu_closure": 5.220124954855639e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1674
+      },
+      "H-016.npz": {
+        "cospsi_base_audit": {
+          "events": 8931,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 42,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1869,
+          "max_finite_cospsi_range_excess": 0.03211820198489446,
+          "max_relative_three_daughter_closure_before_selection": 5.575181090331749e-05,
+          "max_relative_three_daughter_closure_selected": 5.575181090331749e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1827,
+          "structural_truth_1p1n_x_1p1n_candidates": 1869
+        },
+        "cospsi_base_events": 1827,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 41,
+        "max_finite_costheta_range_excess": 0.209203251171169,
+        "max_relative_tau_rho_nu_closure": 5.575181090331749e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1786
+      },
+      "H-017.npz": {
+        "cospsi_base_audit": {
+          "events": 8925,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 32,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1807,
+          "max_finite_cospsi_range_excess": 0.04043422379154271,
+          "max_relative_three_daughter_closure_before_selection": 6.169514688635787e-05,
+          "max_relative_three_daughter_closure_selected": 6.169514688635787e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1775,
+          "structural_truth_1p1n_x_1p1n_candidates": 1807
+        },
+        "cospsi_base_events": 1775,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 30,
+        "max_finite_costheta_range_excess": 0.18321489125313084,
+        "max_relative_tau_rho_nu_closure": 6.169514688635787e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1745
+      },
+      "H-018.npz": {
+        "cospsi_base_audit": {
+          "events": 8940,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 25,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1800,
+          "max_finite_cospsi_range_excess": 0.03920782380856358,
+          "max_relative_three_daughter_closure_before_selection": 4.799440554149368e-05,
+          "max_relative_three_daughter_closure_selected": 4.799440554149368e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1775,
+          "structural_truth_1p1n_x_1p1n_candidates": 1800
+        },
+        "cospsi_base_events": 1775,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 43,
+        "max_finite_costheta_range_excess": 0.27864028874487556,
+        "max_relative_tau_rho_nu_closure": 4.799440554149368e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1732
+      },
+      "H-019.npz": {
+        "cospsi_base_audit": {
+          "events": 8954,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 32,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1773,
+          "max_finite_cospsi_range_excess": 0.04670439496764911,
+          "max_relative_three_daughter_closure_before_selection": 4.452238656925306e-05,
+          "max_relative_three_daughter_closure_selected": 4.452238656925306e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1741,
+          "structural_truth_1p1n_x_1p1n_candidates": 1773
+        },
+        "cospsi_base_events": 1741,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 33,
+        "max_finite_costheta_range_excess": 0.17221925290326068,
+        "max_relative_tau_rho_nu_closure": 4.452238656925306e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1708
+      },
+      "H-020.npz": {
+        "cospsi_base_audit": {
+          "events": 8955,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 31,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1766,
+          "max_finite_cospsi_range_excess": 0.04106889428909044,
+          "max_relative_three_daughter_closure_before_selection": 5.23200814075048e-05,
+          "max_relative_three_daughter_closure_selected": 5.23200814075048e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1735,
+          "structural_truth_1p1n_x_1p1n_candidates": 1766
+        },
+        "cospsi_base_events": 1735,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 38,
+        "max_finite_costheta_range_excess": 0.2218222416148241,
+        "max_relative_tau_rho_nu_closure": 5.23200814075048e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1697
+      },
+      "H-021.npz": {
+        "cospsi_base_audit": {
+          "events": 8957,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 29,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1746,
+          "max_finite_cospsi_range_excess": 0.032765719067502586,
+          "max_relative_three_daughter_closure_before_selection": 3.83585202030211e-05,
+          "max_relative_three_daughter_closure_selected": 3.83585202030211e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1717,
+          "structural_truth_1p1n_x_1p1n_candidates": 1746
+        },
+        "cospsi_base_events": 1717,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 32,
+        "max_finite_costheta_range_excess": 0.15686515117566757,
+        "max_relative_tau_rho_nu_closure": 3.83585202030211e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1685
+      },
+      "H-022.npz": {
+        "cospsi_base_audit": {
+          "events": 8939,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 30,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1792,
+          "max_finite_cospsi_range_excess": 0.04315213263002038,
+          "max_relative_three_daughter_closure_before_selection": 7.327623772226256e-05,
+          "max_relative_three_daughter_closure_selected": 7.327623772226256e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1762,
+          "structural_truth_1p1n_x_1p1n_candidates": 1792
+        },
+        "cospsi_base_events": 1762,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 41,
+        "max_finite_costheta_range_excess": 0.17944176480095053,
+        "max_relative_tau_rho_nu_closure": 7.327623772226256e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1721
+      },
+      "H-023.npz": {
+        "cospsi_base_audit": {
+          "events": 8988,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 30,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1877,
+          "max_finite_cospsi_range_excess": 0.04942667595915817,
+          "max_relative_three_daughter_closure_before_selection": 4.617341689464003e-05,
+          "max_relative_three_daughter_closure_selected": 4.617341689464003e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1847,
+          "structural_truth_1p1n_x_1p1n_candidates": 1877
+        },
+        "cospsi_base_events": 1847,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 39,
+        "max_finite_costheta_range_excess": 0.19544774781013863,
+        "max_relative_tau_rho_nu_closure": 4.617341689464003e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1808
+      },
+      "H-024.npz": {
+        "cospsi_base_audit": {
+          "events": 8953,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 30,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1808,
+          "max_finite_cospsi_range_excess": 0.04928315410982398,
+          "max_relative_three_daughter_closure_before_selection": 6.026632249586978e-05,
+          "max_relative_three_daughter_closure_selected": 6.026632249586978e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1778,
+          "structural_truth_1p1n_x_1p1n_candidates": 1808
+        },
+        "cospsi_base_events": 1778,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 41,
+        "max_finite_costheta_range_excess": 0.2113147747286761,
+        "max_relative_tau_rho_nu_closure": 6.026632249586978e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1737
+      },
+      "H-025.npz": {
+        "cospsi_base_audit": {
+          "events": 9018,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 24,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1788,
+          "max_finite_cospsi_range_excess": 0.0348115986813855,
+          "max_relative_three_daughter_closure_before_selection": 6.413472214627234e-05,
+          "max_relative_three_daughter_closure_selected": 6.413472214627234e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1764,
+          "structural_truth_1p1n_x_1p1n_candidates": 1788
+        },
+        "cospsi_base_events": 1764,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 35,
+        "max_finite_costheta_range_excess": 0.2229180966588178,
+        "max_relative_tau_rho_nu_closure": 6.413472214627234e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1729
+      },
+      "H-026.npz": {
+        "cospsi_base_audit": {
+          "events": 9036,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 33,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1849,
+          "max_finite_cospsi_range_excess": 0.04607401346101003,
+          "max_relative_three_daughter_closure_before_selection": 6.22018097561458e-05,
+          "max_relative_three_daughter_closure_selected": 6.22018097561458e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1816,
+          "structural_truth_1p1n_x_1p1n_candidates": 1849
+        },
+        "cospsi_base_events": 1816,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 41,
+        "max_finite_costheta_range_excess": 0.12861530931730214,
+        "max_relative_tau_rho_nu_closure": 6.22018097561458e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1775
+      },
+      "H-027.npz": {
+        "cospsi_base_audit": {
+          "events": 8934,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 38,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1788,
+          "max_finite_cospsi_range_excess": 0.03126048892331368,
+          "max_relative_three_daughter_closure_before_selection": 5.154914618880747e-05,
+          "max_relative_three_daughter_closure_selected": 5.154914618880747e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1750,
+          "structural_truth_1p1n_x_1p1n_candidates": 1788
+        },
+        "cospsi_base_events": 1750,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 44,
+        "max_finite_costheta_range_excess": 0.22863902057597185,
+        "max_relative_tau_rho_nu_closure": 5.154914618880747e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1706
+      },
+      "H-028.npz": {
+        "cospsi_base_audit": {
+          "events": 8982,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 32,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1832,
+          "max_finite_cospsi_range_excess": 0.0370230439856023,
+          "max_relative_three_daughter_closure_before_selection": 5.7369532869138584e-05,
+          "max_relative_three_daughter_closure_selected": 5.7369532869138584e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1800,
+          "structural_truth_1p1n_x_1p1n_candidates": 1832
+        },
+        "cospsi_base_events": 1800,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 41,
+        "max_finite_costheta_range_excess": 0.14982206196117165,
+        "max_relative_tau_rho_nu_closure": 5.7369532869138584e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1759
+      },
+      "H-029.npz": {
+        "cospsi_base_audit": {
+          "events": 8997,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 35,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1755,
+          "max_finite_cospsi_range_excess": 0.025429669305771396,
+          "max_relative_three_daughter_closure_before_selection": 4.9296870319985544e-05,
+          "max_relative_three_daughter_closure_selected": 4.9296870319985544e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1720,
+          "structural_truth_1p1n_x_1p1n_candidates": 1755
+        },
+        "cospsi_base_events": 1720,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 35,
+        "max_finite_costheta_range_excess": 0.23907051346606867,
+        "max_relative_tau_rho_nu_closure": 4.9296870319985544e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1685
+      },
+      "H-030.npz": {
+        "cospsi_base_audit": {
+          "events": 8898,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 29,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1790,
+          "max_finite_cospsi_range_excess": 0.04567770908170976,
+          "max_relative_three_daughter_closure_before_selection": 5.797611832496759e-05,
+          "max_relative_three_daughter_closure_selected": 5.797611832496759e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1761,
+          "structural_truth_1p1n_x_1p1n_candidates": 1790
+        },
+        "cospsi_base_events": 1761,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 43,
+        "max_finite_costheta_range_excess": 0.24720158516715007,
+        "max_relative_tau_rho_nu_closure": 5.797611832496759e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1718
+      },
+      "H-031.npz": {
+        "cospsi_base_audit": {
+          "events": 8981,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 36,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1792,
+          "max_finite_cospsi_range_excess": 0.041117218169230974,
+          "max_relative_three_daughter_closure_before_selection": 7.497565453271044e-05,
+          "max_relative_three_daughter_closure_selected": 7.497565453271044e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1756,
+          "structural_truth_1p1n_x_1p1n_candidates": 1792
+        },
+        "cospsi_base_events": 1756,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 38,
+        "max_finite_costheta_range_excess": 0.18991080821106898,
+        "max_relative_tau_rho_nu_closure": 7.497565453271044e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1718
+      },
+      "H-032.npz": {
+        "cospsi_base_audit": {
+          "events": 8864,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 29,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1809,
+          "max_finite_cospsi_range_excess": 0.03933986949101986,
+          "max_relative_three_daughter_closure_before_selection": 3.836328312290235e-05,
+          "max_relative_three_daughter_closure_selected": 3.836328312290235e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1780,
+          "structural_truth_1p1n_x_1p1n_candidates": 1809
+        },
+        "cospsi_base_events": 1780,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 43,
+        "max_finite_costheta_range_excess": 0.26497068801981816,
+        "max_relative_tau_rho_nu_closure": 3.836328312290235e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1737
+      },
+      "H-033.npz": {
+        "cospsi_base_audit": {
+          "events": 8963,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 37,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1799,
+          "max_finite_cospsi_range_excess": 0.04894363462523321,
+          "max_relative_three_daughter_closure_before_selection": 6.3952549193452e-05,
+          "max_relative_three_daughter_closure_selected": 6.3952549193452e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1762,
+          "structural_truth_1p1n_x_1p1n_candidates": 1799
+        },
+        "cospsi_base_events": 1762,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 42,
+        "max_finite_costheta_range_excess": 0.18639833074720902,
+        "max_relative_tau_rho_nu_closure": 6.3952549193452e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1720
+      },
+      "H-034.npz": {
+        "cospsi_base_audit": {
+          "events": 8935,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 26,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1757,
+          "max_finite_cospsi_range_excess": 0.039849508154246926,
+          "max_relative_three_daughter_closure_before_selection": 6.275492563002565e-05,
+          "max_relative_three_daughter_closure_selected": 6.275492563002565e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1731,
+          "structural_truth_1p1n_x_1p1n_candidates": 1757
+        },
+        "cospsi_base_events": 1731,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 23,
+        "max_finite_costheta_range_excess": 0.1856102248045155,
+        "max_relative_tau_rho_nu_closure": 6.275492563002565e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1708
+      },
+      "H-035.npz": {
+        "cospsi_base_audit": {
+          "events": 8918,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 26,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1777,
+          "max_finite_cospsi_range_excess": 0.04704643095437633,
+          "max_relative_three_daughter_closure_before_selection": 4.7179096214014685e-05,
+          "max_relative_three_daughter_closure_selected": 4.7179096214014685e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1751,
+          "structural_truth_1p1n_x_1p1n_candidates": 1777
+        },
+        "cospsi_base_events": 1751,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 31,
+        "max_finite_costheta_range_excess": 0.2075309587081946,
+        "max_relative_tau_rho_nu_closure": 4.7179096214014685e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1720
+      },
+      "H-036.npz": {
+        "cospsi_base_audit": {
+          "events": 9042,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 40,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1883,
+          "max_finite_cospsi_range_excess": 0.0379021079999895,
+          "max_relative_three_daughter_closure_before_selection": 5.800803534673929e-05,
+          "max_relative_three_daughter_closure_selected": 5.800803534673929e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1843,
+          "structural_truth_1p1n_x_1p1n_candidates": 1883
+        },
+        "cospsi_base_events": 1843,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 32,
+        "max_finite_costheta_range_excess": 0.22970580035832366,
+        "max_relative_tau_rho_nu_closure": 5.800803534673929e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1811
+      },
+      "H-037.npz": {
+        "cospsi_base_audit": {
+          "events": 9028,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 22,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1820,
+          "max_finite_cospsi_range_excess": 0.028379234686763066,
+          "max_relative_three_daughter_closure_before_selection": 4.566246179912666e-05,
+          "max_relative_three_daughter_closure_selected": 4.566246179912666e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1798,
+          "structural_truth_1p1n_x_1p1n_candidates": 1820
+        },
+        "cospsi_base_events": 1798,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 50,
+        "max_finite_costheta_range_excess": 0.1506690668179833,
+        "max_relative_tau_rho_nu_closure": 4.566246179912666e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1748
+      },
+      "H-038.npz": {
+        "cospsi_base_audit": {
+          "events": 8954,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 26,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1804,
+          "max_finite_cospsi_range_excess": 0.03932615007416462,
+          "max_relative_three_daughter_closure_before_selection": 4.5579090682598134e-05,
+          "max_relative_three_daughter_closure_selected": 4.5579090682598134e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1778,
+          "structural_truth_1p1n_x_1p1n_candidates": 1804
+        },
+        "cospsi_base_events": 1778,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 37,
+        "max_finite_costheta_range_excess": 0.16557571291489603,
+        "max_relative_tau_rho_nu_closure": 4.5579090682598134e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1741
+      },
+      "H-039.npz": {
+        "cospsi_base_audit": {
+          "events": 8945,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 30,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1769,
+          "max_finite_cospsi_range_excess": 0.030293838643527637,
+          "max_relative_three_daughter_closure_before_selection": 5.0478724814159735e-05,
+          "max_relative_three_daughter_closure_selected": 5.0478724814159735e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1739,
+          "structural_truth_1p1n_x_1p1n_candidates": 1769
+        },
+        "cospsi_base_events": 1739,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 48,
+        "max_finite_costheta_range_excess": 0.17866672363262914,
+        "max_relative_tau_rho_nu_closure": 5.0478724814159735e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1691
+      },
+      "H-040.npz": {
+        "cospsi_base_audit": {
+          "events": 8812,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 43,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1806,
+          "max_finite_cospsi_range_excess": 0.04293532777047426,
+          "max_relative_three_daughter_closure_before_selection": 5.724467367428931e-05,
+          "max_relative_three_daughter_closure_selected": 5.724467367428931e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1763,
+          "structural_truth_1p1n_x_1p1n_candidates": 1806
+        },
+        "cospsi_base_events": 1763,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 32,
+        "max_finite_costheta_range_excess": 0.1600904666216869,
+        "max_relative_tau_rho_nu_closure": 5.724467367428931e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1731
+      },
+      "H-041.npz": {
+        "cospsi_base_audit": {
+          "events": 8870,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 28,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1764,
+          "max_finite_cospsi_range_excess": 0.033309043847606246,
+          "max_relative_three_daughter_closure_before_selection": 5.821954983101996e-05,
+          "max_relative_three_daughter_closure_selected": 5.821954983101996e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1736,
+          "structural_truth_1p1n_x_1p1n_candidates": 1764
+        },
+        "cospsi_base_events": 1736,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 42,
+        "max_finite_costheta_range_excess": 0.19593056575810386,
+        "max_relative_tau_rho_nu_closure": 5.821954983101996e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1694
+      },
+      "H-042.npz": {
+        "cospsi_base_audit": {
+          "events": 8843,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 27,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1804,
+          "max_finite_cospsi_range_excess": 0.04641226009175092,
+          "max_relative_three_daughter_closure_before_selection": 6.59525854302052e-05,
+          "max_relative_three_daughter_closure_selected": 6.59525854302052e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1777,
+          "structural_truth_1p1n_x_1p1n_candidates": 1804
+        },
+        "cospsi_base_events": 1777,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 36,
+        "max_finite_costheta_range_excess": 0.13902409055641707,
+        "max_relative_tau_rho_nu_closure": 6.59525854302052e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1741
+      },
+      "H-043.npz": {
+        "cospsi_base_audit": {
+          "events": 8956,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 25,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1803,
+          "max_finite_cospsi_range_excess": 0.03562514483176238,
+          "max_relative_three_daughter_closure_before_selection": 5.3581781316404445e-05,
+          "max_relative_three_daughter_closure_selected": 5.3581781316404445e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1778,
+          "structural_truth_1p1n_x_1p1n_candidates": 1803
+        },
+        "cospsi_base_events": 1778,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 37,
+        "max_finite_costheta_range_excess": 0.34152101708138694,
+        "max_relative_tau_rho_nu_closure": 5.3581781316404445e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1741
+      },
+      "H-044.npz": {
+        "cospsi_base_audit": {
+          "events": 8995,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 26,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1737,
+          "max_finite_cospsi_range_excess": 0.03252410720524401,
+          "max_relative_three_daughter_closure_before_selection": 3.531675241374817e-05,
+          "max_relative_three_daughter_closure_selected": 3.531675241374817e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1711,
+          "structural_truth_1p1n_x_1p1n_candidates": 1737
+        },
+        "cospsi_base_events": 1711,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 28,
+        "max_finite_costheta_range_excess": 0.2102019465820133,
+        "max_relative_tau_rho_nu_closure": 3.531675241374817e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1683
+      },
+      "H-045.npz": {
+        "cospsi_base_audit": {
+          "events": 9027,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 32,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1832,
+          "max_finite_cospsi_range_excess": 0.03928566460881333,
+          "max_relative_three_daughter_closure_before_selection": 7.913574155598064e-05,
+          "max_relative_three_daughter_closure_selected": 7.913574155598064e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1800,
+          "structural_truth_1p1n_x_1p1n_candidates": 1832
+        },
+        "cospsi_base_events": 1800,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 43,
+        "max_finite_costheta_range_excess": 0.2723899895871531,
+        "max_relative_tau_rho_nu_closure": 7.913574155598064e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1757
+      },
+      "H-046.npz": {
+        "cospsi_base_audit": {
+          "events": 8990,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 29,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1853,
+          "max_finite_cospsi_range_excess": 0.038123379196743024,
+          "max_relative_three_daughter_closure_before_selection": 5.985654363652174e-05,
+          "max_relative_three_daughter_closure_selected": 5.985654363652174e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1824,
+          "structural_truth_1p1n_x_1p1n_candidates": 1853
+        },
+        "cospsi_base_events": 1824,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 41,
+        "max_finite_costheta_range_excess": 0.25130490591466503,
+        "max_relative_tau_rho_nu_closure": 5.985654363652174e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1783
+      },
+      "H-047.npz": {
+        "cospsi_base_audit": {
+          "events": 8888,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 32,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1859,
+          "max_finite_cospsi_range_excess": 0.02656666815336317,
+          "max_relative_three_daughter_closure_before_selection": 7.146986913205778e-05,
+          "max_relative_three_daughter_closure_selected": 7.146986913205778e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1827,
+          "structural_truth_1p1n_x_1p1n_candidates": 1859
+        },
+        "cospsi_base_events": 1827,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 43,
+        "max_finite_costheta_range_excess": 0.1806772572940254,
+        "max_relative_tau_rho_nu_closure": 7.146986913205778e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1784
+      },
+      "H-048.npz": {
+        "cospsi_base_audit": {
+          "events": 8990,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 27,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1890,
+          "max_finite_cospsi_range_excess": 0.0309717243282448,
+          "max_relative_three_daughter_closure_before_selection": 4.427576601671309e-05,
+          "max_relative_three_daughter_closure_selected": 4.427576601671309e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1863,
+          "structural_truth_1p1n_x_1p1n_candidates": 1890
+        },
+        "cospsi_base_events": 1863,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 40,
+        "max_finite_costheta_range_excess": 0.24874779993302143,
+        "max_relative_tau_rho_nu_closure": 4.427576601671309e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1823
+      },
+      "H-049.npz": {
+        "cospsi_base_audit": {
+          "events": 8009,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 24,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1615,
+          "max_finite_cospsi_range_excess": 0.03500362026795645,
+          "max_relative_three_daughter_closure_before_selection": 5.114269919816989e-05,
+          "max_relative_three_daughter_closure_selected": 5.114269919816989e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1591,
+          "structural_truth_1p1n_x_1p1n_candidates": 1615
+        },
+        "cospsi_base_events": 1591,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 34,
+        "max_finite_costheta_range_excess": 0.2955239259831377,
+        "max_relative_tau_rho_nu_closure": 5.114269919816989e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1557
+      },
+      "Z-000.npz": {
+        "cospsi_base_audit": {
+          "events": 9086,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 31,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1863,
+          "max_finite_cospsi_range_excess": 0.03544066786924116,
+          "max_relative_three_daughter_closure_before_selection": 5.337530940244593e-05,
+          "max_relative_three_daughter_closure_selected": 5.337530940244593e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1832,
+          "structural_truth_1p1n_x_1p1n_candidates": 1863
+        },
+        "cospsi_base_events": 1832,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 40,
+        "max_finite_costheta_range_excess": 0.22993223376922822,
+        "max_relative_tau_rho_nu_closure": 5.337530940244593e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1792
+      },
+      "Z-001.npz": {
+        "cospsi_base_audit": {
+          "events": 9080,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 22,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1831,
+          "max_finite_cospsi_range_excess": 0.03494605445824317,
+          "max_relative_three_daughter_closure_before_selection": 5.5315473023900656e-05,
+          "max_relative_three_daughter_closure_selected": 5.5315473023900656e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1809,
+          "structural_truth_1p1n_x_1p1n_candidates": 1831
+        },
+        "cospsi_base_events": 1809,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 44,
+        "max_finite_costheta_range_excess": 0.2576833821508635,
+        "max_relative_tau_rho_nu_closure": 5.5315473023900656e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1765
+      },
+      "Z-002.npz": {
+        "cospsi_base_audit": {
+          "events": 9169,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 35,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1860,
+          "max_finite_cospsi_range_excess": 0.03977748172651241,
+          "max_relative_three_daughter_closure_before_selection": 3.040395928082855e-05,
+          "max_relative_three_daughter_closure_selected": 3.040395928082855e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1825,
+          "structural_truth_1p1n_x_1p1n_candidates": 1860
+        },
+        "cospsi_base_events": 1825,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 51,
+        "max_finite_costheta_range_excess": 0.23957084752539637,
+        "max_relative_tau_rho_nu_closure": 3.040395928082855e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1774
+      },
+      "Z-003.npz": {
+        "cospsi_base_audit": {
+          "events": 9048,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 27,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1872,
+          "max_finite_cospsi_range_excess": 0.05019631000907987,
+          "max_relative_three_daughter_closure_before_selection": 4.2321354346537223e-05,
+          "max_relative_three_daughter_closure_selected": 4.2321354346537223e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1845,
+          "structural_truth_1p1n_x_1p1n_candidates": 1872
+        },
+        "cospsi_base_events": 1845,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 41,
+        "max_finite_costheta_range_excess": 0.2625328404719609,
+        "max_relative_tau_rho_nu_closure": 4.2321354346537223e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1804
+      },
+      "Z-004.npz": {
+        "cospsi_base_audit": {
+          "events": 9083,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 24,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1858,
+          "max_finite_cospsi_range_excess": 0.03587112841914064,
+          "max_relative_three_daughter_closure_before_selection": 6.566973379562604e-05,
+          "max_relative_three_daughter_closure_selected": 6.566973379562604e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1834,
+          "structural_truth_1p1n_x_1p1n_candidates": 1858
+        },
+        "cospsi_base_events": 1834,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 55,
+        "max_finite_costheta_range_excess": 0.17585056995926318,
+        "max_relative_tau_rho_nu_closure": 6.566973379562604e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1779
+      },
+      "Z-005.npz": {
+        "cospsi_base_audit": {
+          "events": 9107,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 25,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1829,
+          "max_finite_cospsi_range_excess": 0.0387986733449901,
+          "max_relative_three_daughter_closure_before_selection": 4.9524247352991756e-05,
+          "max_relative_three_daughter_closure_selected": 4.9524247352991756e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1804,
+          "structural_truth_1p1n_x_1p1n_candidates": 1829
+        },
+        "cospsi_base_events": 1804,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 36,
+        "max_finite_costheta_range_excess": 0.20900708394729173,
+        "max_relative_tau_rho_nu_closure": 4.9524247352991756e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1768
+      },
+      "Z-006.npz": {
+        "cospsi_base_audit": {
+          "events": 9135,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 28,
+          "failed_three_daughter_four_vector_closure": 1,
+          "finite_cospsi_events_after_closure": 1880,
+          "max_finite_cospsi_range_excess": 0.03779852742255807,
+          "max_relative_three_daughter_closure_before_selection": 0.009867799125555713,
+          "max_relative_three_daughter_closure_selected": 4.122258095424885e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1852,
+          "structural_truth_1p1n_x_1p1n_candidates": 1881
+        },
+        "cospsi_base_events": 1852,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 39,
+        "max_finite_costheta_range_excess": 0.1888978771579346,
+        "max_relative_tau_rho_nu_closure": 4.122258095424885e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1813
+      },
+      "Z-007.npz": {
+        "cospsi_base_audit": {
+          "events": 8970,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 24,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1797,
+          "max_finite_cospsi_range_excess": 0.03822040599907095,
+          "max_relative_three_daughter_closure_before_selection": 6.608256148509629e-05,
+          "max_relative_three_daughter_closure_selected": 6.608256148509629e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1773,
+          "structural_truth_1p1n_x_1p1n_candidates": 1797
+        },
+        "cospsi_base_events": 1773,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 46,
+        "max_finite_costheta_range_excess": 0.19769195818866914,
+        "max_relative_tau_rho_nu_closure": 6.608256148509629e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1727
+      },
+      "Z-008.npz": {
+        "cospsi_base_audit": {
+          "events": 9183,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 51,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1867,
+          "max_finite_cospsi_range_excess": 0.03759377084713589,
+          "max_relative_three_daughter_closure_before_selection": 4.350110616529012e-05,
+          "max_relative_three_daughter_closure_selected": 4.350110616529012e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1816,
+          "structural_truth_1p1n_x_1p1n_candidates": 1867
+        },
+        "cospsi_base_events": 1816,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 44,
+        "max_finite_costheta_range_excess": 0.22001389371138025,
+        "max_relative_tau_rho_nu_closure": 4.350110616529012e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1772
+      },
+      "Z-009.npz": {
+        "cospsi_base_audit": {
+          "events": 9008,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 28,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1771,
+          "max_finite_cospsi_range_excess": 0.03852634705167257,
+          "max_relative_three_daughter_closure_before_selection": 6.911195524260117e-05,
+          "max_relative_three_daughter_closure_selected": 6.911195524260117e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1743,
+          "structural_truth_1p1n_x_1p1n_candidates": 1771
+        },
+        "cospsi_base_events": 1743,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 29,
+        "max_finite_costheta_range_excess": 0.1438187287693231,
+        "max_relative_tau_rho_nu_closure": 6.911195524260117e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1714
+      },
+      "Z-010.npz": {
+        "cospsi_base_audit": {
+          "events": 9132,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 30,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1794,
+          "max_finite_cospsi_range_excess": 0.04046305051777588,
+          "max_relative_three_daughter_closure_before_selection": 3.41262062696844e-05,
+          "max_relative_three_daughter_closure_selected": 3.41262062696844e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1764,
+          "structural_truth_1p1n_x_1p1n_candidates": 1794
+        },
+        "cospsi_base_events": 1764,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 38,
+        "max_finite_costheta_range_excess": 0.2743292039175298,
+        "max_relative_tau_rho_nu_closure": 3.41262062696844e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1726
+      },
+      "Z-011.npz": {
+        "cospsi_base_audit": {
+          "events": 9039,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 21,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1859,
+          "max_finite_cospsi_range_excess": 0.03195833516273616,
+          "max_relative_three_daughter_closure_before_selection": 3.000990748517093e-05,
+          "max_relative_three_daughter_closure_selected": 3.000990748517093e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1838,
+          "structural_truth_1p1n_x_1p1n_candidates": 1859
+        },
+        "cospsi_base_events": 1838,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 44,
+        "max_finite_costheta_range_excess": 0.19949352566811673,
+        "max_relative_tau_rho_nu_closure": 3.000990748517093e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1794
+      },
+      "Z-012.npz": {
+        "cospsi_base_audit": {
+          "events": 9190,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 34,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1894,
+          "max_finite_cospsi_range_excess": 0.045624443378602164,
+          "max_relative_three_daughter_closure_before_selection": 7.075802951290567e-05,
+          "max_relative_three_daughter_closure_selected": 7.075802951290567e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1860,
+          "structural_truth_1p1n_x_1p1n_candidates": 1894
+        },
+        "cospsi_base_events": 1860,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 47,
+        "max_finite_costheta_range_excess": 0.20372770501625403,
+        "max_relative_tau_rho_nu_closure": 7.075802951290567e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1813
+      },
+      "Z-013.npz": {
+        "cospsi_base_audit": {
+          "events": 9122,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 31,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1910,
+          "max_finite_cospsi_range_excess": 0.04600982622477412,
+          "max_relative_three_daughter_closure_before_selection": 4.993413212883657e-05,
+          "max_relative_three_daughter_closure_selected": 4.993413212883657e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1879,
+          "structural_truth_1p1n_x_1p1n_candidates": 1910
+        },
+        "cospsi_base_events": 1879,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 46,
+        "max_finite_costheta_range_excess": 0.25267359304828774,
+        "max_relative_tau_rho_nu_closure": 4.993413212883657e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1833
+      },
+      "Z-014.npz": {
+        "cospsi_base_audit": {
+          "events": 9181,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 25,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1936,
+          "max_finite_cospsi_range_excess": 0.03439604656240336,
+          "max_relative_three_daughter_closure_before_selection": 4.215862150064676e-05,
+          "max_relative_three_daughter_closure_selected": 4.215862150064676e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1911,
+          "structural_truth_1p1n_x_1p1n_candidates": 1936
+        },
+        "cospsi_base_events": 1911,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 47,
+        "max_finite_costheta_range_excess": 0.2512610913813804,
+        "max_relative_tau_rho_nu_closure": 4.215862150064676e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1864
+      },
+      "Z-015.npz": {
+        "cospsi_base_audit": {
+          "events": 9152,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 32,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1867,
+          "max_finite_cospsi_range_excess": 0.045478372334379236,
+          "max_relative_three_daughter_closure_before_selection": 6.376920479952907e-05,
+          "max_relative_three_daughter_closure_selected": 6.376920479952907e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1835,
+          "structural_truth_1p1n_x_1p1n_candidates": 1867
+        },
+        "cospsi_base_events": 1835,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 53,
+        "max_finite_costheta_range_excess": 0.21422477219963731,
+        "max_relative_tau_rho_nu_closure": 6.376920479952907e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1782
+      },
+      "Z-016.npz": {
+        "cospsi_base_audit": {
+          "events": 9200,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 22,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1835,
+          "max_finite_cospsi_range_excess": 0.02084011219758186,
+          "max_relative_three_daughter_closure_before_selection": 5.377960678572747e-05,
+          "max_relative_three_daughter_closure_selected": 5.377960678572747e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1813,
+          "structural_truth_1p1n_x_1p1n_candidates": 1835
+        },
+        "cospsi_base_events": 1813,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 39,
+        "max_finite_costheta_range_excess": 0.17140421884842816,
+        "max_relative_tau_rho_nu_closure": 5.377960678572747e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1774
+      },
+      "Z-017.npz": {
+        "cospsi_base_audit": {
+          "events": 9206,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 36,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1897,
+          "max_finite_cospsi_range_excess": 0.0473279536529565,
+          "max_relative_three_daughter_closure_before_selection": 6.322596061140209e-05,
+          "max_relative_three_daughter_closure_selected": 6.322596061140209e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1861,
+          "structural_truth_1p1n_x_1p1n_candidates": 1897
+        },
+        "cospsi_base_events": 1861,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 29,
+        "max_finite_costheta_range_excess": 0.18936937670090392,
+        "max_relative_tau_rho_nu_closure": 6.322596061140209e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1832
+      },
+      "Z-018.npz": {
+        "cospsi_base_audit": {
+          "events": 9012,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 34,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1858,
+          "max_finite_cospsi_range_excess": 0.03836742086854783,
+          "max_relative_three_daughter_closure_before_selection": 6.041190475762968e-05,
+          "max_relative_three_daughter_closure_selected": 6.041190475762968e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1824,
+          "structural_truth_1p1n_x_1p1n_candidates": 1858
+        },
+        "cospsi_base_events": 1824,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 45,
+        "max_finite_costheta_range_excess": 0.21589392807946295,
+        "max_relative_tau_rho_nu_closure": 6.041190475762968e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1779
+      },
+      "Z-019.npz": {
+        "cospsi_base_audit": {
+          "events": 9082,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 28,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1884,
+          "max_finite_cospsi_range_excess": 0.042636160099787324,
+          "max_relative_three_daughter_closure_before_selection": 5.1371746769758505e-05,
+          "max_relative_three_daughter_closure_selected": 5.1371746769758505e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1856,
+          "structural_truth_1p1n_x_1p1n_candidates": 1884
+        },
+        "cospsi_base_events": 1856,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 37,
+        "max_finite_costheta_range_excess": 0.14920037798442043,
+        "max_relative_tau_rho_nu_closure": 5.1371746769758505e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1819
+      },
+      "Z-020.npz": {
+        "cospsi_base_audit": {
+          "events": 9179,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 34,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1852,
+          "max_finite_cospsi_range_excess": 0.03170729404269568,
+          "max_relative_three_daughter_closure_before_selection": 3.0235852612158312e-05,
+          "max_relative_three_daughter_closure_selected": 3.0235852612158312e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1818,
+          "structural_truth_1p1n_x_1p1n_candidates": 1852
+        },
+        "cospsi_base_events": 1818,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 37,
+        "max_finite_costheta_range_excess": 0.1990079097373596,
+        "max_relative_tau_rho_nu_closure": 3.0235852612158312e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1781
+      },
+      "Z-021.npz": {
+        "cospsi_base_audit": {
+          "events": 9122,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 30,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1813,
+          "max_finite_cospsi_range_excess": 0.037251987197690184,
+          "max_relative_three_daughter_closure_before_selection": 5.6175667747152795e-05,
+          "max_relative_three_daughter_closure_selected": 5.6175667747152795e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1783,
+          "structural_truth_1p1n_x_1p1n_candidates": 1813
+        },
+        "cospsi_base_events": 1783,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 50,
+        "max_finite_costheta_range_excess": 0.19532686223475504,
+        "max_relative_tau_rho_nu_closure": 5.6175667747152795e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1733
+      },
+      "Z-022.npz": {
+        "cospsi_base_audit": {
+          "events": 9043,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 31,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1865,
+          "max_finite_cospsi_range_excess": 0.043813336632169575,
+          "max_relative_three_daughter_closure_before_selection": 4.5782542472231336e-05,
+          "max_relative_three_daughter_closure_selected": 4.5782542472231336e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1834,
+          "structural_truth_1p1n_x_1p1n_candidates": 1865
+        },
+        "cospsi_base_events": 1834,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 53,
+        "max_finite_costheta_range_excess": 0.2915824477228588,
+        "max_relative_tau_rho_nu_closure": 4.5782542472231336e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1781
+      },
+      "Z-023.npz": {
+        "cospsi_base_audit": {
+          "events": 9140,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 27,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1901,
+          "max_finite_cospsi_range_excess": 0.04134808084722774,
+          "max_relative_three_daughter_closure_before_selection": 6.117635085680888e-05,
+          "max_relative_three_daughter_closure_selected": 6.117635085680888e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1874,
+          "structural_truth_1p1n_x_1p1n_candidates": 1901
+        },
+        "cospsi_base_events": 1874,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 47,
+        "max_finite_costheta_range_excess": 0.2487277965465977,
+        "max_relative_tau_rho_nu_closure": 6.117635085680888e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1827
+      },
+      "Z-024.npz": {
+        "cospsi_base_audit": {
+          "events": 9155,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 28,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1874,
+          "max_finite_cospsi_range_excess": 0.046416629610465554,
+          "max_relative_three_daughter_closure_before_selection": 4.6535484929787e-05,
+          "max_relative_three_daughter_closure_selected": 4.6535484929787e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1846,
+          "structural_truth_1p1n_x_1p1n_candidates": 1874
+        },
+        "cospsi_base_events": 1846,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 43,
+        "max_finite_costheta_range_excess": 0.15800269853935855,
+        "max_relative_tau_rho_nu_closure": 4.6535484929787e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1803
+      },
+      "Z-025.npz": {
+        "cospsi_base_audit": {
+          "events": 9124,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 27,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1844,
+          "max_finite_cospsi_range_excess": 0.03073009950970773,
+          "max_relative_three_daughter_closure_before_selection": 4.0724063773030874e-05,
+          "max_relative_three_daughter_closure_selected": 4.0724063773030874e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1817,
+          "structural_truth_1p1n_x_1p1n_candidates": 1844
+        },
+        "cospsi_base_events": 1817,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 36,
+        "max_finite_costheta_range_excess": 0.1907623548730184,
+        "max_relative_tau_rho_nu_closure": 4.0724063773030874e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1781
+      },
+      "Z-026.npz": {
+        "cospsi_base_audit": {
+          "events": 9121,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 26,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1815,
+          "max_finite_cospsi_range_excess": 0.037155567228411845,
+          "max_relative_three_daughter_closure_before_selection": 4.5435415052731504e-05,
+          "max_relative_three_daughter_closure_selected": 4.5435415052731504e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1789,
+          "structural_truth_1p1n_x_1p1n_candidates": 1815
+        },
+        "cospsi_base_events": 1789,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 35,
+        "max_finite_costheta_range_excess": 0.13850683298107924,
+        "max_relative_tau_rho_nu_closure": 4.5435415052731504e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1754
+      },
+      "Z-027.npz": {
+        "cospsi_base_audit": {
+          "events": 9151,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 26,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1911,
+          "max_finite_cospsi_range_excess": 0.04006390699475482,
+          "max_relative_three_daughter_closure_before_selection": 3.810296005251864e-05,
+          "max_relative_three_daughter_closure_selected": 3.810296005251864e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1885,
+          "structural_truth_1p1n_x_1p1n_candidates": 1911
+        },
+        "cospsi_base_events": 1885,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 39,
+        "max_finite_costheta_range_excess": 0.20336455439012502,
+        "max_relative_tau_rho_nu_closure": 3.810296005251864e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1846
+      },
+      "Z-028.npz": {
+        "cospsi_base_audit": {
+          "events": 9165,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 23,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1954,
+          "max_finite_cospsi_range_excess": 0.04015914744495808,
+          "max_relative_three_daughter_closure_before_selection": 7.387989350190964e-05,
+          "max_relative_three_daughter_closure_selected": 7.387989350190964e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1931,
+          "structural_truth_1p1n_x_1p1n_candidates": 1954
+        },
+        "cospsi_base_events": 1931,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 34,
+        "max_finite_costheta_range_excess": 0.22219136398828443,
+        "max_relative_tau_rho_nu_closure": 7.387989350190964e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1897
+      },
+      "Z-029.npz": {
+        "cospsi_base_audit": {
+          "events": 9060,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 21,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1817,
+          "max_finite_cospsi_range_excess": 0.03753599959152121,
+          "max_relative_three_daughter_closure_before_selection": 6.558532701464398e-05,
+          "max_relative_three_daughter_closure_selected": 6.558532701464398e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1796,
+          "structural_truth_1p1n_x_1p1n_candidates": 1817
+        },
+        "cospsi_base_events": 1796,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 38,
+        "max_finite_costheta_range_excess": 0.20933227180406822,
+        "max_relative_tau_rho_nu_closure": 6.558532701464398e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1758
+      },
+      "Z-030.npz": {
+        "cospsi_base_audit": {
+          "events": 9267,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 34,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1867,
+          "max_finite_cospsi_range_excess": 0.03589114016201833,
+          "max_relative_three_daughter_closure_before_selection": 7.56341797744134e-05,
+          "max_relative_three_daughter_closure_selected": 7.56341797744134e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1833,
+          "structural_truth_1p1n_x_1p1n_candidates": 1867
+        },
+        "cospsi_base_events": 1833,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 36,
+        "max_finite_costheta_range_excess": 0.2327532051719603,
+        "max_relative_tau_rho_nu_closure": 7.56341797744134e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1797
+      },
+      "Z-031.npz": {
+        "cospsi_base_audit": {
+          "events": 9183,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 27,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1887,
+          "max_finite_cospsi_range_excess": 0.03398847263969462,
+          "max_relative_three_daughter_closure_before_selection": 6.066255970629787e-05,
+          "max_relative_three_daughter_closure_selected": 6.066255970629787e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1860,
+          "structural_truth_1p1n_x_1p1n_candidates": 1887
+        },
+        "cospsi_base_events": 1860,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 47,
+        "max_finite_costheta_range_excess": 0.19966228258058294,
+        "max_relative_tau_rho_nu_closure": 6.066255970629787e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1813
+      },
+      "Z-032.npz": {
+        "cospsi_base_audit": {
+          "events": 9136,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 32,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1857,
+          "max_finite_cospsi_range_excess": 0.04496413386482301,
+          "max_relative_three_daughter_closure_before_selection": 5.795376902537275e-05,
+          "max_relative_three_daughter_closure_selected": 5.795376902537275e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1825,
+          "structural_truth_1p1n_x_1p1n_candidates": 1857
+        },
+        "cospsi_base_events": 1825,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 47,
+        "max_finite_costheta_range_excess": 0.19800502277654108,
+        "max_relative_tau_rho_nu_closure": 5.795376902537275e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1778
+      },
+      "Z-033.npz": {
+        "cospsi_base_audit": {
+          "events": 9199,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 32,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1884,
+          "max_finite_cospsi_range_excess": 0.04716363567814885,
+          "max_relative_three_daughter_closure_before_selection": 3.1484971173759724e-05,
+          "max_relative_three_daughter_closure_selected": 3.1484971173759724e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1852,
+          "structural_truth_1p1n_x_1p1n_candidates": 1884
+        },
+        "cospsi_base_events": 1852,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 45,
+        "max_finite_costheta_range_excess": 0.16550826530813256,
+        "max_relative_tau_rho_nu_closure": 3.1484971173759724e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1807
+      },
+      "Z-034.npz": {
+        "cospsi_base_audit": {
+          "events": 9184,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 25,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1878,
+          "max_finite_cospsi_range_excess": 0.03290796193882972,
+          "max_relative_three_daughter_closure_before_selection": 4.556677079472133e-05,
+          "max_relative_three_daughter_closure_selected": 4.556677079472133e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1853,
+          "structural_truth_1p1n_x_1p1n_candidates": 1878
+        },
+        "cospsi_base_events": 1853,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 42,
+        "max_finite_costheta_range_excess": 0.24762601322070066,
+        "max_relative_tau_rho_nu_closure": 4.556677079472133e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1811
+      },
+      "Z-035.npz": {
+        "cospsi_base_audit": {
+          "events": 9123,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 31,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1868,
+          "max_finite_cospsi_range_excess": 0.041632042981836426,
+          "max_relative_three_daughter_closure_before_selection": 5.684715318756985e-05,
+          "max_relative_three_daughter_closure_selected": 5.684715318756985e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1837,
+          "structural_truth_1p1n_x_1p1n_candidates": 1868
+        },
+        "cospsi_base_events": 1837,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 40,
+        "max_finite_costheta_range_excess": 0.25552421888855914,
+        "max_relative_tau_rho_nu_closure": 5.684715318756985e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1797
+      },
+      "Z-036.npz": {
+        "cospsi_base_audit": {
+          "events": 9080,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 24,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1886,
+          "max_finite_cospsi_range_excess": 0.04638389265393328,
+          "max_relative_three_daughter_closure_before_selection": 7.241931258502481e-05,
+          "max_relative_three_daughter_closure_selected": 7.241931258502481e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1862,
+          "structural_truth_1p1n_x_1p1n_candidates": 1886
+        },
+        "cospsi_base_events": 1862,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 43,
+        "max_finite_costheta_range_excess": 0.1607031887699153,
+        "max_relative_tau_rho_nu_closure": 7.241931258502481e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1819
+      },
+      "Z-037.npz": {
+        "cospsi_base_audit": {
+          "events": 9135,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 27,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1909,
+          "max_finite_cospsi_range_excess": 0.034108802419369644,
+          "max_relative_three_daughter_closure_before_selection": 3.211173667393743e-05,
+          "max_relative_three_daughter_closure_selected": 3.211173667393743e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1882,
+          "structural_truth_1p1n_x_1p1n_candidates": 1909
+        },
+        "cospsi_base_events": 1882,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 47,
+        "max_finite_costheta_range_excess": 0.17488385524081385,
+        "max_relative_tau_rho_nu_closure": 3.211173667393743e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1835
+      },
+      "Z-038.npz": {
+        "cospsi_base_audit": {
+          "events": 9112,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 33,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1778,
+          "max_finite_cospsi_range_excess": 0.032022403617189,
+          "max_relative_three_daughter_closure_before_selection": 5.291114894092692e-05,
+          "max_relative_three_daughter_closure_selected": 5.291114894092692e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1745,
+          "structural_truth_1p1n_x_1p1n_candidates": 1778
+        },
+        "cospsi_base_events": 1745,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 50,
+        "max_finite_costheta_range_excess": 0.20540832798563602,
+        "max_relative_tau_rho_nu_closure": 5.291114894092692e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1695
+      },
+      "Z-039.npz": {
+        "cospsi_base_audit": {
+          "events": 9125,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 32,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1839,
+          "max_finite_cospsi_range_excess": 0.045069747411245586,
+          "max_relative_three_daughter_closure_before_selection": 7.188715322983664e-05,
+          "max_relative_three_daughter_closure_selected": 7.188715322983664e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1807,
+          "structural_truth_1p1n_x_1p1n_candidates": 1839
+        },
+        "cospsi_base_events": 1807,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 50,
+        "max_finite_costheta_range_excess": 0.17944069988520384,
+        "max_relative_tau_rho_nu_closure": 7.188715322983664e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1757
+      },
+      "Z-040.npz": {
+        "cospsi_base_audit": {
+          "events": 9057,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 26,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1796,
+          "max_finite_cospsi_range_excess": 0.046835532915657785,
+          "max_relative_three_daughter_closure_before_selection": 6.7364327768222e-05,
+          "max_relative_three_daughter_closure_selected": 6.7364327768222e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1770,
+          "structural_truth_1p1n_x_1p1n_candidates": 1796
+        },
+        "cospsi_base_events": 1770,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 44,
+        "max_finite_costheta_range_excess": 0.14368308413667386,
+        "max_relative_tau_rho_nu_closure": 6.7364327768222e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1726
+      },
+      "Z-041.npz": {
+        "cospsi_base_audit": {
+          "events": 9147,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 34,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1906,
+          "max_finite_cospsi_range_excess": 0.03295176087530227,
+          "max_relative_three_daughter_closure_before_selection": 4.925177695727586e-05,
+          "max_relative_three_daughter_closure_selected": 4.925177695727586e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1872,
+          "structural_truth_1p1n_x_1p1n_candidates": 1906
+        },
+        "cospsi_base_events": 1872,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 42,
+        "max_finite_costheta_range_excess": 0.198969135954413,
+        "max_relative_tau_rho_nu_closure": 4.925177695727586e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1830
+      },
+      "Z-042.npz": {
+        "cospsi_base_audit": {
+          "events": 9026,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 33,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1818,
+          "max_finite_cospsi_range_excess": 0.03463051689748475,
+          "max_relative_three_daughter_closure_before_selection": 4.114683672510127e-05,
+          "max_relative_three_daughter_closure_selected": 4.114683672510127e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1785,
+          "structural_truth_1p1n_x_1p1n_candidates": 1818
+        },
+        "cospsi_base_events": 1785,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 37,
+        "max_finite_costheta_range_excess": 0.2299033360151812,
+        "max_relative_tau_rho_nu_closure": 4.114683672510127e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1748
+      },
+      "Z-043.npz": {
+        "cospsi_base_audit": {
+          "events": 9135,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 28,
+          "failed_three_daughter_four_vector_closure": 1,
+          "finite_cospsi_events_after_closure": 1834,
+          "max_finite_cospsi_range_excess": 0.049579923719595076,
+          "max_relative_three_daughter_closure_before_selection": 0.009558277064040612,
+          "max_relative_three_daughter_closure_selected": 3.2745120136339074e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1806,
+          "structural_truth_1p1n_x_1p1n_candidates": 1835
+        },
+        "cospsi_base_events": 1806,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 42,
+        "max_finite_costheta_range_excess": 0.21505911231441477,
+        "max_relative_tau_rho_nu_closure": 3.2745120136339074e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1764
+      },
+      "Z-044.npz": {
+        "cospsi_base_audit": {
+          "events": 9248,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 29,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1911,
+          "max_finite_cospsi_range_excess": 0.030248361145996494,
+          "max_relative_three_daughter_closure_before_selection": 6.498277344673783e-05,
+          "max_relative_three_daughter_closure_selected": 6.498277344673783e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1882,
+          "structural_truth_1p1n_x_1p1n_candidates": 1911
+        },
+        "cospsi_base_events": 1882,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 43,
+        "max_finite_costheta_range_excess": 0.2672912983150897,
+        "max_relative_tau_rho_nu_closure": 6.498277344673783e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1839
+      },
+      "Z-045.npz": {
+        "cospsi_base_audit": {
+          "events": 9073,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 28,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1854,
+          "max_finite_cospsi_range_excess": 0.03771167044193269,
+          "max_relative_three_daughter_closure_before_selection": 5.803553337694441e-05,
+          "max_relative_three_daughter_closure_selected": 5.803553337694441e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1826,
+          "structural_truth_1p1n_x_1p1n_candidates": 1854
+        },
+        "cospsi_base_events": 1826,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 47,
+        "max_finite_costheta_range_excess": 0.20379464876272158,
+        "max_relative_tau_rho_nu_closure": 5.803553337694441e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1779
+      },
+      "Z-046.npz": {
+        "cospsi_base_audit": {
+          "events": 9200,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 36,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1805,
+          "max_finite_cospsi_range_excess": 0.052289682039129426,
+          "max_relative_three_daughter_closure_before_selection": 6.886844516316183e-05,
+          "max_relative_three_daughter_closure_selected": 6.886844516316183e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1769,
+          "structural_truth_1p1n_x_1p1n_candidates": 1805
+        },
+        "cospsi_base_events": 1769,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 38,
+        "max_finite_costheta_range_excess": 0.23071162257297262,
+        "max_relative_tau_rho_nu_closure": 6.886844516316183e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1731
+      },
+      "Z-047.npz": {
+        "cospsi_base_audit": {
+          "events": 9120,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 24,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1866,
+          "max_finite_cospsi_range_excess": 0.03390148257380887,
+          "max_relative_three_daughter_closure_before_selection": 4.368744702643051e-05,
+          "max_relative_three_daughter_closure_selected": 4.368744702643051e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1842,
+          "structural_truth_1p1n_x_1p1n_candidates": 1866
+        },
+        "cospsi_base_events": 1842,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 39,
+        "max_finite_costheta_range_excess": 0.16341108311201902,
+        "max_relative_tau_rho_nu_closure": 4.368744702643051e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1803
+      },
+      "Z-048.npz": {
+        "cospsi_base_audit": {
+          "events": 8157,
+          "failed_cospsi_finite_or_denominator": 0,
+          "failed_cospsi_physical_range": 28,
+          "failed_three_daughter_four_vector_closure": 0,
+          "finite_cospsi_events_after_closure": 1670,
+          "max_finite_cospsi_range_excess": 0.023398893024519918,
+          "max_relative_three_daughter_closure_before_selection": 4.8582036152587465e-05,
+          "max_relative_three_daughter_closure_selected": 4.8582036152587465e-05,
+          "selected_taus_with_excluded_simulation_objects": 0,
+          "selected_truth_1p1n_x_1p1n": 1642,
+          "structural_truth_1p1n_x_1p1n_candidates": 1670
+        },
+        "cospsi_base_events": 1642,
+        "failed_costheta_finite_or_energy": 0,
+        "failed_costheta_physical_range": 42,
+        "max_finite_costheta_range_excess": 0.16176200734027013,
+        "max_relative_tau_rho_nu_closure": 4.8582036152587465e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "selected_costheta_events": 1600
+      }
+    }
+  },
+  "validation_inference_parity": {
+    "allclose_atol_5e-4": true,
+    "max_abs_difference": 0.00036647915840148926,
+    "mean_abs_difference": 3.9318859854667914e-05
+  },
+  "validation_reference_sha256": "bcb87013ee097a3d1f7ca9709c99ecda654c1817f6c569274b8baaa580e1a63d"
+}
