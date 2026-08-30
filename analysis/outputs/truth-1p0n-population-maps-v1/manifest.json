@@ -1,0 +1,2389 @@
+{
+  "bins_per_axis": 20,
+  "checkpoint_sha256": {
+    "seed42": "35972ce70c1703d816cc8a71dfae40663c98f7742d7364cf06810b7b46447a59",
+    "seed43": "6ae5dca2bf70cc578c1aed5b6b93f5caed350ec883be7925bada3dc300e72e3a",
+    "seed44": "91e23e570dc607891b6f5e407e1f7bfd1389954d0b903524f584e8adb615cad9"
+  },
+  "definitions": {
+    "A_pair": "not used and not treated as identical to the thesis energy-fraction observable",
+    "normalization": "inclusive and tertile panels normalized independently to unit sum; mean maps show raw mean H-like score; scatter contains every selected event",
+    "population": "same canonical split/sample surface and fixed classifier scores as the preceding reco maps; truth pi-nu x pi-nu is independently reselected and is not intersected with reco final events",
+    "score": "arithmetic mean of frozen full-reco seeds 42, 43, and 44 terminal checkpoints; eval-only inference; H-like score",
+    "tertiles": "unit-weight score tertiles defined separately within each truth class and each population",
+    "truth_cos_theta": "x=E_pi/E_tau; a=m_pi/m_tau; beta=sqrt(1-m_tau^2/E_tau^2); cos(theta)=(2x-1-a^2)/(beta*(1-a^2)); stored truth four-vector energies; nominal m_tau=1.77686 GeV and m_pi=0.13957039 GeV",
+    "truth_selection": "clean boson tau pair; charge-ordered PDG 15 (tau-) and -15 (tau+); each tau mode code 0 with exactly one generator-level charged pion and one tau neutrino and no other preserved decay objects; pi+nu four-vector closure <=1e-4"
+  },
+  "device": "mps",
+  "populations": {
+    "all-data": {
+      "class_counts": {
+        "H": 15498,
+        "Z": 16034
+      },
+      "cos_min_max_tau_minus": [
+        -0.9398013409636303,
+        0.9999575605615038
+      ],
+      "cos_min_max_tau_plus": [
+        -0.8958875562212943,
+        0.9999725882707349
+      ],
+      "events": 31532,
+      "inclusive": {
+        "H": {
+          "empty_bins": 42,
+          "events": 15498
+        },
+        "Z": {
+          "empty_bins": 39,
+          "events": 16034
+        }
+      },
+      "mean_score": {
+        "H": {
+          "empty_bins": 42,
+          "nan_bins": 0,
+          "occupied_mean_score_max": 0.6338958109932386,
+          "occupied_mean_score_min": 0.2375064412752787
+        },
+        "Z": {
+          "empty_bins": 39,
+          "nan_bins": 0,
+          "occupied_mean_score_max": 0.6702833473682404,
+          "occupied_mean_score_min": 0.24909274280071259
+        }
+      },
+      "png": [
+        "truth-1p0n-x-1p0n-all-data-inclusive.png",
+        "truth-1p0n-x-1p0n-all-data-score-tertiles.png",
+        "truth-1p0n-x-1p0n-all-data-mean-score.png",
+        "truth-1p0n-x-1p0n-all-data-scatter.png"
+      ],
+      "scatter": {
+        "H": 15498,
+        "Z": 16034
+      },
+      "tertile_edges": {
+        "H": [
+          0.47460462980800205,
+          0.5710572401682535
+        ],
+        "Z": [
+          0.4078695972760519,
+          0.5153285529878404
+        ]
+      },
+      "tertiles": {
+        "H": {
+          "0": {
+            "empty_bins": 45,
+            "events": 5166
+          },
+          "1": {
+            "empty_bins": 60,
+            "events": 5166
+          },
+          "2": {
+            "empty_bins": 94,
+            "events": 5166
+          }
+        },
+        "Z": {
+          "0": {
+            "empty_bins": 60,
+            "events": 5345
+          },
+          "1": {
+            "empty_bins": 59,
+            "events": 5344
+          },
+          "2": {
+            "empty_bins": 67,
+            "events": 5345
+          }
+        }
+      }
+    },
+    "validation-test": {
+      "class_counts": {
+        "H": 3111,
+        "Z": 3239
+      },
+      "cos_min_max_tau_minus": [
+        -0.913843919631718,
+        0.9998407936481142
+      ],
+      "cos_min_max_tau_plus": [
+        -0.8674385989060511,
+        0.999769314403855
+      ],
+      "events": 6350,
+      "inclusive": {
+        "H": {
+          "empty_bins": 55,
+          "events": 3111
+        },
+        "Z": {
+          "empty_bins": 54,
+          "events": 3239
+        }
+      },
+      "mean_score": {
+        "H": {
+          "empty_bins": 55,
+          "nan_bins": 0,
+          "occupied_mean_score_max": 0.6864109536012014,
+          "occupied_mean_score_min": 0.23434350391228995
+        },
+        "Z": {
+          "empty_bins": 54,
+          "nan_bins": 0,
+          "occupied_mean_score_max": 0.712117612361908,
+          "occupied_mean_score_min": 0.23452526869045365
+        }
+      },
+      "png": [
+        "truth-1p0n-x-1p0n-validation-test-inclusive.png",
+        "truth-1p0n-x-1p0n-validation-test-score-tertiles.png",
+        "truth-1p0n-x-1p0n-validation-test-mean-score.png",
+        "truth-1p0n-x-1p0n-validation-test-scatter.png"
+      ],
+      "scatter": {
+        "H": 3111,
+        "Z": 3239
+      },
+      "tertile_edges": {
+        "H": [
+          0.4697598583168453,
+          0.5659653875562879
+        ],
+        "Z": [
+          0.4063106179237366,
+          0.5150580836666955
+        ]
+      },
+      "tertiles": {
+        "H": {
+          "0": {
+            "empty_bins": 101,
+            "events": 1037
+          },
+          "1": {
+            "empty_bins": 114,
+            "events": 1037
+          },
+          "2": {
+            "empty_bins": 152,
+            "events": 1037
+          }
+        },
+        "Z": {
+          "0": {
+            "empty_bins": 154,
+            "events": 1080
+          },
+          "1": {
+            "empty_bins": 98,
+            "events": 1079
+          },
+          "2": {
+            "empty_bins": 123,
+            "events": 1080
+          }
+        }
+      }
+    }
+  },
+  "status": "completed",
+  "truth_audit": {
+    "canonical_rows_seen_once": 892304,
+    "shard_count": 99,
+    "shards": {
+      "H-000.npz": {
+        "events": 8902,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 5.022686548333567e-05,
+        "max_relative_pi_nu_closure_selected": 5.022686548333567e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0016975879143889816,
+          0.05252860847252789,
+          0.8001541604648517
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 332,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 332,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005404273410042348,
+          0.00577153621012162,
+          0.06662919450090321
+        ]
+      },
+      "H-001.npz": {
+        "events": 8928,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.756518329211001e-05,
+        "max_relative_pi_nu_closure_selected": 3.756518329211001e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0015397473518624777,
+          0.04069550723285297,
+          0.7986417175835896
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 328,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 328,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005090444237688674,
+          0.0055357651016750276,
+          0.04012840211994528
+        ]
+      },
+      "H-002.npz": {
+        "events": 8884,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.5377872377400296e-05,
+        "max_relative_pi_nu_closure_selected": 3.5377872377400296e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0014998859942628173,
+          0.05785077066087269,
+          0.7992412950158327
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 269,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 269,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.00048532442868265413,
+          0.006962004705823765,
+          0.0431517370399479
+        ]
+      },
+      "H-003.npz": {
+        "events": 8903,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 6.527023154454816e-05,
+        "max_relative_pi_nu_closure_selected": 6.527023154454816e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0016561396309948129,
+          0.05076159404382546,
+          0.7993769549356091
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 299,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 299,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005133799187222454,
+          0.007069992909831898,
+          0.0773766232780666
+        ]
+      },
+      "H-004.npz": {
+        "events": 8947,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.9902503887094286e-05,
+        "max_relative_pi_nu_closure_selected": 3.9902503887094286e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0019607002154097414,
+          0.08684480332319659,
+          0.7988827123442361
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 311,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 311,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006176669527799827,
+          0.007996844857824257,
+          0.12895454224111602
+        ]
+      },
+      "H-005.npz": {
+        "events": 8927,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 4.1309241279611566e-05,
+        "max_relative_pi_nu_closure_selected": 4.1309241279611566e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0014657231061759174,
+          0.04890533215936541,
+          0.8016556410598343
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 325,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 325,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005488198858738524,
+          0.005245554355354908,
+          0.03969658755111771
+        ]
+      },
+      "H-006.npz": {
+        "events": 9022,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 6.260834591825428e-05,
+        "max_relative_pi_nu_closure_selected": 6.260834591825428e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.001458040700430846,
+          0.055226407497844056,
+          0.8083054720893357
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 300,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 300,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.00043754094897119344,
+          0.005354979022098341,
+          0.04140404630782424
+        ]
+      },
+      "H-007.npz": {
+        "events": 8806,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 6.170710389729991e-05,
+        "max_relative_pi_nu_closure_selected": 6.170710389729991e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0015312702604585587,
+          0.04562129198605276,
+          0.7988230794872802
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 303,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 303,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0004469864744826024,
+          0.006156813321431753,
+          0.05622244514729835
+        ]
+      },
+      "H-008.npz": {
+        "events": 8843,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 4.7962174164551304e-05,
+        "max_relative_pi_nu_closure_selected": 4.7962174164551304e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0017078525874571066,
+          0.05217743441637478,
+          0.7990686129942539
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 293,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 293,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005468050903179034,
+          0.0078090782040330375,
+          0.04413701613773058
+        ]
+      },
+      "H-009.npz": {
+        "events": 8955,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.661084893596464e-05,
+        "max_relative_pi_nu_closure_selected": 3.661084893596464e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0014679629789214332,
+          0.03779443120775095,
+          0.7991368109442829
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 317,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 317,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0004930745118231217,
+          0.007531329415545351,
+          0.0518666423009293
+        ]
+      },
+      "H-010.npz": {
+        "events": 8855,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 7.687565431591394e-05,
+        "max_relative_pi_nu_closure_selected": 7.687565431591394e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.001768592478441619,
+          0.051655964717193276,
+          0.7993436040938979
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 299,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 299,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005220258278602063,
+          0.00516845671171373,
+          0.04489760736461634
+        ]
+      },
+      "H-011.npz": {
+        "events": 8929,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 2.3619427838662954e-05,
+        "max_relative_pi_nu_closure_selected": 2.3619427838662954e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0014150639164091788,
+          0.03827856679729497,
+          0.7986238475568008
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 280,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 280,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0004998822468367248,
+          0.007551797282973842,
+          0.06091785316276277
+        ]
+      },
+      "H-012.npz": {
+        "events": 8985,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 5.033369453736858e-05,
+        "max_relative_pi_nu_closure_selected": 5.033369453736858e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.001664911688559756,
+          0.054642002206988734,
+          0.7990575417784236
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 292,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 292,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005155532064827772,
+          0.007276201925378792,
+          0.07334478759702456
+        ]
+      },
+      "H-013.npz": {
+        "events": 8978,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 4.0198417027617e-05,
+        "max_relative_pi_nu_closure_selected": 4.0198417027617e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0016089494301013835,
+          0.04399384337804548,
+          0.7995915949288859
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 300,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 300,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.000502015436009251,
+          0.007366788832947524,
+          0.03282967862112107
+        ]
+      },
+      "H-014.npz": {
+        "events": 8962,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 2.1085435153956362e-05,
+        "max_relative_pi_nu_closure_selected": 2.1085435153956362e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0015024808350472124,
+          0.04157772686762422,
+          0.8006101201374647
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 323,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 323,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.00047935205553484295,
+          0.00787313369531506,
+          0.06545441363703564
+        ]
+      },
+      "H-015.npz": {
+        "events": 8909,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.4442571222134684e-05,
+        "max_relative_pi_nu_closure_selected": 3.4442571222134684e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0017852572706384684,
+          0.04477606017171277,
+          0.7993245074342723
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 314,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 314,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005096204376499047,
+          0.008592450623862878,
+          0.03964923862436809
+        ]
+      },
+      "H-016.npz": {
+        "events": 8931,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 6.139334786634448e-05,
+        "max_relative_pi_nu_closure_selected": 6.139334786634448e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0015011408510805235,
+          0.057790283976148896,
+          0.798767918990472
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 299,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 299,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005665394058845807,
+          0.006446219958145234,
+          0.06559852445113323
+        ]
+      },
+      "H-017.npz": {
+        "events": 8925,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 4.334080996702733e-05,
+        "max_relative_pi_nu_closure_selected": 4.334080996702733e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0017320995781412302,
+          0.04800015177013281,
+          0.7990655547722998
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 295,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 295,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.000521138180869074,
+          0.007305222429408204,
+          0.028299924893830708
+        ]
+      },
+      "H-018.npz": {
+        "events": 8940,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 8.302777273552368e-05,
+        "max_relative_pi_nu_closure_selected": 8.302777273552368e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0016907047608357845,
+          0.1015543370700144,
+          0.7996136323478091
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 339,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 339,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005225027720257014,
+          0.008120506786645403,
+          0.14234114175662826
+        ]
+      },
+      "H-019.npz": {
+        "events": 8954,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.902492345905126e-05,
+        "max_relative_pi_nu_closure_selected": 3.902492345905126e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0013940670175664333,
+          0.03646997483308821,
+          0.799333575751924
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 331,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 331,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0004761877629473332,
+          0.00735359578158351,
+          0.14464675043464648
+        ]
+      },
+      "H-020.npz": {
+        "events": 8955,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 2.672677280150299e-05,
+        "max_relative_pi_nu_closure_selected": 2.672677280150299e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0014960521721318065,
+          0.04492453541274846,
+          0.8008926236118352
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 288,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 288,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.00048821235105001026,
+          0.006110458538595154,
+          0.07176367234285363
+        ]
+      },
+      "H-021.npz": {
+        "events": 8957,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 2.954933730046618e-05,
+        "max_relative_pi_nu_closure_selected": 2.954933730046618e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.00176327739367238,
+          0.04744557574223044,
+          0.8038269232414119
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 315,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 315,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005360783556739301,
+          0.00767829661769114,
+          0.05912436615355321
+        ]
+      },
+      "H-022.npz": {
+        "events": 8939,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 5.264966786562928e-05,
+        "max_relative_pi_nu_closure_selected": 5.264966786562928e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0015833608924948755,
+          0.03609791282831467,
+          0.799244860823791
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 325,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 325,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005131823786796996,
+          0.005304419438687039,
+          0.10359887870945372
+        ]
+      },
+      "H-023.npz": {
+        "events": 8988,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 2.515263321023869e-05,
+        "max_relative_pi_nu_closure_selected": 2.515263321023869e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.001598894377768223,
+          0.04521180064650592,
+          0.8002582183701155
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 295,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 295,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005126339739340846,
+          0.006951808530170409,
+          0.09397706235972425
+        ]
+      },
+      "H-024.npz": {
+        "events": 8953,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 5.801235596268068e-05,
+        "max_relative_pi_nu_closure_selected": 5.801235596268068e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0017936579805320069,
+          0.060275769127305534,
+          0.7989919656536004
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 310,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 310,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005708025380779524,
+          0.0053292612370054145,
+          0.04512071865474043
+        ]
+      },
+      "H-025.npz": {
+        "events": 9018,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 7.178128049588071e-05,
+        "max_relative_pi_nu_closure_selected": 7.178128049588071e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.001605117733251421,
+          0.039087555676101664,
+          0.7996942508831832
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 307,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 307,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005023037057122481,
+          0.008047875613645781,
+          0.04563937067305934
+        ]
+      },
+      "H-026.npz": {
+        "events": 9036,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 4.115316432627152e-05,
+        "max_relative_pi_nu_closure_selected": 4.115316432627152e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0014959474605145823,
+          0.04057358825317739,
+          0.8032241358048344
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 333,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 333,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005332231742836147,
+          0.00572349435854258,
+          0.08195524260630505
+        ]
+      },
+      "H-027.npz": {
+        "events": 8934,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 5.6432863459311176e-05,
+        "max_relative_pi_nu_closure_selected": 5.6432863459311176e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.001751148338476477,
+          0.056168337309871835,
+          0.8000614378220381
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 314,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 314,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005295642142763013,
+          0.0069087420311559995,
+          0.09063782001130805
+        ]
+      },
+      "H-028.npz": {
+        "events": 8982,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 7.561734854136017e-05,
+        "max_relative_pi_nu_closure_selected": 7.561734854136017e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0013434286210752683,
+          0.048932137993455846,
+          0.7987910434937373
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 325,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 325,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0004910346711702873,
+          0.006964289800251306,
+          0.05846029920891227
+        ]
+      },
+      "H-029.npz": {
+        "events": 8997,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 5.1120228737559796e-05,
+        "max_relative_pi_nu_closure_selected": 5.1120228737559796e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0016729849887585913,
+          0.043918869188024796,
+          0.7994846331048784
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 332,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 332,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0004711303353306384,
+          0.005404225019076327,
+          0.05312731840391005
+        ]
+      },
+      "H-030.npz": {
+        "events": 8898,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.015379604385791e-05,
+        "max_relative_pi_nu_closure_selected": 3.015379604385791e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.00154441817480587,
+          0.0451215647902311,
+          0.7987460223978304
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 319,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 319,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005405408212720841,
+          0.007874823152168519,
+          0.044935909439874466
+        ]
+      },
+      "H-031.npz": {
+        "events": 8981,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 5.007697730228903e-05,
+        "max_relative_pi_nu_closure_selected": 5.007697730228903e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0017855960016065209,
+          0.07497816746172696,
+          0.8042653714098489
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 335,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 335,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0004895622554512702,
+          0.007600952351467112,
+          0.03609454705094395
+        ]
+      },
+      "H-032.npz": {
+        "events": 8864,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 7.18079569025815e-05,
+        "max_relative_pi_nu_closure_selected": 7.18079569025815e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0014148260716872335,
+          0.03614454000990953,
+          0.8006337044935805
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 299,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 299,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.000527382983660063,
+          0.005555054061172503,
+          0.09183279528848032
+        ]
+      },
+      "H-033.npz": {
+        "events": 8963,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 2.8029676179525446e-05,
+        "max_relative_pi_nu_closure_selected": 2.8029676179525446e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0015509651818503833,
+          0.05057211663922962,
+          0.8003530138880046
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 316,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 316,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005519954178805353,
+          0.0065000997009801295,
+          0.06828365906854739
+        ]
+      },
+      "H-034.npz": {
+        "events": 8935,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 6.022322163326795e-05,
+        "max_relative_pi_nu_closure_selected": 6.022322163326795e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0015851909759957983,
+          0.05447223214697056,
+          0.7999509769818522
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 290,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 290,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.000562990540529551,
+          0.007280724211097486,
+          0.044981064252453073
+        ]
+      },
+      "H-035.npz": {
+        "events": 8918,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 2.1298234943948162e-05,
+        "max_relative_pi_nu_closure_selected": 2.1298234943948162e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.001545812995795287,
+          0.04182834164600654,
+          0.7999895155474137
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 265,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 265,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005018183575847823,
+          0.006681841470421141,
+          0.02396546503279251
+        ]
+      },
+      "H-036.npz": {
+        "events": 9042,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 4.134732725858879e-05,
+        "max_relative_pi_nu_closure_selected": 4.134732725858879e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0018438565733583517,
+          0.07810018411117955,
+          0.7994313118314407
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 296,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 296,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005238761329878772,
+          0.007600747593996825,
+          0.06640082364501487
+        ]
+      },
+      "H-037.npz": {
+        "events": 9028,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 5.52107635507033e-05,
+        "max_relative_pi_nu_closure_selected": 5.52107635507033e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0017796371007696987,
+          0.052127009533800395,
+          0.8004938875755203
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 320,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 320,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005535697019738439,
+          0.008280032690945025,
+          0.07650425304333686
+        ]
+      },
+      "H-038.npz": {
+        "events": 8954,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 2.626937818407452e-05,
+        "max_relative_pi_nu_closure_selected": 2.626937818407452e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.001905157484409739,
+          0.055496727969856205,
+          0.7991917008660394
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 316,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 316,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005311307075323013,
+          0.006278320452526862,
+          0.05975722525710836
+        ]
+      },
+      "H-039.npz": {
+        "events": 8945,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 5.536370441066215e-05,
+        "max_relative_pi_nu_closure_selected": 5.536370441066215e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0016962035514908186,
+          0.048753735345284564,
+          0.7990876520848718
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 349,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 349,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005565705153793843,
+          0.007346178825921097,
+          0.0654320938669899
+        ]
+      },
+      "H-040.npz": {
+        "events": 8812,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 4.2722244297187774e-05,
+        "max_relative_pi_nu_closure_selected": 4.2722244297187774e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0015437169274638562,
+          0.0587938251224984,
+          0.7987431348277811
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 293,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 293,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005190596780025869,
+          0.007195665558294706,
+          0.0531094983813869
+        ]
+      },
+      "H-041.npz": {
+        "events": 8870,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 4.25535099756654e-05,
+        "max_relative_pi_nu_closure_selected": 4.25535099756654e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0015889076730345314,
+          0.0664892199919139,
+          0.7997113422260205
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 311,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 311,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0004968002341898536,
+          0.006084033337882622,
+          0.09245867393444374
+        ]
+      },
+      "H-042.npz": {
+        "events": 8843,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 4.3790425874977494e-05,
+        "max_relative_pi_nu_closure_selected": 4.3790425874977494e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0016944810429260077,
+          0.05912571557022342,
+          0.7999947452460161
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 305,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 305,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.00048237547144214243,
+          0.007559614022375061,
+          0.038857759365432454
+        ]
+      },
+      "H-043.npz": {
+        "events": 8956,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 4.536334017380916e-05,
+        "max_relative_pi_nu_closure_selected": 4.536334017380916e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0014977627526282788,
+          0.03838102520816776,
+          0.7991777597480627
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 316,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 316,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0004873246637325801,
+          0.005731942657806875,
+          0.025696184079732287
+        ]
+      },
+      "H-044.npz": {
+        "events": 8995,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.851517766065466e-05,
+        "max_relative_pi_nu_closure_selected": 3.851517766065466e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0017674134105055,
+          0.03843135978513412,
+          0.8130934291086827
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 315,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 315,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0004986552759617124,
+          0.007588300976501178,
+          0.053206720230762006
+        ]
+      },
+      "H-045.npz": {
+        "events": 9027,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 6.727765879812148e-05,
+        "max_relative_pi_nu_closure_selected": 6.727765879812148e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0016854410873678866,
+          0.0430309828777297,
+          0.8005304728537943
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 320,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 320,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.000515133423976355,
+          0.006759470098918462,
+          0.03508087903771595
+        ]
+      },
+      "H-046.npz": {
+        "events": 8990,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 2.236430836208074e-05,
+        "max_relative_pi_nu_closure_selected": 2.236430836208074e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.001821139550083617,
+          0.03885343469933551,
+          0.8001967952340969
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 337,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 337,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005079509531907833,
+          0.00682129626548123,
+          0.05558617945920763
+        ]
+      },
+      "H-047.npz": {
+        "events": 8888,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 8.500411248018976e-05,
+        "max_relative_pi_nu_closure_selected": 8.500411248018976e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0016637764865721771,
+          0.0393058134901427,
+          0.7990788015752219
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 308,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 308,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005460440714599724,
+          0.005904355627389057,
+          0.05016230206827488
+        ]
+      },
+      "H-048.npz": {
+        "events": 8990,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.188423007889533e-05,
+        "max_relative_pi_nu_closure_selected": 3.188423007889533e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0015606688116499984,
+          0.05634537580336508,
+          0.7996610618501339
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 313,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 313,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005482450325743349,
+          0.008415943461204778,
+          0.05173426713716922
+        ]
+      },
+      "H-049.npz": {
+        "events": 8009,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 5.000498513127738e-05,
+        "max_relative_pi_nu_closure_selected": 5.000498513127738e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0016900213131553488,
+          0.04851696734123639,
+          0.8004201463683351
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 282,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 282,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.00046609829436505823,
+          0.007562756359673283,
+          0.07150048297966616
+        ]
+      },
+      "Z-000.npz": {
+        "events": 9086,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 2.6439533511891216e-05,
+        "max_relative_pi_nu_closure_selected": 2.6439533511891216e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.001968703314017023,
+          0.08700825817606944,
+          0.7983612929832729
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 343,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 343,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005182706166759754,
+          0.007820435746039911,
+          0.09899959269667447
+        ]
+      },
+      "Z-001.npz": {
+        "events": 9080,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 7.217996911893605e-05,
+        "max_relative_pi_nu_closure_selected": 7.217996911893605e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0021951845944231524,
+          0.07839102721325114,
+          0.7987598462941792
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 320,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 320,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006670370037740181,
+          0.011822885134721593,
+          0.1750035467035389
+        ]
+      },
+      "Z-002.npz": {
+        "events": 9169,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.4897722909006346e-05,
+        "max_relative_pi_nu_closure_selected": 3.4897722909006346e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.002109157943204959,
+          0.06510223030369383,
+          0.802495122526939
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 332,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 332,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006234318873020728,
+          0.00974006563349517,
+          0.09248338311696735
+        ]
+      },
+      "Z-003.npz": {
+        "events": 9048,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 5.9701987806876474e-05,
+        "max_relative_pi_nu_closure_selected": 5.9701987806876474e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0017003538837946919,
+          0.05460502771416589,
+          0.7988552668299964
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 340,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 340,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005608507423016107,
+          0.008614015123332625,
+          0.09853881102547679
+        ]
+      },
+      "Z-004.npz": {
+        "events": 9083,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 7.617428900204856e-05,
+        "max_relative_pi_nu_closure_selected": 7.617428900204856e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0019658063745121163,
+          0.0799043481000076,
+          0.8037773451776677
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 326,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 326,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006312762453298815,
+          0.012582452138113777,
+          0.12765090270169277
+        ]
+      },
+      "Z-005.npz": {
+        "events": 9107,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 2.9725888742479215e-05,
+        "max_relative_pi_nu_closure_selected": 2.9725888742479215e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.001924480068128273,
+          0.056200822957022716,
+          0.7996311369242843
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 344,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 344,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006516261925895162,
+          0.01094121571730074,
+          0.08175502640382959
+        ]
+      },
+      "Z-006.npz": {
+        "events": 9135,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 6.102510718502487e-05,
+        "max_relative_pi_nu_closure_selected": 6.102510718502487e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0017217521936231661,
+          0.054636516657497206,
+          0.7988989876933983
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 325,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 325,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006099026726307244,
+          0.01234713142443995,
+          0.053308055130855125
+        ]
+      },
+      "Z-007.npz": {
+        "events": 8970,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 6.859597726835535e-05,
+        "max_relative_pi_nu_closure_selected": 6.859597726835535e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0021799853765351873,
+          0.06810249259716089,
+          0.7988077368024844
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 332,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 332,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006103024543132607,
+          0.01005493950241215,
+          0.0709371627962394
+        ]
+      },
+      "Z-008.npz": {
+        "events": 9183,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.795584822499703e-05,
+        "max_relative_pi_nu_closure_selected": 3.795584822499703e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0019278778507939437,
+          0.05478911023109442,
+          0.7989090070811244
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 331,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 331,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006559204512337491,
+          0.008944831326118593,
+          0.07628472967568034
+        ]
+      },
+      "Z-009.npz": {
+        "events": 9008,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.7432125310604256e-05,
+        "max_relative_pi_nu_closure_selected": 3.7432125310604256e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0019761258583727154,
+          0.09100710288725015,
+          0.8016213923413431
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 344,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 344,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005957490738985882,
+          0.007634386724675067,
+          0.09009217451876195
+        ]
+      },
+      "Z-010.npz": {
+        "events": 9132,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.939335722635772e-05,
+        "max_relative_pi_nu_closure_selected": 3.939335722635772e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0017079077744355659,
+          0.04905561755703988,
+          0.799277316861694
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 356,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 356,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.000562384881059308,
+          0.008827909762366184,
+          0.09933444104526323
+        ]
+      },
+      "Z-011.npz": {
+        "events": 9039,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 6.162362642294385e-05,
+        "max_relative_pi_nu_closure_selected": 6.162362642294385e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.001810255980210465,
+          0.06224327794243314,
+          0.7990676500013678
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 364,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 364,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005776874540432964,
+          0.009356820480863292,
+          0.044121815159787525
+        ]
+      },
+      "Z-012.npz": {
+        "events": 9190,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 6.406805037486884e-05,
+        "max_relative_pi_nu_closure_selected": 6.406805037486884e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0020649333259374764,
+          0.07146437418550174,
+          0.7995282261718997
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 317,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 317,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005613941940404432,
+          0.0077186447255324425,
+          0.08866340398958616
+        ]
+      },
+      "Z-013.npz": {
+        "events": 9122,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.182512348618235e-05,
+        "max_relative_pi_nu_closure_selected": 3.182512348618235e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0018511549447574327,
+          0.052185422711699625,
+          0.7997284604294534
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 326,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 326,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006113164763100754,
+          0.009688802074763326,
+          0.08346972285449827
+        ]
+      },
+      "Z-014.npz": {
+        "events": 9181,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 4.284861259814281e-05,
+        "max_relative_pi_nu_closure_selected": 4.284861259814281e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0023212017312093935,
+          0.08654771338515693,
+          0.7991436680671937
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 317,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 317,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005737102739563626,
+          0.007005699287388647,
+          0.050398219331349026
+        ]
+      },
+      "Z-015.npz": {
+        "events": 9152,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.474083207841387e-05,
+        "max_relative_pi_nu_closure_selected": 3.474083207841387e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.002020467261246661,
+          0.08747012074679134,
+          0.7988990140201795
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 339,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 339,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005691864842590766,
+          0.009444685746441289,
+          0.101254693869953
+        ]
+      },
+      "Z-016.npz": {
+        "events": 9200,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 5.175586978137261e-05,
+        "max_relative_pi_nu_closure_selected": 5.175586978137261e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0018698587606694322,
+          0.07296096641074179,
+          0.7989925498585908
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 332,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 332,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005868498273559064,
+          0.012452606477260656,
+          0.0658295769421513
+        ]
+      },
+      "Z-017.npz": {
+        "events": 9206,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 4.6060146949756206e-05,
+        "max_relative_pi_nu_closure_selected": 4.6060146949756206e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0019052413047021821,
+          0.050902247978377946,
+          0.8007954960218466
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 363,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 363,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005823779788651784,
+          0.009303715319276373,
+          0.08877809860136399
+        ]
+      },
+      "Z-018.npz": {
+        "events": 9012,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.163787212064445e-05,
+        "max_relative_pi_nu_closure_selected": 3.163787212064445e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0022826823167324817,
+          0.09200543349173454,
+          0.8022692536452212
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 323,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 323,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006415444932892367,
+          0.009757155560587705,
+          0.06627888633161994
+        ]
+      },
+      "Z-019.npz": {
+        "events": 9082,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 5.126555601969074e-05,
+        "max_relative_pi_nu_closure_selected": 5.126555601969074e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0021721620026505656,
+          0.05178702279596848,
+          0.7986534321197429
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 337,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 337,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005265451366550655,
+          0.008353175855872369,
+          0.07931991502635283
+        ]
+      },
+      "Z-020.npz": {
+        "events": 9179,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 6.968652859127882e-05,
+        "max_relative_pi_nu_closure_selected": 6.968652859127882e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0021497577436212223,
+          0.07403582551165655,
+          0.8011790316523935
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 325,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 325,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005980852617718524,
+          0.0091162300278632,
+          0.07787803436895757
+        ]
+      },
+      "Z-021.npz": {
+        "events": 9122,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 2.5642152082362873e-05,
+        "max_relative_pi_nu_closure_selected": 2.5642152082362873e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0016307723960513887,
+          0.06182908229168302,
+          0.8022983589991894
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 301,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 301,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006075046433491327,
+          0.006327869382857985,
+          0.08029715164157336
+        ]
+      },
+      "Z-022.npz": {
+        "events": 9043,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 5.4650902741922455e-05,
+        "max_relative_pi_nu_closure_selected": 5.4650902741922455e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.002222881737238183,
+          0.06470034751578449,
+          0.7991855398477223
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 323,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 323,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006462131355515766,
+          0.0071122197886109295,
+          0.03471199378114509
+        ]
+      },
+      "Z-023.npz": {
+        "events": 9140,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 2.5391043247274554e-05,
+        "max_relative_pi_nu_closure_selected": 2.5391043247274554e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0021127703674198306,
+          0.09124450352418982,
+          0.7987504747332859
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 321,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 321,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005679694686948622,
+          0.01058593121217157,
+          0.055224593728308013
+        ]
+      },
+      "Z-024.npz": {
+        "events": 9155,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 1.7758632589460935e-05,
+        "max_relative_pi_nu_closure_selected": 1.7758632589460935e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.002069116459787093,
+          0.05573365457423955,
+          0.7985510135946134
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 327,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 327,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.000672413427244889,
+          0.007135775620568608,
+          0.06951915275348308
+        ]
+      },
+      "Z-025.npz": {
+        "events": 9124,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 4.203376496894736e-05,
+        "max_relative_pi_nu_closure_selected": 4.203376496894736e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0020541855803993814,
+          0.08795489380779817,
+          0.8046830547052222
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 305,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 305,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006059782466212305,
+          0.008385036120246596,
+          0.03162838680740143
+        ]
+      },
+      "Z-026.npz": {
+        "events": 9121,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 1.538384202570965e-05,
+        "max_relative_pi_nu_closure_selected": 1.538384202570965e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0023265486619514636,
+          0.06468172500598098,
+          0.7984004751893936
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 324,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 324,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005249532273121638,
+          0.00954521187613097,
+          0.08726831690277459
+        ]
+      },
+      "Z-027.npz": {
+        "events": 9151,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 8.544651447482693e-05,
+        "max_relative_pi_nu_closure_selected": 8.544651447482693e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.001958414588560678,
+          0.08025664958909273,
+          0.7993381857443207
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 334,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 334,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.000577307477304112,
+          0.007102778577098085,
+          0.061405714035618564
+        ]
+      },
+      "Z-028.npz": {
+        "events": 9165,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 1.9704562919953496e-05,
+        "max_relative_pi_nu_closure_selected": 1.9704562919953496e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0018447199142243853,
+          0.09013120801970573,
+          0.799097411628527
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 316,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 316,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006339118529761212,
+          0.011275930810532868,
+          0.07011968284425252
+        ]
+      },
+      "Z-029.npz": {
+        "events": 9060,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.1528237358158756e-05,
+        "max_relative_pi_nu_closure_selected": 3.1528237358158756e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.002103618773825963,
+          0.0480610544475162,
+          0.7991302096272141
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 300,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 300,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005125782650791111,
+          0.010061270300474334,
+          0.09588115392446173
+        ]
+      },
+      "Z-030.npz": {
+        "events": 9267,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.3554351891041484e-05,
+        "max_relative_pi_nu_closure_selected": 3.3554351891041484e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0024719766682657074,
+          0.06269282012266247,
+          0.8146766234678176
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 333,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 333,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006118002791108967,
+          0.009962763594289992,
+          0.06938249717533562
+        ]
+      },
+      "Z-031.npz": {
+        "events": 9183,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 5.363484857863272e-05,
+        "max_relative_pi_nu_closure_selected": 5.363484857863272e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0023353155726322933,
+          0.08059682973141641,
+          0.8031296454356422
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 304,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 304,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006281944413421003,
+          0.010674431812689221,
+          0.08171631355274767
+        ]
+      },
+      "Z-032.npz": {
+        "events": 9136,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.903262799744522e-05,
+        "max_relative_pi_nu_closure_selected": 3.903262799744522e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0021125164290029946,
+          0.057027323280881795,
+          0.8003117910232949
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 328,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 328,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006077018664168987,
+          0.006852053095436794,
+          0.028399356037146717
+        ]
+      },
+      "Z-033.npz": {
+        "events": 9199,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 2.1155382823724747e-05,
+        "max_relative_pi_nu_closure_selected": 2.1155382823724747e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0020073101455674452,
+          0.0638267982098826,
+          0.8007162715842904
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 339,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 339,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006721846906695417,
+          0.0077654088436619135,
+          0.11316440178998244
+        ]
+      },
+      "Z-034.npz": {
+        "events": 9184,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.336948044125567e-05,
+        "max_relative_pi_nu_closure_selected": 3.336948044125567e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0021919840888137004,
+          0.0660773052641285,
+          0.800583386379591
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 333,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 333,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005866396388074513,
+          0.0074748022343302245,
+          0.025100776561085336
+        ]
+      },
+      "Z-035.npz": {
+        "events": 9123,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 4.171322820951695e-05,
+        "max_relative_pi_nu_closure_selected": 4.171322820951695e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0022622580026117195,
+          0.07912685852434494,
+          0.7989874971490276
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 334,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 334,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005980894774531009,
+          0.010004099073960248,
+          0.0727472298141949
+        ]
+      },
+      "Z-036.npz": {
+        "events": 9080,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 2.002621511663628e-05,
+        "max_relative_pi_nu_closure_selected": 2.002621511663628e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0018222259443120697,
+          0.0595722281990113,
+          0.7996239144125064
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 318,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 318,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005346186318803126,
+          0.009075881803368213,
+          0.036016862940001726
+        ]
+      },
+      "Z-037.npz": {
+        "events": 9135,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 4.942124496602169e-05,
+        "max_relative_pi_nu_closure_selected": 4.942124496602169e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0021511728247593787,
+          0.048784567685254514,
+          0.7991303796784739
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 310,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 310,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006260827026767224,
+          0.009235222469515489,
+          0.08416154655912855
+        ]
+      },
+      "Z-038.npz": {
+        "events": 9112,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 8.337559026307425e-05,
+        "max_relative_pi_nu_closure_selected": 8.337559026307425e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0018202461174038065,
+          0.04545370752665558,
+          0.801482629834724
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 339,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 339,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006090085860295247,
+          0.008859509052966723,
+          0.07529095540343311
+        ]
+      },
+      "Z-039.npz": {
+        "events": 9125,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 1.4366687798482566e-05,
+        "max_relative_pi_nu_closure_selected": 1.4366687798482566e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0021848733562386258,
+          0.07016045026784877,
+          0.8044565316103109
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 343,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 343,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006307811994348267,
+          0.011321443897047478,
+          0.05426852373661917
+        ]
+      },
+      "Z-040.npz": {
+        "events": 9057,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 1,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 0.01293938958945792,
+        "max_relative_pi_nu_closure_selected": 2.3180824479927972e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.001822065385127969,
+          0.06880569075531366,
+          0.7989053149773215
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 342,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 343,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006527623880679956,
+          0.011780146069451115,
+          0.07483290332879444
+        ]
+      },
+      "Z-041.npz": {
+        "events": 9147,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.3786166429548086e-05,
+        "max_relative_pi_nu_closure_selected": 3.3786166429548086e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.001950958902018532,
+          0.07262615795495074,
+          0.7993652515298268
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 315,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 315,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005729896004146307,
+          0.00721301063982342,
+          0.04706249417740582
+        ]
+      },
+      "Z-042.npz": {
+        "events": 9026,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 5.3482017016378866e-05,
+        "max_relative_pi_nu_closure_selected": 5.3482017016378866e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.002014159781997635,
+          0.0705228218471927,
+          0.7991053085706448
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 280,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 280,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006889915415277947,
+          0.009586688213515174,
+          0.027791959219460205
+        ]
+      },
+      "Z-043.npz": {
+        "events": 9135,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.8063384766265925e-05,
+        "max_relative_pi_nu_closure_selected": 3.8063384766265925e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0023657971788754173,
+          0.12607305875185332,
+          0.799795692936643
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 363,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 363,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.000721732267128794,
+          0.010387302211581129,
+          0.12883300395129038
+        ]
+      },
+      "Z-044.npz": {
+        "events": 9248,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 2.7603383889153657e-05,
+        "max_relative_pi_nu_closure_selected": 2.7603383889153657e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0019028430146707798,
+          0.06425061975678827,
+          0.7991981100625722
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 315,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 315,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006618255466679379,
+          0.009072163973447088,
+          0.03377772046387628
+        ]
+      },
+      "Z-045.npz": {
+        "events": 9073,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 2.020530293773376e-05,
+        "max_relative_pi_nu_closure_selected": 2.020530293773376e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.002447341127300079,
+          0.059702982054997814,
+          0.7994598534031203
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 327,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 327,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006754225341225606,
+          0.010704667722777316,
+          0.03621175494300677
+        ]
+      },
+      "Z-046.npz": {
+        "events": 9200,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 5.523244766388331e-05,
+        "max_relative_pi_nu_closure_selected": 5.523244766388331e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0022398569980215804,
+          0.09887675269085573,
+          0.8115490509888061
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 304,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 304,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006072215758881061,
+          0.008256445377431214,
+          0.0750629897370012
+        ]
+      },
+      "Z-047.npz": {
+        "events": 9120,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 2.4926403852329557e-05,
+        "max_relative_pi_nu_closure_selected": 2.4926403852329557e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.0023341802374406834,
+          0.05899530568029697,
+          0.8002980685583561
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 349,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 349,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0005735028602186221,
+          0.010626812296375021,
+          0.07696722997870853
+        ]
+      },
+      "Z-048.npz": {
+        "events": 8157,
+        "excluded_simulation_objects_on_selected_taus": 0,
+        "failed_pi_nu_four_vector_closure": 0,
+        "max_cos_range_excess_before_tolerance_clip": 0.0,
+        "max_relative_pi_nu_closure_before_selection": 3.226136993144259e-05,
+        "max_relative_pi_nu_closure_selected": 3.226136993144259e-05,
+        "max_x_inverse_error": 1.1102230246251565e-16,
+        "pion_mass_abs_deviation_quantiles_gev": [
+          0.002023315578720819,
+          0.055918759799822484,
+          0.7994686090657093
+        ],
+        "selected_taus_with_excluded_simulation_objects": 0,
+        "selected_truth_pi_nu_x_pi_nu": 271,
+        "structural_truth_pi_nu_x_pi_nu_candidates": 271,
+        "tau_mass_abs_deviation_quantiles_gev": [
+          0.0006025721674095541,
+          0.008621028302275738,
+          0.07413107503646987
+        ]
+      }
+    }
+  },
+  "validation_inference_parity": {
+    "allclose_atol_5e-4": true,
+    "max_abs_difference": 0.00036647915840148926,
+    "mean_abs_difference": 3.9318859854667914e-05
+  },
+  "validation_reference_sha256": "bcb87013ee097a3d1f7ca9709c99ecda654c1817f6c569274b8baaa580e1a63d"
+}

@@ -1,0 +1,231 @@
+{
+  "bootstrap_note": "The H/Z TVD interval resamples ROOT ntuple_file_index clusters independently within class.",
+  "claim_boundary": "These figures test association between a frozen classifier score and the reco helicity-angle proxy in selected simulated reco 1p0n x 1p0n events. They do not establish that the classifier learned or used spin, nor that an H/Z shape difference is spin-only.",
+  "definition": {
+    "angle_equation": "cos(theta)=(2*x-1-a^2)/(beta*(1-a^2)); x=E_pi/E_tau; a=m_pi/m_tau; beta=sqrt(1-m_tau^2/E_tau^2)",
+    "clipping": "none; out-of-range raw angles are counted outside the primary map",
+    "collinear_equation": "MET_T = alpha_minus pT_vis_minus + alpha_plus pT_vis_plus; z=1/(1+alpha); E_tau=E_vis/z",
+    "collinear_valid": "finite alpha,z; |sin(dphi)|>1e-6; alpha>=0; 0<z<=1 on both sides",
+    "e_pi": "unique selected charged track with charged-pion mass hypothesis",
+    "m_pi_charged_GeV": 0.13957039,
+    "m_tau_GeV": 1.77686,
+    "map_bins_per_axis": 6,
+    "map_population": "collinear valid, finite raw angle, and both raw |cos(theta)|<=1",
+    "map_range": [
+      -1.0,
+      1.0
+    ],
+    "mean_score_min_occupancy": 8,
+    "minimum_abs_sin_tau_dphi": 1e-06,
+    "score": "H-like score from frozen full-reco arithmetic ensemble of seeds 42, 43, 44 at terminal checkpoints"
+  },
+  "effect_sizes": {
+    "inclusive_h_z_tvd": {
+      "cluster_bootstrap_95": [
+        0.13331845115109225,
+        0.2245032621119779
+      ],
+      "cluster_unit": "ntuple_file_index sampled independently within truth class",
+      "estimate": 0.1771521079056721,
+      "interval_method": "cluster bootstrap, distribution centered on the plug-in estimate",
+      "rationale": "2000 replicates matches the frozen classifier comparison. The centered interval reports cluster-resampling spread without presenting the known upward plug-in bias of sparse-bin TVD as a displacement of the point estimate.",
+      "raw_bootstrap_mean": 0.2218284023394723,
+      "raw_bootstrap_percentile_95": [
+        0.17799474558489245,
+        0.26917955654577813
+      ],
+      "replicates": 2000,
+      "seed": 20260826,
+      "source_files": {
+        "H": 50,
+        "Z": 49
+      }
+    },
+    "within_class_score_permutation": {
+      "H": {
+        "observed_low_high_tvd": 0.3947935733170633,
+        "permutation_p_ge_observed": 0.000999000999000999,
+        "permuted_tvd_95": [
+          0.182457511776795,
+          0.31458175030412
+        ],
+        "permuted_tvd_median": 0.24312847911215696,
+        "replicates": 1000
+      },
+      "Z": {
+        "observed_low_high_tvd": 0.4992939666238768,
+        "permutation_p_ge_observed": 0.000999000999000999,
+        "permuted_tvd_95": [
+          0.17301463396429442,
+          0.29904141809898693
+        ],
+        "permuted_tvd_median": 0.22935822256025978,
+        "replicates": 1000
+      },
+      "rationale": "1000 within-class permutations give 0.001 tail-probability resolution for a minimum visual null control; no significance claim is made.",
+      "seed": 20260827
+    }
+  },
+  "figures": {
+    "angle_diagnostics": {
+      "png": "reco-1p1p-angle-diagnostics.png",
+      "svg": "reco-1p1p-angle-diagnostics.svg"
+    },
+    "collinear_diagnostics": {
+      "png": "reco-1p1p-collinear-diagnostics.png",
+      "svg": "reco-1p1p-collinear-diagnostics.svg"
+    },
+    "event_flow": {
+      "png": "reco-1p1p-event-flow.png",
+      "svg": "reco-1p1p-event-flow.svg"
+    },
+    "inclusive_density": {
+      "png": "reco-1p1p-inclusive-density.png",
+      "svg": "reco-1p1p-inclusive-density.svg"
+    },
+    "mean_score": {
+      "png": "reco-1p1p-mean-score.png",
+      "svg": "reco-1p1p-mean-score.svg"
+    },
+    "score_tertiles": {
+      "png": "reco-1p1p-score-tertiles.png",
+      "svg": "reco-1p1p-score-tertiles.svg"
+    },
+    "shuffled_score_null": {
+      "png": "reco-1p1p-shuffled-null.png",
+      "svg": "reco-1p1p-shuffled-null.svg"
+    },
+    "signed_h_minus_z": {
+      "png": "reco-1p1p-hz-difference.png",
+      "svg": "reco-1p1p-hz-difference.svg"
+    }
+  },
+  "format_version": 1,
+  "identity_join": {
+    "ensemble_key": [
+      "sample_id",
+      "ntuple_file_index",
+      "ntuple_entry"
+    ],
+    "event_number_caveat": "source_event_number is diagnostic and non-unique, so it is never used as a join key",
+    "processed_to_sidecar": "the processed-shard builder and prediction sidecar share the frozen validation row-map order; all sample_id, label, and source_event_number rows are required to agree before identities are attached",
+    "semantics": "ensemble scores are joined by unique complete ROOT identity key sets; missing, duplicate, or label-mismatched rows fail closed, and ensemble input row order is not used"
+  },
+  "input_sha256": {
+    "comparison-summary.json": "9437fe655b2dbad8f892b4ae99ce46661a4ab4e80a65b86af9ef6c03937b1db0",
+    "metadata.json": "2cbf5a5480f38e43b3c53e80482b085cfe0b03a3e1ad800c95f13d62341fe648",
+    "stats.json": "84bfb51d835a1fc89bbf964c01107c553e5b50ef48cf51928870d300f4701d9d",
+    "terminal-ensembles.npz": "bcb87013ee097a3d1f7ca9709c99ecda654c1817f6c569274b8baaa580e1a63d",
+    "validation/H_0000.pt": "4860a8de4a37b851ea245272e715fd40123e2a00bc08ca627072248628cda5a6",
+    "validation/Z_0000.pt": "ff221c69155605c48173b1e7b8b3fd7129cf912b977853ca5a6d98661f66031a",
+    "validation_predictions.npz": "534ca1511b18477cfd49a9cbe675adb8d6b11b413d7a969ef5cbdafadad6e01d"
+  },
+  "limitations": [
+    "No processed-tensor truth pi-nu purity or truth-to-reco angular response is available.",
+    "No additional parent pT-|eta| overlap weighting is applied.",
+    "Truth-class conditioning removes overall H/Z mixture changes, not within-class kinematics, acceptance, reconstruction, MET, collinear-quality, or direct classifier-input dependence.",
+    "Class-specific score tertiles are within-class ranks and are not a common operating threshold.",
+    "A shuffled-score map is a visual association null, not a kinematic deconfounder."
+  ],
+  "lineage": {
+    "comparison_claim_boundary": "three-seed ensemble AUC ordering at the terminal endpoint of the common adaptive-v1 schedule on the held-out report partition; not whole-ROC dominance, asymptotic performance, retraining uncertainty, causal attribution or a spin fraction",
+    "comparison_protocol_sha256": "5e878e64ec5ce9e8c9162eb29f339acb6689c26bb25d69446080ff6adeaea5f8",
+    "comparison_status": "family-comparison-promoted",
+    "full_reco_runs": {
+      "42": {
+        "diagnostic_best_scheduler_epoch": 97,
+        "epochs": 127,
+        "history_epochs_match": true,
+        "reporting_auc": 0.6136460149646539,
+        "sha256": {
+          "checkpoint": "35972ce70c1703d816cc8a71dfae40663c98f7742d7364cf06810b7b46447a59",
+          "history": "5690ad33e677512a088a9e5cac53fd72e7a5139a5bc8c8fa56385f94389b5d0b",
+          "predictions": "534ca1511b18477cfd49a9cbe675adb8d6b11b413d7a969ef5cbdafadad6e01d",
+          "result": "92caf82d237f6e232dd2db84e1240771ac7e7008de4a51262613fae678094ffd"
+        },
+        "terminal_slope": -4.461229371383318e-06
+      },
+      "43": {
+        "diagnostic_best_scheduler_epoch": 93,
+        "epochs": 116,
+        "history_epochs_match": true,
+        "reporting_auc": 0.6114708306303296,
+        "sha256": {
+          "checkpoint": "6ae5dca2bf70cc578c1aed5b6b93f5caed350ec883be7925bada3dc300e72e3a",
+          "history": "8afc3124e9ad196f6fc17f44425dc4d8a8557fc1c97f6b60396971f8da9c334d",
+          "predictions": "8175b0e92464a4af92bbe2237572b3b3e303b3c027221556899f7d44d13eb6b4",
+          "result": "2de01b4b42d1fb328ba93791d7f4443dd520ccc17a6a4460baa2ecbd7950b2a2"
+        },
+        "terminal_slope": 5.661922280308535e-06
+      },
+      "44": {
+        "diagnostic_best_scheduler_epoch": 101,
+        "epochs": 116,
+        "history_epochs_match": true,
+        "reporting_auc": 0.6118599529655533,
+        "sha256": {
+          "checkpoint": "91e23e570dc607891b6f5e407e1f7bfd1389954d0b903524f584e8adb615cad9",
+          "history": "0d66af46fab3d0a7878c771d354003b790d2d20ff474282aede0ff5d5d9904b1",
+          "predictions": "070bd2aab7900eb04f6f38053a1e37b66749298fd0e8d4e5ff3458540fd66675",
+          "result": "3e55be410432ea7a0f0a01021087d27fadfe6fdc0b1763a8e4d6d3a6954e75d4"
+        },
+        "terminal_slope": -2.8501910312799935e-07
+      }
+    },
+    "terminal_ensemble_auc_full_reco": 0.6150930579720123
+  },
+  "permutation_note": "The low-high TVD null shuffles scores only within truth class and the fixed track-audited cohort.",
+  "population": {
+    "counts": {
+      "H": {
+        "both_raw_angles_in_range": 491,
+        "charge_ordered_track_pair": 879,
+        "collinear_valid": 513,
+        "finite_raw_angles": 513,
+        "mode_1p0n_x_1p0n": 879,
+        "report": 22552,
+        "unique_core_selector_track_pair": 879,
+        "validation": 44750
+      },
+      "Z": {
+        "both_raw_angles_in_range": 546,
+        "charge_ordered_track_pair": 1008,
+        "collinear_valid": 573,
+        "finite_raw_angles": 573,
+        "mode_1p0n_x_1p0n": 1012,
+        "report": 22335,
+        "unique_core_selector_track_pair": 1008,
+        "validation": 44750
+      }
+    },
+    "frozen_summary_report_events": 44887,
+    "partition": "held-out report subset of validation",
+    "report_events": 44887,
+    "weights": "unit weight; no additional parent-overlap weight"
+  },
+  "primary_estimand": "unit-weight nominal shape in the held-out report subset of the fixed-v3 pT-matched validation surface",
+  "selection": {
+    "charged_track": "exactly one core && passTrkSelector track per tau, with tau[0]/tau[1] charges -1/+1",
+    "decay_mode": "both reconstructed taus raw decay-mode code 0 (processed categorical id 1)",
+    "score_tertile_edges": {
+      "H": {
+        "q1": 0.4749241636859046,
+        "q2": 0.5695782634947035
+      },
+      "Z": {
+        "q1": 0.4076567358440823,
+        "q2": 0.5105925136142306
+      }
+    },
+    "score_tertile_population": "report subset, reco 1p0n x 1p0n, unique charge-ordered track pair; before collinear validity",
+    "score_tertile_rule": "within truth class, unit weight: s<=q1; q1<s<=q2; q2<s",
+    "tau_side_convention": "tau[0] = tau-; tau[1] = tau+, audited by selected track charge"
+  },
+  "status": "completed",
+  "tables": [
+    "event-flow.csv",
+    "score-tertile-summary.csv",
+    "collinear-diagnostics-summary.csv",
+    "map-data.npz"
+  ]
+}
