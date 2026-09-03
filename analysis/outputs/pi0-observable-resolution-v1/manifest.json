@@ -1,0 +1,133 @@
+{
+  "artifacts": {
+    "figure": "pi0-observable-resolution-2x2.png",
+    "table": "panel-stats.csv",
+    "values": "matched-tau-values.npz"
+  },
+  "counts": {
+    "canonical_rows": 892304,
+    "canonical_validation_rows": 89500,
+    "cos_psi_out_of_range_records": 438,
+    "cos_psi_valid_records": 64758,
+    "cos_theta_out_of_range_records": 3567,
+    "cos_theta_valid_records": 61629,
+    "matched_physical_records": 65196,
+    "truth_candidate_events_by_sample": {
+      "H": 31077,
+      "Z": 31441
+    }
+  },
+  "definitions": {
+    "bins_per_axis": 40,
+    "cos_psi": "Existing thesis Eq. 3.5 implementation: [m_rho/sqrt(m_rho^2-4*m_pi^2)]*(E_charged-E_pi0)/|p_charged+p_pi0|",
+    "cos_theta": "Existing thesis Eq. 3.4 implementation: x=E_rho/E_tau, a=m_rho/m_tau, beta=sqrt(1-m_tau^2/E_tau^2), cos(theta)=(2*x-1-a^2)/(beta*(1-a^2)); rho=charged pion+pi0",
+    "hybrid_four_vector": "on-shell pi0 p=sqrt(E^2-m_pi0^2) times the supplied unit direction; energy-reco uses reco E/truth direction and direction-reco uses truth E/reco eta-phi",
+    "hybrid_pi0_mass_GeV": 0.1349768,
+    "m_charged_pion_GeV": 0.13957039,
+    "m_rho_GeV": 0.778,
+    "m_tau_GeV": 1.77686,
+    "out_of_range_handling": "raw values within 5e-5 of [-1,1] are clipped at the plotting boundary; larger excursions are omitted from both energy/direction panels for that observable",
+    "range": [
+      -1.0,
+      1.0
+    ]
+  },
+  "flow_by_sample": {
+    "H": {
+      "no_valid_reco_pi0_candidate": 1430,
+      "physical_matched_observable_records": 32375,
+      "reco_tau_not_1p1n": 5069,
+      "reco_to_truth_tau_mapping_failed": 58,
+      "truth_1p1n_validation_candidates": 40053,
+      "truth_and_reco_1p1n": 34926,
+      "truth_reco_pi0_match_failed": 1121,
+      "truth_tau_ready_for_reco_selection": 39995,
+      "unique_truth_reco_pi0_match": 32375
+    },
+    "Z": {
+      "no_valid_reco_pi0_candidate": 1433,
+      "physical_matched_observable_records": 32821,
+      "reco_tau_not_1p1n": 5193,
+      "reco_to_truth_tau_mapping_failed": 41,
+      "truth_1p1n_validation_candidates": 40622,
+      "truth_and_reco_1p1n": 35388,
+      "truth_reco_pi0_match_failed": 1134,
+      "truth_tau_ready_for_reco_selection": 40581,
+      "unique_truth_reco_pi0_match": 32821
+    }
+  },
+  "format_version": 1,
+  "inputs": {
+    "audit_sha256": "123ee7a1f59fbdb47ba4517cca5b69a568d7b812fede1cc3fa4807aa0d6ef410",
+    "row_map_sha256": "b91fcfbe6a0a777d6cdc96377408127bb83ade19bb9d6c0fc2743ed3839ef4f6",
+    "run_root": "/home/rbaba/tauspin-ss/.athena/ariadne/runs/tauspin-kinematics-truth-reco-d4-20260809",
+    "script_sha256": "af70be29086d973bc4b88f24802ae341001e575ce4cd8eb566d6a39ef3485b73",
+    "truth_manifest_sha256": "7bf620f25feba81bc9537d6c2280a11c4251b5f388b07e7f7388bd2833b82781"
+  },
+  "interpretation_boundary": "This is a matched 1p1n tau observable-smearing diagnostic for pi0 reco energy/direction errors. It is not a detector-level counterfactual or a causal attribution of all reconstruction effects.",
+  "panels": [
+    {
+      "H_tau_count": 30981,
+      "Z_tau_count": 30648,
+      "event_count": 50986,
+      "hybrid": "energy_reco",
+      "mean_delta_y_minus_x": -0.01828299630881706,
+      "median_abs_delta": 0.06958846807877309,
+      "observable": "cos_theta",
+      "panel": "upper_left",
+      "pearson": 0.9505184921130682,
+      "rmse_to_diagonal": 0.16760286423888454,
+      "tau_count": 61629
+    },
+    {
+      "H_tau_count": 30981,
+      "Z_tau_count": 30648,
+      "event_count": 50986,
+      "hybrid": "direction_reco",
+      "mean_delta_y_minus_x": 0.0,
+      "median_abs_delta": 0.0,
+      "observable": "cos_theta",
+      "panel": "upper_right",
+      "pearson": 1.0,
+      "rmse_to_diagonal": 0.0,
+      "tau_count": 61629
+    },
+    {
+      "H_tau_count": 32613,
+      "Z_tau_count": 32145,
+      "event_count": 53045,
+      "hybrid": "energy_reco",
+      "mean_delta_y_minus_x": 0.014101092057911211,
+      "median_abs_delta": 0.04242931225344394,
+      "observable": "cos_psi",
+      "panel": "lower_left",
+      "pearson": 0.9700329304939013,
+      "rmse_to_diagonal": 0.13866535386707204,
+      "tau_count": 64758
+    },
+    {
+      "H_tau_count": 32613,
+      "Z_tau_count": 32145,
+      "event_count": 53045,
+      "hybrid": "direction_reco",
+      "mean_delta_y_minus_x": -4.452412499083943e-07,
+      "median_abs_delta": 2.4776358814870836e-06,
+      "observable": "cos_psi",
+      "panel": "lower_right",
+      "pearson": 0.9999999992685499,
+      "rmse_to_diagonal": 2.1391689810721225e-05,
+      "tau_count": 64758
+    }
+  ],
+  "samples": "H and Z processed with the same selection and combined in the figure",
+  "scope": "tau-level matched 1p1n pi0 energy/direction observable diagnostic only",
+  "selection": {
+    "event_selection": "canonical analysis-surface rows; no additional event-level requirement on the opposite tau truth decay mode",
+    "opposite_tau": "unrestricted",
+    "pi0_match": "same-tau pfo_isPi0==1 candidate, valid pT/eta/phi/E, nearest DeltaR assignment, primary DeltaR<0.05; equal-distance ties rejected",
+    "reco_tau": "reco tau_decayMode==1 for the reco tau mapped to the target truth tau",
+    "truth_tau": "truth tau_mode_code==1 with exactly one charged pion, one neutral pion, one tau neutrino, no other neutrino/photon, tau decay-vector match, and three-daughter closure <=1e-4"
+  },
+  "split": "validation only; test rows were not selected or used",
+  "status": "completed"
+}
