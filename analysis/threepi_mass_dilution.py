@@ -39,7 +39,6 @@ def raw_masses(payload, stats):
     get = lambda name: f[:, names.index(name)]
     pt = np.expm1(get('log1p_track_pt'))
     eta = get('track_eta')
-    phi = np.arctan2(get('sin_track_phi'), get('cos_track_phi'))
     # Source sin/cos are float32; preserve their radius in the independent
     # momentum construction to match the actual stored representation.
     px = pt*get('cos_track_phi')
@@ -113,21 +112,35 @@ def main():
              'weighting': 'unit event weight, H and Z separately',
              'numpy': np.__version__, 'torch': torch.__version__}
     for sample in ('H', 'Z'):
-        qs, raws, ids = [], [], []
+        qs, raws, ids, row_ids, fingerprints = [], [], [], [], []
         for rec in meta['shards']['validation'][sample]:
             path = args.dataset/rec['path']
             assert Path(rec['path']).parts[0] == 'validation'
             x = torch.load(path, map_location='cpu', weights_only=True)
+            base_path = Path(meta['derived_features']['source_dataset'])/rec['path']
+            base = torch.load(base_path, map_location='cpu', weights_only=True)
+            for key, value in base.items():
+                actual = x[key][..., :value.shape[-1]] if key == 'tau_features' else x[key]
+                assert torch.equal(actual, value), f'source row mismatch: {key}'
             assert len(x['labels']) == rec['events']
             assert np.all(x['labels'].numpy() == (1 if sample == 'H' else 0))
             assert np.all(x['tau_decay_mode'].numpy() == 4)
             qs.append(x['tau_features'].numpy()[:, :, qi].astype(float)*st['train_std']+st['train_mean'])
             raws.append(raw_masses(x, stats))
             ids.append(x['event_numbers'].numpy())
+            offsets = x['track_offsets'].numpy()
+            for row, (start, stop) in enumerate(zip(offsets[:-1], offsets[1:])):
+                row_ids.append(f'{sample}:{rec["path"]}:{row}')
+                fingerprint = hashlib.sha256()
+                for arr in (x['event_features'][row], base['tau_features'][row], x['track_features'][start:stop]):
+                    fingerprint.update(arr.numpy().tobytes())
+                fingerprints.append(fingerprint.hexdigest())
             audit['input_files'].append({'path': str(path), 'sha256': digest(path)})
+            audit['input_files'].append({'path': str(base_path), 'sha256': digest(base_path)})
         q, raw, eid = map(np.concatenate, (qs, raws, ids))
         assert np.isfinite(q).all() and np.isfinite(raw).all()
-        assert len(np.unique(eid)) == len(eid), 'duplicate identity within sample'
+        assert len(set(row_ids)) == len(row_ids)
+        assert len(set(fingerprints)) == len(fingerprints), 'repeated reconstructed content'
         residual = q-raw
         # Stored derived features are float32; tolerance is 2e-6 GeV,
         # generous relative to their quantization, not a physics threshold.
@@ -138,6 +151,8 @@ def main():
         b = a.prod(axis=1)
         data[sample] = (q, good, a, b, residual)
         audit[sample] = dict(events=len(q), valid_pair_events=int(good.sum()),
+            repeated_event_number_rows=int(len(eid)-len(np.unique(eid))),
+            unique_reconstructed_content=len(set(fingerprints)), source_payload_exact_match=True,
             below_domain_legs=int((q < 3*MPI).sum()), above_domain_legs=int((q > MTAU).sum()),
             invalid_pair_events=int((~good).sum()), q_range=[float(q.min()), float(q.max())],
             q_quantiles=np.quantile(q, [0, .01, .25, .5, .75, .99, 1]).tolist(),
@@ -146,7 +161,7 @@ def main():
             pair_moments=moments(b), bootstrap_95=bootstrap(b),
             mtau_shift_survival={str(shift): moments(alpha(q[good], MTAU+shift).prod(axis=1))['signed_survival'] for shift in (-.00009, .00009)})
         np.savez_compressed(args.output/f'{sample}_validation.npz', q=q, raw_q=raw,
-                            event_numbers=eid, valid_pair=good)
+                            event_numbers=eid, row_ids=np.asarray(row_ids), valid_pair=good)
     plt.rcParams.update({'font.size': 11, 'axes.spines.top': False, 'axes.spines.right': False})
     colors = {'H': '#0072B2', 'Z': '#D55E00'}
     styles = {'H': '-', 'Z': '--'}
