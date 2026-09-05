@@ -1,0 +1,167 @@
+{
+  "metadata_sha256": "a4ad5fd9527e994f7f37ac94ae604d3f067e75841d3363c30a5acf2e528c4428",
+  "stats_sha256": "84bfb51d835a1fc89bbf964c01107c553e5b50ef48cf51928870d300f4701d9d",
+  "script_sha256": "122eab4643017e84fe343f2a99aaf4bc87d4e6cc84351b375ea4746e7385aa15",
+  "input_files": [
+    {
+      "path": "/home/rbaba/tauspin-3p-bg-diagnostic-20260903/beta_gamma_datasets-v2/stage_E/validation/H_0000.pt",
+      "sha256": "a6d9f0a8d5d7a4e4be8e5e87dfaee92b5338234016349139f6801f5b04a5160d"
+    },
+    {
+      "path": "/home/rbaba/tauspin-3p-diagnostic-20260903/dataset/validation/H_0000.pt",
+      "sha256": "46d0a30d93d95b731e7d312254528985b1a987fa06f41d68894ee530567b6599"
+    },
+    {
+      "path": "/home/rbaba/tauspin-3p-bg-diagnostic-20260903/beta_gamma_datasets-v2/stage_E/validation/Z_0000.pt",
+      "sha256": "055c3d889f1ceb7f1783f4004dc2e7a7290e17566eb6262a0994eaa22e11a3f0"
+    },
+    {
+      "path": "/home/rbaba/tauspin-3p-diagnostic-20260903/dataset/validation/Z_0000.pt",
+      "sha256": "189ea5caea660dc2a146a0da27bc8b1f9757a7b03e09394bcf47ffca9de2844d"
+    }
+  ],
+  "test_loaded": false,
+  "tau_mass_gev": 1.77693,
+  "pion_mass_gev": 0.1396,
+  "zero_gev": 1.2564792526938118,
+  "weighting": "unit event weight, H and Z separately",
+  "bootstrap_caveat": "iid stored-row resampling approximation; generator-event independence and interval coverage unvalidated",
+  "numpy": "2.0.2",
+  "torch": "2.8.0+cu128",
+  "H": {
+    "events": 1045,
+    "valid_pair_events": 1038,
+    "repeated_event_number_rows": 228,
+    "unique_reconstructed_content": 1045,
+    "source_payload_exact_match": true,
+    "below_domain_legs": 0,
+    "above_domain_legs": 7,
+    "invalid_pair_events": 7,
+    "q_range": [
+      0.6295188145554834,
+      4.118710989372441
+    ],
+    "q_quantiles": [
+      0.6295188145554834,
+      0.828126100130581,
+      1.066593053506531,
+      1.1593787697851992,
+      1.2688225934467665,
+      1.5781946455579159,
+      4.118710989372441
+    ],
+    "max_mass_residual_gev": 6.735987234662844e-08,
+    "negative_alpha_fraction_valid_legs": 0.2726836293807009,
+    "pair_moments": {
+      "mean_b": 0.00629111500890307,
+      "mean_abs_b": 0.014725043541864526,
+      "rms_b": 0.02254625894472608,
+      "positive_contribution": 0.010508079275383797,
+      "negative_contribution": -0.004216964266480727,
+      "signed_survival": 0.4272391447276136,
+      "negative_fraction": 0.39980732177263967
+    },
+    "bootstrap_95": {
+      "mean_b": [
+        0.005018612581757751,
+        0.007596377397648324
+      ],
+      "mean_abs_b": [
+        0.013667976246849336,
+        0.01576045175267092
+      ],
+      "rms_b": [
+        0.02084917122940442,
+        0.024199159412356338
+      ],
+      "positive_contribution": [
+        0.009462065248055046,
+        0.011551522870292765
+      ],
+      "negative_contribution": [
+        -0.004828909933078219,
+        -0.003652597968117018
+      ],
+      "signed_survival": [
+        0.3498069392777798,
+        0.5038419614737567
+      ],
+      "negative_fraction": [
+        0.36801541425818884,
+        0.42870905587668595
+      ]
+    },
+    "mtau_shift_survival": {
+      "-9e-05": 0.42684704476122576,
+      "9e-05": 0.4276312542009426
+    }
+  },
+  "Z": {
+    "events": 1041,
+    "valid_pair_events": 1039,
+    "repeated_event_number_rows": 236,
+    "unique_reconstructed_content": 1041,
+    "source_payload_exact_match": true,
+    "below_domain_legs": 0,
+    "above_domain_legs": 2,
+    "invalid_pair_events": 2,
+    "q_range": [
+      0.6746513698097055,
+      1.901115192638624
+    ],
+    "q_quantiles": [
+      0.6746513698097055,
+      0.8502911674317365,
+      1.0652331292977824,
+      1.1626804291398103,
+      1.2589011623426574,
+      1.5759031562490156,
+      1.901115192638624
+    ],
+    "max_mass_residual_gev": 3.1067105776827475e-08,
+    "negative_alpha_fraction_valid_legs": 0.2552884615384615,
+    "pair_moments": {
+      "mean_b": 0.005960573084738241,
+      "mean_abs_b": 0.013686398478935847,
+      "rms_b": 0.021181395522094672,
+      "positive_contribution": 0.009823485781837045,
+      "negative_contribution": -0.0038629126970988028,
+      "signed_survival": 0.43551070750365084,
+      "negative_fraction": 0.4032723772858518
+    },
+    "bootstrap_95": {
+      "mean_b": [
+        0.004727878295067563,
+        0.007178950136238151
+      ],
+      "mean_abs_b": [
+        0.012744748192670172,
+        0.01468212198597868
+      ],
+      "rms_b": [
+        0.019403369455222544,
+        0.023111210057076417
+      ],
+      "positive_contribution": [
+        0.008877571065579794,
+        0.010851082953902944
+      ],
+      "negative_contribution": [
+        -0.004406222473299246,
+        -0.003339100788522357
+      ],
+      "signed_survival": [
+        0.3567303231696419,
+        0.5093596929762195
+      ],
+      "negative_fraction": [
+        0.37439846005774785,
+        0.4331087584215592
+      ]
+    },
+    "mtau_shift_survival": {
+      "-9e-05": 0.4351245132187347,
+      "9e-05": 0.4358968828715443
+    }
+  }
+}
