@@ -110,6 +110,7 @@ def main():
              'input_files': [], 'test_loaded': False, 'tau_mass_gev': MTAU,
              'pion_mass_gev': MPI, 'zero_gev': MTAU/np.sqrt(2),
              'weighting': 'unit event weight, H and Z separately',
+             'bootstrap_caveat': 'iid stored-row resampling approximation; generator-event independence and interval coverage unvalidated',
              'numpy': np.__version__, 'torch': torch.__version__}
     for sample in ('H', 'Z'):
         qs, raws, ids, row_ids, fingerprints = [], [], [], [], []
@@ -175,14 +176,14 @@ def main():
                    histtype='step', color=colors[sample], linestyle=styles[sample], label=f'{sample}: {len(q)} events / {q.size} legs')
     ax[0].axvline(zero, color='black', ls=':', label=r'$m_\tau/\sqrt{2}$')
     ax[0].axvline(MTAU, color='grey', ls='-.', label=r'$m_\tau$')
-    ax[0].set(xlabel=r'Reconstructed $Q_{3\pi}$ [GeV]', ylabel='Fraction of all selected legs / GeV', xlim=(0, edges[-1]))
+    ax[0].set(xlabel=r'Reconstructed $Q_{3\pi}$ [GeV]', ylabel='Fraction of all selected legs / GeV (log)', xlim=(0, edges[-1]), yscale='log', ylim=(.004, 8))
     ax[0].legend(fontsize=9)
     grid = np.linspace(3*MPI, MTAU, 500)
     ax[1].plot(grid, alpha(grid), color='black')
     ax[1].axhline(0, color='grey', ls=':')
     ax[1].axvline(zero, color='grey', ls=':')
     ax[1].set(xlabel=r'$Q$ [GeV]', ylabel=r'Spin-1 reference $\alpha(Q)$', ylim=(-.4, 1))
-    ax[1].text(.05, .94, r'$\alpha=(m_\tau^2-2Q^2)/(m_\tau^2+2Q^2)$'+'\n'+f'Zero: {zero:.5f} GeV', transform=ax[1].transAxes, va='top')
+    ax[1].text(.05, .98, r'$\alpha=(m_\tau^2-2Q^2)/(m_\tau^2+2Q^2)$'+'\n'+f'Zero: {zero:.5f} GeV', transform=ax[1].transAxes, va='top')
     fig.suptitle('Reco 3p0n × 3p0n validation | unit weights | direction-only reference')
     fig.tight_layout(); fig.savefig(args.output/'mass_reference.png', dpi=170); fig.savefig(args.output/'mass_reference.pdf'); plt.close(fig)
     fig, axes = plt.subplots(1, 2, figsize=(10.5, 4.8))
@@ -197,17 +198,18 @@ def main():
     fig.suptitle('Mass pairing | dashed lines: coefficient sign changes | 25 × 25 bins')
     fig.tight_layout(); fig.savefig(args.output/'joint_mass.png', dpi=170); plt.close(fig)
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.5))
-    bedges = np.linspace(-1, 1, 81)
+    bmax = np.ceil(max(np.abs(d[3]).max() for d in data.values())/.005)*.005
+    bedges = np.linspace(-bmax, bmax, int(round(2*bmax/.005))+1)
     for sample, (q, g, a, b, r) in data.items():
-        axes[0].hist(b, bins=bedges, weights=np.ones(len(b))/len(b)/.025, histtype='step', color=colors[sample], linestyle=styles[sample], label=sample)
+        axes[0].hist(b, bins=bedges, weights=np.ones(len(b))/len(b)/.005, histtype='step', color=colors[sample], linestyle=styles[sample], label=sample)
         order = np.argsort(b)
         axes[1].plot(b[order], np.cumsum(b[order])/len(b), color=colors[sample], ls=styles[sample], label=sample)
     for ax in axes:
         ax.axvline(0, color='grey', ls=':'); ax.legend()
         ax.set_xlabel(r'$b=\alpha(Q^-)\alpha(Q^+)$ (reference)')
-    axes[0].set(ylabel='Fraction of valid pairs / unit b', xlim=(-1, 1))
+    axes[0].set(ylabel='Fraction of valid pairs / unit b', xlim=(-bmax, bmax))
     axes[1].axhline(0, color='grey', ls=':')
-    axes[1].set(ylabel=r'Cumulative signed contribution $\sum_{b_i\leq b} b_i/N$', xlim=(-1, 1))
+    axes[1].set(ylabel=r'Cumulative signed contribution $\sum_{b_i\leq b} b_i/N$', xlim=(-bmax, bmax))
     fig.suptitle('Signed arithmetic cancellation | both reco masses in reference domain')
     fig.tight_layout(); fig.savefig(args.output/'pair_cancellation.png', dpi=170); fig.savefig(args.output/'pair_cancellation.pdf'); plt.close(fig)
     (args.output/'summary.json').write_text(json.dumps(audit, indent=2)+'\n')
