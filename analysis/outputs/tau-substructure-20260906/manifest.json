@@ -1,0 +1,24 @@
+{
+  "bootstrap_replicates": 2000,
+  "estimand": "AUC of the frozen score inside quantile strata of a cross-fitted index; the drop is information shared with the block, a lower bound and not a causal attribution",
+  "frozen_closure_auc": {
+    "event_only": 0.5616469239203451,
+    "full_reco": 0.6150930579720123,
+    "tau_object_only": 0.6008338304557016
+  },
+  "inputs": {
+    "analysis-surface-row-map.npz": "b91fcfbe6a0a777d6cdc96377408127bb83ade19bb9d6c0fc2743ed3839ef4f6",
+    "nonspin-features.npz": "f2c86f53187f2b1063a0414cf421bbf9096f247f4b1a369547a42f5d27045d84",
+    "substructure-features.npz": "479b767c83fca1a87b062bda869ac6c7edea9c4aaa3e757a86d82d573fce0cc4",
+    "terminal-ensembles.npz": "bcb87013ee097a3d1f7ca9709c99ecda654c1817f6c569274b8baaa580e1a63d"
+  },
+  "permutation_replicates": 1000,
+  "ridge": 1.0,
+  "run": "tauspin-tau-substructure-20260906",
+  "strata_bins": 10,
+  "test_partition_read": false,
+  "winsor": [
+    0.001,
+    0.999
+  ]
+}
