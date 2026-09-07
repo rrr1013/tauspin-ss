@@ -592,7 +592,7 @@ def figure_decomposition(result: dict, outputs: Path) -> None:
         ax.set_title(population_title(result, population), fontsize=10)
         ax.grid(axis="y", alpha=0.25)
     axes[0].set_ylabel("parent-overlap weighted H/Z AUC of the residual readout")
-    axes[1].legend(fontsize=8, loc="center left", framealpha=0.95)
+    axes[0].legend(fontsize=8, loc="center right", framealpha=0.95)
     fig.suptitle(r"Holding truth $h$ fixed removes essentially all of $\delta h$'s H/Z power; "
                  "holding the non-spin pair fixed removes none of it\n" + CAVEAT, fontsize=10)
     save(fig, outputs, "residual-decomposition")

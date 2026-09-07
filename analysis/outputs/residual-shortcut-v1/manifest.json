@@ -1,0 +1,24 @@
+{
+  "generated_at_unix": 1788804377.121569,
+  "inputs": {
+    "scores": {
+      "path": "/Users/ryunosuke/Projects/tauspin-residual-data/residual-shortcut-scores.npz",
+      "sha256": "3c70ba91ef86d41625fdeb3c231074b3efa213b1335e243e4525141d8dff4c60"
+    },
+    "features": {
+      "path": "/Users/ryunosuke/Projects/tauspin-nonspin-data/nonspin-features.npz",
+      "sha256": "f2c86f53187f2b1063a0414cf421bbf9096f247f4b1a369547a42f5d27045d84"
+    }
+  },
+  "figures": [
+    "residual-arm-conditional.png",
+    "residual-auc-overview.png",
+    "residual-components.png",
+    "residual-decomposition.png",
+    "residual-nonspin-profiles.png",
+    "residual-summary.png"
+  ],
+  "bootstrap_replicates": 2000,
+  "test_loaded": false,
+  "population": "common hybrid-valid validation events of the 2026-09-07 comparison"
+}
