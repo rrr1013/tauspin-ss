@@ -1,0 +1,225 @@
+{
+  "n_events": 11065,
+  "n_H": 5679,
+  "n_Z": 5386,
+  "spin_correlation": {
+    "all": {
+      "n": 11065,
+      "H": {
+        "diag_naive_9moment": {
+          "n": 1.0251,
+          "r": 1.0687,
+          "k": -0.6065
+        },
+        "diag_acceptance_corrected": {
+          "n": 0.9245,
+          "r": 0.955,
+          "k": -0.7672
+        },
+        "max_abs_offdiag_corrected": 0.0394
+      },
+      "Z": {
+        "diag_naive_9moment": {
+          "n": -0.0551,
+          "r": 0.0301,
+          "k": 0.7261
+        },
+        "diag_acceptance_corrected": {
+          "n": -0.0488,
+          "r": 0.0267,
+          "k": 0.9486
+        },
+        "max_abs_offdiag_corrected": 0.047
+      },
+      "auc": {
+        "nn_plus_rr_minus_kk": 0.6908,
+        "nn_plus_rr": 0.6359,
+        "kk": 0.3638
+      }
+    },
+    "pi_pi": {
+      "n": 3260,
+      "H": {
+        "diag_naive_9moment": {
+          "n": 1.2329,
+          "r": 1.3582,
+          "k": -0.5318
+        },
+        "diag_acceptance_corrected": {
+          "n": 1.055,
+          "r": 1.1247,
+          "k": -0.7911
+        },
+        "max_abs_offdiag_corrected": 0.1136
+      },
+      "Z": {
+        "diag_naive_9moment": {
+          "n": 0.0568,
+          "r": -0.0457,
+          "k": 0.7468
+        },
+        "diag_acceptance_corrected": {
+          "n": 0.0472,
+          "r": -0.0398,
+          "k": 1.0809
+        },
+        "max_abs_offdiag_corrected": 0.0844
+      },
+      "auc": {
+        "nn_plus_rr_minus_kk": 0.7059,
+        "nn_plus_rr": 0.66,
+        "kk": 0.3633
+      }
+    },
+    "3pi_3pi": {
+      "n": 2293,
+      "H": {
+        "diag_naive_9moment": {
+          "n": 0.7738,
+          "r": 0.9437,
+          "k": -0.6059
+        },
+        "diag_acceptance_corrected": {
+          "n": 0.7387,
+          "r": 0.9136,
+          "k": -0.6572
+        },
+        "max_abs_offdiag_corrected": 0.0801
+      },
+      "Z": {
+        "diag_naive_9moment": {
+          "n": -0.0861,
+          "r": 0.0048,
+          "k": 0.8673
+        },
+        "diag_acceptance_corrected": {
+          "n": -0.089,
+          "r": 0.0046,
+          "k": 0.8793
+        },
+        "max_abs_offdiag_corrected": 0.1661
+      },
+      "auc": {
+        "nn_plus_rr_minus_kk": 0.6822,
+        "nn_plus_rr": 0.6195,
+        "kk": 0.3611
+      }
+    },
+    "pi_3pi": {
+      "n": 5512,
+      "H": {
+        "diag_naive_9moment": {
+          "n": 1.0086,
+          "r": 0.9561,
+          "k": -0.6487
+        },
+        "diag_acceptance_corrected": {
+          "n": 0.9172,
+          "r": 0.8653,
+          "k": -0.8014
+        },
+        "max_abs_offdiag_corrected": 0.1214
+      },
+      "Z": {
+        "diag_naive_9moment": {
+          "n": -0.1115,
+          "r": 0.0887,
+          "k": 0.6515
+        },
+        "diag_acceptance_corrected": {
+          "n": -0.0966,
+          "r": 0.0768,
+          "k": 0.9005
+        },
+        "max_abs_offdiag_corrected": 0.1086
+      },
+      "auc": {
+        "nn_plus_rr_minus_kk": 0.685,
+        "nn_plus_rr": 0.6279,
+        "kk": 0.3651
+      }
+    }
+  },
+  "closure": {
+    "truth_h": 0.6908,
+    "full_reco_measured": {
+      "mean": 0.5858,
+      "std": 0.005
+    },
+    "longitudinal_only": {
+      "mean": 0.5766,
+      "std": 0.0052
+    },
+    "transverse_only": {
+      "mean": 0.6202,
+      "std": 0.0031
+    },
+    "uniform_0p65": {
+      "mean": 0.5832,
+      "std": 0.0064
+    },
+    "reference_note": "measured full-reco point-h fixed-readout AUC is 0.617-0.619 on the larger rho-inclusive cohort of the 2026-09-17 ladder run"
+  },
+  "transverse_sensitivity": {
+    "rho_k_held_at": 0.759,
+    "rows": [
+      {
+        "rho_T": 0.4,
+        "mean_T_H": 0.04666,
+        "mean_T_Z": 0.0085,
+        "significance_per_event": 0.07121,
+        "ratio_to_current": 0.404,
+        "equivalent_luminosity": 0.16
+      },
+      {
+        "rho_T": 0.5,
+        "mean_T_H": 0.06109,
+        "mean_T_Z": -0.00711,
+        "significance_per_event": 0.11762,
+        "ratio_to_current": 0.667,
+        "equivalent_luminosity": 0.44
+      },
+      {
+        "rho_T": 0.6,
+        "mean_T_H": 0.08285,
+        "mean_T_Z": 0.00492,
+        "significance_per_event": 0.17645,
+        "ratio_to_current": 1.0,
+        "equivalent_luminosity": 1.0
+      },
+      {
+        "rho_T": 0.7,
+        "mean_T_H": 0.1193,
+        "mean_T_Z": -0.00621,
+        "significance_per_event": 0.23463,
+        "ratio_to_current": 1.33,
+        "equivalent_luminosity": 1.77
+      },
+      {
+        "rho_T": 0.8,
+        "mean_T_H": 0.15314,
+        "mean_T_Z": 0.00243,
+        "significance_per_event": 0.30592,
+        "ratio_to_current": 1.734,
+        "equivalent_luminosity": 3.01
+      },
+      {
+        "rho_T": 0.9,
+        "mean_T_H": 0.19311,
+        "mean_T_Z": -0.00449,
+        "significance_per_event": 0.39218,
+        "ratio_to_current": 2.223,
+        "equivalent_luminosity": 4.94
+      },
+      {
+        "rho_T": 1.0,
+        "mean_T_H": 0.23264,
+        "mean_T_Z": -0.00277,
+        "significance_per_event": 0.48458,
+        "ratio_to_current": 2.746,
+        "equivalent_luminosity": 7.54
+      }
+    ],
+    "note": "the observable is a product h^-_i h^+_i, so the H-Z difference is diluted by rho_T^2 while the spread is unchanged; the equivalent luminosity column is (significance ratio)^2"
+  }
+}
