@@ -308,8 +308,9 @@ def figure_met_curve(report, output: Path) -> None:
                label='azimuth-only marginalised (0.621)')
     ax.set_xlabel(r'MET resolution $\sigma_{\rm MET}$ per component  [GeV]')
     ax.set_ylabel('H/Z AUC (unweighted, common cohort)')
-    ax.set_title(f"common cohort {report['met_resolution']['common_cohort']:,} events")
-    ax.legend(loc='best')
+    ax.set_title(f"common cohort {report['met_resolution']['common_cohort']:,} events\n"
+                 '(events with an exact solution at every sigma)')
+    ax.legend(loc='lower left', fontsize=7.5)
     ax = axes[1]
     ax.plot(sigma, [entry['eligible_fraction'] for entry in curve], '-o', color='#1b6ca8',
             label='events with a solution')
@@ -319,8 +320,8 @@ def figure_met_curve(report, output: Path) -> None:
     twin = ax.twinx()
     twin.plot(sigma, [entry['region_area_median'] for entry in curve], '--s', color='#c1440e',
               label='median region area')
-    twin.set_yscale('log')
     twin.set_ylabel(r'median solution-set area  [GeV$^2$]', color='#c1440e')
+    twin.set_ylim(0.0, 12.0)
     twin.grid(False)
     ax.set_title('smeared MET both shrinks the cohort and inflates the region')
     handles = [Line2D([], [], color='#1b6ca8', marker='o', label='solution exists'),
