@@ -62,7 +62,33 @@ def main() -> None:
                 "corr_h_r": correlations[1],
                 "corr_h_k": correlations[2],
             })
-    write_csv(args.output / "h_metrics.csv", h_rows)
+    write_csv(args.output / "h_metrics_technical_closure.csv", h_rows)
+
+    canonical_rows: list[dict[str, Any]] = []
+    canonical = representation["h_metrics_canonical_coordinate_diagnostic"]
+    for cohort in PRIMARY_COHORTS:
+        if cohort not in canonical:
+            continue
+        methods = dict(canonical[cohort])
+        methods["point_h"] = readout["h_references"]["point_h_vs_canonical"][cohort]
+        methods["exact_h"] = readout["h_references"]["exact_h_vs_canonical"][cohort]
+        for method, values in methods.items():
+            components = values.get("component_mse", [None, None, None])
+            correlations = values.get("component_correlation", [None, None, None])
+            canonical_rows.append({
+                "cohort": cohort,
+                "method": method,
+                "events": values.get("events"),
+                "mse": values.get("mse"),
+                "mse_h_n": components[0],
+                "mse_h_r": components[1],
+                "mse_h_k": components[2],
+                "cosine": values.get("cosine"),
+                "corr_h_n": correlations[0],
+                "corr_h_r": correlations[1],
+                "corr_h_k": correlations[2],
+            })
+    write_csv(args.output / "h_metrics_canonical_diagnostic.csv", canonical_rows)
 
     auc_rows: list[dict[str, Any]] = []
     for cohort in PRIMARY_COHORTS:
