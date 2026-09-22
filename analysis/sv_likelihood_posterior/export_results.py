@@ -132,6 +132,36 @@ def main() -> None:
             })
     write_csv(args.output / "posterior_quality.csv", quality_rows)
 
+    oracle_gap_recovery: dict[str, dict[str, float | None]] = {}
+    for cohort in PRIMARY_COHORTS:
+        if cohort not in h_metrics or cohort not in readout["auc_metrics"]:
+            continue
+        h_values = h_metrics[cohort]
+        base_mse = h_values["uniform"]["mse"]
+        sv_mse = h_values["sv"]["mse"]
+        direction_mse = h_values["oracle_direction"]["mse"]
+        auc_values = readout["auc_metrics"][cohort]
+        base_auc = auc_values["baseline_flow_mean"]["weighted_auc"]
+        sv_auc = auc_values["sv_weighted_mean"]["weighted_auc"]
+        direction_auc = auc_values["oracle_direction_mean"]["weighted_auc"]
+        truth_nu_auc = auc_values["truth_nu_functional"]["weighted_auc"]
+
+        def fraction(numerator: float, denominator: float) -> float | None:
+            return numerator / denominator if denominator != 0.0 else None
+
+        oracle_gap_recovery[cohort] = {
+            "h_mse_direction_oracle_gap_fraction": fraction(
+                base_mse - sv_mse, base_mse - direction_mse
+            ),
+            "h_mse_truth_nu_oracle_gap_fraction": fraction(base_mse - sv_mse, base_mse),
+            "auc_direction_oracle_gap_fraction": fraction(
+                sv_auc - base_auc, direction_auc - base_auc
+            ),
+            "auc_truth_nu_functional_gap_fraction": fraction(
+                sv_auc - base_auc, truth_nu_auc - base_auc
+            ),
+        }
+
     compact = {
         "contract": {
             "representation": representation["contract"],
@@ -150,7 +180,7 @@ def main() -> None:
         },
         "paired_bootstrap_h": representation["paired_bootstrap_h"],
         "paired_bootstrap_auc": readout["paired_bootstrap_auc"],
-        "oracle_gap_recovery": readout["oracle_gap_recovery"],
+        "oracle_gap_recovery": oracle_gap_recovery,
         "response_audit": representation["response_audit"],
     }
     (args.output / "summary.json").write_text(
