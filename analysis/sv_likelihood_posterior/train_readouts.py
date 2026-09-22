@@ -72,6 +72,13 @@ def setup_model(model: nn.Module, device: torch.device, seed: int) -> tuple[nn.M
     np.random.seed(seed)
     if device.type == "cuda":
         torch.cuda.manual_seed_all(seed)
+    # The model object is constructed by the caller, so reset every learnable
+    # module after seeding.  This makes paired baseline/SV readouts start from
+    # exactly the same initialization rather than only sharing data-order RNG.
+    for module in model.modules():
+        reset = getattr(module, "reset_parameters", None)
+        if callable(reset):
+            reset()
     model = model.to(device)
     optimizer = torch.optim.AdamW(
         model.parameters(), lr=LEARNING_RATE, weight_decay=WEIGHT_DECAY,
@@ -477,6 +484,7 @@ def main() -> None:
     val_labels = val_source["labels"][val_rows]
 
     arm_specs = {
+        "baseline_flow_mean": ("mean_uniform.npy", 6),
         "sv_weighted_mean": ("mean_sv.npy", 6),
         "sv_raw_mean": ("mean_sv_raw.npy", 6),
         "sv_weighted_moments": ("moments_sv.npy", 15),
@@ -502,7 +510,7 @@ def main() -> None:
         metadata[name] = {"parameters": sum(p.numel() for p in model.parameters()),
                           "train_events": int(len(train_rows)), "validation_events": int(len(val_rows))}
         print(json.dumps({"completed_readout": name, "index": index + 1,
-                          "total": len(arm_specs) + 2}), flush=True)
+                          "total": len(arm_specs) + 3}), flush=True)
 
     model, strict_score, history = fit_fixed(
         train_post["h_truth_reco"][train_rows].reshape(len(train_rows), 6), train_labels,
@@ -518,12 +526,35 @@ def main() -> None:
                                         "train_events": int(len(train_rows)),
                                         "validation_events": int(len(val_rows))}
     print(json.dumps({"completed_readout": "truth_nu_functional",
-                      "index": len(arm_specs) + 1, "total": len(arm_specs) + 2}), flush=True)
+                      "index": len(arm_specs) + 1, "total": len(arm_specs) + 3}), flush=True)
 
     train_h = np.load(args.train_generated / "train_h_samples.npy", mmap_mode="r")[train_rows]
     train_w = np.load(args.train_representations / "weights_sv.npy", mmap_mode="r")[train_rows]
     val_h = val_post["h_samples"][val_rows]
     val_w = np.load(args.validation_representations / "weights_sv.npy", mmap_mode="r")[val_rows]
+    train_uniform_w = np.full(train_w.shape, 1.0 / train_w.shape[1], dtype=np.float32)
+    val_uniform_w = np.full(val_w.shape, 1.0 / val_w.shape[1], dtype=np.float32)
+    model, strict_score, history, permutation_delta = fit_weighted_deepsets(
+        train_h, train_uniform_w, train_labels,
+        val_h, val_uniform_w, val_labels, device, SEED
+    )
+    if permutation_delta > 1.0e-6:
+        raise RuntimeError(f"Baseline DeepSets permutation failure: {permutation_delta}")
+    scores["baseline_full_posterior"] = full_scores_from_strict(
+        strict_score, val_rows, len(val_source["labels"])
+    )
+    histories["baseline_full_posterior"] = history
+    save_model(args.output / "models" / "baseline_full_posterior.pt", model,
+               "baseline_full_posterior")
+    metadata["baseline_full_posterior"] = {
+        "parameters": sum(p.numel() for p in model.parameters()),
+        "train_events": int(len(train_rows)), "validation_events": int(len(val_rows)),
+        "train_draws": int(train_h.shape[1]), "validation_draws": int(val_h.shape[1]),
+        "permutation_max_abs_delta": permutation_delta,
+    }
+    print(json.dumps({"completed_readout": "baseline_full_posterior",
+                      "index": len(arm_specs) + 2, "total": len(arm_specs) + 3}), flush=True)
+
     model, strict_score, history, permutation_delta = fit_weighted_deepsets(
         train_h, train_w, train_labels, val_h, val_w, val_labels, device, SEED
     )
@@ -542,12 +573,12 @@ def main() -> None:
         "permutation_max_abs_delta": permutation_delta,
     }
     print(json.dumps({"completed_readout": "sv_weighted_full_posterior",
-                      "index": len(arm_specs) + 2, "total": len(arm_specs) + 2}), flush=True)
+                      "index": len(arm_specs) + 3, "total": len(arm_specs) + 3}), flush=True)
 
     existing_files = {
         "point_h": "full_reco_point_h_validation_scores.npz",
-        "baseline_flow_mean": "full_reco_flow_mean_h_validation_scores.npz",
-        "baseline_full_posterior": "full_reco_full_h_posterior_validation_scores.npz",
+        "historical_baseline_flow_mean": "full_reco_flow_mean_h_validation_scores.npz",
+        "historical_baseline_full_posterior": "full_reco_full_h_posterior_validation_scores.npz",
         "exact_h": "exact_truth_h_validation_scores.npz",
     }
     for name, filename in existing_files.items():
@@ -646,6 +677,7 @@ def main() -> None:
                 "learning_rate": LEARNING_RATE, "weight_decay": WEIGHT_DECAY,
                 "scheduler": "none", "selection": "fixed endpoint; validation not used for selection",
                 "seed": SEED,
+                "initialization": "all reset_parameters calls occur after the seed is set; paired baseline/SV architectures share initialization and minibatch order",
             },
             "weighted_deepsets": "historical phi/rho capacity with normalized posterior-weight pooling",
             "test_loaded": False,
