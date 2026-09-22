@@ -1,0 +1,15 @@
+{
+  "arm": "baseline_current",
+  "selected_epoch": 49,
+  "selection_window": [
+    48,
+    49,
+    50
+  ],
+  "fixed_endpoint_epoch": 50,
+  "status": "complete",
+  "hostname": "lxgpu02.icepp.jp",
+  "elapsed_seconds": 2778.864860534668,
+  "validation_h_mse": 0.1925522378988791,
+  "test_loaded": false
+}

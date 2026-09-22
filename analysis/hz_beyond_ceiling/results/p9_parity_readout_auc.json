@@ -1,0 +1,104 @@
+{
+  "events": 59390,
+  "weighted_auc": {
+    "readout:baseline_current": 0.6180111507396986,
+    "readout:ip_legacy": 0.6185222645550325,
+    "readout:ip_pv": 0.6250222787049178,
+    "readout:ip_shuffle": 0.618214632577413,
+    "readout:oracle": 0.6863911580574434,
+    "ceiling:exact_h_LR": 0.7186523418534277
+  },
+  "by_pair": {
+    "1p0n x 1p0n": {
+      "events": 3266,
+      "readout:baseline_current": 0.6484953354647172,
+      "readout:ip_legacy": 0.647695063844062,
+      "readout:ip_pv": 0.6557143469466614,
+      "readout:ip_shuffle": 0.6481054976674159,
+      "readout:oracle": 0.7123838246632863,
+      "ceiling:exact_h_LR": 0.716092431760928
+    },
+    "1p0n x rho": {
+      "events": 15946,
+      "readout:baseline_current": 0.6295914996230548,
+      "readout:ip_legacy": 0.6292984794776187,
+      "readout:ip_pv": 0.6367808450746646,
+      "readout:ip_shuffle": 0.6298006634756715,
+      "readout:oracle": 0.694438106941144,
+      "ceiling:exact_h_LR": 0.7234374061218221
+    },
+    "rho x rho": {
+      "events": 18730,
+      "readout:baseline_current": 0.6177720931827657,
+      "readout:ip_legacy": 0.6180109409013262,
+      "readout:ip_pv": 0.6208061822619791,
+      "readout:ip_shuffle": 0.6168990374753802,
+      "readout:oracle": 0.6788729278385809,
+      "ceiling:exact_h_LR": 0.7354118241071607
+    },
+    "1p0n x 3p0n": {
+      "events": 5613,
+      "readout:baseline_current": 0.6045454359664487,
+      "readout:ip_legacy": 0.6051394716044429,
+      "readout:ip_pv": 0.6216829055440527,
+      "readout:ip_shuffle": 0.6051099173377694,
+      "readout:oracle": 0.6850871288869687,
+      "ceiling:exact_h_LR": 0.6950476393271008
+    },
+    "rho x 3p0n": {
+      "events": 13462,
+      "readout:baseline_current": 0.6067135109547934,
+      "readout:ip_legacy": 0.6094043372439661,
+      "readout:ip_pv": 0.6138495503418757,
+      "readout:ip_shuffle": 0.6084151319168927,
+      "readout:oracle": 0.6803108339408936,
+      "ceiling:exact_h_LR": 0.706159461483921
+    },
+    "3p0n x 3p0n": {
+      "events": 2373,
+      "readout:baseline_current": 0.5836162460269941,
+      "readout:ip_legacy": 0.5790505204857535,
+      "readout:ip_pv": 0.5896665028479507,
+      "readout:ip_shuffle": 0.5830965390640793,
+      "readout:oracle": 0.687875733851591,
+      "ceiling:exact_h_LR": 0.685395093960154
+    }
+  },
+  "paired_delta": {
+    "readout:ip_legacy": {
+      "delta": 0.0005111138153338635,
+      "ci95": [
+        -0.0002865546349255898,
+        0.0013317556292453318
+      ]
+    },
+    "readout:ip_pv": {
+      "delta": 0.007011127965219188,
+      "ci95": [
+        0.0047084869474462695,
+        0.009014047331714466
+      ]
+    },
+    "readout:ip_shuffle": {
+      "delta": 0.0002034818377144587,
+      "ci95": [
+        -0.0005281462712679597,
+        0.0009223077732496392
+      ]
+    },
+    "readout:oracle": {
+      "delta": 0.06838000731774485,
+      "ci95": [
+        0.06412985490464412,
+        0.07256948256579096
+      ]
+    },
+    "ceiling:exact_h_LR": {
+      "delta": 0.10064119111372916,
+      "ci95": [
+        0.09613968529444668,
+        0.10475978747605175
+      ]
+    }
+  }
+}
