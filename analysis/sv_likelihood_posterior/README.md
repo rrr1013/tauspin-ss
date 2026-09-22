@@ -35,6 +35,8 @@ Scripts:
   final baseline-to-SV-to-oracle figure.
 - `export_results.py` reduces the full reports to compact CSV/JSON tables for
   versioned review without copying the large posterior arrays into Git.
+- `sample_stability.py` checks whether the weighted h estimate is stable as the
+  saved validation posterior is increased from 32 to 256 draws.
 
 No test split is loaded.  Large arrays stay on the analysis host; curated
 machine-readable summaries and figures are copied back into `results/`.
