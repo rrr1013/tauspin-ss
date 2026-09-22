@@ -12,9 +12,12 @@ from core import h_event_values, jsonable
 from train_readouts import auc, auc_with_counts, prepare_auc
 
 
-def load_npz(path: Path) -> dict[str, np.ndarray]:
+def load_npz(
+    path: Path, names: tuple[str, ...] | None = None
+) -> dict[str, np.ndarray]:
     with np.load(path, allow_pickle=False) as data:
-        return {name: np.asarray(data[name]) for name in data.files}
+        selected = data.files if names is None else names
+        return {name: np.asarray(data[name]) for name in selected}
 
 
 def align_score(path: Path, ids: np.ndarray) -> np.ndarray:
@@ -147,8 +150,12 @@ def main() -> None:
     parser.add_argument("--draws", type=int, default=2000)
     args = parser.parse_args()
 
-    source = load_npz(args.validation_inputs)
-    posterior = load_npz(args.validation_posterior)
+    source = load_npz(
+        args.validation_inputs, ("global_indices", "labels", "weights")
+    )
+    posterior = load_npz(
+        args.validation_posterior, ("global_indices", "h_truth_reco")
+    )
     cohorts = load_npz(args.representations / "cohorts.npz")
     ids = source["global_indices"]
     if not np.array_equal(ids, posterior["global_indices"]):
