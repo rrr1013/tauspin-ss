@@ -13,8 +13,11 @@ The primary likelihood is the decay-mode-conditional vMF core plus uniform
 outlier mixture fitted in the prior sheet-identifiability run, tempered by the
 scalar posterior calibration fitted on a disjoint training partition.  The
 untempered mixture and the old global 7.90 mrad Gaussian are diagnostics, not
-model-selection candidates.  A matched-geometry shuffle is the event-specific
-null control.
+model-selection candidates.  Null controls include the original matched random
+direction shuffle, an offset-preserving shuffle that re-anchors a matched
+SV-minus-visible angular offset on the event's own visible axis, and a
+visible-axis pseudo-SV.  The latter two distinguish directional information
+from generic collinearity regularization.
 
 The analysis deliberately uses `reco_visible_tau_lab4 + sampled neutrino` for
 the candidate tau momentum.  The massless `reco_tau_lab4` projection is not
@@ -30,9 +33,16 @@ Scripts:
   with the same `metspace` implementation and sampling settings as WP-A.
 - `build_representations.py` computes likelihood weights, posterior-quality
   diagnostics, weighted h means/moments, raw-distribution plots, and h metrics.
-- `train_readouts.py` applies the prior fixed readout recipe to the new
-  representations and produces paired-bootstrap H/Z AUC comparisons and the
-  final baseline-to-SV-to-oracle figure.
+- `train_readouts.py` applies the prior fixed readout recipe to same-run
+  unweighted and weighted representations.  Every paired MLP/DeepSets arm is
+  reset after seeding and uses the same minibatch order before paired-bootstrap
+  H/Z AUC comparisons are formed.
+- `build_extra_controls.py` constructs the offset-preserving and visible-axis
+  controls, checks reconstructed-mode cohorts and exact-surface intersections,
+  audits frozen-posterior directional support, and evaluates the transferred
+  temperature on train only.
+- `train_extra_control_readouts.py` evaluates those controls with the same
+  deterministic readout protocol and includes a no-SV placebo cohort.
 - `export_results.py` reduces the full reports to compact CSV/JSON tables for
   versioned review without copying the large posterior arrays into Git.
 - `sample_stability.py` checks whether the weighted h estimate is stable as the
