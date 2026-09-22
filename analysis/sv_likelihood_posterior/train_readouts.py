@@ -341,6 +341,7 @@ def plot_spin(
         ("baseline_flow_mean", "baseline flow mean", "0.35"),
         ("sv_weighted_mean", "SV-weighted mean", "#4C78A8"),
         ("sv_weighted_full_posterior", "SV-weighted posterior", "#59A14F"),
+        ("point_h", "direct point h", "#F28E2B"),
         ("truth_nu_functional", "truth-nu functional", "#B279A2"),
         ("exact_h", "exact h", "#E45756"),
     )
@@ -358,7 +359,7 @@ def plot_spin(
         axes[0, column].legend(fontsize=7)
     for column, cohort in enumerate(("inclusive", "threeprong_x_threeprong")):
         mask = masks[cohort]
-        for name, label, color in methods[:4]:
+        for name, label, color in methods[:5]:
             selected = mask & np.isfinite(scores[name])
             axes[1, column].hist(scores[name][selected & (labels == 0)], bins=np.linspace(0, 1, 51),
                                  density=True, histtype="step", lw=1.5, color=color, ls="--")

@@ -6,6 +6,8 @@ from core import (
     gaussian_log_weight,
     mixture_log_likelihood,
     normalized_weights,
+    offset_preserving_shuffle,
+    opening_angle,
     sv_log_weight,
     weighted_representations,
 )
@@ -47,6 +49,24 @@ class CoreTests(unittest.TestCase):
         mean, moments = weighted_representations(h, weight)
         self.assertTrue(np.array_equal(mean[0], h[0, 1]))
         self.assertEqual(moments.shape, (1, 15))
+
+    def test_offset_shuffle_preserves_angle_to_visible_axis(self) -> None:
+        axis = np.asarray([
+            [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0]],
+            [[0.0, 0.0, 1.0], [1.0, 0.0, 0.0]],
+        ])
+        direction = np.asarray([
+            [[0.995, 0.1, 0.0], [0.0, 0.98, 0.2]],
+            [[0.1, 0.0, 0.995], [0.97, 0.0, 0.24]],
+        ])
+        direction /= np.linalg.norm(direction, axis=-1, keepdims=True)
+        source = np.asarray([[1, 1], [0, 0]])
+        available = np.ones((2, 2), dtype=bool)
+        shuffled = offset_preserving_shuffle(direction, axis, source, available)
+        original_angle = opening_angle(direction, axis)
+        shuffled_angle = opening_angle(shuffled, axis)
+        np.testing.assert_allclose(shuffled_angle[0], original_angle[1], atol=1.0e-12)
+        np.testing.assert_allclose(shuffled_angle[1], original_angle[0], atol=1.0e-12)
 
 
 if __name__ == "__main__":

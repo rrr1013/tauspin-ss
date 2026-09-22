@@ -79,6 +79,65 @@ def candidate_tau_direction(visible: np.ndarray, neutrino_xyz: np.ndarray) -> np
     return unit_vector(visible[:, None, :, :3] + neutrino_xyz)
 
 
+def direction_local_coordinates(
+    direction: np.ndarray, axis: np.ndarray
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Resolve a direction in a deterministic orthonormal frame around axis."""
+    direction = unit_vector(direction)
+    axis = unit_vector(axis)
+    reference = np.zeros_like(axis)
+    use_z = np.abs(axis[..., 2]) < 0.9
+    reference[..., 2] = use_z
+    reference[..., 0] = ~use_z
+    first = unit_vector(np.cross(reference, axis))
+    second = np.cross(axis, first)
+    coordinates = np.stack(
+        (
+            np.sum(direction * first, axis=-1),
+            np.sum(direction * second, axis=-1),
+            np.sum(direction * axis, axis=-1),
+        ),
+        axis=-1,
+    )
+    return coordinates, first, second
+
+
+def direction_from_local_coordinates(
+    coordinates: np.ndarray, axis: np.ndarray
+) -> np.ndarray:
+    """Map local angular coordinates back around a target axis."""
+    coordinates = np.asarray(coordinates, dtype=np.float64)
+    axis = unit_vector(axis)
+    _, first, second = direction_local_coordinates(axis, axis)
+    return unit_vector(
+        coordinates[..., 0, None] * first
+        + coordinates[..., 1, None] * second
+        + coordinates[..., 2, None] * axis
+    )
+
+
+def offset_preserving_shuffle(
+    direction: np.ndarray,
+    visible_axis: np.ndarray,
+    source_index: np.ndarray,
+    available: np.ndarray,
+) -> np.ndarray:
+    """Shuffle SV-minus-visible offsets, then anchor them on each event's axis."""
+    direction = np.asarray(direction, dtype=np.float64)
+    visible_axis = unit_vector(visible_axis)
+    source_index = np.asarray(source_index, dtype=np.int64)
+    available = np.asarray(available, dtype=bool)
+    if direction.shape != visible_axis.shape or direction.shape[:2] != source_index.shape:
+        raise ValueError("Offset-shuffle shape mismatch")
+    coordinates, _, _ = direction_local_coordinates(direction, visible_axis)
+    shuffled_coordinates = np.array(coordinates, copy=True)
+    for side in (0, 1):
+        rows = np.flatnonzero(available[:, side])
+        shuffled_coordinates[rows, side] = coordinates[source_index[rows, side], side]
+    result = direction_from_local_coordinates(shuffled_coordinates, visible_axis)
+    return np.where(available[..., None], result, direction)
+
+
 def sv_log_weight(
     tau_direction: np.ndarray,
     measurement: np.ndarray,
@@ -261,4 +320,3 @@ def jsonable(value: Any) -> Any:
     if isinstance(value, (list, tuple)):
         return [jsonable(item) for item in value]
     return value
-
