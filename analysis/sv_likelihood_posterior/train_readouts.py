@@ -371,7 +371,8 @@ def plot_summary(
     auc_metrics: dict[str, dict[str, dict[str, Any]]],
     bootstrap: dict[str, Any],
 ) -> None:
-    fig, axes = plt.subplots(2, 3, figsize=(14, 8), constrained_layout=True)
+    fig, axes = plt.subplots(2, 3, figsize=(14, 8))
+    fig.subplots_adjust(top=0.88, bottom=0.12, hspace=0.58, wspace=0.30)
     x = np.arange(3)
     labels = ("baseline flow", "SV weighted", "direction oracle")
     colors = ("0.4", "#4C78A8", "#B279A2")
@@ -396,16 +397,21 @@ def plot_summary(
             axes[row, column].plot(x, values, color="0.5", lw=1.5, zorder=1)
             axes[row, column].scatter(x, values, s=70, color=colors, zorder=2)
             axes[row, column].set_xticks(x, labels, rotation=18, ha="right")
+            axes[row, column].set_xlim(-0.18, 2.18)
             for position, value in zip(x, values):
                 axes[row, column].annotate(f"{value:.6f}", (position, value), xytext=(0, 7),
                                            textcoords="offset points", ha="center", fontsize=8)
             span = max(values) - min(values)
             margin = max(0.18 * span, 1.0e-4)
             axes[row, column].set_ylim(min(values) - margin, max(values) + margin)
-        axes[row, 0].set_ylabel("Overall" if row == 0 else "3p x 3p")
-        axes[row, 0].set_title("h MSE (technical closure target)")
-        axes[row, 1].set_title("h cosine (technical closure target)")
-        axes[row, 2].set_title("weighted H/Z AUC")
+        cohort_label = "Overall" if row == 0 else "3p x 3p"
+        axes[row, 0].set_ylabel(f"{cohort_label}: h MSE")
+        axes[row, 1].set_ylabel(f"{cohort_label}: h cosine")
+        axes[row, 2].set_ylabel(f"{cohort_label}: weighted H/Z AUC")
+        if row == 0:
+            axes[row, 0].set_title("h MSE (technical closure target)")
+            axes[row, 1].set_title("h cosine (technical closure target)")
+            axes[row, 2].set_title("fixed-readout H/Z discrimination")
         point_auc = auc_metrics[cohort]["point_h"]["weighted_auc"]
         exact_auc = auc_metrics[cohort]["exact_h"]["weighted_auc"]
         axes[row, 2].text(
