@@ -373,16 +373,24 @@ def plot_summary(
 ) -> None:
     fig, axes = plt.subplots(2, 3, figsize=(14, 8), constrained_layout=True)
     x = np.arange(3)
-    labels = ("baseline flow", "SV weighted", "truth-nu oracle")
+    labels = ("baseline flow", "SV weighted", "direction oracle")
     colors = ("0.4", "#4C78A8", "#B279A2")
     for row, cohort in enumerate(("inclusive", "threeprong_x_threeprong")):
         functional = h_report["h_metrics_reco_visible_truth_nu_functional"][cohort]
-        mse = [functional["uniform"]["mse"], functional["sv"]["mse"], 0.0]
-        cosine = [functional["uniform"]["cosine"], functional["sv"]["cosine"], 1.0]
+        mse = [
+            functional["uniform"]["mse"],
+            functional["sv"]["mse"],
+            functional["oracle_direction"]["mse"],
+        ]
+        cosine = [
+            functional["uniform"]["cosine"],
+            functional["sv"]["cosine"],
+            functional["oracle_direction"]["cosine"],
+        ]
         spin = [
             auc_metrics[cohort]["baseline_flow_mean"]["weighted_auc"],
             auc_metrics[cohort]["sv_weighted_mean"]["weighted_auc"],
-            auc_metrics[cohort]["truth_nu_functional"]["weighted_auc"],
+            auc_metrics[cohort]["oracle_direction_mean"]["weighted_auc"],
         ]
         for column, values in enumerate((mse, cosine, spin)):
             axes[row, column].plot(x, values, color="0.5", lw=1.5, zorder=1)
@@ -391,24 +399,31 @@ def plot_summary(
             for position, value in zip(x, values):
                 axes[row, column].annotate(f"{value:.6f}", (position, value), xytext=(0, 7),
                                            textcoords="offset points", ha="center", fontsize=8)
+            span = max(values) - min(values)
+            margin = max(0.18 * span, 1.0e-4)
+            axes[row, column].set_ylim(min(values) - margin, max(values) + margin)
         axes[row, 0].set_ylabel("Overall" if row == 0 else "3p x 3p")
         axes[row, 0].set_title("h MSE (technical closure target)")
         axes[row, 1].set_title("h cosine (technical closure target)")
         axes[row, 2].set_title("weighted H/Z AUC")
         point_auc = auc_metrics[cohort]["point_h"]["weighted_auc"]
         exact_auc = auc_metrics[cohort]["exact_h"]["weighted_auc"]
-        axes[row, 2].axhline(point_auc, color="#F28E2B", ls="--", lw=1.2,
-                             label=f"point h {point_auc:.4f}")
-        axes[row, 2].axhline(exact_auc, color="#E45756", ls=":", lw=1.5,
-                             label=f"exact h {exact_auc:.4f}")
-        axes[row, 2].legend(fontsize=8)
-        ci = bootstrap[cohort]["sv_mean_minus_baseline_mean"]
         axes[row, 2].text(
-            0.02, 0.04, f"paired delta AUC = {ci['difference']:+.6f}\n95% CI [{ci['ci_low']:+.6f}, {ci['ci_high']:+.6f}]",
-            transform=axes[row, 2].transAxes, fontsize=8, va="bottom",
+            0.02, 0.98,
+            f"fixed references (off scale)\npoint h {point_auc:.4f}; exact h {exact_auc:.4f}",
+            transform=axes[row, 2].transAxes, fontsize=8, va="top",
             bbox={"facecolor": "white", "alpha": 0.8, "edgecolor": "0.8"},
         )
-    fig.suptitle("Baseline -> SV likelihood -> oracle on the same development cohorts", fontsize=14)
+        ci = bootstrap[cohort]["sv_mean_minus_baseline_mean"]
+        axes[row, 2].text(
+            0.98, 0.04, f"paired delta AUC = {ci['difference']:+.6f}\n95% CI [{ci['ci_low']:+.6f}, {ci['ci_high']:+.6f}]",
+            transform=axes[row, 2].transAxes, fontsize=8, va="bottom", ha="right",
+            bbox={"facecolor": "white", "alpha": 0.8, "edgecolor": "0.8"},
+        )
+    fig.suptitle(
+        "Baseline -> SV likelihood -> direction oracle on the same development cohorts",
+        fontsize=14,
+    )
     fig.savefig(output / "summary_ladder.png", dpi=180)
     plt.close(fig)
 
