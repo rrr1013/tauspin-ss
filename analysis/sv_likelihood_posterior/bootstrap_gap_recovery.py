@@ -8,7 +8,7 @@ from typing import Any
 
 import numpy as np
 
-from core import h_event_values, jsonable
+from core import jsonable
 from train_readouts import auc, auc_with_counts, prepare_auc
 
 
@@ -171,7 +171,10 @@ def main() -> None:
         ),
     }
     target = posterior["h_truth_reco"]
-    errors = {name: h_event_values(value, target)[0] for name, value in means.items()}
+    errors = {
+        name: np.mean(np.square(np.asarray(value) - target), axis=(1, 2))
+        for name, value in means.items()
+    }
     scores = {
         name: align_score(args.readouts / f"{name}_validation_scores.npz", ids)
         for name in (
