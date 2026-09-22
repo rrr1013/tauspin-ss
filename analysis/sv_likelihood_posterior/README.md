@@ -33,7 +33,8 @@ Scripts:
 - `train_readouts.py` applies the prior fixed readout recipe to the new
   representations and produces paired-bootstrap H/Z AUC comparisons and the
   final baseline-to-SV-to-oracle figure.
+- `export_results.py` reduces the full reports to compact CSV/JSON tables for
+  versioned review without copying the large posterior arrays into Git.
 
 No test split is loaded.  Large arrays stay on the analysis host; curated
 machine-readable summaries and figures are copied back into `results/`.
-
