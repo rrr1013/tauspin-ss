@@ -382,7 +382,7 @@ def plot_summary(
     fig, axes = plt.subplots(2, 3, figsize=(14, 8))
     fig.subplots_adjust(top=0.88, bottom=0.12, hspace=0.58, wspace=0.30)
     x = np.arange(3)
-    labels = ("baseline flow", "SV weighted", "direction oracle")
+    labels = ("baseline flow", "SV weighted", "truth-dir response")
     colors = ("0.4", "#4C78A8", "#B279A2")
     for row, cohort in enumerate(("inclusive", "threeprong_x_threeprong")):
         functional = h_report["h_metrics_reco_visible_truth_nu_functional"][cohort]
@@ -435,7 +435,7 @@ def plot_summary(
             bbox={"facecolor": "white", "alpha": 0.8, "edgecolor": "0.8"},
         )
     fig.suptitle(
-        "Baseline -> SV likelihood -> direction oracle on the same development cohorts",
+        "Baseline -> SV likelihood -> truth-direction response arm on the same development cohorts",
         fontsize=14,
     )
     fig.savefig(output / "summary_ladder.png", dpi=180)
