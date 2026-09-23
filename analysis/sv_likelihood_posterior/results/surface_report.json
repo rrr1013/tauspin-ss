@@ -1,0 +1,24 @@
+{
+  "algebraically_possible": 51381,
+  "contract": {
+    "keep": 128,
+    "met": "reco_met_xy",
+    "proposal_lattice": 64,
+    "purpose": "mechanism-check cohort only; not a selection on the main result",
+    "seed": 20260922,
+    "tau_mass_GeV": 1.7769,
+    "test_loaded": false,
+    "visible": "reco_visible_tau_lab4"
+  },
+  "events": 59390,
+  "sheet_multiplicity": {
+    "0": 33942,
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 25448
+  },
+  "surface_invalid": 33942,
+  "surface_valid": 25448,
+  "surface_valid_fraction": 0.42848964472133355
+}

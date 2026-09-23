@@ -1,0 +1,66 @@
+{
+  "contract": {
+    "offset_shuffle": "permute SV-minus-visible local angular coordinates using the existing mode/pt/eta/phi matched source indices, then re-anchor on each event's own reco-visible axis",
+    "split": "train",
+    "test_loaded": false,
+    "visible_axis": "replace measured SV direction by the event's reco-visible tau direction on the same SV-available sides"
+  },
+  "counts": {
+    "any_sv": 164038,
+    "both_sv": 19092,
+    "inclusive": 446853,
+    "no_sv": 282815,
+    "one_sv": 144946,
+    "reco_threeprong_containing": 164038,
+    "reco_threeprong_x_threeprong": 19092,
+    "threeprong_containing": 163875,
+    "threeprong_x_threeprong": 18996
+  },
+  "offset_preservation": {
+    "measured_angle_rad": {
+      "events": 188588,
+      "mean": 0.07526878400764055,
+      "q00_q16_q50_q84_q95_q99_q100": [
+        1.5046941947740776e-05,
+        0.001574324696196322,
+        0.00468681091641524,
+        0.015742850309597056,
+        0.055743620979269715,
+        3.115507098751714,
+        3.1414296929240524
+      ]
+    },
+    "shuffled_angle_rad": {
+      "events": 188588,
+      "mean": 0.07526878400764053,
+      "q00_q16_q50_q84_q95_q99_q100": [
+        1.5046941947714828e-05,
+        0.0015743246961963055,
+        0.004686810916415273,
+        0.015742850309597052,
+        0.05574362097926968,
+        3.1155070987517135,
+        3.1414296929240524
+      ]
+    },
+    "sorted_max_abs_difference_rad": 4.440892098500626e-16
+  },
+  "train_only_temperature_sensitivity": {
+    "1.0": {
+      "any_sv_mse": 0.16476673451344348,
+      "inclusive_mse": 0.16093784179917853
+    },
+    "2.0": {
+      "any_sv_mse": 0.16310896046309453,
+      "inclusive_mse": 0.16032927938677194
+    },
+    "4.073573414976854": {
+      "any_sv_mse": 0.1632614567492182,
+      "inclusive_mse": 0.16038526018086546
+    },
+    "8.0": {
+      "any_sv_mse": 0.16460432460903696,
+      "inclusive_mse": 0.16087822175433367
+    }
+  }
+}

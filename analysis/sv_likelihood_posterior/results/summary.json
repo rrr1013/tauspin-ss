@@ -1,0 +1,1008 @@
+{
+  "additional_auc_controls": {
+    "contract": {
+      "readout": "same deterministic reset, seed, minibatch order, architecture, and fixed endpoint as primary readouts-v2",
+      "test_loaded": false
+    },
+    "paired_bootstrap_auc": {
+      "any_sv": {
+        "sv_minus_baseline": {
+          "ci_high": 0.003921793509772045,
+          "ci_low": 0.0007189861016122873,
+          "difference": 0.002351307297584704,
+          "draws": 2000,
+          "events": 20792,
+          "seed": 20261140
+        },
+        "sv_minus_offset_shuffle": {
+          "ci_high": 0.007536356224376974,
+          "ci_low": 0.003128797268461228,
+          "difference": 0.005341856105437803,
+          "draws": 2000,
+          "events": 20792,
+          "seed": 20261141
+        },
+        "sv_minus_random_direction_shuffle": {
+          "ci_high": 0.004028098481345599,
+          "ci_low": 0.0008634638366903618,
+          "difference": 0.0024761681206034725,
+          "draws": 2000,
+          "events": 20792,
+          "seed": 20261143
+        },
+        "sv_minus_visible_axis": {
+          "ci_high": 0.0043982657003439314,
+          "ci_low": 0.0012070569788101449,
+          "difference": 0.002828498691935466,
+          "draws": 2000,
+          "events": 20792,
+          "seed": 20261142
+        }
+      },
+      "any_sv_exact_surface_invalid": {
+        "sv_minus_baseline": {
+          "ci_high": 0.0048170981832967585,
+          "ci_low": 0.000760570724396692,
+          "difference": 0.0027097342534412316,
+          "draws": 2000,
+          "events": 12520,
+          "seed": 20261220
+        },
+        "sv_minus_offset_shuffle": {
+          "ci_high": 0.008462484796689398,
+          "ci_low": 0.0029176700965787756,
+          "difference": 0.005668591600512363,
+          "draws": 2000,
+          "events": 12520,
+          "seed": 20261221
+        },
+        "sv_minus_random_direction_shuffle": {
+          "ci_high": 0.004981184032675675,
+          "ci_low": 0.0009228936016626472,
+          "difference": 0.002947453353023377,
+          "draws": 2000,
+          "events": 12520,
+          "seed": 20261223
+        },
+        "sv_minus_visible_axis": {
+          "ci_high": 0.005412414400220505,
+          "ci_low": 0.001156407838774917,
+          "difference": 0.0032575967738931455,
+          "draws": 2000,
+          "events": 12520,
+          "seed": 20261222
+        }
+      },
+      "any_sv_exact_surface_valid": {
+        "sv_minus_baseline": {
+          "ci_high": 0.004365620044410978,
+          "ci_low": -0.0010006159796733943,
+          "difference": 0.001710302074218073,
+          "draws": 2000,
+          "events": 8272,
+          "seed": 20261200
+        },
+        "sv_minus_offset_shuffle": {
+          "ci_high": 0.008569911532680064,
+          "ci_low": 0.0011617639524603095,
+          "difference": 0.004826726006445292,
+          "draws": 2000,
+          "events": 8272,
+          "seed": 20261201
+        },
+        "sv_minus_random_direction_shuffle": {
+          "ci_high": 0.004349188017786631,
+          "ci_low": -0.0011000084483923562,
+          "difference": 0.0016726876228190246,
+          "draws": 2000,
+          "events": 8272,
+          "seed": 20261203
+        },
+        "sv_minus_visible_axis": {
+          "ci_high": 0.0046409914753607435,
+          "ci_low": -0.0006333909780349478,
+          "difference": 0.0020565040802150714,
+          "draws": 2000,
+          "events": 8272,
+          "seed": 20261202
+        }
+      },
+      "inclusive": {
+        "sv_minus_baseline": {
+          "ci_high": 0.00143194702100001,
+          "ci_low": 0.00029358728110659703,
+          "difference": 0.0008600006081674882,
+          "draws": 2000,
+          "events": 56262,
+          "seed": 20261100
+        },
+        "sv_minus_offset_shuffle": {
+          "ci_high": 0.002780264464261891,
+          "ci_low": 0.0012662798268950476,
+          "difference": 0.0019948894020787034,
+          "draws": 2000,
+          "events": 56262,
+          "seed": 20261101
+        },
+        "sv_minus_random_direction_shuffle": {
+          "ci_high": 0.0014864227145315679,
+          "ci_low": 0.00035494195967571417,
+          "difference": 0.0009014304420124075,
+          "draws": 2000,
+          "events": 56262,
+          "seed": 20261103
+        },
+        "sv_minus_visible_axis": {
+          "ci_high": 0.0016168967055349346,
+          "ci_low": 0.0004719521625434292,
+          "difference": 0.001030222258264435,
+          "draws": 2000,
+          "events": 56262,
+          "seed": 20261102
+        }
+      },
+      "no_sv": {
+        "sv_minus_baseline": {
+          "ci_high": 0.00016397304043266333,
+          "ci_low": -3.874499411926357e-05,
+          "difference": 6.082159789411179e-05,
+          "draws": 2000,
+          "events": 35470,
+          "seed": 20261120
+        },
+        "sv_minus_offset_shuffle": {
+          "ci_high": 0.00031333524998548303,
+          "ci_low": 1.729772565370047e-05,
+          "difference": 0.00016639068079471464,
+          "draws": 2000,
+          "events": 35470,
+          "seed": 20261121
+        },
+        "sv_minus_random_direction_shuffle": {
+          "ci_high": 0.0001629444133133123,
+          "ci_low": -3.737251618930182e-05,
+          "difference": 6.288084721806086e-05,
+          "draws": 2000,
+          "events": 35470,
+          "seed": 20261123
+        },
+        "sv_minus_visible_axis": {
+          "ci_high": 0.00018506048407581905,
+          "ci_low": -3.4267242433891344e-05,
+          "difference": 7.486739107009921e-05,
+          "draws": 2000,
+          "events": 35470,
+          "seed": 20261122
+        }
+      },
+      "reco_threeprong_x_threeprong": {
+        "sv_minus_baseline": {
+          "ci_high": 0.014190100879203858,
+          "ci_low": 0.0007629905702465329,
+          "difference": 0.007431740611858917,
+          "draws": 2000,
+          "events": 2368,
+          "seed": 20261180
+        },
+        "sv_minus_offset_shuffle": {
+          "ci_high": 0.01840988313364863,
+          "ci_low": 0.0006445516793808365,
+          "difference": 0.00942529834644057,
+          "draws": 2000,
+          "events": 2368,
+          "seed": 20261181
+        },
+        "sv_minus_random_direction_shuffle": {
+          "ci_high": 0.01388327944495599,
+          "ci_low": 0.0010950297463194925,
+          "difference": 0.007352614980087879,
+          "draws": 2000,
+          "events": 2368,
+          "seed": 20261183
+        },
+        "sv_minus_visible_axis": {
+          "ci_high": 0.012792446415826034,
+          "ci_low": -0.0010934659466696583,
+          "difference": 0.005760464513382413,
+          "draws": 2000,
+          "events": 2368,
+          "seed": 20261182
+        }
+      },
+      "threeprong_x_threeprong": {
+        "sv_minus_baseline": {
+          "ci_high": 0.014043350359268358,
+          "ci_low": 0.0004091580366882425,
+          "difference": 0.007145079701000756,
+          "draws": 2000,
+          "events": 2357,
+          "seed": 20261160
+        },
+        "sv_minus_offset_shuffle": {
+          "ci_high": 0.01856888129994598,
+          "ci_low": 0.00034700797991113475,
+          "difference": 0.009772772850237033,
+          "draws": 2000,
+          "events": 2357,
+          "seed": 20261161
+        },
+        "sv_minus_random_direction_shuffle": {
+          "ci_high": 0.01371960682255497,
+          "ci_low": 0.00041378701135538765,
+          "difference": 0.007073831749420112,
+          "draws": 2000,
+          "events": 2357,
+          "seed": 20261163
+        },
+        "sv_minus_visible_axis": {
+          "ci_high": 0.012795658665070455,
+          "ci_low": -0.0013136413136961233,
+          "difference": 0.005878969818249202,
+          "draws": 2000,
+          "events": 2357,
+          "seed": 20261162
+        }
+      }
+    }
+  },
+  "additional_h_controls": {
+    "contract": {
+      "offset_shuffle": "permute SV-minus-visible local angular coordinates using the existing mode/pt/eta/phi matched source indices, then re-anchor on each event's own reco-visible axis",
+      "split": "validation",
+      "test_loaded": false,
+      "visible_axis": "replace measured SV direction by the event's reco-visible tau direction on the same SV-available sides"
+    },
+    "counts": {
+      "any_sv": 20792,
+      "any_sv_exact_surface_invalid": 12520,
+      "any_sv_exact_surface_valid": 8272,
+      "both_sv": 2368,
+      "exact_surface_invalid": 32375,
+      "exact_surface_valid": 23887,
+      "inclusive": 56262,
+      "no_sv": 35470,
+      "one_sv": 18424,
+      "reco_threeprong_containing": 20792,
+      "reco_threeprong_x_threeprong": 2368,
+      "threeprong_containing": 20752,
+      "threeprong_x_threeprong": 2357
+    },
+    "offset_preservation": {
+      "measured_angle_rad": {
+        "events": 23841,
+        "mean": 0.07503397395407435,
+        "q00_q16_q50_q84_q95_q99_q100": [
+          2.4153796192772716e-05,
+          0.0016059097911398017,
+          0.0047186560659293105,
+          0.016165838926702217,
+          0.05670265411121965,
+          3.1173977411965947,
+          3.1408519183058887
+        ]
+      },
+      "shuffled_angle_rad": {
+        "events": 23841,
+        "mean": 0.07503397395407435,
+        "q00_q16_q50_q84_q95_q99_q100": [
+          2.4153796192794766e-05,
+          0.0016059097911397676,
+          0.004718656065929314,
+          0.016165838926702276,
+          0.05670265411121967,
+          3.1173977411965943,
+          3.1408519183058887
+        ]
+      },
+      "sorted_max_abs_difference_rad": 4.440892098500626e-16
+    },
+    "paired_bootstrap_h": {
+      "any_sv": {
+        "sv_minus_offset_shuffle": {
+          "ci_high": -0.008004461819723275,
+          "ci_low": -0.009248297613144012,
+          "difference": -0.008622921124802818,
+          "draws": 2000,
+          "events": 20792,
+          "seed": 20261011
+        },
+        "sv_minus_uniform": {
+          "ci_high": -0.004745959513191561,
+          "ci_low": -0.005579962548066565,
+          "difference": -0.005165211802383284,
+          "draws": 2000,
+          "events": 20792,
+          "seed": 20261010
+        },
+        "sv_minus_visible_axis": {
+          "ci_high": -0.004940783153927702,
+          "ci_low": -0.005797002254955266,
+          "difference": -0.005371877388693104,
+          "draws": 2000,
+          "events": 20792,
+          "seed": 20261012
+        }
+      },
+      "any_sv_exact_surface_invalid": {
+        "sv_minus_offset_shuffle": {
+          "ci_high": -0.00712954056774233,
+          "ci_low": -0.008672270960398687,
+          "difference": -0.007911937226856281,
+          "draws": 2000,
+          "events": 12520,
+          "seed": 20261051
+        },
+        "sv_minus_uniform": {
+          "ci_high": -0.004203419302544129,
+          "ci_low": -0.005268829500930279,
+          "difference": -0.004726322438716939,
+          "draws": 2000,
+          "events": 12520,
+          "seed": 20261050
+        },
+        "sv_minus_visible_axis": {
+          "ci_high": -0.004355959700690764,
+          "ci_low": -0.005466349105784891,
+          "difference": -0.004906667905886847,
+          "draws": 2000,
+          "events": 12520,
+          "seed": 20261052
+        }
+      },
+      "any_sv_exact_surface_valid": {
+        "sv_minus_offset_shuffle": {
+          "ci_high": -0.008669252550185028,
+          "ci_low": -0.010737491767486656,
+          "difference": -0.009699023446162903,
+          "draws": 2000,
+          "events": 8272,
+          "seed": 20261041
+        },
+        "sv_minus_uniform": {
+          "ci_high": -0.0051413003600323465,
+          "ci_low": -0.006488801595705827,
+          "difference": -0.005829488257062037,
+          "draws": 2000,
+          "events": 8272,
+          "seed": 20261040
+        },
+        "sv_minus_visible_axis": {
+          "ci_high": -0.005341310134540781,
+          "ci_low": -0.006779042309490889,
+          "difference": -0.0060759903873312026,
+          "draws": 2000,
+          "events": 8272,
+          "seed": 20261042
+        }
+      },
+      "inclusive": {
+        "sv_minus_offset_shuffle": {
+          "ci_high": -0.0029465272056607983,
+          "ci_low": -0.003419326272419612,
+          "difference": -0.003186658420015288,
+          "draws": 2000,
+          "events": 56262,
+          "seed": 20261001
+        },
+        "sv_minus_uniform": {
+          "ci_high": -0.0017591273221108444,
+          "ci_low": -0.002068554338345141,
+          "difference": -0.0019088387152101465,
+          "draws": 2000,
+          "events": 56262,
+          "seed": 20261000
+        },
+        "sv_minus_visible_axis": {
+          "ci_high": -0.0018221388171394963,
+          "ci_low": -0.0021528068981360293,
+          "difference": -0.0019852133707601405,
+          "draws": 2000,
+          "events": 56262,
+          "seed": 20261002
+        }
+      },
+      "reco_threeprong_x_threeprong": {
+        "sv_minus_offset_shuffle": {
+          "ci_high": -0.012709209755693542,
+          "ci_low": -0.01765830702532003,
+          "difference": -0.015052182101179075,
+          "draws": 2000,
+          "events": 2368,
+          "seed": 20261031
+        },
+        "sv_minus_uniform": {
+          "ci_high": -0.007269176777321683,
+          "ci_low": -0.010551770918706224,
+          "difference": -0.008942235670724911,
+          "draws": 2000,
+          "events": 2368,
+          "seed": 20261030
+        },
+        "sv_minus_visible_axis": {
+          "ci_high": -0.007401776803187451,
+          "ci_low": -0.01091111951544592,
+          "difference": -0.009166733685743467,
+          "draws": 2000,
+          "events": 2368,
+          "seed": 20261032
+        }
+      },
+      "threeprong_x_threeprong": {
+        "sv_minus_offset_shuffle": {
+          "ci_high": -0.012350721859193687,
+          "ci_low": -0.01718225401458959,
+          "difference": -0.014787110730361744,
+          "draws": 2000,
+          "events": 2357,
+          "seed": 20261021
+        },
+        "sv_minus_uniform": {
+          "ci_high": -0.007166563621105459,
+          "ci_low": -0.010244315069430035,
+          "difference": -0.008700723894689998,
+          "draws": 2000,
+          "events": 2357,
+          "seed": 20261020
+        },
+        "sv_minus_visible_axis": {
+          "ci_high": -0.007237839313423397,
+          "ci_low": -0.010666777940094373,
+          "difference": -0.008985152767631819,
+          "draws": 2000,
+          "events": 2357,
+          "seed": 20261022
+        }
+      }
+    },
+    "posterior_truth_direction_support": {
+      "any_sv": {
+        "available_sides": 23160,
+        "fraction_with_draw_within_1sigma": 0.9919257340241796,
+        "fraction_with_draw_within_2sigma": 0.9963730569948187,
+        "min_angle_rad": {
+          "events": 23160,
+          "mean": 0.0009638491647614517,
+          "q00_q16_q50_q84_q95_q99_q100": [
+            9.918458090396598e-07,
+            6.18274201406166e-05,
+            0.00017600453429622576,
+            0.0005194808077067137,
+            0.0011587857094127684,
+            0.003852188778109848,
+            2.345794439315796
+          ]
+        }
+      },
+      "any_sv_exact_surface_invalid": {
+        "available_sides": 13999,
+        "fraction_with_draw_within_1sigma": 0.9879991427959139,
+        "fraction_with_draw_within_2sigma": 0.9944996071147939,
+        "min_angle_rad": {
+          "events": 13999,
+          "mean": 0.001064914201379882,
+          "q00_q16_q50_q84_q95_q99_q100": [
+            9.918458090396598e-07,
+            6.217788119101897e-05,
+            0.000183042575372383,
+            0.0005634375498630107,
+            0.001372042379807676,
+            0.0054278128035366545,
+            0.8555896282196045
+          ]
+        }
+      },
+      "any_sv_exact_surface_valid": {
+        "available_sides": 9161,
+        "fraction_with_draw_within_1sigma": 0.9979259906123785,
+        "fraction_with_draw_within_2sigma": 0.9992358912782447,
+        "min_angle_rad": {
+          "events": 9161,
+          "mean": 0.000809410844968699,
+          "q00_q16_q50_q84_q95_q99_q100": [
+            1.2011249737042817e-06,
+            6.127247615950182e-05,
+            0.0001661051792325452,
+            0.00045883491984568533,
+            0.0009243371314369142,
+            0.0020122770685702513,
+            2.345794439315796
+          ]
+        }
+      },
+      "reco_threeprong_x_threeprong": {
+        "available_sides": 4736,
+        "fraction_with_draw_within_1sigma": 0.9926097972972973,
+        "fraction_with_draw_within_2sigma": 0.9968327702702703,
+        "min_angle_rad": {
+          "events": 4736,
+          "mean": 0.0005299186335675169,
+          "q00_q16_q50_q84_q95_q99_q100": [
+            9.918458090396598e-07,
+            6.129212706582621e-05,
+            0.0001714521276880987,
+            0.000517430098261684,
+            0.0011357099865563214,
+            0.0037164585664868307,
+            0.33963629603385925
+          ]
+        }
+      },
+      "threeprong_x_threeprong": {
+        "available_sides": 4650,
+        "fraction_with_draw_within_1sigma": 0.9929032258064516,
+        "fraction_with_draw_within_2sigma": 0.9972043010752688,
+        "min_angle_rad": {
+          "events": 4650,
+          "mean": 0.0005171803988617197,
+          "q00_q16_q50_q84_q95_q99_q100": [
+            9.918458090396598e-07,
+            6.081652187276632e-05,
+            0.00016956133913481608,
+            0.0005114966561086475,
+            0.0011156534252222635,
+            0.0036029538512229956,
+            0.3142582178115845
+          ]
+        }
+      }
+    }
+  },
+  "contract": {
+    "readout": {
+      "readout_recipe": {
+        "batch_size": 512,
+        "epochs": 50,
+        "initialization": "all reset_parameters calls occur after the seed is set; paired baseline/SV architectures share initialization and minibatch order",
+        "learning_rate": 0.001,
+        "optimizer": "AdamW",
+        "scheduler": "none",
+        "seed": 20260916,
+        "selection": "fixed endpoint; validation not used for selection",
+        "weight_decay": 0.0001
+      },
+      "test_loaded": false,
+      "weighted_deepsets": "historical phi/rho capacity with normalized posterior-weight pooling"
+    },
+    "representation": {
+      "candidate_tau": "reco_visible_tau_lab4 + sampled neutrino lab momentum",
+      "global_gaussian_control_sigma_rad": 0.0079,
+      "primary_response": "train-only decay-mode vMF core + uniform tail, tempered by disjoint-train sheet-posterior calibration",
+      "split": "validation",
+      "temperature": 4.073573414976854,
+      "test_loaded": false,
+      "unavailable_side": "unit likelihood"
+    },
+    "surface": {
+      "keep": 128,
+      "met": "reco_met_xy",
+      "proposal_lattice": 64,
+      "purpose": "mechanism-check cohort only; not a selection on the main result",
+      "seed": 20260922,
+      "tau_mass_GeV": 1.7769,
+      "test_loaded": false,
+      "visible": "reco_visible_tau_lab4"
+    }
+  },
+  "counts": {
+    "readout": {
+      "train_strict": 446853,
+      "validation_strict": 56262
+    },
+    "representation": {
+      "any_sv_strict": 20792,
+      "both_sv_strict": 2368,
+      "draws": 256,
+      "events": 59390,
+      "matched_shuffle_available_sides": 23841,
+      "matched_shuffle_changed_available_sides": 23526,
+      "strict_common": 56262
+    },
+    "surface": {
+      "events": 59390,
+      "invalid": 33942,
+      "valid": 25448,
+      "valid_fraction": 0.42848964472133355
+    }
+  },
+  "oracle_gap_bootstrap": {
+    "auc": {
+      "inclusive": {
+        "draws": 2000,
+        "events": 56262,
+        "same_response_truth_direction_gap_fraction": {
+          "ci_high": 0.5658793338374393,
+          "ci_low": 0.13111263687359243,
+          "denominator_nonpositive_fraction": 0.0,
+          "finite_draws": 2000,
+          "fraction": 0.3545875453256126
+        },
+        "seed": 20261201,
+        "truth_nu_functional_gap_fraction": {
+          "ci_high": 0.03177702914096445,
+          "ci_low": 0.006318878174452618,
+          "denominator_nonpositive_fraction": 0.0,
+          "finite_draws": 2000,
+          "fraction": 0.01942582147918272
+        }
+      },
+      "threeprong_x_threeprong": {
+        "draws": 2000,
+        "events": 2357,
+        "same_response_truth_direction_gap_fraction": {
+          "ci_high": 1.6937191263198046,
+          "ci_low": 0.030346735380368698,
+          "denominator_nonpositive_fraction": 0.0035,
+          "finite_draws": 2000,
+          "fraction": 0.7487783564041982
+        },
+        "seed": 20261211,
+        "truth_nu_functional_gap_fraction": {
+          "ci_high": 0.12835841434185227,
+          "ci_low": 0.003081135622785435,
+          "denominator_nonpositive_fraction": 0.0,
+          "finite_draws": 2000,
+          "fraction": 0.06693282193433232
+        }
+      }
+    },
+    "contract": {
+      "direction_arm": "truth tau direction evaluated with the same tempered response; not a detector-independent information oracle",
+      "test_loaded": false,
+      "truth_nu_h_denominator": "zero technical-target MSE, so this ratio is the relative MSE reduction"
+    },
+    "h": {
+      "inclusive": {
+        "draws": 2000,
+        "events": 56262,
+        "relative_mse_reduction_to_exact_technical_target": {
+          "ci_high": 0.012745665705331647,
+          "ci_low": 0.010895364115494946,
+          "denominator_nonpositive_fraction": 0.0,
+          "finite_draws": 2000,
+          "fraction": 0.011815072037279606
+        },
+        "same_response_truth_direction_gap_fraction": {
+          "ci_high": 0.3755805306850237,
+          "ci_low": 0.32120149681059973,
+          "denominator_nonpositive_fraction": 0.0,
+          "finite_draws": 2000,
+          "fraction": 0.34799960255622864
+        },
+        "seed": 20261200
+      },
+      "threeprong_x_threeprong": {
+        "draws": 2000,
+        "events": 2357,
+        "relative_mse_reduction_to_exact_technical_target": {
+          "ci_high": 0.05980587255484286,
+          "ci_low": 0.040362959922323284,
+          "denominator_nonpositive_fraction": 0.0,
+          "finite_draws": 2000,
+          "fraction": 0.0500008650124073
+        },
+        "same_response_truth_direction_gap_fraction": {
+          "ci_high": 0.38612960461912543,
+          "ci_low": 0.2640092234494757,
+          "denominator_nonpositive_fraction": 0.0,
+          "finite_draws": 2000,
+          "fraction": 0.32484379410743713
+        },
+        "seed": 20261210
+      }
+    }
+  },
+  "oracle_gap_recovery": {
+    "both_sv": {
+      "h_mse_relative_reduction_to_exact_technical_target": 0.05159274845272071,
+      "h_mse_same_response_truth_direction_gap_fraction": 0.32785892752541085
+    },
+    "exact_surface_invalid": {
+      "h_mse_relative_reduction_to_exact_technical_target": 0.011754141073132827,
+      "h_mse_same_response_truth_direction_gap_fraction": 0.3317426510086163
+    },
+    "exact_surface_valid": {
+      "h_mse_relative_reduction_to_exact_technical_target": 0.011890917616088084,
+      "h_mse_same_response_truth_direction_gap_fraction": 0.3702718695943173
+    },
+    "inclusive": {
+      "h_mse_relative_reduction_to_exact_technical_target": 0.0118151639334771,
+      "h_mse_same_response_truth_direction_gap_fraction": 0.34800218166208996
+    },
+    "one_sv": {
+      "h_mse_relative_reduction_to_exact_technical_target": 0.028213344373972344,
+      "h_mse_same_response_truth_direction_gap_fraction": 0.35333366533904936
+    },
+    "threeprong_containing": {
+      "h_mse_relative_reduction_to_exact_technical_target": 0.03055064726906326,
+      "h_mse_same_response_truth_direction_gap_fraction": 0.3480315124954174
+    },
+    "threeprong_x_threeprong": {
+      "h_mse_relative_reduction_to_exact_technical_target": 0.0500008390108756,
+      "h_mse_same_response_truth_direction_gap_fraction": 0.32484365352389327
+    }
+  },
+  "paired_bootstrap_auc": {
+    "any_sv": {
+      "global_gaussian_minus_baseline_mean": {
+        "ci_high": 0.0030064545260556096,
+        "ci_low": -0.002999852965087188,
+        "difference": -1.7550232450314063e-05,
+        "draws": 2000,
+        "events": 20792,
+        "seed": 20260945
+      },
+      "sv_full_minus_baseline_full": {
+        "ci_high": 0.003960340156861931,
+        "ci_low": 0.0008059815739131615,
+        "difference": 0.002339488390003641,
+        "draws": 2000,
+        "events": 20792,
+        "seed": 20260943
+      },
+      "sv_mean_minus_baseline_mean": {
+        "ci_high": 0.003989221127985137,
+        "ci_low": 0.0007977906540404007,
+        "difference": 0.0023513107690567026,
+        "draws": 2000,
+        "events": 20792,
+        "seed": 20260942
+      },
+      "sv_mean_minus_shuffle_mean": {
+        "ci_high": 0.004012368485139391,
+        "ci_low": 0.0009434651765934498,
+        "difference": 0.0024761678127777076,
+        "draws": 2000,
+        "events": 20792,
+        "seed": 20260944
+      }
+    },
+    "exact_surface_invalid": {
+      "global_gaussian_minus_baseline_mean": {
+        "ci_high": 0.0018853067713531222,
+        "ci_low": -0.000970616405642688,
+        "difference": 0.0004696518271812833,
+        "draws": 2000,
+        "events": 32375,
+        "seed": 20260985
+      },
+      "sv_full_minus_baseline_full": {
+        "ci_high": 0.0016974032717459087,
+        "ci_low": 0.00021978583778754226,
+        "difference": 0.0009641607531893914,
+        "draws": 2000,
+        "events": 32375,
+        "seed": 20260983
+      },
+      "sv_mean_minus_baseline_mean": {
+        "ci_high": 0.0017579689394454144,
+        "ci_low": 0.00027250324492995306,
+        "difference": 0.001023767860490965,
+        "draws": 2000,
+        "events": 32375,
+        "seed": 20260982
+      },
+      "sv_mean_minus_shuffle_mean": {
+        "ci_high": 0.0018580937600241316,
+        "ci_low": 0.00039771198026068987,
+        "difference": 0.0011109776095797885,
+        "draws": 2000,
+        "events": 32375,
+        "seed": 20260984
+      }
+    },
+    "inclusive": {
+      "global_gaussian_minus_baseline_mean": {
+        "ci_high": 0.001097417712839438,
+        "ci_low": -0.001069458524519365,
+        "difference": -1.1096396276388809e-05,
+        "draws": 2000,
+        "events": 56262,
+        "seed": 20260925
+      },
+      "sv_full_minus_baseline_full": {
+        "ci_high": 0.0013869646635872835,
+        "ci_low": 0.00024149883903824276,
+        "difference": 0.0008066410100957544,
+        "draws": 2000,
+        "events": 56262,
+        "seed": 20260923
+      },
+      "sv_mean_minus_baseline_mean": {
+        "ci_high": 0.001423900013424342,
+        "ci_low": 0.0002847409259078948,
+        "difference": 0.0008600062030779121,
+        "draws": 2000,
+        "events": 56262,
+        "seed": 20260922
+      },
+      "sv_mean_minus_shuffle_mean": {
+        "ci_high": 0.0014764456442691693,
+        "ci_low": 0.00033606896890361063,
+        "difference": 0.0009014379093028602,
+        "draws": 2000,
+        "events": 56262,
+        "seed": 20260924
+      }
+    },
+    "threeprong_x_threeprong": {
+      "global_gaussian_minus_baseline_mean": {
+        "ci_high": 0.02202832074700777,
+        "ci_low": -0.0022187634561052936,
+        "difference": 0.00972505242752797,
+        "draws": 2000,
+        "events": 2357,
+        "seed": 20260965
+      },
+      "sv_full_minus_baseline_full": {
+        "ci_high": 0.01322753200096402,
+        "ci_low": 0.0005252204112476401,
+        "difference": 0.006908925883511219,
+        "draws": 2000,
+        "events": 2357,
+        "seed": 20260963
+      },
+      "sv_mean_minus_baseline_mean": {
+        "ci_high": 0.013542453376538734,
+        "ci_low": 0.0003834220504290165,
+        "difference": 0.007145079701000756,
+        "draws": 2000,
+        "events": 2357,
+        "seed": 20260962
+      },
+      "sv_mean_minus_shuffle_mean": {
+        "ci_high": 0.013512042625405854,
+        "ci_low": 0.0006822640508852118,
+        "difference": 0.007073831749420112,
+        "draws": 2000,
+        "events": 2357,
+        "seed": 20260964
+      }
+    }
+  },
+  "paired_bootstrap_h": {
+    "any_sv": {
+      "delta_event_cosine_sv_minus_unweighted": {
+        "ci_high": 0.017473418030562668,
+        "ci_low": 0.014872763741049705,
+        "difference": 0.016149644981289093,
+        "draws": 2000,
+        "events": 20792,
+        "seed": 20260933
+      },
+      "delta_event_mse_sv_minus_unweighted": {
+        "ci_high": -0.004735071398562131,
+        "ci_low": -0.005570959475436877,
+        "difference": -0.005165211802383284,
+        "draws": 2000,
+        "events": 20792,
+        "seed": 20260932
+      }
+    },
+    "exact_surface_invalid": {
+      "delta_event_cosine_sv_minus_unweighted": {
+        "ci_high": 0.006266677400670631,
+        "ci_low": 0.0049672097425921755,
+        "difference": 0.005597315580039604,
+        "draws": 2000,
+        "events": 32375,
+        "seed": 20260953
+      },
+      "delta_event_mse_sv_minus_unweighted": {
+        "ci_high": -0.0016336785354866532,
+        "ci_low": -0.002024519273715033,
+        "difference": -0.001827754654293006,
+        "draws": 2000,
+        "events": 32375,
+        "seed": 20260952
+      }
+    },
+    "inclusive": {
+      "delta_event_cosine_sv_minus_unweighted": {
+        "ci_high": 0.006477206396668638,
+        "ci_low": 0.005488062236815498,
+        "difference": 0.005968209776598109,
+        "draws": 2000,
+        "events": 56262,
+        "seed": 20260923
+      },
+      "delta_event_mse_sv_minus_unweighted": {
+        "ci_high": -0.001760291103581783,
+        "ci_low": -0.0020590167035580485,
+        "difference": -0.0019088387152101465,
+        "draws": 2000,
+        "events": 56262,
+        "seed": 20260922
+      }
+    },
+    "threeprong_x_threeprong": {
+      "delta_event_cosine_sv_minus_unweighted": {
+        "ci_high": 0.03290575597476176,
+        "ci_low": 0.023061567402356452,
+        "difference": 0.027972214326748086,
+        "draws": 2000,
+        "events": 2357,
+        "seed": 20260943
+      },
+      "delta_event_mse_sv_minus_unweighted": {
+        "ci_high": -0.006984830526576564,
+        "ci_low": -0.010318745666408951,
+        "difference": -0.008700723894689998,
+        "draws": 2000,
+        "events": 2357,
+        "seed": 20260942
+      }
+    }
+  },
+  "response_audit": {
+    "source_contract": {
+      "ip_response": "mode-conditional half-normal plane-residual core + uniform outlier mixture",
+      "length_response": "mode-conditional robust Student-t in log(SV length / tau momentum)",
+      "measure": "flat in nuT, integrated separately over four global sheets",
+      "response": "mode-conditional vMF core + uniform outlier mixture, fit without angular cuts; one scalar posterior temperature fit on a disjoint partition",
+      "seed": 20260922,
+      "selector_inputs": "measured SV/IP geometry and reconstructed decay-mode category",
+      "split": "train only; disjoint hash response-fit, posterior-calibration, and evaluation partitions",
+      "surface": "truth visible + exact tau-neutrino MET",
+      "test_loaded": false,
+      "topology_control": "P(sheet | reco mode pair, SV availability), fit on response partition"
+    },
+    "source_counts": {
+      "any_ip": 19977,
+      "any_sv": 7158,
+      "both_ip": 19977,
+      "both_sv": 810,
+      "evaluation_events": 20000,
+      "input_events": 472872,
+      "posterior_calibration_events": 10000,
+      "response_fit_events": 189549,
+      "surface_valid": 19977
+    },
+    "source_sv_models": {
+      "1p0n": {
+        "effective_sigma_mrad": null,
+        "events": 0,
+        "kappa": 0.0,
+        "log_likelihood": 0.0,
+        "pi_core": 0.0
+      },
+      "3p0n": {
+        "effective_sigma_mrad": 4.5518580526754855,
+        "events": 75475,
+        "kappa": 48263.91853923691,
+        "log_likelihood": 694731.4990602507,
+        "pi_core": 0.9070947417932205
+      },
+      "rho": {
+        "effective_sigma_mrad": null,
+        "events": 0,
+        "kappa": 0.0,
+        "log_likelihood": 0.0,
+        "pi_core": 0.0
+      }
+    },
+    "source_temperature": {
+      "events": 3628,
+      "nll_after": 1.3477953686631123,
+      "nll_before": 1.4848644206445167,
+      "temperature": 4.073573414976854
+    }
+  },
+  "train_only_temperature_sensitivity": {
+    "1.0": {
+      "any_sv_mse": 0.16476673451344348,
+      "inclusive_mse": 0.16093784179917853
+    },
+    "2.0": {
+      "any_sv_mse": 0.16310896046309453,
+      "inclusive_mse": 0.16032927938677194
+    },
+    "4.073573414976854": {
+      "any_sv_mse": 0.1632614567492182,
+      "inclusive_mse": 0.16038526018086546
+    },
+    "8.0": {
+      "any_sv_mse": 0.16460432460903696,
+      "inclusive_mse": 0.16087822175433367
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "auc": {
+    "inclusive": {
+      "draws": 2000,
+      "events": 56262,
+      "same_response_truth_direction_gap_fraction": {
+        "ci_high": 0.5658793338374393,
+        "ci_low": 0.13111263687359243,
+        "denominator_nonpositive_fraction": 0.0,
+        "finite_draws": 2000,
+        "fraction": 0.3545875453256126
+      },
+      "seed": 20261201,
+      "truth_nu_functional_gap_fraction": {
+        "ci_high": 0.03177702914096445,
+        "ci_low": 0.006318878174452618,
+        "denominator_nonpositive_fraction": 0.0,
+        "finite_draws": 2000,
+        "fraction": 0.01942582147918272
+      }
+    },
+    "threeprong_x_threeprong": {
+      "draws": 2000,
+      "events": 2357,
+      "same_response_truth_direction_gap_fraction": {
+        "ci_high": 1.6937191263198046,
+        "ci_low": 0.030346735380368698,
+        "denominator_nonpositive_fraction": 0.0035,
+        "finite_draws": 2000,
+        "fraction": 0.7487783564041982
+      },
+      "seed": 20261211,
+      "truth_nu_functional_gap_fraction": {
+        "ci_high": 0.12835841434185227,
+        "ci_low": 0.003081135622785435,
+        "denominator_nonpositive_fraction": 0.0,
+        "finite_draws": 2000,
+        "fraction": 0.06693282193433232
+      }
+    }
+  },
+  "contract": {
+    "direction_arm": "truth tau direction evaluated with the same tempered response; not a detector-independent information oracle",
+    "test_loaded": false,
+    "truth_nu_h_denominator": "zero technical-target MSE, so this ratio is the relative MSE reduction"
+  },
+  "h": {
+    "inclusive": {
+      "draws": 2000,
+      "events": 56262,
+      "relative_mse_reduction_to_exact_technical_target": {
+        "ci_high": 0.012745665705331647,
+        "ci_low": 0.010895364115494946,
+        "denominator_nonpositive_fraction": 0.0,
+        "finite_draws": 2000,
+        "fraction": 0.011815072037279606
+      },
+      "same_response_truth_direction_gap_fraction": {
+        "ci_high": 0.3755805306850237,
+        "ci_low": 0.32120149681059973,
+        "denominator_nonpositive_fraction": 0.0,
+        "finite_draws": 2000,
+        "fraction": 0.34799960255622864
+      },
+      "seed": 20261200
+    },
+    "threeprong_x_threeprong": {
+      "draws": 2000,
+      "events": 2357,
+      "relative_mse_reduction_to_exact_technical_target": {
+        "ci_high": 0.05980587255484286,
+        "ci_low": 0.040362959922323284,
+        "denominator_nonpositive_fraction": 0.0,
+        "finite_draws": 2000,
+        "fraction": 0.0500008650124073
+      },
+      "same_response_truth_direction_gap_fraction": {
+        "ci_high": 0.38612960461912543,
+        "ci_low": 0.2640092234494757,
+        "denominator_nonpositive_fraction": 0.0,
+        "finite_draws": 2000,
+        "fraction": 0.32484379410743713
+      },
+      "seed": 20261210
+    }
+  }
+}

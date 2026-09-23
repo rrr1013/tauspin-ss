@@ -1,0 +1,74 @@
+{
+  "contract": {
+    "candidate_tau": "reco_visible_tau_lab4 + sampled neutrino lab momentum",
+    "global_gaussian_control_sigma_rad": 0.0079,
+    "primary_response": "train-only decay-mode vMF core + uniform tail, tempered by disjoint-train sheet-posterior calibration",
+    "split": "train",
+    "temperature": 4.073573414976854,
+    "test_loaded": false,
+    "unavailable_side": "unit likelihood"
+  },
+  "counts": {
+    "any_sv_strict": 164038,
+    "both_sv_strict": 19092,
+    "draws": 64,
+    "events": 472872,
+    "matched_shuffle_available_sides": 188588,
+    "matched_shuffle_changed_available_sides": 188280,
+    "strict_common": 446853
+  },
+  "response_audit": {
+    "source_contract": {
+      "ip_response": "mode-conditional half-normal plane-residual core + uniform outlier mixture",
+      "length_response": "mode-conditional robust Student-t in log(SV length / tau momentum)",
+      "measure": "flat in nuT, integrated separately over four global sheets",
+      "response": "mode-conditional vMF core + uniform outlier mixture, fit without angular cuts; one scalar posterior temperature fit on a disjoint partition",
+      "seed": 20260922,
+      "selector_inputs": "measured SV/IP geometry and reconstructed decay-mode category",
+      "split": "train only; disjoint hash response-fit, posterior-calibration, and evaluation partitions",
+      "surface": "truth visible + exact tau-neutrino MET",
+      "test_loaded": false,
+      "topology_control": "P(sheet | reco mode pair, SV availability), fit on response partition"
+    },
+    "source_counts": {
+      "any_ip": 19977,
+      "any_sv": 7158,
+      "both_ip": 19977,
+      "both_sv": 810,
+      "evaluation_events": 20000,
+      "input_events": 472872,
+      "posterior_calibration_events": 10000,
+      "response_fit_events": 189549,
+      "surface_valid": 19977
+    },
+    "source_sv_models": {
+      "1p0n": {
+        "effective_sigma_mrad": null,
+        "events": 0,
+        "kappa": 0.0,
+        "log_likelihood": 0.0,
+        "pi_core": 0.0
+      },
+      "3p0n": {
+        "effective_sigma_mrad": 4.5518580526754855,
+        "events": 75475,
+        "kappa": 48263.91853923691,
+        "log_likelihood": 694731.4990602507,
+        "pi_core": 0.9070947417932205
+      },
+      "rho": {
+        "effective_sigma_mrad": null,
+        "events": 0,
+        "kappa": 0.0,
+        "log_likelihood": 0.0,
+        "pi_core": 0.0
+      }
+    },
+    "source_temperature": {
+      "events": 3628,
+      "nll_after": 1.3477953686631123,
+      "nll_before": 1.4848644206445167,
+      "temperature": 4.073573414976854
+    }
+  }
+}

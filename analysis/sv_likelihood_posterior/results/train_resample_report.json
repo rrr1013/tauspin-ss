@@ -1,0 +1,19 @@
+{
+  "device": "cuda",
+  "events": 472872,
+  "existing_strict_all_draw_valid": 446853,
+  "flow_checkpoint": "/home/rbaba/neutrino-statistics-20260907-training/flow4/checkpoint.pt",
+  "outputs": {
+    "draw_valid": "/home/rbaba/tauspin-sv-likelihood-posterior-20260922-artifacts/train-resample/train_draw_valid.npy",
+    "h_samples": "/home/rbaba/tauspin-sv-likelihood-posterior-20260922-artifacts/train-resample/train_h_samples.npy",
+    "neutrino_xyz": "/home/rbaba/tauspin-sv-likelihood-posterior-20260922-artifacts/train-resample/train_nu_samples_xyz.npy"
+  },
+  "parity_exact_within_1e-6": true,
+  "parity_max_abs_h_delta": 2.9802322165650708e-08,
+  "parity_mean_abs_h_delta": 9.934718494304725e-09,
+  "runtime_seconds": 399.98318243026733,
+  "samples": 64,
+  "seed": 20260908,
+  "strict_all_draw_valid": 446853,
+  "test_loaded": false
+}

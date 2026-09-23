@@ -1,0 +1,137 @@
+{
+  "contract": {
+    "purpose": "diagnostic only; no likelihood or model selection",
+    "selection": "fixed prefixes of the saved validation posterior draws",
+    "test_loaded": false
+  },
+  "metrics": {
+    "128": {
+      "any_sv": {
+        "sv": {
+          "events": 20792,
+          "mse": 0.16238498601197263
+        },
+        "uniform": {
+          "events": 20792,
+          "mse": 0.1675508747997973
+        }
+      },
+      "inclusive": {
+        "sv": {
+          "events": 56262,
+          "mse": 0.16032166450539082
+        },
+        "uniform": {
+          "events": 56262,
+          "mse": 0.162230753405118
+        }
+      },
+      "threeprong_x_threeprong": {
+        "sv": {
+          "events": 2357,
+          "mse": 0.16594218271618993
+        },
+        "uniform": {
+          "events": 2357,
+          "mse": 0.17473220837400844
+        }
+      }
+    },
+    "256": {
+      "any_sv": {
+        "sv": {
+          "events": 20792,
+          "mse": 0.1615540129670176
+        },
+        "uniform": {
+          "events": 20792,
+          "mse": 0.1667192248124829
+        }
+      },
+      "inclusive": {
+        "sv": {
+          "events": 56262,
+          "mse": 0.15964953879746988
+        },
+        "uniform": {
+          "events": 56262,
+          "mse": 0.16155837752860122
+        }
+      },
+      "threeprong_x_threeprong": {
+        "sv": {
+          "events": 2357,
+          "mse": 0.1653108340264271
+        },
+        "uniform": {
+          "events": 2357,
+          "mse": 0.17401155784988723
+        }
+      }
+    },
+    "32": {
+      "any_sv": {
+        "sv": {
+          "events": 20792,
+          "mse": 0.16611571250846213
+        },
+        "uniform": {
+          "events": 20792,
+          "mse": 0.1710861657161865
+        }
+      },
+      "inclusive": {
+        "sv": {
+          "events": 56262,
+          "mse": 0.1642584574897657
+        },
+        "uniform": {
+          "events": 56262,
+          "mse": 0.16609532185816725
+        }
+      },
+      "threeprong_x_threeprong": {
+        "sv": {
+          "events": 2357,
+          "mse": 0.16948556868147452
+        },
+        "uniform": {
+          "events": 2357,
+          "mse": 0.17807515618339734
+        }
+      }
+    },
+    "64": {
+      "any_sv": {
+        "sv": {
+          "events": 20792,
+          "mse": 0.16357682587153935
+        },
+        "uniform": {
+          "events": 20792,
+          "mse": 0.16863118182157347
+        }
+      },
+      "inclusive": {
+        "sv": {
+          "events": 56262,
+          "mse": 0.16160022399699178
+        },
+        "uniform": {
+          "events": 56262,
+          "mse": 0.16346809518737088
+        }
+      },
+      "threeprong_x_threeprong": {
+        "sv": {
+          "events": 2357,
+          "mse": 0.16677288562315182
+        },
+        "uniform": {
+          "events": 2357,
+          "mse": 0.17547611598915117
+        }
+      }
+    }
+  }
+}
