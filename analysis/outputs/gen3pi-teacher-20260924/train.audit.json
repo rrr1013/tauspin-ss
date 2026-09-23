@@ -1,0 +1,47 @@
+{
+  "split": "train",
+  "source": "/home/rbaba/reco-h-supervision-20260906-targets/train.npz",
+  "source_sha256": "d6ae8707f78ac085bc0a23f0a7fba428a78ba6d946b73a2a8729ba98b5f4bfb7",
+  "rows": 473018,
+  "h_valid_rows": 472872,
+  "events_with_3pi_side": 169455,
+  "replaced_3pi_sides": 188514,
+  "cos_old_new_3pi": {
+    "mean": 0.8878581383890487,
+    "median": 0.9715797574542658,
+    "frac_negative": 0.016534580986027562
+  },
+  "pi_rho_closure_on_touched_events": {
+    "mode0_side0": {
+      "n": 22026,
+      "max_abs_dev": 2.982718383393035e-08
+    },
+    "mode0_side1": {
+      "n": 22100,
+      "max_abs_dev": 2.9801449641375655e-08
+    },
+    "mode1_side0": {
+      "n": 53230,
+      "max_abs_dev": 2.980214686143512e-08
+    },
+    "mode1_side1": {
+      "n": 53040,
+      "max_abs_dev": 2.9801547007934914e-08
+    }
+  },
+  "unchanged_fields": [
+    "entry_indices",
+    "event_numbers",
+    "file_indices",
+    "global_indices",
+    "h_valid",
+    "labels",
+    "modes",
+    "weights"
+  ],
+  "current": "TauDecay UFO Kuehn-Santamaria (rho770 + rho1465, beta=-0.145); pi and rho unchanged",
+  "hostname": "lxgpu02.icepp.jp",
+  "script_sha256": "0e9e2fbea1097cc8c7d2cc1e943cd8327c71e319f46a17bfa6e150b021b6ed3c",
+  "elapsed_seconds": 18.356669425964355,
+  "test_split_loaded": false
+}

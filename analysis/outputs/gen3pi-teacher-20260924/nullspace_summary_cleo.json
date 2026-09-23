@@ -1,0 +1,113 @@
+{
+  "tag": "full",
+  "rows": 59390,
+  "independent": false,
+  "met_sigma_GeV": 0.0,
+  "proposal_lattice": 96,
+  "proposal_draws_per_event": 9216,
+  "retained_per_event": 1024,
+  "clip_quantile": 0.99,
+  "seed": 20260919,
+  "inputs": {
+    "surface": "/home/rbaba/azimuth-nullspace-20260918/artifacts/truth_surface.npz",
+    "surface_sha256": "e544294ceaf91a1433f3302de9040b21fb55e04a8a180d1997c4d0855ab7fa32",
+    "hybrid_polarimeter": "/home/rbaba/tauspin-truth-neutrino-20260906/NN/neutrino_statistics_20260907/hybrid_polarimeter.py",
+    "hybrid_polarimeter_sha256": "78c237c2bbc04c5581bcc0688848eb500a4b9c56da4688cdf8ad477e27ed1322"
+  },
+  "closure": {
+    "truth_h_max_abs_deviation": 2.986728953047191e-08,
+    "truth_h_median_abs_deviation": 2.3569279750113026e-08
+  },
+  "region": {
+    "proposal_acceptance_mean": 0.30174869930520476,
+    "proposal_acceptance_quantiles": [
+      0.012261284722222222,
+      0.20475260416666666,
+      0.8585069444444444
+    ],
+    "region_area_GeV2_quantiles": [
+      0.9459160957838363,
+      7.859223426109736,
+      61.19386915917308
+    ],
+    "ellipse_semi_major_GeV_median": 156.31521789254316,
+    "ellipse_semi_minor_GeV_median": 1.6598804946518873,
+    "retained_quantiles": [
+      23.0,
+      113.0,
+      1024.0,
+      1024.0
+    ],
+    "sheet_multiplicity_mean": 3.9987203232867485,
+    "valid_hypotheses_quantiles": [
+      92.0,
+      452.0,
+      4096.0,
+      4096.0
+    ],
+    "events_with_no_valid_hypothesis": 19
+  },
+  "effective_sample_size": {
+    "flat": {
+      "mean": 3309.5255766964137,
+      "quantiles": [
+        452.0,
+        4096.0,
+        4096.0
+      ]
+    },
+    "ip1": {
+      "mean": 1075.062961609569,
+      "quantiles": [
+        62.229630860543736,
+        816.0171295097966,
+        2963.09652170158
+      ]
+    },
+    "ip3": {
+      "mean": 944.7104681672707,
+      "quantiles": [
+        57.21014246459168,
+        681.5071134004943,
+        2737.089682381745
+      ]
+    },
+    "sv": {
+      "mean": 2580.210635284489,
+      "quantiles": [
+        258.7646511667095,
+        2766.949825548695,
+        4096.0
+      ]
+    },
+    "ip3_sv": {
+      "mean": 793.0302494391489,
+      "quantiles": [
+        43.80171367415688,
+        522.0939169021958,
+        2488.794814258951
+      ]
+    },
+    "ip3_sv_mass": {
+      "mean": 723.083570319382,
+      "quantiles": [
+        38.284775116195846,
+        466.05247510047184,
+        2310.9658105626227
+      ]
+    },
+    "ip3_shuffle": {
+      "mean": 1256.7960879939858,
+      "quantiles": [
+        55.807362170791,
+        901.9599074719024,
+        3568.9010570172863
+      ]
+    }
+  },
+  "elapsed_seconds": 3133.0657246112823,
+  "hostname": "lxgpu02.icepp.jp",
+  "script_sha256": "6aa5dcabf08e1797d7fcb563750ddf9dc8ec8d8bab3303a46597801095e7b4f3",
+  "metspace_sha256": "a7a541987fb13ded263204ec15a13b863bd61d78c92a251bbd943a5fc093e1f1",
+  "nullspace_sha256": "286178ed7474a8c5fd02d2f8fd85533dc1c15ef791d6e718285cec17db2c9526"
+}
