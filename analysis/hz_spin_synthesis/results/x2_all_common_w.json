@@ -1,0 +1,413 @@
+{
+  "events": 48722,
+  "weighted": true,
+  "auc": {
+    "base_hard": 0.6190052480664393,
+    "f22ens_hard": 0.6281629347553679,
+    "f22ens_soft": 0.626554129261868,
+    "truth_exact:flat": 0.6221384960504341,
+    "truth_exact:ip3_sv": 0.6484460186552566,
+    "truth_exact:ip3_sv_mass": 0.6521237858827305,
+    "truth_exact2:flat": 0.6195120611488596,
+    "truth_exact2:ip3_sv": 0.6451409109635147,
+    "truth_exact2:ip3_sv_mass": 0.6485518632268247,
+    "recopi_exact2:flat": 0.6173680743413097,
+    "recopi_exact2:ip3_sv": 0.6419153576443436,
+    "recopi_exact2:ip3_sv_mass": 0.6449041130771992,
+    "recorho_exact2:flat": 0.5831880435425295,
+    "recorho_exact2:ip3_sv": 0.5995821909882024,
+    "recorho_exact2:ip3_sv_mass": 0.600812059266372,
+    "reco3pi_exact2:flat": 0.618191106824186,
+    "reco3pi_exact2:ip3_sv": 0.6420018211496844,
+    "reco3pi_exact2:ip3_sv_mass": 0.6453869369931834,
+    "reco_exact2:flat": 0.5804300614563925,
+    "reco_exact2:ip3_sv": 0.5943471260478413,
+    "reco_exact2:ip3_sv_mass": 0.5953829960011283,
+    "truth_recomet:flat": 0.5968784950519352,
+    "truth_recomet:ip3_sv": 0.6170724811108705,
+    "truth_recomet:ip3_sv_mass": 0.6272896481951691,
+    "reco_recomet:flat": 0.5672842038097957,
+    "reco_recomet:ip3_sv": 0.5778592700763253,
+    "reco_recomet:ip3_sv_mass": 0.5836764899588262,
+    "exact_h_LR": 0.7165335030207491
+  },
+  "by_pair": {
+    "pi x pi": {
+      "events": 2944,
+      "base_hard": 0.6465919019942972,
+      "f22ens_hard": 0.6507903796404508,
+      "f22ens_soft": 0.6448286115837201,
+      "truth_exact:flat": 0.6247237845814702,
+      "truth_exact:ip3_sv": 0.6451726226307517,
+      "truth_exact:ip3_sv_mass": 0.6489764185466327,
+      "truth_exact2:flat": 0.6235281037836341,
+      "truth_exact2:ip3_sv": 0.6429505017590865,
+      "truth_exact2:ip3_sv_mass": 0.6471312910308296,
+      "recopi_exact2:flat": 0.6184530996942003,
+      "recopi_exact2:ip3_sv": 0.6321446046320169,
+      "recopi_exact2:ip3_sv_mass": 0.6366845579499725,
+      "recorho_exact2:flat": 0.6235281037836341,
+      "recorho_exact2:ip3_sv": 0.6429505017590865,
+      "recorho_exact2:ip3_sv_mass": 0.6471312910308296,
+      "reco3pi_exact2:flat": 0.6235281037836341,
+      "reco3pi_exact2:ip3_sv": 0.6429505017590865,
+      "reco3pi_exact2:ip3_sv_mass": 0.6471312910308296,
+      "reco_exact2:flat": 0.6184530996942003,
+      "reco_exact2:ip3_sv": 0.6321446046320169,
+      "reco_exact2:ip3_sv_mass": 0.6366845579499725,
+      "truth_recomet:flat": 0.5904220936369252,
+      "truth_recomet:ip3_sv": 0.6085813748005318,
+      "truth_recomet:ip3_sv_mass": 0.6188298956591461,
+      "reco_recomet:flat": 0.5912918991555551,
+      "reco_recomet:ip3_sv": 0.6022517398828313,
+      "reco_recomet:ip3_sv_mass": 0.6115440046481815,
+      "exact_h_LR": 0.7066116835028926
+    },
+    "pi x rho": {
+      "events": 13074,
+      "base_hard": 0.6307069627281207,
+      "f22ens_hard": 0.6386885945868928,
+      "f22ens_soft": 0.6363859565212526,
+      "truth_exact:flat": 0.6270093441617508,
+      "truth_exact:ip3_sv": 0.6548465970557041,
+      "truth_exact:ip3_sv_mass": 0.6591850722347968,
+      "truth_exact2:flat": 0.6254413807081182,
+      "truth_exact2:ip3_sv": 0.6540113999218822,
+      "truth_exact2:ip3_sv_mass": 0.6567402197137675,
+      "recopi_exact2:flat": 0.6192914883957678,
+      "recopi_exact2:ip3_sv": 0.6473507877721402,
+      "recopi_exact2:ip3_sv_mass": 0.6494133590885044,
+      "recorho_exact2:flat": 0.5921385457923839,
+      "recorho_exact2:ip3_sv": 0.606929275861217,
+      "recorho_exact2:ip3_sv_mass": 0.6078975951672855,
+      "reco3pi_exact2:flat": 0.6254413807081182,
+      "reco3pi_exact2:ip3_sv": 0.6540113999218822,
+      "reco3pi_exact2:ip3_sv_mass": 0.6567402197137675,
+      "reco_exact2:flat": 0.5877508032343293,
+      "reco_exact2:ip3_sv": 0.6030258619915837,
+      "reco_exact2:ip3_sv_mass": 0.603148337157269,
+      "truth_recomet:flat": 0.6020577289415534,
+      "truth_recomet:ip3_sv": 0.6261326773225165,
+      "truth_recomet:ip3_sv_mass": 0.6344986452653529,
+      "reco_recomet:flat": 0.5761748331081532,
+      "reco_recomet:ip3_sv": 0.5888937808694631,
+      "reco_recomet:ip3_sv_mass": 0.5920787597044267,
+      "exact_h_LR": 0.7199692790866278
+    },
+    "rho x rho": {
+      "events": 13794,
+      "base_hard": 0.6187306528087112,
+      "f22ens_hard": 0.622811335197226,
+      "f22ens_soft": 0.6233759842164749,
+      "truth_exact:flat": 0.6432520174849597,
+      "truth_exact:ip3_sv": 0.65886288998565,
+      "truth_exact:ip3_sv_mass": 0.6629000126653154,
+      "truth_exact2:flat": 0.6419897434843036,
+      "truth_exact2:ip3_sv": 0.6568752046222955,
+      "truth_exact2:ip3_sv_mass": 0.6604067805435782,
+      "recopi_exact2:flat": 0.6419897434843036,
+      "recopi_exact2:ip3_sv": 0.6568752046222955,
+      "recopi_exact2:ip3_sv_mass": 0.6604067805435782,
+      "recorho_exact2:flat": 0.5741817446687321,
+      "recorho_exact2:ip3_sv": 0.5772639458756619,
+      "recorho_exact2:ip3_sv_mass": 0.5768606159553868,
+      "reco3pi_exact2:flat": 0.6419897434843036,
+      "reco3pi_exact2:ip3_sv": 0.6568752046222955,
+      "reco3pi_exact2:ip3_sv_mass": 0.6604067805435782,
+      "reco_exact2:flat": 0.5741817446687321,
+      "reco_exact2:ip3_sv": 0.5772639458756619,
+      "reco_exact2:ip3_sv_mass": 0.5768606159553868,
+      "truth_recomet:flat": 0.6298686046503335,
+      "truth_recomet:ip3_sv": 0.6403189572077653,
+      "truth_recomet:ip3_sv_mass": 0.6471551815614255,
+      "reco_recomet:flat": 0.5733038562829929,
+      "reco_recomet:ip3_sv": 0.5731861629301278,
+      "reco_recomet:ip3_sv_mass": 0.5763743064319256,
+      "exact_h_LR": 0.7344882346746757
+    },
+    "pi x 3pi": {
+      "events": 5303,
+      "base_hard": 0.6081235393364343,
+      "f22ens_hard": 0.6256024013883058,
+      "f22ens_soft": 0.6211763537052198,
+      "truth_exact:flat": 0.5864827948069563,
+      "truth_exact:ip3_sv": 0.6356805569273912,
+      "truth_exact:ip3_sv_mass": 0.6392107117686754,
+      "truth_exact2:flat": 0.5816299530318583,
+      "truth_exact2:ip3_sv": 0.6305737330894345,
+      "truth_exact2:ip3_sv_mass": 0.6342817613789776,
+      "recopi_exact2:flat": 0.580259712864654,
+      "recopi_exact2:ip3_sv": 0.6232805461456751,
+      "recopi_exact2:ip3_sv_mass": 0.6248847390085142,
+      "recorho_exact2:flat": 0.5816299530318583,
+      "recorho_exact2:ip3_sv": 0.6305737330894345,
+      "recorho_exact2:ip3_sv_mass": 0.6342817613789776,
+      "reco3pi_exact2:flat": 0.5782867175116172,
+      "reco3pi_exact2:ip3_sv": 0.6182086514099641,
+      "reco3pi_exact2:ip3_sv_mass": 0.6238396743509668,
+      "reco_exact2:flat": 0.576017807086575,
+      "reco_exact2:ip3_sv": 0.6103174633120466,
+      "reco_exact2:ip3_sv_mass": 0.6146500534168796,
+      "truth_recomet:flat": 0.5582137341746582,
+      "truth_recomet:ip3_sv": 0.5908155194647079,
+      "truth_recomet:ip3_sv_mass": 0.6059944730222178,
+      "reco_recomet:flat": 0.5500201491834144,
+      "reco_recomet:ip3_sv": 0.5782940142413757,
+      "reco_recomet:ip3_sv_mass": 0.5883779307642422,
+      "exact_h_LR": 0.6957328551205522
+    },
+    "rho x 3pi": {
+      "events": 11319,
+      "base_hard": 0.6090589114866182,
+      "f22ens_hard": 0.6212610634262827,
+      "f22ens_soft": 0.6211522737668004,
+      "truth_exact:flat": 0.6144583973430645,
+      "truth_exact:ip3_sv": 0.6469386831543241,
+      "truth_exact:ip3_sv_mass": 0.6500113531117232,
+      "truth_exact2:flat": 0.6100772144738128,
+      "truth_exact2:ip3_sv": 0.6415496026487001,
+      "truth_exact2:ip3_sv_mass": 0.6448125987791842,
+      "recopi_exact2:flat": 0.6100772144738128,
+      "recopi_exact2:ip3_sv": 0.6415496026487001,
+      "recopi_exact2:ip3_sv_mass": 0.6448125987791842,
+      "recorho_exact2:flat": 0.5779364772231264,
+      "recorho_exact2:ip3_sv": 0.5940596948321287,
+      "recorho_exact2:ip3_sv_mass": 0.5947922585844956,
+      "reco3pi_exact2:flat": 0.6063426391135595,
+      "reco3pi_exact2:ip3_sv": 0.6349641280906411,
+      "reco3pi_exact2:ip3_sv_mass": 0.6376469812155156,
+      "reco_exact2:flat": 0.575370137758916,
+      "reco_exact2:ip3_sv": 0.5894489346615788,
+      "reco_exact2:ip3_sv_mass": 0.5901313574904834,
+      "truth_recomet:flat": 0.5760933936532657,
+      "truth_recomet:ip3_sv": 0.6061612272528207,
+      "truth_recomet:ip3_sv_mass": 0.6193166892682429,
+      "reco_recomet:flat": 0.5551745922110386,
+      "reco_recomet:ip3_sv": 0.5705509748687075,
+      "reco_recomet:ip3_sv_mass": 0.577201639450734,
+      "exact_h_LR": 0.7090557436471854
+    },
+    "3pi x 3pi": {
+      "events": 2288,
+      "base_hard": 0.5831100391408074,
+      "f22ens_hard": 0.5983668893188201,
+      "f22ens_soft": 0.5970766029315533,
+      "truth_exact:flat": 0.5700885449273005,
+      "truth_exact:ip3_sv": 0.5966015352676516,
+      "truth_exact:ip3_sv_mass": 0.5976287891285199,
+      "truth_exact2:flat": 0.5617447284607567,
+      "truth_exact2:ip3_sv": 0.5863139018180704,
+      "truth_exact2:ip3_sv_mass": 0.591427416964691,
+      "recopi_exact2:flat": 0.5617447284607567,
+      "recopi_exact2:ip3_sv": 0.5863139018180704,
+      "recopi_exact2:ip3_sv_mass": 0.591427416964691,
+      "recorho_exact2:flat": 0.5617447284607567,
+      "recorho_exact2:ip3_sv": 0.5863139018180704,
+      "recorho_exact2:ip3_sv_mass": 0.591427416964691,
+      "reco3pi_exact2:flat": 0.5606359864241581,
+      "reco3pi_exact2:ip3_sv": 0.5823619708903554,
+      "reco3pi_exact2:ip3_sv_mass": 0.5858118251788061,
+      "reco_exact2:flat": 0.5606359864241581,
+      "reco_exact2:ip3_sv": 0.5823619708903554,
+      "reco_exact2:ip3_sv_mass": 0.5858118251788061,
+      "truth_recomet:flat": 0.5434348125121594,
+      "truth_recomet:ip3_sv": 0.562723541563722,
+      "truth_recomet:ip3_sv_mass": 0.5734646027075828,
+      "reco_recomet:flat": 0.5422317695552633,
+      "reco_recomet:ip3_sv": 0.5533624482477107,
+      "reco_recomet:ip3_sv_mass": 0.5673329530903519,
+      "exact_h_LR": 0.6865715773262598
+    }
+  },
+  "paired_delta": {
+    "base_hard": {
+      "delta": -0.0031332479839948357,
+      "ci95": [
+        -0.007520360592132858,
+        0.0005223259927108677
+      ]
+    },
+    "f22ens_hard": {
+      "delta": 0.006024438704933743,
+      "ci95": [
+        0.0014785076358265676,
+        0.009847522633874837
+      ]
+    },
+    "f22ens_soft": {
+      "delta": 0.0044156332114339,
+      "ci95": [
+        8.516883387018064e-05,
+        0.008107966587428123
+      ]
+    },
+    "truth_exact:ip3_sv": {
+      "delta": 0.026307522604822497,
+      "ci95": [
+        0.023468985171708593,
+        0.029555636828761837
+      ]
+    },
+    "truth_exact:ip3_sv_mass": {
+      "delta": 0.029985289832296314,
+      "ci95": [
+        0.02741252183030379,
+        0.032957149790391986
+      ]
+    },
+    "truth_exact2:flat": {
+      "delta": -0.002626434901574548,
+      "ci95": [
+        -0.003852533100069283,
+        -0.0016299288664429433
+      ]
+    },
+    "truth_exact2:ip3_sv": {
+      "delta": 0.023002414913080527,
+      "ci95": [
+        0.020087632461446354,
+        0.026436306284642976
+      ]
+    },
+    "truth_exact2:ip3_sv_mass": {
+      "delta": 0.026413367176390534,
+      "ci95": [
+        0.023528972217253655,
+        0.029665638427814386
+      ]
+    },
+    "recopi_exact2:flat": {
+      "delta": -0.0047704217091244505,
+      "ci95": [
+        -0.006304101549220184,
+        -0.003444692895613747
+      ]
+    },
+    "recopi_exact2:ip3_sv": {
+      "delta": 0.019776861593909456,
+      "ci95": [
+        0.016699667373892065,
+        0.023419164688629496
+      ]
+    },
+    "recopi_exact2:ip3_sv_mass": {
+      "delta": 0.02276561702676505,
+      "ci95": [
+        0.019291746416562,
+        0.02618031506428517
+      ]
+    },
+    "recorho_exact2:flat": {
+      "delta": -0.03895045250790463,
+      "ci95": [
+        -0.042435552839688785,
+        -0.03446795623918729
+      ]
+    },
+    "recorho_exact2:ip3_sv": {
+      "delta": -0.02255630506223172,
+      "ci95": [
+        -0.02672936987612057,
+        -0.018579724856485246
+      ]
+    },
+    "recorho_exact2:ip3_sv_mass": {
+      "delta": -0.021326436784062097,
+      "ci95": [
+        -0.025573656435560393,
+        -0.0169581943647865
+      ]
+    },
+    "reco3pi_exact2:flat": {
+      "delta": -0.003947389226248155,
+      "ci95": [
+        -0.005826172818837702,
+        -0.0023120377052663777
+      ]
+    },
+    "reco3pi_exact2:ip3_sv": {
+      "delta": 0.019863325099250262,
+      "ci95": [
+        0.016578771365923287,
+        0.02391824806058602
+      ]
+    },
+    "reco3pi_exact2:ip3_sv_mass": {
+      "delta": 0.02324844094274925,
+      "ci95": [
+        0.020048055764240028,
+        0.027152123626881432
+      ]
+    },
+    "reco_exact2:flat": {
+      "delta": -0.04170843459404161,
+      "ci95": [
+        -0.045214649373132305,
+        -0.03750760635554227
+      ]
+    },
+    "reco_exact2:ip3_sv": {
+      "delta": -0.027791370002592797,
+      "ci95": [
+        -0.03204690233923576,
+        -0.023123601838158873
+      ]
+    },
+    "reco_exact2:ip3_sv_mass": {
+      "delta": -0.026755500049305825,
+      "ci95": [
+        -0.03065269881652037,
+        -0.022206479922404983
+      ]
+    },
+    "truth_recomet:flat": {
+      "delta": -0.0252600009984989,
+      "ci95": [
+        -0.028987216274897278,
+        -0.02246369128328816
+      ]
+    },
+    "truth_recomet:ip3_sv": {
+      "delta": -0.005066014939563601,
+      "ci95": [
+        -0.009085476011436389,
+        -0.0010994807728524159
+      ]
+    },
+    "truth_recomet:ip3_sv_mass": {
+      "delta": 0.005151152144734938,
+      "ci95": [
+        0.0017060516218130011,
+        0.008816744545322977
+      ]
+    },
+    "reco_recomet:flat": {
+      "delta": -0.054854292240638425,
+      "ci95": [
+        -0.0590148969130696,
+        -0.050554471881976266
+      ]
+    },
+    "reco_recomet:ip3_sv": {
+      "delta": -0.04427922597410883,
+      "ci95": [
+        -0.04873337691931856,
+        -0.0398518452932751
+      ]
+    },
+    "reco_recomet:ip3_sv_mass": {
+      "delta": -0.03846200609160799,
+      "ci95": [
+        -0.04317842549394463,
+        -0.03342098801681837
+      ]
+    },
+    "exact_h_LR": {
+      "delta": 0.094395006970315,
+      "ci95": [
+        0.09012718212499278,
+        0.09796858523266944
+      ]
+    }
+  }
+}

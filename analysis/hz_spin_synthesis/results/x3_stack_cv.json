@@ -1,0 +1,88 @@
+{
+  "events": 59390,
+  "auc": {
+    "learner_only": 0.6262946320911239,
+    "physics_only": 0.5747277661115738,
+    "learner+physics": 0.6262149482284982,
+    "learner+rr_flat": 0.6262975794871364,
+    "learner+rr_ipsv": 0.6262419203029851,
+    "learner+rr_ipsvm": 0.6262512139713937
+  },
+  "delta": {
+    "physics_only": [
+      -0.05156686597955007,
+      -0.055840587813038675,
+      -0.04747723831289549
+    ],
+    "learner+physics": [
+      -7.968386262569016e-05,
+      -0.00037083186381127177,
+      0.00025093916936439733
+    ],
+    "learner+rr_flat": [
+      2.9473960124759557e-06,
+      -0.00033815901503082,
+      0.0003809584302119552
+    ],
+    "learner+rr_ipsv": [
+      -5.271178813881505e-05,
+      -0.00034702636396097,
+      0.0002573142806456705
+    ],
+    "learner+rr_ipsvm": [
+      -4.34181197301875e-05,
+      -0.0003566637356534258,
+      0.0002613598415965729
+    ]
+  },
+  "by_pair": {
+    "pi x pi": {
+      "learner_only": 0.6559931599675138,
+      "physics_only": 0.6094605994541481,
+      "learner+physics": 0.6556584046286319,
+      "learner+rr_flat": 0.6558918403111635,
+      "learner+rr_ipsv": 0.6558562000139596,
+      "learner+rr_ipsvm": 0.6553135839792189
+    },
+    "pi x rho": {
+      "learner_only": 0.6371554932784425,
+      "physics_only": 0.5827990781905326,
+      "learner+physics": 0.6368287088487817,
+      "learner+rr_flat": 0.6370254496935089,
+      "learner+rr_ipsv": 0.6369905468555386,
+      "learner+rr_ipsvm": 0.6368234724643178
+    },
+    "rho x rho": {
+      "learner_only": 0.6205898787242013,
+      "physics_only": 0.5649346325367044,
+      "learner+physics": 0.620639377388387,
+      "learner+rr_flat": 0.6206411178133827,
+      "learner+rr_ipsv": 0.6204968343852032,
+      "learner+rr_ipsvm": 0.6206110011529609
+    },
+    "pi x 3pi": {
+      "learner_only": 0.6216215985588015,
+      "physics_only": 0.5865450906100251,
+      "learner+physics": 0.6218058781428742,
+      "learner+rr_flat": 0.6216989366109088,
+      "learner+rr_ipsv": 0.6218637620659125,
+      "learner+rr_ipsvm": 0.6219630969745714
+    },
+    "rho x 3pi": {
+      "learner_only": 0.6177862627499621,
+      "physics_only": 0.5672077473672205,
+      "learner+physics": 0.6176102304489661,
+      "learner+rr_flat": 0.6177031788865208,
+      "learner+rr_ipsv": 0.6178203133846327,
+      "learner+rr_ipsvm": 0.6179315344946623
+    },
+    "3pi x 3pi": {
+      "learner_only": 0.601176859421362,
+      "physics_only": 0.566014963632885,
+      "learner+physics": 0.6020104262980873,
+      "learner+rr_flat": 0.6020095034792762,
+      "learner+rr_ipsv": 0.6016414763972878,
+      "learner+rr_ipsvm": 0.6020345101884756
+    }
+  }
+}
