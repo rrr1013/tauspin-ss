@@ -75,11 +75,13 @@ def plot_control_auc(
         upper = np.array([
             bootstrap[cohort][name]["ci_high"] for name, _, _ in comparisons
         ])
-        axes[1, column].errorbar(
-            np.arange(len(points)), points,
-            yerr=np.stack((points - lower, upper - points)), fmt="none",
-            ecolor=[color for _, _, color in comparisons], capsize=4, lw=2,
-        )
+        for position, (point, low, high, (_, _, color)) in enumerate(
+            zip(points, lower, upper, comparisons)
+        ):
+            axes[1, column].errorbar(
+                position, point, yerr=[[point - low], [high - point]],
+                fmt="none", ecolor=color, capsize=4, lw=2,
+            )
         axes[1, column].scatter(
             np.arange(len(points)), points,
             color=[color for _, _, color in comparisons], s=50, zorder=3,
