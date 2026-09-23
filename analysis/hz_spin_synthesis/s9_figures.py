@@ -39,7 +39,7 @@ def fig_ladder():
         ("point h + all IP + SV, 2 seeds (09-23)", x1["f22ens_hard"]),
     ]
     if "best" in fin:
-        learned.append(("point h + all IP + SV, best of this run", fin["best"]))
+        learned.append(("point h + all IP + SV, 4-seed ensemble (this run)", fin["best"]))
     learned += [
         ("same, IP direction replaced by truth (ideal IP)", x1["ideal_hard"]),
         ("same, truth tau direction in local frame (09-23)", 0.6864),          # beyond-ceiling oracle
