@@ -268,7 +268,11 @@ def main() -> None:
             "visible_axis": "replace measured SV direction by the event's reco-visible tau direction on the same SV-available sides",
             "test_loaded": False,
         },
-        "counts": {name: int(mask.sum()) for name, mask in masks.items()},
+        "counts": {
+            name: int(mask.sum())
+            for name, mask in masks.items()
+            if args.split == "validation" or "exact_surface" not in name
+        },
         "offset_preservation": {
             "measured_angle_rad": quantile_summary(measured_offset[available]),
             "shuffled_angle_rad": quantile_summary(shuffled_offset[available]),

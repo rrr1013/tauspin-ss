@@ -26,6 +26,78 @@ from train_readouts import (
 )
 
 
+def plot_control_auc(
+    output: Path,
+    auc_metrics: dict[str, dict[str, dict[str, float]]],
+    bootstrap: dict[str, dict[str, dict[str, float]]],
+) -> None:
+    fig, axes = plt.subplots(2, 3, figsize=(14, 8), constrained_layout=True)
+    methods = (
+        ("baseline_flow_mean", "baseline", "0.35"),
+        ("sv_weighted_mean", "real SV", "#4C78A8"),
+        ("offset_shuffle", "offset shuffle", "#F28E2B"),
+        ("visible_axis", "visible axis", "#59A14F"),
+        ("point_h", "direct point h", "#B279A2"),
+    )
+    comparisons = (
+        ("sv_minus_baseline", "baseline", "0.35"),
+        ("sv_minus_offset_shuffle", "offset shuffle", "#F28E2B"),
+        ("sv_minus_visible_axis", "visible axis", "#59A14F"),
+        ("sv_minus_random_direction_shuffle", "random dir.", "#E45756"),
+    )
+    cohorts = ("inclusive", "no_sv", "reco_threeprong_x_threeprong")
+    for column, cohort in enumerate(cohorts):
+        values = [auc_metrics[cohort][name]["weighted_auc"] for name, _, _ in methods]
+        axes[0, column].scatter(
+            np.arange(len(values)), values,
+            color=[color for _, _, color in methods], s=60,
+        )
+        axes[0, column].set_xticks(
+            np.arange(len(values)), [label for _, label, _ in methods],
+            rotation=25, ha="right",
+        )
+        axes[0, column].set(ylabel="weighted H/Z AUC",
+                            title=cohort.replace("_", " "))
+        margin = max(max(values) - min(values), 1.0e-4) * 0.08
+        axes[0, column].set_ylim(min(values) - margin, max(values) + margin)
+        for position, value in enumerate(values):
+            axes[0, column].annotate(
+                f"{value:.6f}", (position, value), xytext=(0, 6),
+                textcoords="offset points", ha="center", fontsize=8,
+            )
+
+        points = np.array([
+            bootstrap[cohort][name]["difference"] for name, _, _ in comparisons
+        ])
+        lower = np.array([
+            bootstrap[cohort][name]["ci_low"] for name, _, _ in comparisons
+        ])
+        upper = np.array([
+            bootstrap[cohort][name]["ci_high"] for name, _, _ in comparisons
+        ])
+        axes[1, column].errorbar(
+            np.arange(len(points)), points,
+            yerr=np.stack((points - lower, upper - points)), fmt="none",
+            ecolor=[color for _, _, color in comparisons], capsize=4, lw=2,
+        )
+        axes[1, column].scatter(
+            np.arange(len(points)), points,
+            color=[color for _, _, color in comparisons], s=50, zorder=3,
+        )
+        axes[1, column].axhline(0.0, color="0.5", ls="--", lw=1)
+        axes[1, column].set_xticks(
+            np.arange(len(points)), [label for _, label, _ in comparisons],
+            rotation=25, ha="right",
+        )
+        axes[1, column].set(
+            ylabel="AUC(real SV) - AUC(control)",
+            title="paired event bootstrap (95% CI)",
+        )
+    fig.suptitle("Deterministic-readout SV controls and zero-SV placebo")
+    fig.savefig(output / "extra_control_auc.png", dpi=180)
+    plt.close(fig)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--train-inputs", type=Path, required=True)
@@ -147,26 +219,7 @@ def main() -> None:
             global_indices=validation["global_indices"][val_rows],
         )
 
-    fig, axes = plt.subplots(1, 3, figsize=(14, 4.5), constrained_layout=True)
-    methods = (
-        ("baseline_flow_mean", "baseline", "0.35"),
-        ("sv_weighted_mean", "real SV", "#4C78A8"),
-        ("offset_shuffle", "offset shuffle", "#F28E2B"),
-        ("visible_axis", "visible axis", "#59A14F"),
-        ("point_h", "direct point h", "#B279A2"),
-    )
-    for axis, cohort in zip(axes, ("inclusive", "no_sv", "reco_threeprong_x_threeprong")):
-        values = [auc_metrics[cohort][name]["weighted_auc"] for name, _, _ in methods]
-        axis.scatter(np.arange(len(values)), values, color=[color for _, _, color in methods], s=60)
-        axis.set_xticks(np.arange(len(values)), [label for _, label, _ in methods],
-                        rotation=25, ha="right")
-        axis.set(ylabel="weighted H/Z AUC", title=cohort.replace("_", " "))
-        for position, value in enumerate(values):
-            axis.annotate(f"{value:.6f}", (position, value), xytext=(0, 6),
-                          textcoords="offset points", ha="center", fontsize=8)
-    fig.suptitle("Deterministic-readout SV controls and zero-SV placebo")
-    fig.savefig(args.output / "extra_control_auc.png", dpi=180)
-    plt.close(fig)
+    plot_control_auc(args.output, auc_metrics, bootstrap)
 
     report = {
         "contract": {

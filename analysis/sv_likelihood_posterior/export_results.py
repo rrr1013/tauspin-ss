@@ -33,6 +33,10 @@ def main() -> None:
     parser.add_argument("--representation-report", type=Path, required=True)
     parser.add_argument("--readout-report", type=Path, required=True)
     parser.add_argument("--surface-report", type=Path, required=True)
+    parser.add_argument("--train-extra-controls-report", type=Path)
+    parser.add_argument("--validation-extra-controls-report", type=Path)
+    parser.add_argument("--extra-control-readout-report", type=Path)
+    parser.add_argument("--gap-bootstrap-report", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
@@ -140,25 +144,15 @@ def main() -> None:
         base_mse = h_values["uniform"]["mse"]
         sv_mse = h_values["sv"]["mse"]
         direction_mse = h_values["oracle_direction"]["mse"]
-        auc_values = readout["auc_metrics"][cohort]
-        base_auc = auc_values["baseline_flow_mean"]["weighted_auc"]
-        sv_auc = auc_values["sv_weighted_mean"]["weighted_auc"]
-        direction_auc = auc_values["oracle_direction_mean"]["weighted_auc"]
-        truth_nu_auc = auc_values["truth_nu_functional"]["weighted_auc"]
-
         def fraction(numerator: float, denominator: float) -> float | None:
             return numerator / denominator if denominator != 0.0 else None
 
         oracle_gap_recovery[cohort] = {
-            "h_mse_direction_oracle_gap_fraction": fraction(
+            "h_mse_same_response_truth_direction_gap_fraction": fraction(
                 base_mse - sv_mse, base_mse - direction_mse
             ),
-            "h_mse_truth_nu_oracle_gap_fraction": fraction(base_mse - sv_mse, base_mse),
-            "auc_direction_oracle_gap_fraction": fraction(
-                sv_auc - base_auc, direction_auc - base_auc
-            ),
-            "auc_truth_nu_functional_gap_fraction": fraction(
-                sv_auc - base_auc, truth_nu_auc - base_auc
+            "h_mse_relative_reduction_to_exact_technical_target": fraction(
+                base_mse - sv_mse, base_mse
             ),
         }
 
@@ -183,6 +177,32 @@ def main() -> None:
         "oracle_gap_recovery": oracle_gap_recovery,
         "response_audit": representation["response_audit"],
     }
+    if args.train_extra_controls_report:
+        train_extra = json.loads(args.train_extra_controls_report.read_text())
+        compact["train_only_temperature_sensitivity"] = train_extra[
+            "train_only_temperature_sensitivity"
+        ]
+    if args.validation_extra_controls_report:
+        validation_extra = json.loads(args.validation_extra_controls_report.read_text())
+        compact["additional_h_controls"] = {
+            "contract": validation_extra["contract"],
+            "counts": validation_extra["counts"],
+            "offset_preservation": validation_extra["offset_preservation"],
+            "paired_bootstrap_h": validation_extra["paired_bootstrap_h"],
+            "posterior_truth_direction_support": validation_extra[
+                "posterior_truth_direction_support"
+            ],
+        }
+    if args.extra_control_readout_report:
+        extra_readout = json.loads(args.extra_control_readout_report.read_text())
+        compact["additional_auc_controls"] = {
+            "contract": extra_readout["contract"],
+            "paired_bootstrap_auc": extra_readout["paired_bootstrap_auc"],
+        }
+    if args.gap_bootstrap_report:
+        compact["oracle_gap_bootstrap"] = json.loads(
+            args.gap_bootstrap_report.read_text()
+        )
     (args.output / "summary.json").write_text(
         json.dumps(compact, indent=2, sort_keys=True) + "\n"
     )
