@@ -1,0 +1,15 @@
+{
+  "arm": "geo16",
+  "selected_epoch": 47,
+  "selection_window": [
+    46,
+    47,
+    48
+  ],
+  "fixed_endpoint_epoch": 100,
+  "status": "complete",
+  "hostname": "lxgpu02.icepp.jp",
+  "elapsed_seconds": 4736.452649831772,
+  "validation_h_mse": 0.1700386008859624,
+  "test_loaded": false
+}

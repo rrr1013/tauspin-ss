@@ -9,7 +9,7 @@ import numpy as np
 
 CH = np.diag([1.0, 1.0, -1.0])
 CZ = np.diag([0.0, 0.0, 1.0])
-MEASURES = ('flat', 'ip', 'ip_shuffle', 'ip_legacy', 'mass', 'ip_mass')
+MEASURES = None  # discovered from second_* keys
 PAIRS = {'1p0n x 1p0n': (0, 0), 'rho x rho': (1, 1), '3p0n x 3p0n': (3, 3)}
 
 
@@ -48,6 +48,8 @@ def main():
     p.add_argument('--boot', type=int, default=1000)
     a = p.parse_args()
     d = np.load(a.moments)
+    global MEASURES
+    MEASURES = tuple(k[len('second_'):] for k in d.files if k.startswith('second_'))
     y = d['labels'].astype(int)
     modes = d['modes']
     valid = d['count'] > 0
@@ -66,12 +68,12 @@ def main():
         sel = valid & (modes[:, 0] == m0) & (modes[:, 1] == m1)
         out['by_pair'][name] = {'events': int(sel.sum()), **{
             k: float(fast_auc(scores[k][sel], y[sel])) for k in
-            ('truth_h_LR', 'flat_LR', 'ip_LR', 'ip_shuffle_LR', 'ip_legacy_LR', 'mass_LR', 'ip_mass_LR')}}
+            ('truth_h_LR',) + tuple(f'{m}_LR' for m in MEASURES)}}
     for m in MEASURES:
         out['ess'][m] = np.quantile(d[f'ess_{m}'][valid], [0.05, 0.5, 0.95]).tolist()
     rng = np.random.default_rng(20260923)
     idx = np.flatnonzero(valid)
-    diffs = {k: [] for k in ('ip_LR', 'ip_shuffle_LR', 'ip_legacy_LR', 'mass_LR', 'ip_mass_LR')}
+    diffs = {f'{m}_LR': [] for m in MEASURES if m != 'flat'}
     for _ in range(a.boot):
         b = rng.choice(idx, len(idx))
         base = fast_auc(scores['flat_LR'][b], y[b])
