@@ -35,10 +35,11 @@ without simulating a new sample.
 | `p9_review_followups.py` | review follow-ups: finiteness of the Fisher information, rest-frame `y`, same-seed geometry |
 | `p10_review_round2.py` | paired comparisons, mode pairs on one scale, cross-fitted readout with an exact-`h` positive control, static modulation across arms |
 | `p11_classical_phase.py` | phase shift of the classical phi*_CP with bootstrap errors, and its Z control |
+| `p12_density_closure.py` | external closure of the spin-density model against the ideal-C(0) re-decay toy; cross-fitted classical + learned combination |
 | `make_figures.py` | figures |
 
 Two independent reviews (`review/`) are folded in; `p9`-`p11` exist because of
-them.  See the run note section "レビューと訂正" for what changed.
+them, as does `p12`.  See the run note section "レビューと訂正" for what changed.
 
 ## Inputs (ICEPP lxgpu02, copied into `data/`, not tracked)
 
@@ -58,7 +59,7 @@ python3 p0_align.py && python3 p1_density_check.py
 python3 p2_sensitivity.py && python3 p3_classical.py && python3 p4_classical_full.py
 python3 p5_readout.py && python3 p6_geometry_value.py && python3 p7_static_modulation.py
 python3 p8_closure_fit.py && python3 p9_review_followups.py
-python3 p10_review_round2.py && python3 p11_classical_phase.py
+python3 p10_review_round2.py && python3 p11_classical_phase.py && python3 p12_density_closure.py
 python3 make_figures.py
 ```
 
