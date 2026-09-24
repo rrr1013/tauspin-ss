@@ -1,0 +1,346 @@
+{
+ "A_density_closure": {
+  "what": "observed 9<h- h+^T> vs a re-decay toy built with an ideal C(0) and the same visible pT>20 GeV, |eta|<2.5 selection (2026-09-24 run, toy stats ~1.2e5/pair)",
+  "naive_unselected_expectation": {
+   "C0_H": [
+    1.0,
+    1.0,
+    -1.0000000000000018
+   ],
+   "C0_Z": [
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  "rows": {
+   "pi x pi (H)": {
+    "n": 1628,
+    "observed_diag": [
+     1.234,
+     1.355,
+     -0.53
+    ],
+    "observed_diag_err": [
+     0.069,
+     0.071,
+     0.056
+    ],
+    "ideal_C0_toy_with_selection_diag": [
+     1.231,
+     1.212,
+     -0.45
+    ],
+    "pull": [
+     0.04,
+     2.01,
+     -1.43
+    ],
+    "max_abs_pull": 2.0060879435044554
+   },
+   "pi x pi (Z)": {
+    "n": 1638,
+    "observed_diag": [
+     0.061,
+     -0.048,
+     0.746
+    ],
+    "observed_diag_err": [
+     0.084,
+     0.082,
+     0.058
+    ],
+    "ideal_C0_toy_with_selection_diag": [
+     0.012,
+     0.011,
+     0.867
+    ],
+    "pull": [
+     0.59,
+     -0.72,
+     -2.07
+    ],
+    "max_abs_pull": 2.0716436951590667
+   },
+   "rho x rho (H)": {
+    "n": 9274,
+    "observed_diag": [
+     1.041,
+     1.06,
+     -0.931
+    ],
+    "observed_diag_err": [
+     0.029,
+     0.032,
+     0.026
+    ],
+    "ideal_C0_toy_with_selection_diag": [
+     1.023,
+     1.024,
+     -0.978
+    ],
+    "pull": [
+     0.61,
+     1.14,
+     1.78
+    ],
+    "max_abs_pull": 1.7822184928255227
+   },
+   "rho x rho (Z)": {
+    "n": 9456,
+    "observed_diag": [
+     -0.021,
+     -0.027,
+     0.937
+    ],
+    "observed_diag_err": [
+     0.03,
+     0.033,
+     0.029
+    ],
+    "ideal_C0_toy_with_selection_diag": [
+     -0.018,
+     0.013,
+     0.983
+    ],
+    "pull": [
+     -0.12,
+     -1.22,
+     -1.6
+    ],
+    "max_abs_pull": 1.598231545035884
+   },
+   "3pi x 3pi (H)": {
+    "n": 1188,
+    "observed_diag": [
+     0.971,
+     1.094,
+     -0.836
+    ],
+    "observed_diag_err": [
+     0.087,
+     0.081,
+     0.082
+    ],
+    "ideal_C0_toy_with_selection_diag": [
+     1.002,
+     0.988,
+     -1.002
+    ],
+    "pull": [
+     -0.36,
+     1.32,
+     2.03
+    ],
+    "max_abs_pull": 2.02623019907907
+   },
+   "3pi x 3pi (Z)": {
+    "n": 1185,
+    "observed_diag": [
+     -0.061,
+     0.009,
+     1.05
+    ],
+    "observed_diag_err": [
+     0.089,
+     0.091,
+     0.075
+    ],
+    "ideal_C0_toy_with_selection_diag": [
+     0.012,
+     -0.009,
+     1.006
+    ],
+    "pull": [
+     -0.82,
+     0.2,
+     0.58
+    ],
+    "max_abs_pull": 0.8243434056038835
+   },
+   "pi x rho (H)": {
+    "n": 7976,
+    "observed_diag": [
+     1.134,
+     1.103,
+     -0.839
+    ],
+    "observed_diag_err": [
+     0.036,
+     0.031,
+     0.028
+    ],
+    "ideal_C0_toy_with_selection_diag": [
+     1.098,
+     1.082,
+     -0.796
+    ],
+    "pull": [
+     1.02,
+     0.66,
+     -1.56
+    ],
+    "max_abs_pull": 1.5558677828741756
+   },
+   "pi x rho (Z)": {
+    "n": 7970,
+    "observed_diag": [
+     -0.017,
+     -0.001,
+     0.69
+    ],
+    "observed_diag_err": [
+     0.035,
+     0.035,
+     0.028
+    ],
+    "ideal_C0_toy_with_selection_diag": [
+     0.009,
+     0.005,
+     0.819
+    ],
+    "pull": [
+     -0.74,
+     -0.18,
+     -4.64
+    ],
+    "max_abs_pull": 4.637323241006197
+   },
+   "pi x 3pi (H)": {
+    "n": 2944,
+    "observed_diag": [
+     1.15,
+     1.027,
+     -0.749
+    ],
+    "observed_diag_err": [
+     0.052,
+     0.055,
+     0.049
+    ],
+    "ideal_C0_toy_with_selection_diag": [
+     1.09,
+     1.096,
+     -0.815
+    ],
+    "pull": [
+     1.15,
+     -1.25,
+     1.34
+    ],
+    "max_abs_pull": 1.3395796315153536
+   },
+   "pi x 3pi (Z)": {
+    "n": 2669,
+    "observed_diag": [
+     -0.078,
+     0.05,
+     0.726
+    ],
+    "observed_diag_err": [
+     0.062,
+     0.057,
+     0.05
+    ],
+    "ideal_C0_toy_with_selection_diag": [
+     -0.009,
+     0.02,
+     0.838
+    ],
+    "pull": [
+     -1.1,
+     0.53,
+     -2.26
+    ],
+    "max_abs_pull": 2.2568944992090967
+   },
+   "rho x 3pi (H)": {
+    "n": 6640,
+    "observed_diag": [
+     0.974,
+     1.041,
+     -0.995
+    ],
+    "observed_diag_err": [
+     0.035,
+     0.035,
+     0.034
+    ],
+    "ideal_C0_toy_with_selection_diag": [
+     1.001,
+     1.017,
+     -0.988
+    ],
+    "pull": [
+     -0.77,
+     0.7,
+     -0.19
+    ],
+    "max_abs_pull": 0.7710546299032973
+   },
+   "rho x 3pi (Z)": {
+    "n": 6822,
+    "observed_diag": [
+     0.004,
+     -0.017,
+     0.931
+    ],
+    "observed_diag_err": [
+     0.037,
+     0.04,
+     0.033
+    ],
+    "ideal_C0_toy_with_selection_diag": [
+     0.007,
+     -0.018,
+     0.985
+    ],
+    "pull": [
+     -0.1,
+     0.01,
+     -1.64
+    ],
+    "max_abs_pull": 1.644404130348804
+   }
+  },
+  "worst_pull": 4.637323241006197
+ },
+ "B_crossfit_combination": {
+  "pi-pi": {
+   "n": 1346,
+   "learned_alone": 0.907823537110169,
+   "combined_with_classical_reco": {
+    "sigma_deg": 0.9247347438040321,
+    "classical_alone": 1.1239494627555482
+   },
+   "combined_with_classical_truth_labY": {
+    "sigma_deg": 0.5936439406363611,
+    "classical_alone": 0.595515652170675
+   }
+  },
+  "rho-rho": {
+   "n": 7472,
+   "learned_alone": 1.3928334922284473,
+   "combined_with_classical_reco": {
+    "sigma_deg": 1.3945215999006235,
+    "classical_alone": 3.2862067669092863
+   },
+   "combined_with_classical_truth_labY": {
+    "sigma_deg": 1.2768697460398495,
+    "classical_alone": 1.7265594430751299
+   }
+  },
+  "pi-rho": {
+   "n": 6602,
+   "learned_alone": 1.1733631171396905,
+   "combined_with_classical_reco": {
+    "sigma_deg": 1.1758877326198813,
+    "classical_alone": 1.8546146596428226
+   },
+   "combined_with_classical_truth_labY": {
+    "sigma_deg": 0.9329765692584691,
+    "classical_alone": 1.0165249582493265
+   }
+  }
+ }
+}
