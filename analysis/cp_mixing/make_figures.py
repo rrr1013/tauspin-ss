@@ -101,7 +101,9 @@ def fig1(data, out):
     fig.legend(h_, l_, loc='lower center', bbox_to_anchor=(0.5, 0.055), ncol=3, fontsize=9)
     fig.text(0.5, 0.008, 'H→ττ, m=91.19 GeV, reco-selected validation cohort, both sides truth ρ and reco ρ.\n'
              'φ$_\\tau$=45° obtained by the exact-$h$ spin weight (ESS 0.40); shapes area-normalised, sumw2 errors, '
-             'curves are weighted fits of 1 + A cos(x − x$_0$).',
+             'curves are weighted fits of 1 + A cos(x − x$_0$).  The classical peak shift is −82° ± 13° '
+             '(bootstrap), consistent with the expected 2φ$_\\tau$ = 90°; the learned-$h$ shift is smaller '
+             'because its static component does not move.',
              ha='center', fontsize=8.2, color=MUTED)
     fig.tight_layout(rect=(0.01, 0.16, 0.99, 0.95))
     fig.savefig(out / 'fig1_cp_angle_distributions.png')
@@ -182,43 +184,49 @@ def fig2(out):
 
 
 def fig3(data, out):
-    """Mode-pair structure: CP is flat at truth level, H/Z is not."""
+    """Mode-pair dependence of CP and H/Z, both on the effective-statistics scale."""
     S = json_get('sensitivity.json', ['by_mode_pair'])
+    B = json_get('review_round2.json', ['B_mode_pair_same_scale'])
     mp = json.loads((HERE.parents[0] / 'outputs' / 'mode-pair-auc-origin-20260924'
                      / 'results.json').read_text())['observed']['generator_current']
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(11.8, 4.5))
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(12.4, 4.7), gridspec_kw={'width_ratios': [1, 1]})
     x = np.arange(len(PAIRS))
+    cp = np.array([B['rows'][p_]['cp_effective_lumi_vs_best'] for p_ in PAIRS])
+    hz = np.array([B['rows'][p_]['hz_effective_lumi_vs_best'] for p_ in PAIRS])
+    a1.plot(x, cp, 'o', color=BLUE, ms=9, label=f'CP mixing angle  (spread {B["cp_spread_effective_lumi"]:.3f}×)')
+    a1.plot(x, hz, 's', color=ORANGE, ms=8, mfc='white', mew=2,
+            label=f'H/Z discrimination  (spread {B["hz_spread_effective_lumi"]:.3f}×)')
+    a1.set_xticks(x, [PLABEL[p_] for p_ in PAIRS])
+    a1.set_ylabel('effective statistics per event,\nrelative to the best decay-mode pair')
+    a1.set_ylim(0.73, 1.06)
+    a1.legend(fontsize=8.8, loc='lower right')
+    a1.set_title('exact $h$: both quantities on one scale', fontsize=10.5, color=INK)
+    a1.grid(axis='y', color=GRAY, alpha=0.2, lw=0.6)
+
     series = [('exact $h$, triple product', 'exact_Tp', AQUA, '^', -0.16),
               ('exact $h$, optimal statistic', 'exact_optimal', GRAY, '*', 0.0),
               ('reco $h$ (+IP, SV), triple product', 'full22_Tp', BLUE, 's', 0.16)]
     for lab, key, col, mk, dx in series:
         v = [S[p_][key]['sigma_deg'] for p_ in PAIRS]
         e = [S[p_][key].get('sigma_deg_se', 0.0) for p_ in PAIRS]
-        a1.errorbar(x + dx, v, yerr=e, fmt=mk, ms=8, color=col, elinewidth=1.2, capsize=0,
+        a2.errorbar(x + dx, v, yerr=e, fmt=mk, ms=8, color=col, elinewidth=1.2, capsize=0,
                     label=lab, zorder=3)
-    a1.set_xticks(x, [PLABEL[p_] for p_ in PAIRS])
-    a1.set_ylabel('σ($\\phi_\\tau$) per 10,000 H events  [deg]')
-    a1.set_ylim(0.3, 1.95)
-    a1.legend(fontsize=8.6, loc='upper left', ncol=1)
-    a1.set_title('CP mixing angle  (H events only)', fontsize=10.5, color=INK)
-    v = [mp[p_]['auc'] for p_ in PAIRS]
-    e = [mp[p_]['se'] for p_ in PAIRS]
-    a2.errorbar(x, v, yerr=e, fmt='^', ms=8, color=AQUA, elinewidth=1.2, capsize=0,
-                label='exact $h$, fixed-C likelihood ratio', zorder=3)
     a2.set_xticks(x, [PLABEL[p_] for p_ in PAIRS])
-    a2.set_ylabel('H/Z weighted AUC')
-    a2.set_ylim(0.665, 0.762)
-    a2.legend(fontsize=8.6, loc='lower right')
-    a2.set_title('H/Z spin discrimination  (H vs Z, 2026-09-24 run)', fontsize=10.5, color=INK)
+    a2.set_ylabel('σ($\\phi_\\tau$) per 10,000 H events  [deg]')
+    a2.set_ylim(0.3, 1.95)
+    a2.legend(fontsize=8.6, loc='upper left')
+    a2.set_title('CP mixing angle, absolute scale  (H events only)', fontsize=10.5, color=INK)
+    a2.grid(axis='y', color=GRAY, alpha=0.2, lw=0.6)
     for ax in (a1, a2):
-        ax.grid(axis='y', color=GRAY, alpha=0.2, lw=0.6)
         ax.set_xlim(-0.55, len(PAIRS) - 0.45)
-    fig.suptitle('At truth level the CP angle does not care which decay modes the event has; H/Z does',
+    fig.suptitle('The CP angle depends on the decay-mode pair about half as much as H/Z does — not zero',
                  fontsize=11.5, color=INK)
-    fig.text(0.5, 0.005, 'Same validation cohort and the same exact generator-current $h$ in both panels. '
-             'Error bars are bootstrap standard deviations; the optimal-statistic points carry no bar.',
+    d = B['pi3pi_minus_rhorho_cp_sigma']
+    fig.text(0.5, 0.008, 'Left: (best σ / σ)² for CP and (d′/d′$_{best}$)² for H/Z with d′ = √2 Φ⁻¹(AUC), unweighted AUC from the 2026-09-24 run.  '
+             f'The CP spread is real: π×3π vs ρ×ρ differs by {d["n_sigma"]:.1f}σ ({-d["delta_deg"]:.3f}° paired bootstrap).\n'
+             'Right: error bars are bootstrap standard deviations; the optimal-statistic points carry no bar.',
              ha='center', fontsize=8.2, color=MUTED)
-    fig.tight_layout(rect=(0, 0.035, 1, 0.93))
+    fig.tight_layout(rect=(0, 0.06, 1, 0.93))
     fig.savefig(out / 'fig3_mode_pair.png')
     plt.close(fig)
 
@@ -298,7 +306,7 @@ def fig5(data, out):
     hH = h_exact[y]
     S, f = score(hH, C0)
     Tp = triple(hH[:, 0], hH[:, 1])
-    fig, ax = plt.subplots(2, 2, figsize=(11.4, 8.0))
+    fig, ax = plt.subplots(2, 3, figsize=(15.6, 8.0))
 
     a = ax[0, 0]
     degs = np.arange(-12, 12.5, 1.5)
@@ -337,28 +345,67 @@ def fig5(data, out):
     a.set_xlabel('percent of events with the smallest $1+h_-^{T}C_0h_+$ removed')
     a.set_ylabel('σ($\\phi_\\tau$) per 10,000 events [deg]')
     a.legend(fontsize=8.8, loc='center right')
-    a.set_title('(c) both statistics lose when the smallest-weight events are cut', fontsize=10, color=INK)
+    R9 = json_get('review_followups.json', ['fisher_isotropic'])
+    a.text(0.97, 0.06, 'the Fisher information is finite: $T_p = O(\\sqrt{f})$ as $f\\to0$.\n'
+           f'isotropic toy gives $E[S^2] \\to 4/3$ (measured {R9["rows"][-1]["E_S2"]:.3f}\n'
+           f'at $10^7$); it is $E[S^4]$ that diverges logarithmically',
+           transform=a.transAxes, ha='right', fontsize=7.8, color=MUTED)
+    a.set_title('(c) both statistics lose when the most informative events are cut', fontsize=10, color=INK)
 
     a = ax[1, 1]
-    R = json_get('readout.json', ['arms'])
-    for arm, col, mk in (('base_s43', ORANGE, 'o'), ('full22_s42', BLUE, 's')):
-        degs_ = [2, 3, 4]
-        v = [R[arm][f'fitted_readout_deg{d}']['sigma_deg'] for d in degs_]
-        e = [R[arm][f'fitted_readout_deg{d}']['sigma_deg_se'] for d in degs_]
-        a.errorbar(degs_, v, yerr=e, fmt=mk + '-', color=col, ms=7, elinewidth=1.1, capsize=0,
-                   label=f'{arm}: readout fitted on the train split')
-        a.axhline(R[arm]['plugin_Tp']['sigma_deg'], color=col, ls=':', lw=1.4)
-        a.text(4.06, R[arm]['plugin_Tp']['sigma_deg'], ' plug-in $T_p$', va='center',
-               fontsize=8.4, color=col)
-    a.set_ylim(1.15, 1.75)
-    a.set_xlim(1.6, 4.7)
-    a.set_xticks([2, 3, 4])
-    a.text(1.72, 1.70, 'degree 1 omitted: a readout linear in $h_{pred}$\ncannot be CP-odd '
-           '(measured σ > 45°, consistent with none)', fontsize=8.2, color=MUTED, va='top')
-    a.set_xlabel('polynomial degree of the fitted readout')
-    a.set_ylabel('σ($\\phi_\\tau$) per 10,000 H events [deg]')
-    a.legend(fontsize=8.4, loc='lower left')
-    a.set_title('(d) no readout of $h_{pred}$ beats its own triple product by much', fontsize=10, color=INK)
+    R = json_get('review_round2.json', ['C_readout_crossfit'])
+    degs_ = [2, 3, 4, 5, 6]
+    for tag, col, mk in (('exact_h (positive control)', AQUA, '^'),
+                         ('base_s43', ORANGE, 'o'), ('full22_s42', BLUE, 's')):
+        r = R[tag]
+        a.plot(degs_, [r[f'crossfit_deg{d}']['sigma_deg'] / r['plugin_Tp'] for d in degs_],
+               mk + '-', color=col, ms=7, label=tag.replace('_', r'\_'))
+    a.axhline(1, color=GRAY, lw=1, ls=':')
+    a.text(2.05, 0.855, 'plug-in triple product', fontsize=8.2, color=MUTED)
+    a.plot([6.25], [R['exact_h (positive control)']['optimal_from_exact_score']
+                    / R['exact_h (positive control)']['plugin_Tp']], '*', color=GRAY, ms=13)
+    a.text(6.2, 0.815, 'optimal\n(exact $h$)', fontsize=8.0, color=MUTED, ha='right')
+    a.set_xticks(degs_)
+    a.set_xlim(1.7, 6.6)
+    a.set_ylim(0.78, 1.35)
+    a.set_xlabel('polynomial degree, cross-fitted on validation halves')
+    a.set_ylabel('σ($\\phi_\\tau$) / σ of the plug-in $T_p$')
+    a.legend(fontsize=8.0, loc='upper left')
+    a.set_title('(d) the readout search finds the known gap for exact $h$,\nbut almost none for $h_{pred}$',
+                fontsize=9.5, color=INK)
+
+    K = json_get('closure_fit.json', [])
+    a = ax[0, 2]
+    for name, col, mk in (('exact_h_Tp', AQUA, '^'), ('reco_h_Tp', BLUE, 'D')):
+        r = K['observables'][name]
+        xs = np.array([float(k) for k in r['injections']])
+        bi = np.array([v['bias_deg'] for v in r['injections'].values()])
+        sd = np.array([v['sd_phi_hat_deg'] for v in r['injections'].values()])
+        a.errorbar(xs, bi, yerr=sd / np.sqrt(K['toys']), fmt=mk + '-', color=col, ms=7,
+                   elinewidth=1.2, capsize=0, label=f'{name} (σ = {r["predicted_sigma_deg"]:.2f}°)')
+    a.axhline(0, color=GRAY, lw=1, ls=':')
+    a.set_xlabel('injected $\\phi_\\tau$ [deg]')
+    a.set_ylabel('fitted − injected  [deg]')
+    a.set_ylim(-0.6, 0.6)
+    a.legend(fontsize=8.2, loc='lower left')
+    a.set_title('(e) injection closure: the fit is unbiased', fontsize=10, color=INK)
+
+    a = ax[1, 2]
+    for name, col, mk in (('exact_h_Tp', AQUA, '^'), ('reco_h_Tp', BLUE, 'D'),
+                          ('exact_h_score', GRAY, '*')):
+        r = K['observables'][name]
+        xs = np.array([float(k) for k in r['injections']])
+        ra = np.array([v['sd_over_predicted'] for v in r['injections'].values()])
+        a.plot(xs, ra, mk + '-', color=col, ms=7, label=name)
+    a.axhline(1, color=GRAY, lw=1, ls=':')
+    a.set_xlabel('injected $\\phi_\\tau$ [deg]')
+    a.set_ylabel('toy spread / predicted σ')
+    a.set_ylim(0.8, 2.5)
+    a.legend(fontsize=8.2, loc='upper left')
+    a.text(0.97, 0.05, 'above ~10° the parent reweighting ESS\nitself inflates the toy spread',
+           transform=a.transAxes, ha='right', fontsize=8.0, color=MUTED)
+    a.set_title('(f) the quoted σ is the local sensitivity at $\\phi_\\tau=0$', fontsize=10, color=INK)
+
     fig.suptitle('Validation of the CP-mixing sensitivity estimates', fontsize=12, color=INK)
     fig.tight_layout(rect=(0, 0, 1, 0.95))
     fig.savefig(out / 'fig5_validation.png')

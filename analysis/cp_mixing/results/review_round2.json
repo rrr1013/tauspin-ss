@@ -1,0 +1,326 @@
+{
+ "A_paired_channel_comparisons": {
+  "pi-pi": {
+   "n": 1346,
+   "classical_reco_over_learned": {
+    "ratio": 1.23807041435978,
+    "ci95": [
+     1.1568588361577317,
+     1.3391166455960077
+    ],
+    "p_ratio_lt_1": 0.0
+   },
+   "classical_truth_labY_over_learned": {
+    "ratio": 0.6559817275352336,
+    "ci95": [
+     0.6070298404985366,
+     0.7013993737793153
+    ],
+    "p_ratio_lt_1": 1.0
+   },
+   "combined_classicalTruth_and_learned_insample": {
+    "sigma_deg": 0.593281111720284,
+    "learned_alone_sigma_deg": 0.907823537110169
+   }
+  },
+  "rho-rho": {
+   "n": 7472,
+   "classical_reco_over_learned": {
+    "ratio": 2.3593679971405335,
+    "ci95": [
+     2.0688693761539327,
+     2.734353039318007
+    ],
+    "p_ratio_lt_1": 0.0
+   },
+   "classical_truth_labY_over_learned": {
+    "ratio": 1.2396021869870042,
+    "ci95": [
+     1.1507198881594662,
+     1.3370350079109479
+    ],
+    "p_ratio_lt_1": 0.0
+   },
+   "combined_classicalTruth_and_learned_insample": {
+    "sigma_deg": 1.2765628835878728,
+    "learned_alone_sigma_deg": 1.3928334922284473
+   }
+  },
+  "pi-rho": {
+   "n": 6602,
+   "classical_reco_over_learned": {
+    "ratio": 1.5805973722472377,
+    "ci95": [
+     1.4670732802529305,
+     1.7036346112819614
+    ],
+    "p_ratio_lt_1": 0.0
+   },
+   "classical_truth_labY_over_learned": {
+    "ratio": 0.8663345075370286,
+    "ci95": [
+     0.8187383139943789,
+     0.912248655267991
+    ],
+    "p_ratio_lt_1": 1.0
+   },
+   "combined_classicalTruth_and_learned_insample": {
+    "sigma_deg": 0.9323832818705386,
+    "learned_alone_sigma_deg": 1.1733631171396905
+   }
+  }
+ },
+ "B_mode_pair_same_scale": {
+  "rows": {
+   "pi x pi": {
+    "n_H": 1628,
+    "cp_sigma_deg": 0.5759807432140245,
+    "hz_auc": 0.7145673395673395,
+    "hz_dprime": 0.801544506855893,
+    "cp_effective_lumi_vs_best": 0.9764385157650141,
+    "hz_effective_lumi_vs_best": 0.7984981851496334
+   },
+   "rho x rho": {
+    "n_H": 9274,
+    "cp_sigma_deg": 0.603786267103896,
+    "hz_auc": 0.7356591732358025,
+    "hz_dprime": 0.8909824945333777,
+    "cp_effective_lumi_vs_best": 0.8885755679058828,
+    "hz_effective_lumi_vs_best": 0.9866360773531527
+   },
+   "3pi x 3pi": {
+    "n_H": 1188,
+    "cp_sigma_deg": 0.6027484288303727,
+    "hz_auc": 0.7370484024492463,
+    "hz_dprime": 0.8969963491979919,
+    "cp_effective_lumi_vs_best": 0.8916381778740977,
+    "hz_effective_lumi_vs_best": 1.0
+   },
+   "pi x rho": {
+    "n_H": 7976,
+    "cp_sigma_deg": 0.5822982052548616,
+    "hz_auc": 0.7229712663712593,
+    "hz_dprime": 0.8367775574957561,
+    "cp_effective_lumi_vs_best": 0.9553663194772133,
+    "hz_effective_lumi_vs_best": 0.8702393092583951
+   },
+   "pi x 3pi": {
+    "n_H": 2944,
+    "cp_sigma_deg": 0.5691548157002285,
+    "hz_auc": 0.7181291946992034,
+    "hz_dprime": 0.8164154455793119,
+    "cp_effective_lumi_vs_best": 1.0,
+    "hz_effective_lumi_vs_best": 0.828401876463797
+   },
+   "rho x 3pi": {
+    "n_H": 6640,
+    "cp_sigma_deg": 0.5977783905619241,
+    "hz_auc": 0.7341914712499956,
+    "hz_dprime": 0.8846463899926864,
+    "cp_effective_lumi_vs_best": 0.9065262968964429,
+    "hz_effective_lumi_vs_best": 0.9726533083083989
+   }
+  },
+  "cp_spread_effective_lumi": 1.1253966866956657,
+  "hz_spread_effective_lumi": 1.2523509991605133,
+  "pi3pi_minus_rhorho_cp_sigma": {
+   "delta_deg": -0.03441112388032066,
+   "sd": 0.010956185151224134,
+   "n_sigma": 3.1407943006947
+  }
+ },
+ "C_readout_crossfit": {
+  "exact_h (positive control)": {
+   "plugin_Tp": 0.5913187263859139,
+   "optimal_from_exact_score": 0.4864438796132127,
+   "crossfit_deg2": {
+    "sigma_deg": 0.5916074517671318,
+    "corr": 0.8222270949938599
+   },
+   "crossfit_deg3": {
+    "sigma_deg": 0.5917285816665798,
+    "corr": 0.8220587808572339
+   },
+   "crossfit_deg4": {
+    "sigma_deg": 0.530297207087573,
+    "corr": 0.9172887768252551
+   },
+   "crossfit_deg5": {
+    "sigma_deg": 0.5315413039087359,
+    "corr": 0.9151418203367476
+   },
+   "crossfit_deg6": {
+    "sigma_deg": 0.5122979719445084,
+    "corr": 0.9495170839674906
+   }
+  },
+  "base_s43": {
+   "plugin_Tp": 1.6040086899862995,
+   "optimal_from_exact_score": 0.4864438796132127,
+   "crossfit_deg2": {
+    "sigma_deg": 1.620376802429347,
+    "corr": 0.30019911153623097
+   },
+   "crossfit_deg3": {
+    "sigma_deg": 1.6428634754637004,
+    "corr": 0.29609013999529804
+   },
+   "crossfit_deg4": {
+    "sigma_deg": 1.6557644288576818,
+    "corr": 0.29378314207341844
+   },
+   "crossfit_deg5": {
+    "sigma_deg": 1.8094147682294923,
+    "corr": 0.2688359158907413
+   },
+   "crossfit_deg6": {
+    "sigma_deg": 2.1106704111257373,
+    "corr": 0.23046500954346813
+   }
+  },
+  "full22_s42": {
+   "plugin_Tp": 1.2808166904392677,
+   "optimal_from_exact_score": 0.4864438796132127,
+   "crossfit_deg2": {
+    "sigma_deg": 1.2883147902075247,
+    "corr": 0.377575170401368
+   },
+   "crossfit_deg3": {
+    "sigma_deg": 1.2985030045524788,
+    "corr": 0.37461266915655383
+   },
+   "crossfit_deg4": {
+    "sigma_deg": 1.2689211965285117,
+    "corr": 0.38334585140037825
+   },
+   "crossfit_deg5": {
+    "sigma_deg": 1.3371290933237892,
+    "corr": 0.36379110952858257
+   },
+   "crossfit_deg6": {
+    "sigma_deg": 1.4325593534595,
+    "corr": 0.33955708380843785
+   }
+  }
+ },
+ "D_static_modulation": {
+  "exact_h": {
+   "H_rhorho": {
+    "amplitude": 0.6460025139478391,
+    "amplitude_se": 0.01358181331478433,
+    "phase_deg": -0.5539929096205641,
+    "n": 9274
+   },
+   "Z_rhorho": {
+    "amplitude": 0.016250388696291113,
+    "amplitude_se": 0.012199736995266284,
+    "phase_deg": -126.14081410827937,
+    "n": 9456
+   },
+   "H_rhorho_phi45": {
+    "amplitude": 0.6302613087376981,
+    "amplitude_se": 0.016402432865321268,
+    "phase_deg": 86.13280715099218,
+    "n": 9274
+   },
+   "additive_model_predicted_shift_deg": 88.52184363592403,
+   "observed_shift_deg": 86.68680006061277
+  },
+  "base_s43": {
+   "H_rhorho": {
+    "amplitude": 0.6915869828034958,
+    "amplitude_se": 0.013502610931589401,
+    "phase_deg": 0.12646597877741853,
+    "n": 9274
+   },
+   "Z_rhorho": {
+    "amplitude": 0.48886699584458765,
+    "amplitude_se": 0.014471332878797646,
+    "phase_deg": -1.9898408452878764,
+    "n": 9456
+   },
+   "H_rhorho_phi45": {
+    "amplitude": 0.535840814831767,
+    "amplitude_se": 0.02155048827079566,
+    "phase_deg": 20.872941070869366,
+    "n": 9274
+   },
+   "additive_model_predicted_shift_deg": 22.522469469323536,
+   "observed_shift_deg": 20.74647509209194
+  },
+  "full22_s42": {
+   "H_rhorho": {
+    "amplitude": 0.6246658843909262,
+    "amplitude_se": 0.012819848176082704,
+    "phase_deg": 0.21188488562083319,
+    "n": 9274
+   },
+   "Z_rhorho": {
+    "amplitude": 0.38507436799768857,
+    "amplitude_se": 0.015881902596170835,
+    "phase_deg": -2.674630197931455,
+    "n": 9456
+   },
+   "H_rhorho_phi45": {
+    "amplitude": 0.46537841629964694,
+    "amplitude_se": 0.0202805369027172,
+    "phase_deg": 28.654691936984577,
+    "n": 9274
+   },
+   "additive_model_predicted_shift_deg": 31.889685626466893,
+   "observed_shift_deg": 28.44280705136373
+  },
+  "full22_shuffle_s42": {
+   "H_rhorho": {
+    "amplitude": 0.6892548808499307,
+    "amplitude_se": 0.013328078083918123,
+    "phase_deg": -0.5008428348166694,
+    "n": 9274
+   },
+   "Z_rhorho": {
+    "amplitude": 0.47786782114326615,
+    "amplitude_se": 0.014515469063215302,
+    "phase_deg": -3.927782637938168,
+    "n": 9456
+   },
+   "H_rhorho_phi45": {
+    "amplitude": 0.532394297326479,
+    "amplitude_se": 0.02039952439670653,
+    "phase_deg": 20.385416938898707,
+    "n": 9274
+   },
+   "additive_model_predicted_shift_deg": 23.86242609590842,
+   "observed_shift_deg": 20.88625977371538
+  },
+  "idealip22_s42": {
+   "H_rhorho": {
+    "amplitude": 0.5827216437565916,
+    "amplitude_se": 0.01411560162374374,
+    "phase_deg": 1.442641701686977,
+    "n": 9274
+   },
+   "Z_rhorho": {
+    "amplitude": 0.29642413512950194,
+    "amplitude_se": 0.014928629195759768,
+    "phase_deg": -1.6348945139005857,
+    "n": 9456
+   },
+   "H_rhorho_phi45": {
+    "amplitude": 0.42935847568070296,
+    "amplitude_se": 0.020737485234215407,
+    "phase_deg": 43.57804714085912,
+    "n": 9274
+   },
+   "additive_model_predicted_shift_deg": 44.00440533153351,
+   "observed_shift_deg": 42.13540543917213
+  },
+  "classical_phistar": {
+   "H_rhorho": {
+    "amplitude": 0.16350364722261093,
+    "amplitude_se": 0.017788678428449358,
+    "phase_deg": -175.6942434976277,
+    "n": 7472
+   }
+  }
+ }
+}

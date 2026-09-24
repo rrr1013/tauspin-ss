@@ -4,8 +4,12 @@ Nominal sample: CP-even H -> tau tau (phi_tau = 0), spin density
 p_0(h) proportional to f = 1 + h-^T C(0) h+ times the isotropic measure.
 
 Reweighting to phi:      w(phi) = (1 + h-^T C(phi) h+) / f
-Score at phi = 0:        S = d/dphi log(1 + h-^T C(phi) h+) |_0 = 2 * Tp / f
-                         with Tp = (h- x h+) . k_hat = h-_n h+_r - h-_r h+_n
+Score at phi = 0:        S = d/dphi log(1 + h-^T C(phi) h+) |_0
+                           = (h-^T C'(0) h+) / f = (2/beta) Tp / f
+                         with Tp = (h- x h+) . k_hat = h-_n h+_r - h-_r h+_n.
+C'(0) is taken from a central difference of the exact c_matrix, so the finite
+beta = 0.99924 of this sample is carried exactly; it scales every sigma by a
+common 0.076% and cancels in every ratio.
 
 For any observable T the linear response of its mean is exactly
     d<T>/dphi |_0 = Cov_0(T, S)
@@ -27,12 +31,17 @@ def triple(hm, hp):
     return hm[:, 0] * hp[:, 1] - hm[:, 1] * hp[:, 0]
 
 
+def dc_dphi(eps=1e-5):
+    """C'(0) by central difference of the exact spinor-trace C(phi)."""
+    return (c_matrix(eps) - c_matrix(-eps)) / (2 * eps)
+
+
 def score(h_exact, C0=None):
     """CP score at phi = 0 from the exact polarimeters."""
     C0 = c_matrix(0.0) if C0 is None else C0
     hm, hp = h_exact[:, 0].astype(float), h_exact[:, 1].astype(float)
     f = 1.0 + bilinear(hm, hp, C0)
-    return 2.0 * triple(hm, hp) / f, f
+    return bilinear(hm, hp, dc_dphi()) / f, f
 
 
 def weights(h_exact, phi, C0=None):

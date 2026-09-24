@@ -1,0 +1,78 @@
+{
+ "fisher_isotropic": {
+  "rows": [
+   {
+    "n": 100000,
+    "E_S2": 1.353455761618033,
+    "E_S4": 31.602334775180026,
+    "f_min": 0.0020515051108453974
+   },
+   {
+    "n": 1000000,
+    "E_S2": 1.331268371820241,
+    "E_S4": 44.29739856869286,
+    "f_min": 0.0008517213647242228
+   },
+   {
+    "n": 10000000,
+    "E_S2": 1.338793024219718,
+    "E_S4": 62.61939422299787,
+    "f_min": 0.0004262735218569791
+   }
+  ],
+  "analytic_E_S2": 1.3333333333333333,
+  "sigma_deg_10k_from_4_3": 0.4961960058796129
+ },
+ "classical_rest_frame_y": {
+  "pi-pi": {
+   "n": 1346,
+   "classical_truth_lab_y": 0.595515652170675,
+   "classical_truth_rest_frame_y": 0.595515652170675,
+   "y_sign_disagreement": 0.0,
+   "learned_reco_h_Tp": 0.907823537110169
+  },
+  "rho-rho": {
+   "n": 7472,
+   "classical_truth_lab_y": 1.7265594430751299,
+   "classical_truth_rest_frame_y": 0.8947017375601931,
+   "y_sign_disagreement": 0.4131423982869379,
+   "learned_reco_h_Tp": 1.3928334922284473
+  },
+  "pi-rho": {
+   "n": 6602,
+   "classical_truth_lab_y": 1.0165249582493265,
+   "classical_truth_rest_frame_y": 0.7271470552598718,
+   "y_sign_disagreement": 0.2724931838836716,
+   "learned_reco_h_Tp": 1.1733631171396905
+  }
+ },
+ "same_seed_geometry": {
+  "selection": "no 3-prong side, generator-current teacher throughout",
+  "arms": {
+   "base (seed 43)": {
+    "cp_sigma_deg": 1.698426968608358,
+    "hz_auc": 0.6237299765034997,
+    "cp_effective_lumi": 1.0,
+    "hz_effective_lumi": 1.0
+   },
+   "IP+SV v2 (seed 42)": {
+    "cp_sigma_deg": 1.3156296511922783,
+    "hz_auc": 0.6304496372604675,
+    "cp_effective_lumi": 1.6665810855289456,
+    "hz_effective_lumi": 1.1157806777069097
+   },
+   "IP+SV v2 (seed 43)": {
+    "cp_sigma_deg": 1.3220556346492007,
+    "hz_auc": 0.6300764512082063,
+    "cp_effective_lumi": 1.6504192915825822,
+    "hz_effective_lumi": 1.1091662673200988
+   },
+   "ideal-IP (seed 42)": {
+    "cp_sigma_deg": 0.9711009590856917,
+    "hz_auc": 0.6473757084216399,
+    "cp_effective_lumi": 3.058897949073744,
+    "hz_effective_lumi": 1.43919903459
+   }
+  }
+ }
+}
