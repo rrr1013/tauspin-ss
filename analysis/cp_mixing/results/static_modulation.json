@@ -1,0 +1,42 @@
+{
+ "exact_h:H_rhorho": {
+  "n": 9274,
+  "amplitude": 0.6422112655477555,
+  "phase_deg": -0.1964605134848289
+ },
+ "exact_h:Z_rhorho": {
+  "n": 9456,
+  "amplitude": 0.017128542551464954,
+  "phase_deg": -126.46327849482671
+ },
+ "exact_h:H_all": {
+  "n": 29650,
+  "amplitude": 0.6495131073901457,
+  "phase_deg": -0.6273153922095244
+ },
+ "exact_h:Z_all": {
+  "n": 29740,
+  "amplitude": 0.007999931036740252,
+  "phase_deg": -151.58198101039244
+ },
+ "reco_h_full22:H_rhorho": {
+  "n": 9274,
+  "amplitude": 0.6029310083654177,
+  "phase_deg": 0.7245418990879811
+ },
+ "reco_h_full22:Z_rhorho": {
+  "n": 9456,
+  "amplitude": 0.37396316052223433,
+  "phase_deg": -1.5275325473375971
+ },
+ "reco_h_full22:H_all": {
+  "n": 29650,
+  "amplitude": 0.6065066310040235,
+  "phase_deg": 0.00465164395003278
+ },
+ "reco_h_full22:Z_all": {
+  "n": 29740,
+  "amplitude": 0.3634255576449529,
+  "phase_deg": 0.2692606286982316
+ }
+}

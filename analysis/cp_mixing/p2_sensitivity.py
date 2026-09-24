@@ -136,10 +136,10 @@ def main():
         if k.sum() < 200:
             continue
         row = {'n': int(k.sum()), 'fraction': float(k.mean()),
-               'exact_Tp': sensitivity(triple(hH[k, 0], hH[k, 1]), S[k], args.n_ref),
+               'exact_Tp': sensitivity(triple(hH[k, 0], hH[k, 1]), S[k], args.n_ref, boot=200),
                'exact_optimal': cramer_rao(S[k], args.n_ref)}
         Pf = np.load(args.data / 'gen3pi_full22_s42.npz')['h_pred'][y][k].astype(float)
-        row['full22_Tp'] = sensitivity(triple(Pf[:, 0], Pf[:, 1]), S[k], args.n_ref)
+        row['full22_Tp'] = sensitivity(triple(Pf[:, 0], Pf[:, 1]), S[k], args.n_ref, boot=200)
         bym[nm] = row
     out['by_mode_pair'] = bym
 

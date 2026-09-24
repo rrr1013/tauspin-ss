@@ -99,6 +99,7 @@ def main():
                    (pions_t[..., 3] - pi0_t[..., 3]) / np.maximum(pions_t[..., 3] + pi0_t[..., 3], 1e-9), 0.0)
 
     P = np.load(args.data / f'gen3pi_{args.arm}.npz')['h_pred'].astype(float)
+    P0 = np.load(args.data / 'gen3pi_base_s43.npz')['h_pred'].astype(float)
 
     channels = {
         'pi-pi': (tmode[:, 0] == 0) & (tmode[:, 1] == 0),
@@ -128,6 +129,7 @@ def main():
         row['classical_truth_sin'] = sensitivity(np.sin(pcp_t), Sk, args.n_ref, boot=200)
         row['classical_truth_sin_yweighted'] = sensitivity(wy_t * np.sin(pcp_t), Sk, args.n_ref, boot=200)
         row['classical_truth_asimov_sigma_deg'] = asimov_sigma(pcp_t, Sk, args.n_ref)
+        row['learned_reco_h_nogeo_Tp'] = sensitivity(triple(P0[k, 0], P0[k, 1]), Sk, args.n_ref, boot=200)
         row['learned_reco_h_Tp'] = sensitivity(triple(P[k, 0], P[k, 1]), Sk, args.n_ref, boot=200)
         row['exact_h_Tp'] = sensitivity(triple(h_gen[k, 0], h_gen[k, 1]), Sk, args.n_ref, boot=200)
         row['exact_h_optimal_sigma_deg'] = float(np.rad2deg(1 / np.sqrt(args.n_ref * np.var(Sk))))

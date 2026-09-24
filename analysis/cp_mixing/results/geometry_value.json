@@ -1,0 +1,84 @@
+{
+ "n_ref": 10000,
+ "selection": "no 3-prong side",
+ "n_events": 37942,
+ "n_H": 18878,
+ "cleo_vs_generator_max_dev_on_selection": 0.0,
+ "exact_h": {
+  "cp_sigma_deg": 0.5924555009743312,
+  "cp_optimal_sigma_deg": 0.4885739522513173,
+  "hz_auc": 0.7285789160933844
+ },
+ "arms": {
+  "base_s43": {
+   "description": "no geometry",
+   "cp_sigma_deg": 1.697749301965068,
+   "cp_sigma_deg_se": 0.04628245219140744,
+   "hz_auc": 0.6238558037725018,
+   "hz_auc_se": 0.0030719826542929705,
+   "mean_pred_norm": 0.681213389568211,
+   "cp_effective_lumi_vs_base": 1.0,
+   "hz_effective_lumi_vs_base": 1.0
+  },
+  "sv_s42": {
+   "description": "+ SV only",
+   "cp_sigma_deg": 1.7003745908046979,
+   "cp_sigma_deg_se": 0.04718497828530155,
+   "hz_auc": 0.6240469509655323,
+   "hz_auc_se": 0.003018178284644872,
+   "mean_pred_norm": 0.697680475785778,
+   "cp_effective_lumi_vs_base": 0.9969144890779414,
+   "hz_effective_lumi_vs_base": 1.003193974139153
+  },
+  "ip22_s42": {
+   "description": "+ 3 track IPs only",
+   "cp_sigma_deg": 1.3196251449512608,
+   "cp_sigma_deg_se": 0.024138401323833162,
+   "hz_auc": 0.629859137700535,
+   "hz_auc_se": 0.0030286139987138884,
+   "mean_pred_norm": 0.7385151985474355,
+   "cp_effective_lumi_vs_base": 1.655182769337327,
+   "hz_effective_lumi_vs_base": 1.1030040448705343
+  },
+  "full_s42": {
+   "description": "+ IP and SV (v1, 16 ch)",
+   "cp_sigma_deg": 1.3165557219455357,
+   "cp_sigma_deg_se": 0.024770443717288593,
+   "hz_auc": 0.6300247270978699,
+   "hz_auc_se": 0.003027806681075476,
+   "mean_pred_norm": 0.7412681550715639,
+   "cp_effective_lumi_vs_base": 1.6629095647678283,
+   "hz_effective_lumi_vs_base": 1.1059245002629559
+  },
+  "full22_s42": {
+   "description": "+ IP and SV (v2, 22 ch)",
+   "cp_sigma_deg": 1.3228509497630307,
+   "cp_sigma_deg_se": 0.02451434303145804,
+   "hz_auc": 0.6295113621768276,
+   "hz_auc_se": 0.0030448500489646544,
+   "mean_pred_norm": 0.740227609565192,
+   "cp_effective_lumi_vs_base": 1.6471202033480161,
+   "hz_effective_lumi_vs_base": 1.0968843688634766
+  },
+  "full22_shuffle_s42": {
+   "description": "geometry shuffled (control)",
+   "cp_sigma_deg": 1.7086264285780786,
+   "cp_sigma_deg_se": 0.045849042612055003,
+   "hz_auc": 0.6244375423267995,
+   "hz_auc_se": 0.0029690510849498743,
+   "mean_pred_norm": 0.6826785745921491,
+   "cp_effective_lumi_vs_base": 0.9873085134311685,
+   "hz_effective_lumi_vs_base": 1.0097379849486432
+  },
+  "idealip22_s42": {
+   "description": "ideal-IP oracle",
+   "cp_sigma_deg": 0.9738541967188942,
+   "cp_sigma_deg_se": 0.012469127253275628,
+   "hz_auc": 0.6471520429764865,
+   "hz_auc_se": 0.0028484374183578094,
+   "mean_pred_norm": 0.8250727420571986,
+   "cp_effective_lumi_vs_base": 3.0391997223303866,
+   "hz_effective_lumi_vs_base": 1.4316084551027204
+  }
+ }
+}
