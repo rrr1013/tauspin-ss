@@ -25,6 +25,7 @@ separation between a maximally entangled state and a separable one.
 | `q2_reco.py` | per-arm sensitivity, events needed to certify entanglement, instrumental correlation of the two predicted polarimeters, mode pairs |
 | `q4_zcontrol.py` | Z control, and the sharpest test: response calibrated on H applied to Z |
 | `q5_checks.py` | the instrumental correlation without any reweighting (Z has zero generated transverse correlation), why cutting on `f` is not a control, and the mode-pair response conditioning |
+| `q6_origin.py` | what the instrumental correlation is: an isotropic, event-dependent azimuthal alignment of the two predictions, not an alignment with MET or the visible axes |
 | `q3_figures.py` | figures |
 
 ## The estimator, and what it can and cannot do
@@ -50,7 +51,7 @@ injecting states into events the calibration never saw.
 ```sh
 export PYTHONPATH=../mode_pair_auc_origin:../cp_mixing
 python3 q0_naive.py && python3 q1_unfold.py
-python3 q2_reco.py && python3 q4_zcontrol.py && python3 q5_checks.py
+python3 q2_reco.py && python3 q4_zcontrol.py && python3 q5_checks.py && python3 q6_origin.py
 python3 q3_figures.py
 ```
 
