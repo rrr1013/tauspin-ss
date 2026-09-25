@@ -287,6 +287,52 @@ def fig5_modepairs(R):
     plt.close(fig)
 
 
+def fig6_alignment(S):
+    """The instrumental alignment, measured without any reweighting."""
+    y = S['labels']
+    O = json.loads((HERE / 'results' / 'origin.json').read_text())
+    fig, ax = plt.subplots(1, 2, figsize=(9.6, 3.6))
+    arms = [('exact $h$', S['h_gen'][~y], 'k', '-', 'o'),
+            ('reco, no geometry', load_arm('base_s43', S)['h_pred'][~y], 'C3', '--', 's'),
+            ('reco + 3 IP + SV', load_arm('full22_s42', S)['h_pred'][~y], 'C1', '-.', '^'),
+            ('reco + ideal IP', load_arm('idealip22_s42', S)['h_pred'][~y], 'C0', ':', 'v')]
+    vals = []
+    for lab, v, c, ls, mk in arms:
+        tm, tp = v[:, 0, :2], v[:, 1, :2]
+        dphi = np.mod(np.arctan2(tm[:, 1], tm[:, 0]) - np.arctan2(tp[:, 1], tp[:, 0]),
+                      2 * np.pi)
+        dphi = np.where(dphi > np.pi, 2 * np.pi - dphi, dphi)
+        ax[0].hist(dphi, bins=30, range=(0, np.pi), density=True, histtype='step',
+                   color=c, ls=ls, lw=1.7, label=lab)
+        um = tm / np.maximum(np.linalg.norm(tm, axis=1, keepdims=True), 1e-12)
+        up = tp / np.maximum(np.linalg.norm(tp, axis=1, keepdims=True), 1e-12)
+        cd = np.sum(um * up, 1)
+        vals.append((lab, cd.mean(), cd.std() / np.sqrt(len(cd)), c, mk))
+    ax[0].axhline(1 / np.pi, color='0.4', lw=1.1, ls='-')
+    ax[0].text(0.05, 1 / np.pi - 0.028, r'no alignment ($1/\pi$)', fontsize=7.5,
+               color='0.35')
+    ax[0].set_xlabel(r'$|\Delta\phi|$ between $h_{-\perp}$ and $h_{+\perp}$  [rad]')
+    ax[0].set_ylabel('normalised')
+    ax[0].set_title(r'$Z\to\tau\tau$, where $C_{nn}=C_{rr}=0$ by construction'
+                    '\n(29,740 events, no reweighting)', fontsize=9)
+    ax[0].legend(fontsize=7.5, loc='upper right')
+    x = np.arange(len(vals))
+    for i, (lab, m, e, c, mk) in enumerate(vals):
+        ax[1].errorbar([i], [m], yerr=[e], fmt=mk, color=c, ms=7, capsize=4)
+        ax[1].annotate(f'{m:+.3f}', (i, m), textcoords='offset points', xytext=(0, 10),
+                       ha='center', fontsize=8)
+    ax[1].axhline(0, color='0.3', lw=1.2)
+    ax[1].set_xticks(x, [v[0].replace(' + ', '\n+ ').replace(', ', ',\n') for v in vals],
+                     fontsize=7.5)
+    ax[1].set_ylim(-0.04, 0.31)
+    ax[1].set_ylabel(r'$\langle\cos\Delta\phi\rangle$')
+    ax[1].set_title('Spin-independent azimuthal alignment of the two\n'
+                    'predicted polarimeters; geometry halves it', fontsize=9)
+    fig.tight_layout()
+    fig.savefig(FIG / 'fig6_instrumental_alignment.png')
+    plt.close(fig)
+
+
 def main():
     S, R, U = load()
     fig1_states(S)
@@ -294,6 +340,7 @@ def main():
     fig3_instrumental(S, R)
     fig4_ladder(R)
     fig5_modepairs(R)
+    fig6_alignment(S)
     print('figures written to', FIG)
 
 
