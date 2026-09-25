@@ -24,6 +24,7 @@ separation between a maximally entangled state and a separable one.
 | `q1_unfold.py` | three estimators (naive, second-moment, calibrated), the identifiability limit, injection closure against a 236,688-event independent calibration |
 | `q2_reco.py` | per-arm sensitivity, events needed to certify entanglement, instrumental correlation of the two predicted polarimeters, mode pairs |
 | `q4_zcontrol.py` | Z control, and the sharpest test: response calibrated on H applied to Z |
+| `q5_checks.py` | the instrumental correlation without any reweighting (Z has zero generated transverse correlation), why cutting on `f` is not a control, and the mode-pair response conditioning |
 | `q3_figures.py` | figures |
 
 ## The estimator, and what it can and cannot do
@@ -49,7 +50,7 @@ injecting states into events the calibration never saw.
 ```sh
 export PYTHONPATH=../mode_pair_auc_origin:../cp_mixing
 python3 q0_naive.py && python3 q1_unfold.py
-python3 q2_reco.py && python3 q4_zcontrol.py
+python3 q2_reco.py && python3 q4_zcontrol.py && python3 q5_checks.py
 python3 q3_figures.py
 ```
 
