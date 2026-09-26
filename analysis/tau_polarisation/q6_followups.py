@@ -36,7 +36,7 @@ S, _ = PT.score(h[z])
 out = {'n_ref': N_REF}
 
 
-def crossfit(X, S, folds=2, seed=0):
+def crossfit(X, S, folds=10, seed=0):
     rng = np.random.default_rng(seed)
     parts = np.array_split(rng.permutation(len(S)), folds)
     T = np.empty(len(S))
