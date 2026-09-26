@@ -20,7 +20,7 @@ FIGS = PD.FIGS
 FIGS.mkdir(exist_ok=True)
 Q = {n: json.loads((PD.RESULTS / f'{n}.json').read_text())
      for n in ('q0_structure', 'q1_sensitivity', 'q2_classical',
-               'q3_measure', 'q4_transport', 'q5_translate')}
+               'q3_measure', 'q4_transport', 'q5_translate', 'q6_followups')}
 MLAB = {'pi': 'π ν', 'rho': 'ρ ν (π±π⁰)', '3pi': 'a₁ ν (3π)'}
 
 S = PD.load_surface()
@@ -302,7 +302,64 @@ def fig5():
     plt.close(fig)
 
 
+# ---------------------------------------------------------------- figure 6
+def fig6():
+    q6 = Q['q6_followups']
+    fig, ax = plt.subplots(1, 2, figsize=(11.2, 4.0))
+    mech = q6['mechanism_vs_truth_tau_pt']['rows']
+    for tag, c, mk in (('H', ORANGE, 'o'), ('Z', BLUE, 's')):
+        r = [x for x in mech[tag] if x]
+        xs = [0.5 * (x['lo'] + min(x['hi'], 300)) for x in r]
+        ax[0].errorbar(xs, [x['E0_hk'] for x in r], [x['E0_hk_se'] for x in r],
+                       color=c, marker=mk, ms=4.5, lw=1.5, label=f'{tag}, all modes')
+    pi = q6['mechanism_pi_only']
+    for tag, c, mk in (('H', ORANGE, 'v'), ('Z', BLUE, '^')):
+        r = [x for x in pi[tag] if x]
+        xs = [0.5 * (x['lo'] + min(x['hi'], 300)) for x in r]
+        ax[0].errorbar(xs, [x['E0_hk'] for x in r], [x['E0_hk_se'] for x in r],
+                       color=c, marker=mk, ms=4.5, lw=1.5, ls='--',
+                       label=f'{tag}, π sides only')
+    am = q6['acceptance_model']
+    xs = np.array([r['pt_tau'] for r in am['rows']])
+    ax[0].plot(xs, am['p_cut_fitted_GeV'] / xs, color=INK, ls=':', lw=1.8,
+               label=f'$p_{{cut}}/p_T^\\tau$, one parameter\n'
+                     f'($p_{{cut}}$ = {am["p_cut_fitted_GeV"]:.1f} GeV, fitted)')
+    ax[0].axhline(0, color=GRAY, lw=1.0)
+    ax[0].set_xscale('log')
+    ax[0].set_xticks([20, 30, 50, 70, 100, 150, 250])
+    ax[0].get_xaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter())
+    ax[0].get_xaxis().set_minor_formatter(matplotlib.ticker.NullFormatter())
+    ax[0].set_xlabel(r'truth $p_T^\tau$  [GeV]   (not a function of $h_k$)')
+    ax[0].set_ylabel(r'$E_0[h_k]$  (unpolarised measure)')
+    ax[0].set_title('(a) the acceptance first moment is a soft-τ effect',
+                    loc='left', fontsize=10)
+    ax[0].legend(fontsize=8, loc='upper right')
+
+    suff = q6['sufficiency']
+    keys = [('h_pred only', BLUE), ('visible + MET only', ORANGE), ('both', VIOLET)]
+    x = np.arange(2)
+    for j, (k, c) in enumerate(keys):
+        v = [suff[a][k]['sigma'] for a in ('base_s43', 'full22_s42')]
+        e = [suff[a][k].get('sigma_se', 0) for a in ('base_s43', 'full22_s42')]
+        ax[1].bar(x + (j - 1) * 0.26, v, 0.25, yerr=e, color=c, alpha=0.85,
+                  error_kw={'lw': 1.0, 'ecolor': INK}, label=k)
+        for xx, vv in zip(x + (j - 1) * 0.26, v):
+            ax[1].text(xx, vv + 0.00012, f'{vv:.5f}', ha='center', fontsize=8)
+    ax[1].set_xticks(x)
+    ax[1].set_xticklabels(['reco, no geometry', 'reco + 3 IP + SV'])
+    ax[1].set_ylabel(r'$\sigma(P_\tau)$ per $10^5$ Z events')
+    ax[1].set_ylim(0, 0.0082)
+    ax[1].legend(fontsize=8.5, loc='upper left')
+    ax[1].set_title('(b) adding raw visible + MET to $h_{pred}$ buys nothing',
+                    loc='left', fontsize=10)
+    ax[1].text(0.02, 0.06, 'cross-fitted linear readouts on halves of the Z rows',
+               transform=ax[1].transAxes, fontsize=8, color=MUTED)
+    fig.tight_layout()
+    fig.savefig(FIGS / 'fig6_followups.png')
+    plt.close(fig)
+
+
 if __name__ == '__main__':
-    for fn in (fig1, fig2, fig3, fig4, fig5):
+    for fn in (fig1, fig2, fig3, fig4, fig5, fig6):
         fn()
         print('wrote', fn.__name__)
