@@ -20,7 +20,8 @@ FIGS = PD.FIGS
 FIGS.mkdir(exist_ok=True)
 Q = {n: json.loads((PD.RESULTS / f'{n}.json').read_text())
      for n in ('q0_structure', 'q1_sensitivity', 'q2_classical',
-               'q3_measure', 'q4_transport', 'q5_translate', 'q6_followups')}
+               'q3_measure', 'q4_transport', 'q5_translate', 'q6_followups',
+               'q8_review')}
 MLAB = {'pi': 'π ν', 'rho': 'ρ ν (π±π⁰)', '3pi': 'a₁ ν (3π)'}
 
 S = PD.load_surface()
@@ -107,11 +108,12 @@ def fig2():
               q1['rows']['base_s43_hk'].get('sigma_se'), BLUE),
              ('reco h, shuffled geometry', q1['rows']['full22_shuffle_s42_hk']['sigma'],
               q1['rows']['full22_shuffle_s42_hk'].get('sigma_se'), GRAY),
-             ('best visible + MET readout', q2['rows']['vismet_best']['sigma'],
-              q2['rows']['vismet_best'].get('sigma_se'), ORANGE),
-             ('best visible-only readout', q2['rows']['vis_best']['sigma'],
-              q2['rows']['vis_best'].get('sigma_se'), ORANGE),
-             ('$E_{vis}/E_\\tau$ with truth $E_\\tau$ (LEP-style)',
+             ('best cross-fitted visible + MET readout',
+              q2['rows']['vismet_best']['sigma'],
+              Q['q8_review']['fold_stability']['visible + MET']['10-fold']['sd'], ORANGE),
+             ('best cross-fitted visible-only readout', q2['rows']['vis_best']['sigma'],
+              Q['q8_review']['fold_stability']['visible only']['10-fold']['sd'], ORANGE),
+             ('$E_{vis}/E_\\tau$ with truth $E_\\tau$: one variable',
               q2['rows']['x_truth']['sigma'], q2['rows']['x_truth'].get('sigma_se'), YELLOW)]
     fig, ax = plt.subplots(figsize=(8.6, 4.4))
     y = np.arange(len(items))[::-1]
@@ -125,7 +127,7 @@ def fig2():
                   '   (signal only, shape only)')
     lep = Q['q5_translate']['lep_sigma_P']
     ax.axvline(lep, color=INK, ls='--', lw=1.2)
-    ax.text(lep, len(items) - 0.4, ' LEP $\\sigma(A_\\tau)=0.0043$', fontsize=8.5,
+    ax.text(lep, len(items) - 0.4, ' LEP total $\\sigma(A_\\tau)=0.0043$', fontsize=8.5,
             color=INK, va='top')
     sec = ax.secondary_xaxis('top', functions=(lambda v: v / 7.870, lambda v: v * 7.870))
     sec.set_xlabel(r'$\sigma(\sin^2\theta^{\rm lept}_{\rm eff})$')
@@ -259,38 +261,49 @@ def fig5():
     ax[0].text(P0 + 0.006, -0.30, 'the SM value', fontsize=8, color=VIOLET, rotation=90)
     ax[0].set_xlabel('injected $P_\\tau$ (exact-$h$ reweighting of the Z rows)')
     ax[0].set_ylabel('recovered $P_\\tau$')
-    ax[0].set_title('(a) the bias is an offset, not a slope', loc='left', fontsize=10)
+    ax[0].set_title('(a) the uncorrected bias is an offset, not a slope',
+                    loc='left', fontsize=10)
     ax[0].legend(fontsize=8.5, loc='upper left')
     ax[0].text(0.04, 0.06, 'offset −0.037 … −0.044 over the whole range',
                transform=ax[0].transAxes, fontsize=8, color=MUTED)
 
-    tr = q4['transport']
-    order = ['none', 'overlap weights (existing)', 'per-side pT_vis',
-             'per-side pT_vis + mode', 'per-side pT_vis + eta + mode']
-    short = ['no reweighting', 'existing overlap\nweights',
-             'per-side $p_T^{vis}$', '+ decay mode', '+ η']
-    y = np.arange(len(order))[::-1]
-    ax[1].barh(y, [tr[k]['bias'] for k in order], 0.6, color=ORANGE, alpha=0.85)
-    est = q4['estimator_closure']['H -> H  (truth P = 0)']
+    tr, q8 = q4['transport'], Q['q8_review']
+    rows = [('no reweighting', tr['none']['bias'],
+             q8['significance']['P_hat']['sd']),
+            ('existing overlap\nweights', tr['overlap weights (existing)']['bias'], None),
+            ('per-side $p_T^{vis}$', tr['per-side pT_vis']['bias'], None),
+            ('+ η + *truth* mode',
+             q8['reweighted_bootstrap']['truth mode']['mean'] - P0,
+             q8['reweighted_bootstrap']['truth mode']['sd']),
+            ('+ η + *reco* mode\n(the one data has)',
+             q8['reweighted_bootstrap']['reco mode']['mean'] - P0,
+             q8['reweighted_bootstrap']['reco mode']['sd'])]
+    y = np.arange(len(rows))[::-1]
+    ax[1].barh(y, [r[1] for r in rows], 0.6, color=ORANGE, alpha=0.85)
+    for yy, r in zip(y, rows):
+        if r[2]:
+            ax[1].errorbar(r[1], yy, xerr=r[2], color=INK, capsize=3, lw=1.1)
     ax[1].axvline(0, color=INK, lw=1.0)
-    ax[1].axvspan(-est['sd'], est['sd'], color=GRAY, alpha=0.25, lw=0)
-    ax[1].text(0.004, len(order) - 1.2, 'grey band: estimator closure\n(H→H halves, ±1 sd)',
-               fontsize=8, color=MUTED, ha='left', va='top')
-    ax[1].set_ylim(-0.6, len(order) - 0.2)
-    ax[1].set_yticks(y), ax[1].set_yticklabels(short, fontsize=9)
+    ax[1].set_yticks(y), ax[1].set_yticklabels([r[0] for r in rows], fontsize=8.5)
     ax[1].set_xlabel('bias of $\\hat P_\\tau$  (truth $-0.1470$)')
-    ax[1].set_title('(b) most of it is H+jet → Z+jet kinematics', loc='left', fontsize=10)
+    ax[1].set_title('(b) a ~2σ indication that does not survive reweighting',
+                    loc='left', fontsize=10)
+    ax[1].text(0.60, 0.97, 'error bars: bootstrap that refits\nthe density ratio in every replica\n'
+               '(the middle rows have no fit error)',
+               transform=ax[1].transAxes, fontsize=7.5, color=MUTED, va='top')
 
-    dP = abs(q4['dP_hat_dE0_hk'])
+    dP = abs(q4.get('dP_hat_dE0_hk_total_attribution', q4['dP_hat_dE0_hk']))
     N = np.logspace(3.5, 8, 60)
     sig = q5['ladder']['full22_s42_hk']['sigma_P'] * np.sqrt(1e5 / N)
     ax[2].loglog(N, sig / dP, color=BLUE, lw=1.8,
                  label='needed accuracy on $E_0[h_k]$')
-    for k, c, t in ((abs(tr['none']['bias']) / dP, GRAY, 'no reweighting'),
-                    (abs(tr['per-side pT_vis + eta + mode']['bias']) / dP, ORANGE,
-                     'after reweighting')):
-        ax[2].axhline(k, color=c, ls='--', lw=1.3)
-        ax[2].text(N[1], k * 1.15, f'{t}: {k:.1e}', fontsize=8, color=c)
+    ax[2].axhline(0.049, color=INK, ls='-', lw=1.2)
+    ax[2].text(N[1], 0.055, 'its own size on this sample: $+0.049$', fontsize=8,
+               color=INK)
+    ax[2].axhline(abs(q8['significance']['E0_sum_difference_H_minus_Z']['mean']) / 2,
+                  color=ORANGE, ls='--', lw=1.3)
+    ax[2].text(N[1], 0.0115, 'measured H − Z difference, $0.010$ per side (2.3σ)',
+               fontsize=8, color=ORANGE)
     ax[2].set_xlabel('selected Z → $\\tau_h\\tau_h$ events')
     ax[2].set_ylabel('accuracy required on $E_0[h_k]$')
     ax[2].set_title('(c) a first-moment measurement is an\n     acceptance measurement',

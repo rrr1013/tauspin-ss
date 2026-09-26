@@ -26,7 +26,7 @@ import pol_visible as V
 
 N_REF = 100_000
 BOOT = 300
-FOLDS = 2
+FOLDS = 10   # 2-fold is unstable: sd 5.5e-5 across partitions, 10-fold is 2e-5
 
 S_surface = PD.load_surface()
 lab = S_surface['labels']

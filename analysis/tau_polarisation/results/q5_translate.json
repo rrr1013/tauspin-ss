@@ -2,6 +2,7 @@
  "dP_dsin2w": 7.870045218530408,
  "P_tau_sample": -0.14703656772705448,
  "lep_sigma_P": 0.0043,
+ "lep_sigma_P_stat": 0.0035,
  "lep_sigma_sin2": 0.0005463755138122255,
  "n_ref": 100000,
  "ladder": {
@@ -42,31 +43,43 @@
    "n_to_match_lep": 168157.23896430753
   },
   "x_truth": {
-   "label": "x_truth = E_vis/E_tau (needs E_tau)",
+   "label": "E_vis/E_tau, truth E_tau: single variable",
    "sigma_P": 0.009026044456817145,
    "sigma_sin2": 0.0011468859715780134,
    "n_to_match_lep": 440613.72923980275
   },
   "vismet_best": {
    "label": "best visible + MET readout",
-   "sigma_P": 0.006662916643661886,
-   "sigma_sin2": 0.0008466173266671608,
-   "n_to_match_lep": 240099.82801723405
+   "sigma_P": 0.006690243558570453,
+   "sigma_sin2": 0.00085008959577741,
+   "n_to_match_lep": 242073.33084366383
   },
   "vis_best": {
    "label": "best visible-only readout",
-   "sigma_P": 0.007409401509987785,
-   "sigma_sin2": 0.0009414687342001524,
-   "n_to_match_lep": 296913.09213742166
+   "sigma_P": 0.007100895697616187,
+   "sigma_sin2": 0.0009022687291423408,
+   "n_to_match_lep": 272702.6485041864
   }
  },
- "systematics_limit": {
-  "n_to_match_lep_statistically": 161146.1302406376,
-  "n_where_transport_bias_takes_over": {
-   "uncorrected": 1653.7853553104871,
-   "kinematically_reweighted": 9204.320395016895
+ "lep_equivalence": {
+  "n_for_lep_total": 161146.1302406376,
+  "n_for_lep_statistical": 243231.99576729714
+ },
+ "acceptance_tolerance": {
+  "dP_dE0_partial_per_side": -3.2941867366846065,
+  "dP_dE0_total_attribution_per_side": -4.085482977091285,
+  "needed_E0_accuracy_partial": {
+   "1e+05": 0.0016570292768842072,
+   "1e+06": 0.0005239986664535893,
+   "1e+07": 0.00016570292768842073,
+   "1e+08": 5.239986664535892e-05
   },
-  "ratio_corrected": 17.50766198098451
+  "needed_E0_accuracy_total": {
+   "1e+05": 0.0013360877763579225,
+   "1e+06": 0.0004225080527200704,
+   "1e+07": 0.00013360877763579225,
+   "1e+08": 4.225080527200703e-05
+  }
  },
  "three_measurements": {
   "cp_angle": {

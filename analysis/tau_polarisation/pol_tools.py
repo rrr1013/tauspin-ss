@@ -5,7 +5,8 @@ density of the Z sample is
 
     f_Z(P) = 1 + P (h-_k + h+_k) + h-^T C_Z h+ ,   C_Z = diag(0, 0, 1)
 
-so B_can = -P k_hat and the nominal sample has P = P_0 = -0.147037.  For the H
+i.e. B_can = +P k_hat (the Dirac trace returns the physical B_phys = -P k_hat,
+and h_can = -h_phys flips it).  The nominal sample has P = P_0 = -0.147037.  For the H
 sample
 
     f_H = 1 + h-^T C_H h+ ,   C_H = diag(1, 1, -1) ,   B = 0 exactly.

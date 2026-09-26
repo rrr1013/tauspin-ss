@@ -20,10 +20,11 @@ print(f'rows {len(lab)}  H {lab.sum()}  Z {(~lab).sum()}')
 
 BmH, BpH, CH = higgs_state()
 BmZ, BpZ, CZ = z_state()
-out['analytic'] = {'B_H': BmH.tolist(), 'C_H': CH.tolist(),
-                   'B_Z_canonical_sign': BmZ.tolist(), 'C_Z': CZ.tolist(),
+out['analytic'] = {'B_H_physical': BmH.tolist(), 'C_H': CH.tolist(),
+                   'B_Z_physical': BmZ.tolist(),
+                   'B_Z_canonical': (-BmZ).tolist(), 'C_Z': CZ.tolist(),
                    'P_tau': p_tau_of_sin2w(0.23152), 'dP_dsin2w': dp_dsin2w()}
-print('analytic  B_H =', np.round(BmH, 9), ' B_Z =', np.round(BmZ, 5),
+print('analytic  B_H_phys =', np.round(BmH, 9), ' B_Z_phys =', np.round(BmZ, 5),
       ' P_tau =', round(out['analytic']['P_tau'], 6))
 assert np.abs(BmH).max() < 1e-9 and np.abs(BpH).max() < 1e-9
 assert np.allclose(CH, PT.C_H, atol=2e-5) and np.allclose(CZ, PT.C_Z, atol=2e-5)

@@ -132,23 +132,44 @@ out['dP_hat_dE0_hk'] = float(dP_dE0)
 try:
     q1 = json.loads((PD.RESULTS / 'q1_sensitivity.json').read_text())
     sig = q1['rows']['full22_s42_hk']['sigma']
-    for N in (1e5, 1e6, 1e7, 1e8):
+    for N in (1e5, 1e6, 1e7, 1e8):  # noqa: E501
         s_N = sig * np.sqrt(1e5 / N)
         print(f'  N = {N:.0e} Z events: sigma(P) = {s_N:.5f}'
               f'  -> E_0[h_k] must be known to {abs(s_N / dP_dE0):.2e}')
     out['requirement'] = {'sigma_per_1e5': sig, 'dP_dE0': float(dP_dE0),
                           'needed_E0_accuracy': {f'{N:.0e}': float(abs(sig * np.sqrt(1e5 / N) / dP_dE0))
                                                  for N in (1e5, 1e6, 1e7, 1e8)}}
-    bias_c = abs(tr['per-side pT_vis + eta + mode']['bias'])
-    bias_u = abs(tr['none']['bias'])
-    out['crossover_events'] = {'uncorrected': 1e5 * (sig / bias_u) ** 2,
-                               'kinematically_reweighted': 1e5 * (sig / bias_c) ** 2}
-    print(f'  bias = statistical error at {out["crossover_events"]["uncorrected"]:.3g}'
-          f' Z events (uncorrected) / {out["crossover_events"]["kinematically_reweighted"]:.3g}'
-          f' after the kinematic reweighting')
+    # NOTE: the single-fit reweighted bias is not stable enough to convert into a
+    # crossover event count.  q8 refits the histogram ratio inside the bootstrap
+    # and finds the reweighted bias consistent with zero, and the choice of truth
+    # vs reconstructed decay mode moves it from -0.018 to -0.004.  Only the
+    # uncorrected number is quoted here, and only with its own bootstrap error.
+    out['uncorrected_bias_in_units_of_1e5_stat'] = abs(tr['none']['bias']) / sig
+    print(f'  the uncorrected bias is {abs(tr["none"]["bias"]) / sig:.1f} times the'
+          f' statistical error of 1e5 Z events; see q8 for why the *reweighted*'
+          f' residual is not stable enough to quote a crossover')
 except FileNotFoundError:
     pass
 
 PD.RESULTS.mkdir(exist_ok=True)
 (PD.RESULTS / 'q4_transport.json').write_text(json.dumps(out, indent=1))
 print('\nwrote', PD.RESULTS / 'q4_transport.json')
+
+# Two coefficients are in play and they are not the same number.
+#   partial: shift only E_0[h_k] (i.e. m['T'] and m['u']) and leave every higher
+#            moment alone -- this is what a first-moment-only correction buys.
+#   total:   attribute the whole observed bias to the measured H - Z difference in
+#            E_0[h_k], which folds in the higher moments that also differ.
+e0H = float(np.sum([np.sum((1 / PT.f_density(h[lab], 0.0, PT.C_H)) * h[lab][:, s, 2])
+                    / np.sum(1 / PT.f_density(h[lab], 0.0, PT.C_H)) for s in (0, 1)]))
+e0Z = float(np.sum([np.sum((1 / PT.f_density(h[z], P0, PT.C_Z)) * h[z][:, s, 2])
+                    / np.sum(1 / PT.f_density(h[z], P0, PT.C_Z)) for s in (0, 1)]))
+total = (tr['none']['bias']) / ((e0H - e0Z) / 2.0)
+out['dP_hat_dE0_hk_total_attribution'] = float(total)
+print(f'\n  partial dP/dE_0[h_k] (per side, first moment only) = {dP_dE0:+.2f};'
+      f' attributing the whole bias to the measured difference gives {total:+.2f}.'
+      f'  Using the larger magnitude, E_0[h_k] must be known to'
+      f' {abs(sig / total):.2e} at 1e5 events.')
+out['requirement']['needed_E0_accuracy_total'] = {
+    f'{N:.0e}': float(abs(sig * np.sqrt(1e5 / N) / total)) for N in (1e5, 1e6, 1e7, 1e8)}
+(PD.RESULTS / 'q4_transport.json').write_text(json.dumps(out, indent=1))
