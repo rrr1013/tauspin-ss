@@ -1,0 +1,113 @@
+{
+ "dP_dsin2w": 7.870045218530408,
+ "P_tau_sample": -0.14703656772705448,
+ "lep_sigma_P": 0.0043,
+ "lep_sigma_sin2": 0.0005463755138122255,
+ "n_ref": 100000,
+ "ladder": {
+  "exact_score": {
+   "label": "exact h, Cramer-Rao",
+   "sigma_P": 0.004376905532383281,
+   "sigma_sin2": 0.0005561474439915087,
+   "n_to_match_lep": 103608.98885563748
+  },
+  "exact_hk": {
+   "label": "exact h, h_k sum",
+   "sigma_P": 0.004514902505747552,
+   "sigma_sin2": 0.0005736819014860286,
+   "n_to_match_lep": 110245.23870419427
+  },
+  "idealip22_s42_hk": {
+   "label": "reco + ideal-IP oracle",
+   "sigma_P": 0.0053118254566043655,
+   "sigma_sin2": 0.0006749421774728068,
+   "n_to_match_lep": 152598.64619486305
+  },
+  "full22_s42_hk": {
+   "label": "reco + 3 IP + SV",
+   "sigma_P": 0.00545856386621004,
+   "sigma_sin2": 0.0006935873574598508,
+   "n_to_match_lep": 161146.1302406376
+  },
+  "base_s43_hk": {
+   "label": "reco, no geometry",
+   "sigma_P": 0.0055209352143761785,
+   "sigma_sin2": 0.0007015125149950683,
+   "n_to_match_lep": 164849.7871354188
+  },
+  "full22_shuffle_s42_hk": {
+   "label": "reco + shuffled geometry",
+   "sigma_P": 0.005576044609263852,
+   "sigma_sin2": 0.0007085149391689365,
+   "n_to_match_lep": 168157.23896430753
+  },
+  "x_truth": {
+   "label": "x_truth = E_vis/E_tau (needs E_tau)",
+   "sigma_P": 0.009026044456817145,
+   "sigma_sin2": 0.0011468859715780134,
+   "n_to_match_lep": 440613.72923980275
+  },
+  "vismet_best": {
+   "label": "best visible + MET readout",
+   "sigma_P": 0.006662916643661886,
+   "sigma_sin2": 0.0008466173266671608,
+   "n_to_match_lep": 240099.82801723405
+  },
+  "vis_best": {
+   "label": "best visible-only readout",
+   "sigma_P": 0.007409401509987785,
+   "sigma_sin2": 0.0009414687342001524,
+   "n_to_match_lep": 296913.09213742166
+  }
+ },
+ "systematics_limit": {
+  "n_to_match_lep_statistically": 161146.1302406376,
+  "n_where_transport_bias_takes_over": {
+   "uncorrected": 1653.7853553104871,
+   "kinematically_reweighted": 9204.320395016895
+  },
+  "ratio_corrected": 17.50766198098451
+ },
+ "three_measurements": {
+  "cp_angle": {
+   "quantity": "CP mixing angle phi_tau (transverse direction of C)",
+   "unit": "deg per 1e4 H events",
+   "exact": 0.591,
+   "base": 1.604,
+   "ip_sv": 1.281,
+   "ideal_ip": 0.934,
+   "source": "run 2026-09-25",
+   "reco_over_exact": 2.714043993231811,
+   "ip_sv_gain": 1.2521467603434817,
+   "ideal_ip_gain": 1.7173447537473234,
+   "residual_after_ideal_ip": 1.580372250423012
+  },
+  "entanglement": {
+   "quantity": "entanglement witness <W> (magnitude of C)",
+   "unit": "N(3 sigma) events",
+   "exact": 46,
+   "base": 344,
+   "ip_sv": 240,
+   "ideal_ip": 143,
+   "source": "run 2026-09-26",
+   "is_event_count": true,
+   "reco_over_exact": 2.7346409032202414,
+   "ip_sv_gain": 1.1972189997378648,
+   "ideal_ip_gain": 1.550997874142452,
+   "residual_after_ideal_ip": 1.763149356173184
+  },
+  "polarisation": {
+   "quantity": "tau polarisation P_tau (longitudinal first moment B)",
+   "unit": "sigma(P) per 1e5 Z events",
+   "exact": 0.004514902505747552,
+   "base": 0.0055209352143761785,
+   "ip_sv": 0.00545856386621004,
+   "ideal_ip": 0.0053118254566043655,
+   "source": "this run",
+   "reco_over_exact": 1.2228249020544584,
+   "ip_sv_gain": 1.0114263292863959,
+   "ideal_ip_gain": 1.0393668352772811,
+   "residual_after_ideal_ip": 1.1765094483972391
+  }
+ }
+}

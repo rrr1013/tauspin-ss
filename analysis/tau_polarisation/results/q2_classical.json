@@ -1,0 +1,328 @@
+{
+ "n_ref": 100000,
+ "collinear_valid_fraction_Z": 0.5681909885675858,
+ "score_mean": 0.07921398947498882,
+ "note_score_mean": "non-zero because the selected rate itself depends on P; only mean-subtracted covariances are used below",
+ "rows": {
+  "exact_h": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.6302718395089846,
+   "sd_T": 0.8998627613710919,
+   "sigma": 0.004514902505747552,
+   "sigma_se": 9.07310302383429e-06,
+   "label": "exact h, h_k sum",
+   "n_used": 29740
+  },
+  "x_truth": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.22950530070839684,
+   "sd_T": 0.6550737379458564,
+   "sigma": 0.009026044456817145,
+   "sigma_se": 8.803582848945686e-05,
+   "label": "x_truth (needs E_tau; LEP reference)",
+   "n_used": 29740
+  },
+  "upsilon": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.03625272761465945,
+   "sd_T": 0.919157754625525,
+   "sigma": 0.08017691977603024,
+   "sigma_se": 0.009068686243121463,
+   "label": "Upsilon alone (visible only)",
+   "n_used": 29740
+  },
+  "costheta": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": -0.02605186839473033,
+   "sd_T": 1.0073711867606434,
+   "sigma": 0.12227865391930429,
+   "sigma_se": 0.023931617059428523,
+   "label": "cos(theta*) alone (visible only)",
+   "n_used": 29740
+  },
+  "vis_best": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.20268951033769417,
+   "sd_T": 0.474913377427721,
+   "sigma": 0.007409401509987785,
+   "sigma_se": 5.271566393508599e-05,
+   "label": "best visible-only readout (cross-fit)",
+   "n_used": 29740
+  },
+  "vismet_best": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.2267317417453481,
+   "sd_T": 0.47772360876150555,
+   "sigma": 0.006662916643661886,
+   "sigma_se": 3.914312242811487e-05,
+   "label": "best visible + MET readout (cross-fit)",
+   "n_used": 29740
+  },
+  "base_s43": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.4016060855513092,
+   "sd_T": 0.7011532250807905,
+   "sigma": 0.0055209352143761785,
+   "sigma_se": 2.1561380844175223e-05,
+   "label": "network h_pred_k (no geometry)",
+   "n_used": 29740
+  },
+  "full22_s42": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.4113433489368328,
+   "sd_T": 0.7100400984374242,
+   "sigma": 0.00545856386621004,
+   "sigma_se": 2.0958966239278e-05,
+   "label": "network h_pred_k + 3 IP + SV",
+   "n_used": 29740
+  },
+  "pi_exact_h": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.12488176969012059,
+   "sd_T": 0.35727550868938135,
+   "sigma": 0.009046991906482435,
+   "sigma_se": 6.73516913525533e-05,
+   "label": "exact h, h_k sum",
+   "n_used": 29740
+  },
+  "pi_x_truth": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.12422529327449426,
+   "sd_T": 0.3558828302593365,
+   "sigma": 0.009059349300788977,
+   "sigma_se": 6.805051975332148e-05,
+   "label": "x_truth (needs E_tau; LEP reference)",
+   "n_used": 29740
+  },
+  "pi_upsilon": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.05695329693658819,
+   "sd_T": 0.5898411405846373,
+   "sigma": 0.032750368499224816,
+   "sigma_se": 0.0014323593251293885,
+   "label": "Upsilon alone (visible only)",
+   "n_used": 29740
+  },
+  "pi_costheta": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.012028677435162397,
+   "sd_T": 0.6587635201915788,
+   "sigma": 0.17318555381210002,
+   "sigma_se": 0.05352056607363827,
+   "label": "cos(theta*) alone (visible only)",
+   "n_used": 29740
+  },
+  "pi_vis_best": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.05350124521955204,
+   "sd_T": 0.24889811755753546,
+   "sigma": 0.014711525938886317,
+   "sigma_se": 0.0007951852658442838,
+   "label": "best visible-only readout (cross-fit)",
+   "n_used": 29740
+  },
+  "pi_vismet_best": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.09002085033592463,
+   "sd_T": 0.32988514618910075,
+   "sigma": 0.011588297870130961,
+   "sigma_se": 0.0008032682459861913,
+   "label": "best visible + MET readout (cross-fit)",
+   "n_used": 29740
+  },
+  "pi_base_s43": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.1143029820026604,
+   "sd_T": 0.3474024307933136,
+   "sigma": 0.009611148604682226,
+   "sigma_se": 7.967642851564422e-05,
+   "label": "network h_pred_k (no geometry)",
+   "n_used": 29740
+  },
+  "pi_full22_s42": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.11369775885769484,
+   "sd_T": 0.3459813230668938,
+   "sigma": 0.009622784299023069,
+   "sigma_se": 7.99339568643127e-05,
+   "label": "network h_pred_k + 3 IP + SV",
+   "n_used": 29740
+  },
+  "rho_exact_h": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.37277454486365696,
+   "sd_T": 0.6593556111621853,
+   "sigma": 0.005593368828462963,
+   "sigma_se": 1.9786195143842146e-05,
+   "label": "exact h, h_k sum",
+   "n_used": 29740
+  },
+  "rho_x_truth": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.11013421890967268,
+   "sd_T": 0.51320242038619,
+   "sigma": 0.01473555235782453,
+   "sigma_se": 0.0002691684383722642,
+   "label": "x_truth (needs E_tau; LEP reference)",
+   "n_used": 29740
+  },
+  "rho_upsilon": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.008235710953461707,
+   "sd_T": 0.6311261455190527,
+   "sigma": 0.24233440464349798,
+   "sigma_se": 1.9248347764372262,
+   "label": "Upsilon alone (visible only)",
+   "n_used": 29740
+  },
+  "rho_costheta": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": -0.040808831238155194,
+   "sd_T": 0.6930372110720335,
+   "sigma": 0.05370347603068384,
+   "sigma_se": 0.004471413556733994,
+   "label": "cos(theta*) alone (visible only)",
+   "n_used": 29740
+  },
+  "rho_vis_best": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.1426597200782377,
+   "sd_T": 0.37842912388315336,
+   "sigma": 0.008388478287749987,
+   "sigma_se": 7.304206164457643e-05,
+   "label": "best visible-only readout (cross-fit)",
+   "n_used": 29740
+  },
+  "rho_vismet_best": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.1611301723007144,
+   "sd_T": 0.4022906919798548,
+   "sigma": 0.007895199576696122,
+   "sigma_se": 6.10469933177823e-05,
+   "label": "best visible + MET readout (cross-fit)",
+   "n_used": 29740
+  },
+  "rho_base_s43": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.22025359538416422,
+   "sd_T": 0.4957798419309425,
+   "sigma": 0.0071181290628445784,
+   "sigma_se": 4.442626864053222e-05,
+   "label": "network h_pred_k (no geometry)",
+   "n_used": 29740
+  },
+  "rho_full22_s42": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.2239190574992099,
+   "sd_T": 0.49969607001940447,
+   "sigma": 0.007056914836745741,
+   "sigma_se": 4.339195552084012e-05,
+   "label": "network h_pred_k + 3 IP + SV",
+   "n_used": 29740
+  },
+  "3pi_exact_h": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.13261552495520712,
+   "sd_T": 0.3735159363475068,
+   "sigma": 0.00890665781119933,
+   "sigma_se": 6.327412437912403e-05,
+   "label": "exact h, h_k sum",
+   "n_used": 29740
+  },
+  "3pi_x_truth": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": -0.004854211475770067,
+   "sd_T": 0.328414247850783,
+   "sigma": 0.2139455696241128,
+   "sigma_se": 0.1047818437222739,
+   "label": "x_truth (needs E_tau; LEP reference)",
+   "n_used": 29740
+  },
+  "3pi_upsilon": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": -0.028936280275390455,
+   "sd_T": 0.5640415049524787,
+   "sigma": 0.06164081331614445,
+   "sigma_se": 0.0049103112716707455,
+   "label": "Upsilon alone (visible only)",
+   "n_used": 29740
+  },
+  "3pi_costheta": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.0027282854082624386,
+   "sd_T": 0.366382125777884,
+   "sigma": 0.4246630531848506,
+   "sigma_se": 1.8353031356597909,
+   "label": "cos(theta*) alone (visible only)",
+   "n_used": 29740
+  },
+  "3pi_vis_best": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.014490107976567907,
+   "sd_T": 0.12559346491544507,
+   "sigma": 0.027409140705335434,
+   "sigma_se": 0.0008820581113225819,
+   "label": "best visible-only readout (cross-fit)",
+   "n_used": 29740
+  },
+  "3pi_vismet_best": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.02171150115099502,
+   "sd_T": 0.15274038769371076,
+   "sigma": 0.02224662000338668,
+   "sigma_se": 0.000589019469551742,
+   "label": "best visible + MET readout (cross-fit)",
+   "n_used": 29740
+  },
+  "3pi_base_s43": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.06704950816448474,
+   "sd_T": 0.27297296084762485,
+   "sigma": 0.012874312124718856,
+   "sigma_se": 0.0001718604974811912,
+   "label": "network h_pred_k (no geometry)",
+   "n_used": 29740
+  },
+  "3pi_full22_s42": {
+   "n": 29740,
+   "n_events": 100000,
+   "response": 0.07372653257992827,
+   "sd_T": 0.28614112569144623,
+   "sigma": 0.01227316215432375,
+   "sigma_se": 0.00015212229133733396,
+   "label": "network h_pred_k + 3 IP + SV",
+   "n_used": 29740
+  }
+ }
+}
