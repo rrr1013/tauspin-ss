@@ -18,7 +18,8 @@ import numpy as np
 import ztheory as zt
 import zent
 
-QT_EDGES = np.array([0, 150, 200, 250, 300, 400, 1e9])
+PRED_CLASSES = __import__('os').environ.get('PRED_CLASSES', 'qt')
+QT_QUANTILES = np.linspace(0, 1, 7)             # equal-population pair-qT bins (v3 has ptj > 200 GeV)
 CT_EDGES = np.linspace(0, 1, 11)                 # |cos theta_CS|
 NBOOT = 200
 rng = np.random.default_rng(20260927)
@@ -65,21 +66,44 @@ def main(outdir, paths):
     res['mode_pair_counts'] = {f'{a}{b}': int(np.sum((ev['mode'][:, 0] == a) & (ev['mode'][:, 1] == b)))
                                for a in range(3) for b in range(3)}
 
-    zdec = zt.ZDecay()
+    # electroweak mixing angle of the generator: MadGraph sm model, sin^2 = 1 - MW^2/MZ^2 from the banner
+    sin2w = zt.SIN2W
+    banner = Path(paths[0]).parent / 'banner_sub1.txt'
+    if banner.exists():
+        masses = {}
+        for line in banner.read_text().splitlines():
+            t = line.split()
+            if len(t) >= 2 and t[0] in ('23', '24') and '#' in line and line.split('#')[1].strip().split()[0] in ('mz', 'w+'):
+                masses[t[0]] = float(t[1])
+        if {'23', '24'} <= set(masses):
+            sin2w = 1.0 - (masses['24'] / masses['23']) ** 2
+    res['sin2w_used'] = sin2w
+    zdec = zt.ZDecay(sin2w=sin2w)
     A, basis = zt.direction_moment_map(zdec, 120)
 
     # train/test halves: <R> is fitted on one half and tested on the other
     half = rng.random(n) < 0.5
+    QT_EDGES = np.quantile(qt[good], QT_QUANTILES)
+    QT_EDGES[0], QT_EDGES[-1] = 0.0, 1e9
     qbin = np.digitize(qt, QT_EDGES) - 1
+    # production classes that share one <R>: pair qT (default), optionally x |y_pair| tertile x parton channel
+    cls = qbin.copy()
+    if PRED_CLASSES == 'qt_y_channel':
+        pair = pv['pair']
+        ypair = np.abs(0.5 * np.log((pair[:, 3] + pair[:, 2]) / (pair[:, 3] - pair[:, 2])))
+        ybin = np.digitize(ypair, np.quantile(ypair[good], [1 / 3, 2 / 3]))
+        gluon = np.any(ev['beam_id'] == 21, axis=1).astype(int)          # qg/gq vs q qbar
+        cls = qbin + 6 * ybin + 18 * gluon
+    res['pred_classes'] = PRED_CLASSES
     R_bins = {}
-    for b in range(len(QT_EDGES) - 1):
-        m = good & half & (qbin == b)
+    for b in np.unique(cls):
+        m = good & half & (cls == b)
         R_bins[b] = zent.fit_R_from_directions(k_cs[m], A, basis)
-    res['R_cs_by_qt'] = {f'{QT_EDGES[b]:.0f}-{QT_EDGES[b + 1]:.0f}':
-                         dict(re=np.real(R).round(4).tolist(), im=np.imag(R).round(4).tolist(),
-                              n_fit=int(np.sum(good & half & (qbin == b))))
-                         for b, R in R_bins.items()}
-    R_ev = np.stack([R_bins[b] for b in qbin])
+    res['R_cs_by_class'] = {str(int(b)): dict(re=np.real(R).round(4).tolist(), im=np.imag(R).round(4).tolist(),
+                                              n_fit=int(np.sum(good & half & (cls == b))))
+                            for b, R in R_bins.items()}
+    res['qt_edges'] = QT_EDGES.tolist()
+    R_ev = np.stack([R_bins[b] for b in cls])
 
     # bases (rows n, r, k in pair-frame Cartesian)
     zcs = CS[:, 2]

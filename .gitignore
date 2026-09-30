@@ -16,3 +16,6 @@ NN/outputs/
 
 .DS_Store
 analysis/z_entanglement/data/
+analysis/meeting_followup/zmass/cpangle_data/
+analysis/z_entanglement/results/*/arrays.npz
+analysis/meeting_followup/zmass/results_cpangle/*.npz

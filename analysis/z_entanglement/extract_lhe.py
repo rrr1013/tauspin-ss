@@ -15,8 +15,18 @@ from collections import Counter
 import numpy as np
 
 
+def _open_text(path):
+    if path.endswith('.tar.gz'):                  # filtered mc.TXT tarballs (v2 merged / v3 filtered)
+        import io
+        import tarfile
+        tf = tarfile.open(path, 'r:gz')
+        member = [m for m in tf.getmembers() if m.isfile()][0]
+        return io.TextIOWrapper(tf.extractfile(member), encoding='utf-8', errors='replace')
+    return gzip.open(path, 'rt')
+
+
 def events(path):
-    with gzip.open(path, 'rt') as f:
+    with _open_text(path) as f:
         block = None
         for line in f:
             s = line.strip()
