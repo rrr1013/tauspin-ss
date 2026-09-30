@@ -1,0 +1,60 @@
+{
+ "simple": {
+  "1-prong": {
+   "n": 62843,
+   "dphi_median_abs": 0.3085470209409699,
+   "dphi_mean_cos": 0.6780698656096567,
+   "dtau_median_mrad": 1.999488678565536,
+   "ip_median_um": 59.02201209202998,
+   "cone_median_mrad": 7.147798172173568,
+   "vis_axis_median_mrad": 5.545019813328466
+  },
+  "3-prong": {
+   "n": 17427,
+   "dphi_median_abs": 0.297750550089738,
+   "dphi_mean_cos": 0.6799174734933879,
+   "dtau_median_mrad": 2.1324141853792407,
+   "ip_median_um": 61.2391209703839,
+   "cone_median_mrad": 7.731204405525421,
+   "vis_axis_median_mrad": 2.733926433464314
+  },
+  "sv": {
+   "n": 17427,
+   "angle_median_mrad": 88.12998164900894,
+   "angle_q16_q84": [
+    21.44100331508264,
+    433.1809970018166
+   ],
+   "length_median_mm": 6.2617545066537135
+  }
+ },
+ "atlas": {
+  "1-prong": {
+   "n": 94949,
+   "dphi_median_abs": 0.2875989097350556,
+   "dphi_mean_cos": 0.6865119593825144,
+   "dtau_median_mrad": 2.018823345365223,
+   "ip_median_um": 67.06302172390639,
+   "cone_median_mrad": 7.770669176234102,
+   "vis_axis_median_mrad": 6.122981993725405
+  },
+  "3-prong": {
+   "n": 23817,
+   "dphi_median_abs": 0.3971690201346847,
+   "dphi_mean_cos": 0.6353498043915908,
+   "dtau_median_mrad": 1.8217733395831381,
+   "ip_median_um": 56.95827834738816,
+   "cone_median_mrad": 5.050326324730761,
+   "vis_axis_median_mrad": 3.1598996579308696
+  },
+  "sv": {
+   "n": 23841,
+   "angle_median_mrad": 3.045840962342974,
+   "angle_q16_q84": [
+    0.7277448976175699,
+    13.565868619804919
+   ],
+   "length_median_mm": 7.557319068827053
+  }
+ }
+}
