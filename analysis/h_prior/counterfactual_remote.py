@@ -213,9 +213,11 @@ def main() -> None:
     dataset = GeneratorTargetDataset("validation")
     collate = p11.T.collate_reco_h
     device = torch.device("cuda")
+    p11.T.configure_runtime(device)
     model = p11.T.RecoModel(args.arm).to(device)
     checkpoint = torch.load(args.checkpoint, map_location="cpu", weights_only=True)
     model.load_state_dict(checkpoint["model_state_dict"], strict=True)
+    network = torch.compile(model, dynamic=True)
     stats = json.loads(args.stats.read_text())
 
     n = len(dataset)
@@ -251,7 +253,7 @@ def main() -> None:
     if args.limit is not None:
         rows = rows[:args.limit]
 
-    original = evaluate(model, collate, dataset, rows, device, args.batch_size)
+    original = evaluate(network, collate, dataset, rows, device, args.batch_size)
     with np.load(args.reference_predictions) as ref:
         pos = {int(v): i for i, v in enumerate(ref["global_indices"])}
         reference = np.asarray(ref["h_pred"])[[pos[int(global_index[i])] for i in rows]]
@@ -263,7 +265,7 @@ def main() -> None:
     no_op_events = [hybrid_event(dataset[int(i)], dataset[int(i)], 1, stats) for i in rows[:args.batch_size]]
     batch = collate(no_op_events)
     with torch.inference_mode():
-        no_op = model({k: (v.to(device) if torch.is_tensor(v) else v) for k, v in batch.items()})[1].cpu().numpy()
+        no_op = network({k: (v.to(device) if torch.is_tensor(v) else v) for k, v in batch.items()})[1].cpu().numpy()
     no_op_max = float(np.max(np.abs(no_op - original[:len(no_op)])))
     if no_op_max > 1e-7:
         raise RuntimeError(f"self-donor no-op failed: {no_op_max}")
@@ -279,10 +281,10 @@ def main() -> None:
         arrays[f"donor_minus_seed{j}"] = global_index[m[0][rows]]
         arrays[f"donor_plus_seed{j}"] = global_index[m[1][rows]]
         arrays[f"h_opposite_seed{j}"] = evaluate(
-            model, collate, dataset, rows, device, args.batch_size, m, "opposite", stats
+            network, collate, dataset, rows, device, args.batch_size, m, "opposite", stats
         )
         arrays[f"h_target_seed{j}"] = evaluate(
-            model, collate, dataset, rows, device, args.batch_size, m, "target", stats
+            network, collate, dataset, rows, device, args.batch_size, m, "target", stats
         )
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
