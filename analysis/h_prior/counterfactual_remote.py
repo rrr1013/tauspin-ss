@@ -253,11 +253,16 @@ def main() -> None:
     if args.limit is not None:
         rows = rows[:args.limit]
 
+    # Reproduce the original evaluation order/batching for checkpoint parity.
+    # A separate primary-only pass is used as the numerical reference for the
+    # hybrid arms, which use the same row order and batch size.
+    all_rows = np.arange(n, dtype=np.int64)
+    original_all = evaluate(network, collate, dataset, all_rows, device, args.batch_size)
     original = evaluate(network, collate, dataset, rows, device, args.batch_size)
     with np.load(args.reference_predictions) as ref:
         pos = {int(v): i for i, v in enumerate(ref["global_indices"])}
-        reference = np.asarray(ref["h_pred"])[[pos[int(global_index[i])] for i in rows]]
-    parity_max = float(np.max(np.abs(original - reference)))
+        reference = np.asarray(ref["h_pred"])[[pos[int(v)] for v in global_index]]
+    parity_max = float(np.max(np.abs(original_all - reference)))
     if parity_max > 2e-5:
         raise RuntimeError(f"checkpoint prediction parity failed: {parity_max}")
 
