@@ -36,6 +36,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--stats", type=Path, required=True)
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--batch-size", type=int, default=512)
+    p.add_argument("--limit", type=int, default=None, help="fixed-prefix pilot size after the primary mask")
     return p.parse_args()
 
 
@@ -246,6 +247,9 @@ def main() -> None:
     rows = np.flatnonzero(primary)
     if len(rows) < 1000:
         raise RuntimeError(f"unexpectedly small primary cohort: {len(rows)}")
+    full_primary_rows = len(rows)
+    if args.limit is not None:
+        rows = rows[:args.limit]
 
     original = evaluate(model, collate, dataset, rows, device, args.batch_size)
     with np.load(args.reference_predictions) as ref:
@@ -289,7 +293,9 @@ def main() -> None:
         "checkpoint_epoch": int(checkpoint["epoch"]),
         "validation_rows": n,
         "primary_rows": int(len(rows)),
-        "primary_excluded_by_singleton_cells": int(np.sum((label == 0) & (truth_mode[:, 0] == 1) & (truth_mode[:, 1] == 1)) - len(rows)),
+        "full_primary_rows": int(full_primary_rows),
+        "pilot_limit": args.limit,
+        "primary_excluded_by_singleton_cells": int(np.sum((label == 0) & (truth_mode[:, 0] == 1) & (truth_mode[:, 1] == 1)) - full_primary_rows),
         "reference_parity_max_abs": parity_max,
         "self_donor_noop_max_abs": no_op_max,
         "donor_maps": map_reports,
