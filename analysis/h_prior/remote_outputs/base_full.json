@@ -1,0 +1,85 @@
+{
+  "arm": "base16",
+  "checkpoint": "/home/rbaba/gen3pi-teacher-20260924/artifacts/p11/base_s43/checkpoint.pt",
+  "checkpoint_epoch": 48,
+  "validation_rows": 59390,
+  "primary_rows": 9455,
+  "full_primary_rows": 9455,
+  "pilot_limit": null,
+  "primary_excluded_by_singleton_cells": 1,
+  "reference_parity_max_abs": 0.0,
+  "self_donor_noop_max_abs": 0.0,
+  "donor_maps": [
+    {
+      "seed": 20261001,
+      "sides": [
+        {
+          "side": 0,
+          "cells": 640,
+          "singleton_rows": 0,
+          "cell_size_min": 2,
+          "cell_size_median": 88.0,
+          "cell_size_max": 278,
+          "donor_unique": 59390
+        },
+        {
+          "side": 1,
+          "cells": 640,
+          "singleton_rows": 3,
+          "cell_size_min": 1,
+          "cell_size_median": 86.0,
+          "cell_size_max": 274,
+          "donor_unique": 59387
+        }
+      ]
+    },
+    {
+      "seed": 20261002,
+      "sides": [
+        {
+          "side": 0,
+          "cells": 640,
+          "singleton_rows": 0,
+          "cell_size_min": 2,
+          "cell_size_median": 88.0,
+          "cell_size_max": 278,
+          "donor_unique": 59390
+        },
+        {
+          "side": 1,
+          "cells": 640,
+          "singleton_rows": 3,
+          "cell_size_min": 1,
+          "cell_size_median": 86.0,
+          "cell_size_max": 274,
+          "donor_unique": 59387
+        }
+      ]
+    },
+    {
+      "seed": 20261003,
+      "sides": [
+        {
+          "side": 0,
+          "cells": 640,
+          "singleton_rows": 0,
+          "cell_size_min": 2,
+          "cell_size_median": 88.0,
+          "cell_size_max": 278,
+          "donor_unique": 59390
+        },
+        {
+          "side": 1,
+          "cells": 640,
+          "singleton_rows": 3,
+          "cell_size_min": 1,
+          "cell_size_median": 86.0,
+          "cell_size_max": 274,
+          "donor_unique": 59387
+        }
+      ]
+    }
+  ],
+  "output": "/home/rbaba/h-prior-20261001-v3/outputs/base_full.npz",
+  "device": "NVIDIA RTX A6000"
+}
