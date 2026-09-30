@@ -31,3 +31,12 @@ on ICEPP from a clean checkout with explicit paths to the existing p11 code,
 generator-current targets, geometry features, selected checkpoint, reference
 predictions, and preprocessing statistics.  It writes only validation
 predictions and donor identities; no network is trained.
+
+`support_audit_remote.py` reloads those exact donor identities and checks all
+hybrid sides for finite values, tau-relative coordinate closure, token counts,
+recipient--donor matching distances, and excursions beyond the extrema of the
+original validation features.  It does not evaluate a network.
+
+`analyze_counterfactual.py` combines the two fixed-network arms, bootstraps the
+predeclared response ratio and connected-moment change, and writes the Stage-2
+JSON summary and figures.

@@ -171,17 +171,21 @@ def main() -> None:
     fig.savefig(figures_dir / "fig8_counterfactual_response_distribution.png", dpi=180)
     plt.close(fig)
 
-    # Figure 9: target reconstruction quality before/after opposite-side swap.
+    # Figure 9: target reconstruction-quality changes after opposite-side swap.
     fig, axes = plt.subplots(1, 2, figsize=(9.2, 4.1), constrained_layout=True)
     for i, name in enumerate(data):
         original = result["arms"][name]["original_h_metrics"]
         swaps = [r["opposite_h_metrics"] for r in result["arms"][name]["donor_maps"]]
-        axes[0].plot([i-.12, i+.12], [original["mse"], np.mean([x["mse"] for x in swaps])], "o-", color=COLORS[name], label=LABELS[name])
-        axes[1].plot([i-.12, i+.12], [original["mean_cosine"], np.mean([x["mean_cosine"] for x in swaps])], "o-", color=COLORS[name])
-    for ax, ylabel in zip(axes, ("h MSE", "mean cosine to exact h")):
-        ax.set_xticks([-.12, .12, .88, 1.12], ["orig", "swap", "orig", "swap"], rotation=20)
+        dmse = [x["mse"] - original["mse"] for x in swaps]
+        dcos = [x["mean_cosine"] - original["mean_cosine"] for x in swaps]
+        offsets = i + np.asarray((-.08, 0, .08))
+        axes[0].scatter(offsets, dmse, color=COLORS[name], label=LABELS[name])
+        axes[1].scatter(offsets, dcos, color=COLORS[name])
+    for ax, ylabel in zip(axes, (r"$\Delta$ h MSE", r"$\Delta$ mean cosine to exact h")):
+        ax.axhline(0, color="black", lw=.9)
+        ax.set_xticks(range(len(data)), [LABELS[n] for n in data])
         ax.set_ylabel(ylabel); ax.grid(axis="y", alpha=.25)
-    axes[0].legend(frameon=False); fig.suptitle("Support diagnostic: the hybrid remains a finite but shifted input population")
+    axes[0].legend(frameon=False); fig.suptitle("Reconstruction quality is nearly unchanged by the opposite-side intervention")
     fig.savefig(figures_dir / "fig9_counterfactual_quality.png", dpi=180)
     plt.close(fig)
 
