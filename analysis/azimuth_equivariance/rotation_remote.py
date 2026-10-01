@@ -174,6 +174,15 @@ def feature_controls(base: dict, raw: dict[str, np.ndarray], rows: np.ndarray, a
     }
 
 
+def score_array(readout: nn.Module, values: np.ndarray, device: torch.device) -> np.ndarray:
+    flat = torch.from_numpy(values.astype(np.float32, copy=False).reshape(-1, 6))
+    out = []
+    with torch.inference_mode():
+        for start in range(0, len(flat), 2048):
+            out.append(torch.sigmoid(readout(flat[start:start + 2048].to(device))).cpu().numpy())
+    return np.concatenate(out).astype(np.float32)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--checkout", type=Path, required=True)
@@ -279,6 +288,7 @@ def main() -> None:
     if args.arm == "local" and controls["local_geometry_invariance_max_abs"] > 5e-6:
         raise RuntimeError(f"local geometry invariance failed: {controls}")
 
+    score_c16_average_h = score_array(readout, h16.mean(axis=1), device)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(
         args.output,
@@ -293,6 +303,7 @@ def main() -> None:
         h_c17=h17,
         score_c16=s16,
         score_c17=s17,
+        score_c16_average_h=score_c16_average_h,
         lab_saturated_c16=saturated,
     )
     report = {

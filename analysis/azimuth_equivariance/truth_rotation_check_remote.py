@@ -45,6 +45,7 @@ def main() -> None:
     parser.add_argument("--checkout", type=Path, required=True)
     parser.add_argument("--targets", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--limit", type=int)
     args = parser.parse_args()
     sys.path.insert(0, str(args.checkout / "analysis/gen3pi_teacher"))
     sys.path.insert(0, str(args.checkout / "analysis/mode_pair_auc_origin"))
@@ -59,6 +60,13 @@ def main() -> None:
         event_numbers = np.asarray(source["event_numbers"])[valid]
         modes = np.asarray(source["modes"])[valid]
         stored_h = np.asarray(source["h"], np.float64)[valid]
+    if args.limit is not None:
+        labels = labels[:args.limit]
+        file_indices = file_indices[:args.limit]
+        entry_indices = entry_indices[:args.limit]
+        event_numbers = event_numbers[:args.limit]
+        modes = modes[:args.limit]
+        stored_h = stored_h[:args.limit]
     truth = build_targets.read_truth(labels, file_indices, entry_indices, event_numbers, modes)
     base_frames = frames(truth["pions"], truth["pi0"], truth["nu4"])
     base_h = fill_h(base_frames, modes, truth["charges"], canonical_h)
@@ -100,6 +108,7 @@ def main() -> None:
     report = {
         "status": "complete",
         "rows": int(len(modes)),
+        "pilot_limit": args.limit,
         "near_beam_rows_excluded": int(near_beam.sum()),
         "stored_target_max_abs": stored_closure,
         "base_basis_orthonormality_max_abs": orth0,
