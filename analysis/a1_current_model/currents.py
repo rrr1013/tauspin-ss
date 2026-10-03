@@ -59,3 +59,25 @@ def dalitz(ordered):
     s13 = d(p[:, 0] + p[:, 2], p[:, 0] + p[:, 2])
     s23 = d(p[:, 1] + p[:, 2], p[:, 1] + p[:, 2])
     return d(Q, Q), s13, s23
+
+
+# ---- generator a1 form factor (sm__taudecay_UFO Fortran/functions.f) ----------
+# FFCT3(S) = Fa1(S, mode=1) is used for every 3pi channel, including pi-pi-pi+.
+PI0 = 0.1349766
+A1M, A1G, FPI = 1.23, 0.42, 0.13041
+
+
+def _gfun(s):
+    pi3, pi1 = 2 * PI0 + 0.13957018, PI0
+    x = s - pi3**2
+    low = 4.1 / s * x**3 * (1 - 3.3 * x + 5.8 * x**2)
+    high = 1.623 + 10.38 / s - 9.32 / s**2 + 0.65 / s**3
+    return np.where(s < (0.77549 + pi1)**2, low, high)
+
+
+def fa1_generator(s):
+    s = np.asarray(s, dtype=np.float64)
+    w = np.sqrt(s)
+    pi3 = 2 * PI0 + 0.13957018
+    gs = np.where(s > pi3**2, A1G * (w / A1M) * _gfun(s) / _gfun(A1M**2), 0.0)
+    return 4 / 3 / FPI * (-A1M**2 / ((s - A1M**2) + 1j * w * gs))

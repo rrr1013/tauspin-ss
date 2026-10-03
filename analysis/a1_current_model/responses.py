@@ -66,8 +66,8 @@ def responses_on(idx_z, idx_h, d, pre, obs):
     return out
 
 
-def main():
-    d, nets = an.load_all()
+def main(lineshape='generator'):
+    d, nets = an.load_all(lineshape)
     est = {'exact h_gen': d['h_gen'], 'exact h_CLEO': d['h_cleo']}
     for (teacher, arm), v in nets.items():
         if 'h_pred' in v:
@@ -113,7 +113,7 @@ def main():
             row[sn] = {'delta': pt, 'ci68': np.quantile(bb, [0.16, 0.84]).tolist()}
         mb[f'{edges[i]:.2f}-{edges[i + 1]:.2f}'] = row
     res = {'responses': out, 'auc_world_effect_vs_m3pi': mb, 'm3pi_edges': edges.tolist()}
-    (rw.HERE / 'results' / 'responses.json').write_text(json.dumps(res, indent=2))
+    (rw.HERE / 'results' / ('responses.json' if lineshape == 'generator' else f'responses_{lineshape}_lineshape.json')).write_text(json.dumps(res, indent=2))
     for n, v in out['all events'].items():
         print(f'{n:34s}', '  '.join(f"{q}: {x['ratio']:.3f} [{x['ratio_ci95'][0]:.3f},{x['ratio_ci95'][1]:.3f}]" for q, x in v.items()))
     for k, v in mb.items():
@@ -121,4 +121,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    import sys
+    main(*sys.argv[1:])

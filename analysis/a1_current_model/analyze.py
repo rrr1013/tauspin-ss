@@ -32,8 +32,8 @@ def lr(h):
     return np.log(1 + p @ rw.C_H) - np.log(1 + p @ rw.C_Z)
 
 
-def load_all():
-    d = rw.load()
+def load_all(lineshape='generator'):
+    d = rw.load(lineshape=lineshape)
     nets = {}
     for teacher, prefix in (('gen', 'gen3pi'), ('cleo', 'cleo')):
         for arm in ARMS:
@@ -197,8 +197,8 @@ def template_fraction(d, score, mask, nbins=20):
             'N_star': float((1 / np.sqrt(info) / (fhat - 0.5)) ** 2) if fhat != 0.5 else None}
 
 
-def main():
-    d, nets = load_all()
+def main(lineshape='generator'):
+    d, nets = load_all(lineshape)
     scores = {'exact LR h_gen': lr(d['h_gen']), 'exact LR h_CLEO': lr(d['h_cleo'])}
     for (teacher, arm), v in nets.items():
         scores[f'{teacher}:{arm}'] = v['score']
@@ -218,8 +218,9 @@ def main():
            'template_fraction': {}}
     for name in ('exact LR h_gen', 'gen:base_s43', 'gen:full22_s42', 'gen:ens_full22', 'cleo:full22_s42'):
         out['template_fraction'][name] = {p: template_fraction(d, scores[name], sel[p]) for p in ('any 3pi', 'overall')}
-    (rw.HERE / 'results' / 'analysis.json').write_text(json.dumps(out, indent=2))
-    np.savez_compressed(rw.HERE / 'results' / 'arrays.npz', w=d['w'], ids=d['ids'])
+    (rw.HERE / 'results' / ('analysis.json' if lineshape == 'generator' else f'analysis_{lineshape}_lineshape.json')).write_text(json.dumps(out, indent=2))
+    if lineshape == 'generator':
+        np.savez_compressed(rw.HERE / 'results' / 'arrays.npz', w=d['w'], ids=d['ids'])
     short = {k: {p: {wn: round(x, 4) for wn, x in v[p].items()} for p in ('any 3pi', '3pi x 3pi', 'overall')}
              for k, v in table.items()}
     print(json.dumps(short, indent=0))
@@ -228,4 +229,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    import sys
+    main(*sys.argv[1:])

@@ -10,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-from currents import dalitz
+from currents import dalitz, fa1_generator
 
 HERE = Path(__file__).resolve().parent
 DATA = HERE / 'data'
@@ -66,9 +66,11 @@ def load(spin_reweight=True, lineshape='generator'):
         nn = np.interp(m3, centres[ok], n[ok])
         u[is3] = (ratio * nn)[is3]
     elif lineshape == 'cleo':
-        # CLEO rate including its a1 lineshape; generator lineshape removed by the toy
-        # only up to F_a1 of the generator, which is not available: not implemented.
-        raise NotImplementedError
+        # variant: CLEO rate including its own a1 lineshape vs the generator rate with
+        # its F_a1 (functions.f); one global constant keeps the mean u over 3pi sides at 1
+        with np.errstate(invalid='ignore'):
+            full = ratio / np.abs(fa1_generator(m3**2)) ** 2
+        u[is3] = full[is3] / full[is3].mean()
     w = np.prod(u, axis=1)
     if spin_reweight:
         w = w * spin_factor(h_cleo, y) / spin_factor(h_gen, y)
