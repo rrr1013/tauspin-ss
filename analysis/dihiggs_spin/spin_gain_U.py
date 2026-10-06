@@ -195,7 +195,7 @@ def main():
                 res[name] = z
                 if name == "spin" and ztag == "Z_long" and eff == 0.2:
                     np.savez_compressed(Path(args.out).with_name("spin_D_eff20.npz"), D=D, region=region,
-                                        **{f"w_{Y}": W[Y] for Y in HYPS}, edges=e)
+                                        probs=p, dens=dens, **{f"w_{Y}": W[Y] for Y in HYPS}, edges=e)
             if "kin" in res:
                 res["increment_kin_to_kinspin"] = res["kin+spin"]["Z"] / res["kin"]["Z"]
             var[f"sig_eff_{int(eff * 100)}"] = res
