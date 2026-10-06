@@ -28,7 +28,6 @@ import argparse
 import json
 
 import numpy as np
-import xgboost as xgb
 
 GROUPS = {"zbb": "Z+HF", "ttll": "top", "ttlj": "fakes", "zh": "singleH", "tth": "singleH"}
 UNC = {"Z+HF": 0.10, "top": 0.10, "fakes": 0.20, "singleH": 0.15}
@@ -84,6 +83,7 @@ def feature_sets(d, hp):
 
 
 def train_score(X, y, w, tr, ev, seed=0):
+    import xgboost as xgb
     ws = w.copy()
     ws[tr & (y == 1)] /= ws[tr & (y == 1)].sum()
     ws[tr & (y == 0)] /= ws[tr & (y == 0)].sum()
