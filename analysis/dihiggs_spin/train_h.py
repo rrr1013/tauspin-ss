@@ -46,6 +46,7 @@ def main():
     ap.add_argument("--patience", type=int, default=15)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--drop", default="", help="comma-separated input prefixes to drop (ablation)")
+    ap.add_argument("--load", default="", help="skip training: load model.pt written by a previous run")
     args = ap.parse_args()
     torch.manual_seed(args.seed)
     dev = "cuda" if torch.cuda.is_available() else "cpu"
@@ -75,38 +76,49 @@ def main():
     model = nn.Sequential(nn.Linear(X.shape[1], 512), nn.SiLU(), nn.Linear(512, 512), nn.SiLU(),
                           nn.Linear(512, 256), nn.SiLU(), nn.Linear(256, 256), nn.SiLU(),
                           nn.Linear(256, 15)).to(dev)
-    opt = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-4)
-    sched = torch.optim.lr_scheduler.ReduceLROnPlateau(opt, factor=0.5, patience=5)
-    t = lambda a: torch.as_tensor(a, device=dev)
-    Xtr, Ytr, Wtr = t(Xn[tr]), t(Y[tr]), t(w[tr] * len(tr))
-    Xva, Yva, Wva = t(Xn[va]), t(Y[va]), t(w[va] * len(va))
-    best, best_state, bad, hist = 1e9, None, 0, []
-    for ep in range(args.epochs):
-        model.train()
-        perm = torch.randperm(len(tr), device=dev)
-        for a in range(0, len(tr), 1024):
-            i = perm[a:a + 1024]
-            loss = (((model(Xtr[i]) - Ytr[i]) ** 2).mean(1) * Wtr[i]).mean()
-            opt.zero_grad()
-            loss.backward()
-            opt.step()
-        model.eval()
-        with torch.no_grad():
-            vl = float((((model(Xva) - Yva) ** 2).mean(1) * Wva).mean())
-            tl = float((((model(Xtr[:20000]) - Ytr[:20000]) ** 2).mean(1) * Wtr[:20000]).mean())
-        sched.step(vl)
-        hist.append((ep, tl, vl))
-        if vl < best - 1e-5:
-            best, bad = vl, 0
-            best_state = {k: v.detach().clone() for k, v in model.state_dict().items()}
-        else:
-            bad += 1
-        if ep % 5 == 0:
-            print(f"epoch {ep} train {tl:.5f} val {vl:.5f} lr {opt.param_groups[0]['lr']:.2e}", flush=True)
-        if bad >= args.patience:
-            break
+    if args.load:
+        ck = torch.load(args.load, map_location=dev, weights_only=False)
+        assert ck["cols"] == cols
+        mu, sd = ck["mu"], ck["sd"]
+        Xn = (X - mu) / sd
+        best_state, best, hist = ck["state"], ck["best"], ck["hist"]
+        t = lambda a: torch.as_tensor(a, device=dev)
+    else:
+        opt = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-4)
+        sched = torch.optim.lr_scheduler.ReduceLROnPlateau(opt, factor=0.5, patience=5)
+        t = lambda a: torch.as_tensor(a, device=dev)
+        Xtr, Ytr, Wtr = t(Xn[tr]), t(Y[tr]), t(w[tr] * len(tr))
+        Xva, Yva, Wva = t(Xn[va]), t(Y[va]), t(w[va] * len(va))
+        best, best_state, bad, hist = 1e9, None, 0, []
+        for ep in range(args.epochs):
+            model.train()
+            perm = torch.randperm(len(tr), device=dev)
+            for a in range(0, len(tr), 1024):
+                i = perm[a:a + 1024]
+                loss = (((model(Xtr[i]) - Ytr[i]) ** 2).mean(1) * Wtr[i]).mean()
+                opt.zero_grad()
+                loss.backward()
+                opt.step()
+            model.eval()
+            with torch.no_grad():
+                vl = float((((model(Xva) - Yva) ** 2).mean(1) * Wva).mean())
+                tl = float((((model(Xtr[:20000]) - Ytr[:20000]) ** 2).mean(1) * Wtr[:20000]).mean())
+            sched.step(vl)
+            hist.append((ep, tl, vl))
+            if vl < best - 1e-5:
+                best, bad = vl, 0
+                best_state = {k: v.detach().clone() for k, v in model.state_dict().items()}
+            else:
+                bad += 1
+            if ep % 5 == 0:
+                print(f"epoch {ep} train {tl:.5f} val {vl:.5f} lr {opt.param_groups[0]['lr']:.2e}", flush=True)
+            if bad >= args.patience:
+                break
     model.load_state_dict(best_state)
     model.eval()
+    if not args.load:
+        torch.save({"state": best_state, "mu": mu, "sd": sd, "cols": cols, "best": best, "hist": hist},
+                   args.out.replace(".npz", "_model.pt"))
     if dedicated:
         ho = np.flatnonzero(split == 2)
         with torch.no_grad():
