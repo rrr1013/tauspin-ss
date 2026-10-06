@@ -1,0 +1,419 @@
+{
+  "timestamp": "2026-10-07 06:17:38",
+  "total_validation_events": 59390,
+  "pipi_overall": {
+    "count": 3265,
+    "auc_base": 0.6359519773330791,
+    "ci_base": [
+      0.618204800590249,
+      0.6554823155972904
+    ],
+    "auc_full": 0.6474947412428578,
+    "ci_full": [
+      0.6294843429605032,
+      0.6652765822318234
+    ],
+    "auc_ideal": 0.6896487570441907,
+    "ci_ideal": [
+      0.671111466106867,
+      0.7076571125501238
+    ],
+    "auc_exact": 0.7164383338415603,
+    "ci_exact": [
+      0.6990815134190186,
+      0.735231263935972
+    ],
+    "delta_full_base": 0.011542763909778708,
+    "headroom_ideal_full": 0.042154015801332934
+  },
+  "single_pi_resolution_vs_x": [
+    {
+      "x_min": 0.0,
+      "x_max": 0.25,
+      "count": 3204,
+      "mean_cos_dphi": 0.8376877320923732,
+      "median_dphi_deg": 6.788754822867277,
+      "p68_dphi_deg": 14.754060424557826,
+      "median_ip_um": 132.18918825821126,
+      "median_pt_GeV": 30.16230583190918,
+      "median_theta_tau_pi_mrad": 14.211744397941128
+    },
+    {
+      "x_min": 0.25,
+      "x_max": 0.4,
+      "count": 4818,
+      "mean_cos_dphi": 0.7959242210331509,
+      "median_dphi_deg": 9.6268687531731,
+      "p68_dphi_deg": 20.26531805828193,
+      "median_ip_um": 98.92471782634343,
+      "median_pt_GeV": 46.16991996765137,
+      "median_theta_tau_pi_mrad": 11.615984929661613
+    },
+    {
+      "x_min": 0.4,
+      "x_max": 0.55,
+      "count": 5005,
+      "mean_cos_dphi": 0.7467960484456464,
+      "median_dphi_deg": 12.720243396954626,
+      "p68_dphi_deg": 26.323024285485925,
+      "median_ip_um": 77.16953420345273,
+      "median_pt_GeV": 61.836788177490234,
+      "median_theta_tau_pi_mrad": 9.345123419635998
+    },
+    {
+      "x_min": 0.55,
+      "x_max": 0.7,
+      "count": 5133,
+      "mean_cos_dphi": 0.6885412783319201,
+      "median_dphi_deg": 16.802012153090114,
+      "p68_dphi_deg": 34.832944580024574,
+      "median_ip_um": 59.66558378169302,
+      "median_pt_GeV": 78.72513580322266,
+      "median_theta_tau_pi_mrad": 7.1792950529189925
+    },
+    {
+      "x_min": 0.7,
+      "x_max": 0.85,
+      "count": 5023,
+      "mean_cos_dphi": 0.6242196786893779,
+      "median_dphi_deg": 22.853717791505833,
+      "p68_dphi_deg": 45.53599260794771,
+      "median_ip_um": 47.52683233225905,
+      "median_pt_GeV": 94.84521484375,
+      "median_theta_tau_pi_mrad": 5.056850815452224
+    },
+    {
+      "x_min": 0.85,
+      "x_max": 1.0,
+      "count": 4900,
+      "mean_cos_dphi": 0.47444389041165863,
+      "median_dphi_deg": 37.120031915343844,
+      "p68_dphi_deg": 65.66580091918108,
+      "median_ip_um": 32.02710782259851,
+      "median_pt_GeV": 110.40312576293945,
+      "median_theta_tau_pi_mrad": 2.5480111607254514
+    }
+  ],
+  "single_pi_polarimeter_corr_vs_x": [
+    {
+      "x_min": 0.0,
+      "x_max": 0.25,
+      "count": 3204,
+      "corr_perp_Base": 0.5854371190071106,
+      "corr_k_Base": 0.547516405582428,
+      "corr_perp_Full22": 0.8216235935688019,
+      "corr_k_Full22": 0.5324742197990417,
+      "corr_perp_IdealIP": 0.9344673156738281,
+      "corr_k_IdealIP": 0.5454583764076233
+    },
+    {
+      "x_min": 0.25,
+      "x_max": 0.4,
+      "count": 4818,
+      "corr_perp_Base": 0.590142011642456,
+      "corr_k_Base": 0.46833473443984985,
+      "corr_perp_Full22": 0.812069296836853,
+      "corr_k_Full22": 0.46693018078804016,
+      "corr_perp_IdealIP": 0.95889812707901,
+      "corr_k_IdealIP": 0.46754205226898193
+    },
+    {
+      "x_min": 0.4,
+      "x_max": 0.55,
+      "count": 5005,
+      "corr_perp_Base": 0.5831436812877655,
+      "corr_k_Base": 0.4119051992893219,
+      "corr_perp_Full22": 0.788962721824646,
+      "corr_k_Full22": 0.4166516363620758,
+      "corr_perp_IdealIP": 0.9712474346160889,
+      "corr_k_IdealIP": 0.41799816489219666
+    },
+    {
+      "x_min": 0.55,
+      "x_max": 0.7,
+      "count": 5133,
+      "corr_perp_Base": 0.558223620057106,
+      "corr_k_Base": 0.34707412123680115,
+      "corr_perp_Full22": 0.7420092225074768,
+      "corr_k_Full22": 0.35455387830734253,
+      "corr_perp_IdealIP": 0.974336177110672,
+      "corr_k_IdealIP": 0.35533174872398376
+    },
+    {
+      "x_min": 0.7,
+      "x_max": 0.85,
+      "count": 5023,
+      "corr_perp_Base": 0.5390124469995499,
+      "corr_k_Base": 0.27881166338920593,
+      "corr_perp_Full22": 0.6854279935359955,
+      "corr_k_Full22": 0.272050678730011,
+      "corr_perp_IdealIP": 0.965440183877945,
+      "corr_k_IdealIP": 0.28162676095962524
+    },
+    {
+      "x_min": 0.85,
+      "x_max": 1.0,
+      "count": 4900,
+      "corr_perp_Base": 0.4399692267179489,
+      "corr_k_Base": 0.18499629199504852,
+      "corr_perp_Full22": 0.555254340171814,
+      "corr_k_Full22": 0.18346820771694183,
+      "corr_perp_IdealIP": 0.9192478656768799,
+      "corr_k_IdealIP": 0.17923107743263245
+    }
+  ],
+  "pipi_by_min_ip": [
+    {
+      "ip_low": 0,
+      "ip_high": 30,
+      "count": 1511,
+      "auc_base": 0.649488267557848,
+      "auc_full": 0.6476124357443307,
+      "auc_ideal": 0.7022499896679625,
+      "auc_exact": 0.7284041959405028,
+      "delta_full_base": -0.001875831813517359
+    },
+    {
+      "ip_low": 30,
+      "ip_high": 50,
+      "count": 632,
+      "auc_base": 0.5973305442676698,
+      "auc_full": 0.6110060645438625,
+      "auc_ideal": 0.6536861902008602,
+      "auc_exact": 0.6902620173815873,
+      "delta_full_base": 0.013675520276192676
+    },
+    {
+      "ip_low": 50,
+      "ip_high": 70,
+      "count": 407,
+      "auc_base": 0.6415965363488009,
+      "auc_full": 0.6663355947165462,
+      "auc_ideal": 0.7156096723954696,
+      "auc_exact": 0.7328103881334204,
+      "delta_full_base": 0.02473905836774537
+    },
+    {
+      "ip_low": 70,
+      "ip_high": 100,
+      "count": 365,
+      "auc_base": 0.7070464660923764,
+      "auc_full": 0.7294802359825541,
+      "auc_ideal": 0.7341169125407586,
+      "auc_exact": 0.7509953557963525,
+      "delta_full_base": 0.022433769890177646
+    },
+    {
+      "ip_low": 100,
+      "ip_high": 500,
+      "count": 331,
+      "auc_base": 0.6087769372974722,
+      "auc_full": 0.6230692048094741,
+      "auc_ideal": 0.641741430449933,
+      "auc_exact": 0.668794716942941,
+      "delta_full_base": 0.014292267512001966
+    }
+  ],
+  "pipi_2d_x_phase_space": [
+    {
+      "region": "Both low (x<0.45)",
+      "count": 338,
+      "auc_base": 0.5959915273845645,
+      "auc_full": 0.6700273067906096,
+      "auc_ideal": 0.7182745284712769,
+      "auc_exact": 0.7286844209138584,
+      "delta_full_base": 0.07403577940604511
+    },
+    {
+      "region": "One low, one mid",
+      "count": 843,
+      "auc_base": 0.5754187189726816,
+      "auc_full": 0.5864996052766417,
+      "auc_ideal": 0.6573335649685254,
+      "auc_exact": 0.6797335718665789,
+      "delta_full_base": 0.011080886303960091
+    },
+    {
+      "region": "Both mid (0.45<=x<0.75)",
+      "count": 394,
+      "auc_base": 0.566021989059428,
+      "auc_full": 0.5712973583198123,
+      "auc_ideal": 0.6627084822597084,
+      "auc_exact": 0.6808433290269016,
+      "delta_full_base": 0.005275369260384299
+    },
+    {
+      "region": "One mid, one high",
+      "count": 702,
+      "auc_base": 0.62042888914029,
+      "auc_full": 0.6369332631525936,
+      "auc_ideal": 0.6777914286039365,
+      "auc_exact": 0.6894804602961284,
+      "delta_full_base": 0.016504374012303535
+    },
+    {
+      "region": "One low, one high",
+      "count": 700,
+      "auc_base": 0.5617624904105767,
+      "auc_full": 0.5765844087670117,
+      "auc_ideal": 0.5977980317217174,
+      "auc_exact": 0.6299570168633628,
+      "delta_full_base": 0.014821918356434982
+    },
+    {
+      "region": "Both high (x>=0.75)",
+      "count": 288,
+      "auc_base": 0.6554265792139572,
+      "auc_full": 0.6368707794169216,
+      "auc_ideal": 0.7649416457980363,
+      "auc_exact": 0.81245943846633,
+      "delta_full_base": -0.018555799797035588
+    }
+  ],
+  "mixed_modes": {
+    "pi_x_rho": {
+      "total_count": 15943,
+      "auc_base": 0.625202760481162,
+      "auc_full": 0.6339825291077343,
+      "auc_ideal": 0.6542487489530573,
+      "auc_exact": 0.7233092555965857,
+      "cuts": [
+        {
+          "cut_um": 0,
+          "count": 15943,
+          "auc_base": 0.6250341975836905,
+          "auc_full": 0.6338108267152816,
+          "auc_ideal": 0.6540285476790376
+        },
+        {
+          "cut_um": 30,
+          "count": 11654,
+          "auc_base": 0.6230240033768216,
+          "auc_full": 0.6329445337264998,
+          "auc_ideal": 0.6512710782078808
+        },
+        {
+          "cut_um": 60,
+          "count": 8159,
+          "auc_base": 0.6240900154466966,
+          "auc_full": 0.6365941790136388,
+          "auc_ideal": 0.6493884252207486
+        },
+        {
+          "cut_um": 90,
+          "count": 5720,
+          "auc_base": 0.6313043955417059,
+          "auc_full": 0.6454191334592444,
+          "auc_ideal": 0.6596718534089755
+        },
+        {
+          "cut_um": 120,
+          "count": 4206,
+          "auc_base": 0.6312195575636553,
+          "auc_full": 0.6462260787732441,
+          "auc_ideal": 0.6575962566239162
+        }
+      ]
+    },
+    "pi_x_3pi": {
+      "total_count": 5609,
+      "auc_base": 0.6019180796799549,
+      "auc_full": 0.6160505701964247,
+      "auc_ideal": 0.6553076068354758,
+      "auc_exact": 0.6953561393857162,
+      "cuts": [
+        {
+          "cut_um": 0,
+          "count": 5609,
+          "auc_base": 0.6014506883404254,
+          "auc_full": 0.6157565362207933,
+          "auc_ideal": 0.6545697039458903
+        },
+        {
+          "cut_um": 30,
+          "count": 4192,
+          "auc_base": 0.5992280958516712,
+          "auc_full": 0.6188046735447433,
+          "auc_ideal": 0.653822894423732
+        },
+        {
+          "cut_um": 60,
+          "count": 2930,
+          "auc_base": 0.6030389425909641,
+          "auc_full": 0.6221113588377871,
+          "auc_ideal": 0.6568336044904297
+        },
+        {
+          "cut_um": 90,
+          "count": 2078,
+          "auc_base": 0.6103939213769312,
+          "auc_full": 0.6280454414868604,
+          "auc_ideal": 0.6624473309179366
+        },
+        {
+          "cut_um": 120,
+          "count": 1497,
+          "auc_base": 0.6090372184692627,
+          "auc_full": 0.6267933350137902,
+          "auc_ideal": 0.6681347956437469
+        }
+      ]
+    }
+  },
+  "pipi_experimental_cuts": [
+    {
+      "min_ip_cut_um": 0,
+      "retained_count": 3265,
+      "efficiency": 1.0,
+      "auc_base": 0.636040789462296,
+      "auc_full22": 0.6473720335624953,
+      "auc_idealip22": 0.6897216937429185,
+      "delta_auc": 0.011331244100199256
+    },
+    {
+      "min_ip_cut_um": 20,
+      "retained_count": 2276,
+      "efficiency": 0.6970903522205206,
+      "auc_base": 0.6361426934458765,
+      "auc_full22": 0.6481387098422624,
+      "auc_idealip22": 0.6881531373558716,
+      "delta_auc": 0.011996016396385922
+    },
+    {
+      "min_ip_cut_um": 40,
+      "retained_count": 1378,
+      "efficiency": 0.422052067381317,
+      "auc_base": 0.6363187480851427,
+      "auc_full22": 0.6568364497872556,
+      "auc_idealip22": 0.6848803934740727,
+      "delta_auc": 0.020517701702112978
+    },
+    {
+      "min_ip_cut_um": 60,
+      "retained_count": 886,
+      "efficiency": 0.27136294027565083,
+      "auc_base": 0.642649793590338,
+      "auc_full22": 0.6655828836974339,
+      "auc_idealip22": 0.6804296819348405,
+      "delta_auc": 0.022933090107095877
+    },
+    {
+      "min_ip_cut_um": 80,
+      "retained_count": 563,
+      "efficiency": 0.17243491577335376,
+      "auc_base": 0.6534055008075134,
+      "auc_full22": 0.6704820698556692,
+      "auc_idealip22": 0.6887475620702849,
+      "delta_auc": 0.0170765690481558
+    },
+    {
+      "min_ip_cut_um": 100,
+      "retained_count": 350,
+      "efficiency": 0.10719754977029096,
+      "auc_base": 0.6122087119717108,
+      "auc_full22": 0.6268334822046068,
+      "auc_idealip22": 0.6452181932829995,
+      "delta_auc": 0.01462477023289599
+    }
+  ]
+}
