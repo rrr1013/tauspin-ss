@@ -56,7 +56,7 @@ def delta_r(eta1, phi1, eta2, phi2):
     return math.hypot(eta1 - eta2, dphi)
 
 
-def setup(lhe, seed, proc):
+def setup(lhe, seed, proc, spinflat=False):
     py = pythia8.Pythia("", False)
     cmds = [
         "Beams:frameType = 4", f"Beams:LHEF = {lhe}",
@@ -68,7 +68,11 @@ def setup(lhe, seed, proc):
         "Next:numberCount = 0", "Init:showChangedSettings = off",
         "Init:showChangedParticleData = off",
     ]
-    if proc == "hh":
+    if spinflat:
+        # TauSpinner-style reference: taus decayed unpolarised and uncorrelated (generator density 1)
+        cmds = [c for c in cmds if not c.startswith("TauDecays:mode")]
+        cmds += ["TauDecays:mode = 3", "TauDecays:tauPolarization = 0."]
+    if proc in ("hh", "hhU"):
         # one H -> bb and one H -> tautau is selected later; equal BRs raise the yield
         cmds += ["25:oneChannel = 1 0.5 100 5 -5", "25:addChannel = 1 0.5 100 15 -15"]
     elif proc in ("zh", "tth"):
@@ -229,8 +233,9 @@ def main():
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--nmax", type=int, default=10 ** 9)
     ap.add_argument("--fakes", action="store_true")
+    ap.add_argument("--spinflat", action="store_true", help="unpolarised, uncorrelated tau decays")
     args = ap.parse_args()
-    py = setup(args.lhe, args.seed, args.proc)
+    py = setup(args.lhe, args.seed, args.proc, args.spinflat)
     jetdef = fastjet.JetDefinition(fastjet.antikt_algorithm, 0.4)
     chunk = 20000
     out = empty(chunk)

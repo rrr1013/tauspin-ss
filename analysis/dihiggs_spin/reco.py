@@ -224,7 +224,7 @@ def process(path, proc, seed, no_btag=False):
         base = good_tau.all(1)
         is_true = np.ones((n, 2), bool)
         exclude_jet = np.full(n, -1)
-    if proc == "hh":
+    if proc in ("hh", "hhU"):
         base &= (d["n_h_bb"] == 1) & (d["n_h_tt"] == 1)
     vis = sides["vis"]
     # order sides by visible pT for the pT thresholds

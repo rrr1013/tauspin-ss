@@ -27,6 +27,7 @@ LUMI_FB = 3000.0
 BR_BBTT = 2 * 0.5824 * 0.06272
 XS_FB = {
     "hh": 36.69 * BR_BBTT / 0.5,           # sample has BR(bb)=BR(tautau)=0.5 -> bbtautau fraction 0.5
+    "hhU": 36.69 * BR_BBTT / 0.5,          # same, spin-flat tau decays
     "ttll": 984.5e3 * 0.1125 ** 2,
     "ttlj": 984.5e3 * 2 * 0.1125 * 0.6741,
     "zh": 0.8839e3 * 0.1512 * 0.06272,
@@ -177,6 +178,7 @@ def main():
     ap.add_argument("--recodir", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--procs", default="hh,zbb,ttll,ttlj,zh,tth")
+    ap.add_argument("--table-from", default="", help="reuse the MMC dR table and MET sigma of an existing dataset")
     args = ap.parse_args()
     procs = args.procs.split(",")
     data = {}
@@ -185,19 +187,23 @@ def main():
         if files:
             data[p] = load(p, files)
             print(p, len(data[p]["w"]), "events, yield", data[p]["w"].sum())
-    # MMC dR table and MET resolution from split-0 true taus
-    vis_l, nu_l, pr_l, dmet = [], [], [], []
-    for p, d in data.items():
-        tr = (d["uid"] % 3 == 0)
-        for s in (0, 1):
-            ok = tr & d["is_true"][:, s]
-            vis_l.append(d["vis"][ok, s])
-            nu_l.append(d["tau_nu_p4"][ok, s] if p != "ttlj" else d["tau_nu_p4"][ok, 0])
-            pr_l.append(np.where(d["nch"][ok, s] >= 2, 3, 1))
-        if p in ("hh", "zbb", "zh", "trainH", "trainZ"):
-            dmet.append(d["met"][tr] - d["met_true"][tr])
-    table = build_dr_table(np.concatenate(vis_l), np.concatenate(nu_l), np.concatenate(pr_l))
-    met_sigma = float(np.sqrt(0.5 * np.mean(np.concatenate(dmet) ** 2)))
+    if args.table_from:
+        ref = np.load(args.table_from, allow_pickle=True)
+        table, met_sigma = ref["dr_table"], float(ref["met_sigma"])
+    else:
+        # MMC dR table and MET resolution from split-0 true taus
+        vis_l, nu_l, pr_l, dmet = [], [], [], []
+        for p, d in data.items():
+            tr = (d["uid"] % 3 == 0)
+            for s in (0, 1):
+                ok = tr & d["is_true"][:, s]
+                vis_l.append(d["vis"][ok, s])
+                nu_l.append(d["tau_nu_p4"][ok, s] if p != "ttlj" else d["tau_nu_p4"][ok, 0])
+                pr_l.append(np.where(d["nch"][ok, s] >= 2, 3, 1))
+            if p in ("hh", "hhU", "zbb", "zh", "trainH", "trainZ"):
+                dmet.append(d["met"][tr] - d["met_true"][tr])
+        table = build_dr_table(np.concatenate(vis_l), np.concatenate(nu_l), np.concatenate(pr_l))
+        met_sigma = float(np.sqrt(0.5 * np.mean(np.concatenate(dmet) ** 2)))
     print("MET sigma per component", met_sigma)
     out = {}
     for p, d in data.items():
