@@ -64,11 +64,14 @@ def local_basis(v):
 def features(d, table, met_sigma):
     vis, met = d["vis"], d["met"]
     prong = np.where(d["nch"] >= 2, 3, 1)
-    mm = run_mmc(vis, met, prong, table, 1.4 * met_sigma)
+    # the mass shell has no solution for m_vis > m_tau (11 % of smeared visible taus,
+    # 7 % in ATLAS full simulation): cap the visible mass at 1.6 GeV for the MMC only
+    vis_m = vis.copy()
+    vis_m[..., 3] = np.sqrt((vis[..., :3] ** 2).sum(-1) + np.minimum(mass(vis), 1.6) ** 2)
+    mm = run_mmc(vis_m, met, prong, table, 1.4 * met_sigma)
     retry = np.flatnonzero(~mm["valid"])
     if len(retry):
-        r2 = run_mmc(vis[retry], met[retry], prong[retry], table, 2.5 * met_sigma, n_samples=2000,
-                     dphi_halfwidth=0.35, seed=1)
+        r2 = run_mmc(vis_m[retry], met[retry], prong[retry], table, 4.0 * met_sigma, n_samples=4000, seed=1)
         for k in mm:
             mm[k][retry] = r2[k]
     mm["status"] = np.where(mm["valid"], 1.0, 0.0)
