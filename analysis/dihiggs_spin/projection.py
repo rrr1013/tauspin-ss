@@ -42,7 +42,8 @@ def main(rundir):
     lh = json.load(open(here / "significance_lephad.json"))["arms"]
     # lephad: average of SLT and LTT weighted by their tau_lep tau_had significance share (SLT dominates)
     r_lh = {arm: 0.75 * lh[arm]["SLT"]["R_syst"] + 0.25 * lh[arm]["LTT"]["R_syst"] for arm in lh}
-    lh_map = {"K": None, "K+obs": "reco_noIPSV", "K+low": "reco_IPSV", "K+h": "reco_IPSV", "K+exact": "exact"}
+    lh_map = {"K": None, "K+obs": "reco_noIPSV", "K+low": "reco_IPSV", "K+h": "reco_IPSV", "K+exact": "exact",
+              "K[mtt 10%]+h": "reco_IPSV", "K[mtt 10%]+exact": "exact"}
     out = {}
     for name in runs[0]["sets"]:
         for tag in ("atlas_calibrated", "raw"):

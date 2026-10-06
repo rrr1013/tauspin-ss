@@ -77,6 +77,8 @@ def feature_sets(d, hp):
         # a fake tau has no true ditau mass: keep the MMC value there
         Km[:, i_mtt] = np.where(d["is_true"].all(1), smeared, K[:, i_mtt])
         sets[f"K[mtt {int(res * 100)}%]"] = Km
+    sets["K[mtt 10%]+h"] = np.concatenate([sets["K[mtt 10%]"], H], 1)
+    sets["K[mtt 10%]+exact"] = np.concatenate([sets["K[mtt 10%]"], E], 1)
     return {**sets, "K": K, "K+obs": np.concatenate([K, obs], 1), "K+low": np.concatenate([K, low], 1),
             "K+h": np.concatenate([K, H], 1), "K+exact": np.concatenate([K, E], 1)}
 
