@@ -200,7 +200,7 @@ def reco_fake_taus(d, rng):
 
 
 # ---------------------------------------------------------------- event selection
-def process(path, proc, seed):
+def process(path, proc, seed, no_btag=False):
     d = dict(np.load(path))
     rng = np.random.default_rng(seed)
     n = len(d["weight"])
@@ -248,7 +248,8 @@ def process(path, proc, seed):
     order = np.argsort(-np.where(tagged, pt(jets), -1), axis=1)
     b1 = np.take_along_axis(jets, order[:, :1, None], 1)[:, 0]
     b2 = np.take_along_axis(jets, order[:, 1:2, None], 1)[:, 0]
-    sel &= (nb == 2) & (pt(b1) > 45) & (pt(b2) > 20)
+    if not no_btag:
+        sel &= (nb == 2) & (pt(b1) > 45) & (pt(b2) > 20)
     other = keep & ~tagged & (pt(jets) > 20) & (np.abs(eta(jets)) < 4.5)
     # MET: truth minus object mismeasurement plus soft term
     dvis = (vis - sides["vis_true"])[..., :2].sum(1)
@@ -280,13 +281,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("inputs", nargs="+")
     ap.add_argument("--outdir", required=True)
+    ap.add_argument("--no-btag", action="store_true", help="h-regressor training samples: no b-jet requirement")
     args = ap.parse_args()
     Path(args.outdir).mkdir(parents=True, exist_ok=True)
     for path in args.inputs:
         name = Path(path).stem
         proc = name.split("_run_")[0]
         seed = int(hashlib.sha256(name.encode()).hexdigest()[:8], 16)
-        out = process(path, proc, seed)
+        out = process(path, proc, seed, args.no_btag)
         out = {k: v for k, v in out.items() if v is not None}
         np.savez_compressed(Path(args.outdir) / f"{name}.npz", **out)
         print(name, "selected", len(out["weight"]), "of", int(out["n_gen"]))

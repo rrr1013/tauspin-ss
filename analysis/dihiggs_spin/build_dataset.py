@@ -40,7 +40,7 @@ def load(proc, files):
     parts = [dict(np.load(f, allow_pickle=True)) for f in files]
     n_gen = sum(int(p["n_gen"]) for p in parts)
     sig = np.mean([float(p["sigma_pb"]) for p in parts])
-    xs = XS_FB[proc] if proc in XS_FB else sig * 1e3 * K_ZBB
+    xs = XS_FB[proc] if proc in XS_FB else (sig * 1e3 * K_ZBB if proc == "zbb" else sig * 1e3)
     keys = [k for k in parts[0] if parts[0][k].ndim >= 1 and k not in ("n_gen",)]
     d = {k: np.concatenate([p[k] for p in parts]) for k in keys}
     # unique event id across chunks: chunk index * 1e6 + local index
@@ -176,8 +176,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--recodir", required=True)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--procs", default="hh,zbb,ttll,ttlj,zh,tth")
     args = ap.parse_args()
-    procs = ["hh", "zbb", "ttll", "ttlj", "zh", "tth"]
+    procs = args.procs.split(",")
     data = {}
     for p in procs:
         files = sorted(glob.glob(f"{args.recodir}/{p}_run_*.npz"))
@@ -193,7 +194,7 @@ def main():
             vis_l.append(d["vis"][ok, s])
             nu_l.append(d["tau_nu_p4"][ok, s] if p != "ttlj" else d["tau_nu_p4"][ok, 0])
             pr_l.append(np.where(d["nch"][ok, s] >= 2, 3, 1))
-        if p in ("hh", "zbb", "zh"):
+        if p in ("hh", "zbb", "zh", "trainH", "trainZ"):
             dmet.append(d["met"][tr] - d["met_true"][tr])
     table = build_dr_table(np.concatenate(vis_l), np.concatenate(nu_l), np.concatenate(pr_l))
     met_sigma = float(np.sqrt(0.5 * np.mean(np.concatenate(dmet) ** 2)))

@@ -39,7 +39,8 @@ def make_xy(d):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--data", required=True)
+    ap.add_argument("--data", required=True, help="dataset to train on (and to predict, unless --apply)")
+    ap.add_argument("--apply", default="", help="dataset to predict with the trained model")
     ap.add_argument("--out", required=True)
     ap.add_argument("--epochs", type=int, default=200)
     ap.add_argument("--patience", type=int, default=15)
@@ -55,8 +56,10 @@ def main():
         X, cols = X[:, keep], [cols[i] for i in keep]
     proc = d["proc"]
     split = d["uid"] % 3
-    is_h = np.isin(proc, ["hh", "zh", "tth"])
-    is_z = proc == "zbb"
+    is_h = np.isin(proc, ["hh", "zh", "tth", "trainH"])
+    is_z = np.isin(proc, ["zbb", "trainZ"])
+    if np.isin(proc, ["trainH", "trainZ"]).all():
+        split = np.zeros_like(split)        # a dedicated training sample: use all of it
     valid = np.isfinite(Y).all(1) & d["is_true"].all(1)
     tr_all = np.flatnonzero((split == 0) & valid & (is_h | is_z))
     rng = np.random.default_rng(args.seed)
@@ -101,6 +104,18 @@ def main():
             break
     model.load_state_dict(best_state)
     model.eval()
+    if args.apply:
+        d = np.load(args.apply, allow_pickle=True)
+        X2, Y, cols2 = make_xy(d)
+        if args.drop:
+            X2 = X2[:, [cols2.index(c) for c in cols]]
+        assert cols2 == cols or args.drop
+        Xn = (X2 - mu) / sd
+        proc = d["proc"]
+        split = d["uid"] % 3
+        is_h = np.isin(proc, ["hh", "zh", "tth"])
+        is_z = proc == "zbb"
+        valid = np.isfinite(Y).all(1) & d["is_true"].all(1)
     with torch.no_grad():
         P = np.concatenate([model(t(Xn[a:a + 65536])).cpu().numpy() for a in range(0, len(Xn), 65536)])
     np.savez_compressed(args.out, h_pred=P[:, :6].reshape(-1, 2, 3), hh_pred=P[:, 6:].reshape(-1, 3, 3),
