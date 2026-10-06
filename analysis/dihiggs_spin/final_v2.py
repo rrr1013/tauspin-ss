@@ -62,8 +62,8 @@ def main(R="outputs/v2"):
         scan.append(row)
     v = g["variants"]["Z_long"]["sig_eff_20"]
     vf = g["variants"]["Z_full"]["sig_eff_20"]
-    r_rest_up = {"spin": max(r["spin"] for r in scan if r["top_fraction"] <= 0.6),
-                 "exact": max(r["exact"] for r in scan if r["top_fraction"] <= 0.6)}
+    r_rest_up = {"spin": max(r["spin"] for r in scan if r["top_fraction"] <= 0.61),
+                 "exact": max(r["exact"] for r in scan if r["top_fraction"] <= 0.61)}
     scen = {
         "tauspin spin-only (Z_long)": v["spin"]["R"],
         "tauspin spin-only, with spin shape nuisance": v["spin"]["R_shape"],

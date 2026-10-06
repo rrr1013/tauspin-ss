@@ -39,6 +39,31 @@ UNC = {"Z+HF": 0.10, "top": 0.10, "fakes": 0.20, "singleH": 0.15}
 HYPS = ("H", "Z", "W", "U")
 
 
+def side_marginal(h1, X):
+    """Spin weight when only one side carries an implemented polarimeter (other side summed over)."""
+    k = h1[:, 2]
+    return {"H": np.ones_like(k), "Z": 1 - 0.147 * k, "W": 1 - k, "U": np.ones_like(k)}[X]
+
+
+def hyp_weights(h, z_transverse):
+    """rho_X for both-implemented events, the one-side marginal when only one side is
+    implemented, 1 when neither is."""
+    okside = np.isfinite(h).all(-1)
+    both = okside.all(1)
+    hz = np.where(okside[..., None], h, 0.0)
+    rho = densities(hz, z_transverse)
+    W = {}
+    for X in HYPS:
+        w = np.ones(len(h))
+        w = np.where(both, rho[X], w)
+        only0 = okside[:, 0] & ~okside[:, 1]
+        only1 = okside[:, 1] & ~okside[:, 0]
+        w = np.where(only0, side_marginal(hz[:, 0], X), w)
+        w = np.where(only1, side_marginal(hz[:, 1], X), w)
+        W[X] = w
+    return W, rho, both
+
+
 def densities(h, z_transverse):
     hm, hp = h[:, 0], h[:, 1]
     nn, rr, kk = hm[:, 0] * hp[:, 0], hm[:, 1] * hp[:, 1], hm[:, 2] * hp[:, 2]
@@ -163,8 +188,7 @@ def main():
     out = {"n_events": int(len(h)), "frac_h_defined": float(ok.mean()), "variants": {}}
     rng = np.random.default_rng(7)
     for ztag in ("Z_long", "Z_full"):
-        rho = densities(np.where(ok[:, None, None], h, 0.0), ztag == "Z_full")
-        W = {X: np.where(ok, rho[X], 1.0) for X in HYPS}
+        W, rho, _ = hyp_weights(h, ztag == "Z_full")
         o = np.argsort(K)
         cdf = np.cumsum(W["H"][o]) / W["H"].sum()
         var = {}
@@ -173,7 +197,7 @@ def main():
             region = K >= kcut
             ess = {X: float(W[X][region].sum() ** 2 / (W[X][region] ** 2).sum()) for X in HYPS}
             res = {"k_cut": kcut, "n": int(region.sum()), "ess": ess}
-            dens = np.stack([np.where(ok, rho[X], 1.0) for X in HYPS], 1)
+            dens = np.stack([W[X] for X in HYPS], 1)
             De = disc(dens, frac, fmap)
             e = edges_for(De, W, region, frac, fmap)
             res["exact"] = significance(templates(De, W, region, e), fmap, 0.25)
@@ -194,6 +218,23 @@ def main():
                     z["R_boot_sd"] = float(np.std(bs))
                 res[name] = z
                 if name == "spin" and ztag == "Z_long" and eff == 0.2:
+                    reps = []
+                    for rep in range(1, 6):
+                        perm_rng = np.random.default_rng(100 + rep)
+                        shuffled = region.copy()
+                        idx_r = np.flatnonzero(region)
+                        order = perm_rng.permutation(len(idx_r))
+                        Xp = X.copy()
+                        Xp[idx_r] = X[idx_r][order]
+                        Wp = {Y: W[Y].copy() for Y in HYPS}
+                        for Y in HYPS:
+                            Wp[Y][idx_r] = W[Y][idx_r][order]
+                        pp = fit_probs(Xp, Wp, region, seed=rep)
+                        Dp = disc(pp, frac, fmap)
+                        ep = edges_for(Dp, Wp, region, frac, fmap)
+                        reps.append(significance(templates(Dp, Wp, region, ep), fmap)["R"])
+                    z["R_refit_reps"] = reps
+                    z["R_refit_sd"] = float(np.std(reps + [z["R"]], ddof=1))
                     np.savez_compressed(Path(args.out).with_name("spin_D_eff20.npz"), D=D, region=region,
                                         probs=p, dens=dens, **{f"w_{Y}": W[Y] for Y in HYPS}, edges=e)
             if "kin" in res:

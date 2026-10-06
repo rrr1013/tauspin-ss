@@ -1,0 +1,455 @@
+{
+ "scan": [
+  {
+   "top_fraction": 0.15936177322343506,
+   "spin": 1.0170440798604623,
+   "exact": 1.0933143864462784
+  },
+  {
+   "top_fraction": 0.20372020494542215,
+   "spin": 1.0183187115463386,
+   "exact": 1.0951819043178224
+  },
+  {
+   "top_fraction": 0.24807863666740923,
+   "spin": 1.0203025496361344,
+   "exact": 1.0977220133718288
+  },
+  {
+   "top_fraction": 0.2924370683893963,
+   "spin": 1.022457511725309,
+   "exact": 1.100943424873536
+  },
+  {
+   "top_fraction": 0.3367955001113834,
+   "spin": 1.0249825427597667,
+   "exact": 1.1048901631048913
+  },
+  {
+   "top_fraction": 0.38115393183337043,
+   "spin": 1.0280283469985023,
+   "exact": 1.109632404123959
+  },
+  {
+   "top_fraction": 0.42551236355535754,
+   "spin": 1.0319535423150665,
+   "exact": 1.1152920666265205
+  },
+  {
+   "top_fraction": 0.46987079527734466,
+   "spin": 1.0363135679414504,
+   "exact": 1.12197754950816
+  },
+  {
+   "top_fraction": 0.5142292269993317,
+   "spin": 1.0413891467000456,
+   "exact": 1.1298543636835523
+  },
+  {
+   "top_fraction": 0.5585876587213188,
+   "spin": 1.047348326995602,
+   "exact": 1.139246887175996
+  },
+  {
+   "top_fraction": 0.6029460904433058,
+   "spin": 1.0542706075388733,
+   "exact": 1.1504526167678069
+  }
+ ],
+ "rows": [
+  {
+   "scenario": "tauspin spin-only (Z_long)",
+   "R_bin": 1.0237166871252963,
+   "f": 0.5,
+   "rest": "rest=1",
+   "R_channel": 1.011927827342146,
+   "bbtt_rel": 0.008933639234573354,
+   "atlas_rel": 0.005927586877032542,
+   "atlas_cms_rel": 0.004232014022565123,
+   "bbtt": 3.5312677373210066,
+   "atlas": 4.32548862357124,
+   "atlas_cms": 7.230470500962468
+  },
+  {
+   "scenario": "tauspin spin-only (Z_long)",
+   "R_bin": 1.0237166871252963,
+   "f": 0.5,
+   "rest": "rest=top-rich",
+   "R_channel": 1.0391059545155097,
+   "bbtt_rel": 0.029385853891228164,
+   "atlas_rel": 0.01956341315923593,
+   "atlas_cms_rel": 0.013994127783000021,
+   "bbtt": 3.6028504886192985,
+   "atlas": 4.384122676584714,
+   "atlas_cms": 7.300757720037601
+  },
+  {
+   "scenario": "tauspin spin-only (Z_long)",
+   "R_bin": 1.0237166871252963,
+   "f": 0.62,
+   "rest": "rest=1",
+   "R_channel": 1.0147696440124976,
+   "bbtt_rel": 0.011065966982426456,
+   "atlas_rel": 0.007345017583305413,
+   "atlas_cms_rel": 0.005245046297117195,
+   "bbtt": 3.5387308844384924,
+   "atlas": 4.331583575608213,
+   "atlas_cms": 7.2377643333392445
+  },
+  {
+   "scenario": "tauspin spin-only (Z_long)",
+   "R_bin": 1.0237166871252963,
+   "f": 0.62,
+   "rest": "rest=top-rich",
+   "R_channel": 1.0354333902762636,
+   "bbtt_rel": 0.026614524506360704,
+   "atlas_rel": 0.017710474272291332,
+   "atlas_cms_rel": 0.012665413416367066,
+   "bbtt": 3.5931508357722626,
+   "atlas": 4.376155039370852,
+   "atlas_cms": 7.291190976597844
+  },
+  {
+   "scenario": "tauspin spin-only (Z_long)",
+   "R_bin": 1.0237166871252963,
+   "f": 1.0,
+   "rest": "rest=1",
+   "R_channel": 1.0237166871252963,
+   "bbtt_rel": 0.017788866493557487,
+   "atlas_rel": 0.011820448538425232,
+   "atlas_cms_rel": 0.008446268264023171,
+   "bbtt": 3.562261032727451,
+   "atlas": 4.350827928715228,
+   "atlas_cms": 7.260813131500967
+  },
+  {
+   "scenario": "tauspin spin-only (Z_long)",
+   "R_bin": 1.0237166871252963,
+   "f": 1.0,
+   "rest": "rest=top-rich",
+   "R_channel": 1.0237166871252963,
+   "bbtt_rel": 0.017788866493557487,
+   "atlas_rel": 0.011820448538425232,
+   "atlas_cms_rel": 0.008446268264023171,
+   "bbtt": 3.562261032727451,
+   "atlas": 4.350827928715228,
+   "atlas_cms": 7.260813131500967
+  },
+  {
+   "scenario": "tauspin spin-only, with spin shape nuisance",
+   "R_bin": 1.023325613139088,
+   "f": 0.5,
+   "rest": "rest=1",
+   "R_channel": 1.0117300308151602,
+   "bbtt_rel": 0.008785279740588958,
+   "atlas_rel": 0.0058290043936650715,
+   "atlas_cms_rel": 0.004161572574502115,
+   "bbtt": 3.5307484790920616,
+   "atlas": 4.32506471889276,
+   "atlas_cms": 7.229963322536416
+  },
+  {
+   "scenario": "tauspin spin-only, with spin shape nuisance",
+   "R_bin": 1.023325613139088,
+   "f": 0.5,
+   "rest": "rest=top-rich",
+   "R_channel": 1.0384593668270583,
+   "bbtt_rel": 0.02889776698130797,
+   "atlas_rel": 0.019236955507322406,
+   "atlas_cms_rel": 0.013759981008282685,
+   "bbtt": 3.6011421844345777,
+   "atlas": 4.382718908681486,
+   "atlas_cms": 7.299071863259635
+  },
+  {
+   "scenario": "tauspin spin-only, with spin shape nuisance",
+   "R_bin": 1.023325613139088,
+   "f": 0.62,
+   "rest": "rest=1",
+   "R_channel": 1.0145250576077576,
+   "bbtt_rel": 0.01088238602243452,
+   "atlas_rel": 0.0072229458956165615,
+   "atlas_cms_rel": 0.005157786198648928,
+   "bbtt": 3.5380883510785206,
+   "atlas": 4.331058667351151,
+   "atlas_cms": 7.237136060630272
+  },
+  {
+   "scenario": "tauspin spin-only, with spin shape nuisance",
+   "R_bin": 1.023325613139088,
+   "f": 0.62,
+   "rest": "rest=top-rich",
+   "R_channel": 1.0348474503520833,
+   "bbtt_rel": 0.026172589198111273,
+   "atlas_rel": 0.017415142228962344,
+   "atlas_cms_rel": 0.01245369768316662,
+   "bbtt": 3.59160406219339,
+   "atlas": 4.374885111584538,
+   "atlas_cms": 7.2896666233188006
+  },
+  {
+   "scenario": "tauspin spin-only, with spin shape nuisance",
+   "R_bin": 1.023325613139088,
+   "f": 1.0,
+   "rest": "rest=1",
+   "R_channel": 1.023325613139088,
+   "bbtt_rel": 0.017494708213559695,
+   "atlas_rel": 0.01162442248054818,
+   "atlas_cms_rel": 0.008305969272519365,
+   "bbtt": 3.561231478747459,
+   "atlas": 4.349985016666357,
+   "atlas_cms": 7.259802978762139
+  },
+  {
+   "scenario": "tauspin spin-only, with spin shape nuisance",
+   "R_bin": 1.023325613139088,
+   "f": 1.0,
+   "rest": "rest=top-rich",
+   "R_channel": 1.023325613139088,
+   "bbtt_rel": 0.017494708213559695,
+   "atlas_rel": 0.01162442248054818,
+   "atlas_cms_rel": 0.008305969272519365,
+   "bbtt": 3.561231478747459,
+   "atlas": 4.349985016666357,
+   "atlas_cms": 7.259802978762139
+  },
+  {
+   "scenario": "tauspin increment over kinematics",
+   "R_bin": 1.0230666575144216,
+   "f": 0.5,
+   "rest": "rest=1",
+   "R_channel": 1.0115990771342496,
+   "bbtt_rel": 0.008687060423428372,
+   "atlas_rel": 0.005763741907171882,
+   "atlas_cms_rel": 0.004114940784993193,
+   "bbtt": 3.5304047114819994,
+   "atlas": 4.324784090200839,
+   "atlas_cms": 7.2296275736519515
+  },
+  {
+   "scenario": "tauspin increment over kinematics",
+   "R_bin": 1.0230666575144216,
+   "f": 0.5,
+   "rest": "rest=top-rich",
+   "R_channel": 1.0380312500712832,
+   "bbtt_rel": 0.028574636118686048,
+   "atlas_rel": 0.019020856624984983,
+   "atlas_cms_rel": 0.01360499888379918,
+   "bbtt": 3.600011226415401,
+   "atlas": 4.381789683487435,
+   "atlas_cms": 7.297955991963355
+  },
+  {
+   "scenario": "tauspin increment over kinematics",
+   "R_bin": 1.0230666575144216,
+   "f": 0.62,
+   "rest": "rest=1",
+   "R_channel": 1.014363119964933,
+   "bbtt_rel": 0.010760845340486602,
+   "atlas_rel": 0.0071421317885298485,
+   "atlas_cms_rel": 0.005100019769916475,
+   "bbtt": 3.537662958691703,
+   "atlas": 4.330711166690678,
+   "atlas_cms": 7.236720142343399
+  },
+  {
+   "scenario": "tauspin increment over kinematics",
+   "R_bin": 1.0230666575144216,
+   "f": 0.62,
+   "rest": "rest=top-rich",
+   "R_channel": 1.0344594909550175,
+   "bbtt_rel": 0.02588001032586562,
+   "atlas_rel": 0.017219643398986628,
+   "atlas_cms_rel": 0.012313559193476653,
+   "bbtt": 3.5905800361405293,
+   "atlas": 4.374044466615643,
+   "atlas_cms": 7.288657626193032
+  },
+  {
+   "scenario": "tauspin increment over kinematics",
+   "R_bin": 1.0230666575144216,
+   "f": 1.0,
+   "rest": "rest=1",
+   "R_channel": 1.0230666575144216,
+   "bbtt_rel": 0.017299941871282476,
+   "atlas_rel": 0.011494641147560936,
+   "atlas_cms_rel": 0.008213086909360179,
+   "bbtt": 3.5605497965494886,
+   "atlas": 4.349426956934511,
+   "atlas_cms": 7.259134225747393
+  },
+  {
+   "scenario": "tauspin increment over kinematics",
+   "R_bin": 1.0230666575144216,
+   "f": 1.0,
+   "rest": "rest=top-rich",
+   "R_channel": 1.0230666575144216,
+   "bbtt_rel": 0.017299941871282476,
+   "atlas_rel": 0.011494641147560936,
+   "atlas_cms_rel": 0.008213086909360179,
+   "bbtt": 3.5605497965494886,
+   "atlas": 4.349426956934511,
+   "atlas_cms": 7.259134225747393
+  },
+  {
+   "scenario": "tauspin spin-only (Z with transverse correlations)",
+   "R_bin": 1.0242762150361184,
+   "f": 0.5,
+   "rest": "rest=1",
+   "R_channel": 1.0122108882759355,
+   "bbtt_rel": 0.009145964743416446,
+   "atlas_rel": 0.006068682152966298,
+   "atlas_cms_rel": 0.004332836113495109,
+   "bbtt": 3.532010876601958,
+   "atlas": 4.326095333257755,
+   "atlas_cms": 7.231196420017165
+  },
+  {
+   "scenario": "tauspin spin-only (Z with transverse correlations)",
+   "R_bin": 1.0242762150361184,
+   "f": 0.5,
+   "rest": "rest=top-rich",
+   "R_channel": 1.040031156199326,
+   "bbtt_rel": 0.030084382640174878,
+   "atlas_rel": 0.020030712566124098,
+   "atlas_cms_rel": 0.01432932753097127,
+   "bbtt": 3.6052953392406124,
+   "atlas": 4.386132064034333,
+   "atlas_cms": 7.303171158222993
+  },
+  {
+   "scenario": "tauspin spin-only (Z with transverse correlations)",
+   "R_bin": 1.0242762150361184,
+   "f": 0.62,
+   "rest": "rest=1",
+   "R_channel": 1.015119645217747,
+   "bbtt_rel": 0.011328688862242142,
+   "atlas_rel": 0.007519726645174973,
+   "atlas_cms_rel": 0.005369938213174885,
+   "bbtt": 3.5396504110178477,
+   "atlas": 4.332334824574252,
+   "atlas_cms": 7.238663555134859
+  },
+  {
+   "scenario": "tauspin spin-only (Z with transverse correlations)",
+   "R_bin": 1.0242762150361184,
+   "f": 0.62,
+   "rest": "rest=top-rich",
+   "R_channel": 1.0362718156849222,
+   "bbtt_rel": 0.027246996777691823,
+   "atlas_rel": 0.018133208484882424,
+   "atlas_cms_rel": 0.012968490278913558,
+   "bbtt": 3.595364488721921,
+   "atlas": 4.377972796484994,
+   "atlas_cms": 7.293373130008177
+  },
+  {
+   "scenario": "tauspin spin-only (Z with transverse correlations)",
+   "R_bin": 1.0242762150361184,
+   "f": 1.0,
+   "rest": "rest=1",
+   "R_channel": 1.0242762150361184,
+   "bbtt_rel": 0.018209780112056206,
+   "atlas_rel": 0.012100976394160412,
+   "atlas_cms_rel": 0.00864705987354819,
+   "bbtt": 3.5637342303921966,
+   "atlas": 4.35203419849489,
+   "atlas_cms": 7.2622588310895475
+  },
+  {
+   "scenario": "tauspin spin-only (Z with transverse correlations)",
+   "R_bin": 1.0242762150361184,
+   "f": 1.0,
+   "rest": "rest=top-rich",
+   "R_channel": 1.0242762150361184,
+   "bbtt_rel": 0.018209780112056206,
+   "atlas_rel": 0.012100976394160412,
+   "atlas_cms_rel": 0.00864705987354819,
+   "bbtt": 3.5637342303921966,
+   "atlas": 4.35203419849489,
+   "atlas_cms": 7.2622588310895475
+  },
+  {
+   "scenario": "exact h (implemented modes)",
+   "R_bin": 1.1262498896637312,
+   "f": 0.5,
+   "rest": "rest=1",
+   "R_channel": 1.0649973741675534,
+   "bbtt_rel": 0.04898871074087463,
+   "atlas_rel": 0.03271584045983955,
+   "atlas_cms_rel": 0.02344473455565832,
+   "bbtt": 3.671460487593061,
+   "atlas": 4.4406781139773095,
+   "atlas_cms": 7.368802088800741
+  },
+  {
+   "scenario": "exact h (implemented modes)",
+   "R_bin": 1.1262498896637312,
+   "f": 0.5,
+   "rest": "rest=top-rich",
+   "R_channel": 1.138415573812011,
+   "bbtt_rel": 0.10515115362064464,
+   "atlas_rel": 0.07081972099237355,
+   "atlas_cms_rel": 0.051007171207880786,
+   "bbtt": 3.868029037672256,
+   "atlas": 4.604524800267206,
+   "atlas_cms": 7.567251632696742
+  },
+  {
+   "scenario": "exact h (implemented modes)",
+   "R_bin": 1.1262498896637312,
+   "f": 0.62,
+   "rest": "rest=1",
+   "R_channel": 1.0800148446479296,
+   "bbtt_rel": 0.06040929405802298,
+   "atlas_rel": 0.04041457546954508,
+   "atlas_cms_rel": 0.028991989577776378,
+   "bbtt": 3.7114325292030808,
+   "atlas": 4.473782674519044,
+   "atlas_cms": 7.40874232495999
+  },
+  {
+   "scenario": "exact h (implemented modes)",
+   "R_bin": 1.1262498896637312,
+   "f": 0.62,
+   "rest": "rest=top-rich",
+   "R_channel": 1.1355076968310216,
+   "bbtt_rel": 0.10291160403313238,
+   "atlas_rel": 0.06928886103050003,
+   "atlas_cms_rel": 0.04989475474361482,
+   "bbtt": 3.8601906141159636,
+   "atlas": 4.5979421024311495,
+   "atlas_cms": 7.559242234154027
+  },
+  {
+   "scenario": "exact h (implemented modes)",
+   "R_bin": 1.1262498896637312,
+   "f": 1.0,
+   "rest": "rest=1",
+   "R_channel": 1.1262498896637312,
+   "bbtt_rel": 0.09578950100993588,
+   "atlas_rel": 0.06442661291107576,
+   "atlas_cms_rel": 0.046364300508863865,
+   "bbtt": 3.8352632535347757,
+   "atlas": 4.577034435517626,
+   "atlas_cms": 7.5338229636638205
+  },
+  {
+   "scenario": "exact h (implemented modes)",
+   "R_bin": 1.1262498896637312,
+   "f": 1.0,
+   "rest": "rest=top-rich",
+   "R_channel": 1.1262498896637312,
+   "bbtt_rel": 0.09578950100993588,
+   "atlas_rel": 0.06442661291107576,
+   "atlas_cms_rel": 0.046364300508863865,
+   "bbtt": 3.8352632535347757,
+   "atlas": 4.577034435517626,
+   "atlas_cms": 7.5338229636638205
+  }
+ ],
+ "r_rest_upper": {
+  "spin": 1.0542706075388733,
+  "exact": 1.1504526167678069
+ }
+}
