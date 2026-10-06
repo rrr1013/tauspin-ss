@@ -58,8 +58,11 @@ def main():
     split = d["uid"] % 3
     is_h = np.isin(proc, ["hh", "zh", "tth", "trainH"])
     is_z = np.isin(proc, ["zbb", "trainZ"])
-    if np.isin(proc, ["trainH", "trainZ"]).all():
-        split = np.zeros_like(split)        # a dedicated training sample: use all of it
+    dedicated = np.isin(proc, ["trainH", "trainZ"]).all()
+    if dedicated:
+        # a dedicated training sample: 80 % for training, 20 % held out for the closure test
+        holdout = (d["uid"] // 7) % 5 == 4
+        split = np.where(holdout, 2, 0)
     valid = np.isfinite(Y).all(1) & d["is_true"].all(1)
     tr_all = np.flatnonzero((split == 0) & valid & (is_h | is_z))
     rng = np.random.default_rng(args.seed)
@@ -104,6 +107,15 @@ def main():
             break
     model.load_state_dict(best_state)
     model.eval()
+    if dedicated:
+        ho = np.flatnonzero(split == 2)
+        with torch.no_grad():
+            Pho = model(t(Xn[ho])).cpu().numpy()
+        np.savez_compressed(args.out.replace(".npz", "_holdout.npz"), h_pred=Pho[:, :6].reshape(-1, 2, 3),
+                            hh_pred=Pho[:, 6:].reshape(-1, 3, 3), h_exact=d["h_exact"][ho], proc=proc[ho],
+                            rmode=np.stack([d[f"spin_rmode{m}_0"][ho] for m in range(5)], 1).argmax(1),
+                            rmode1=np.stack([d[f"spin_rmode{m}_1"][ho] for m in range(5)], 1).argmax(1),
+                            is_true=d["is_true"][ho])
     if args.apply:
         d = np.load(args.apply, allow_pickle=True)
         X2, Y, cols2 = make_xy(d)
