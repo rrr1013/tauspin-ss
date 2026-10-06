@@ -9,6 +9,8 @@ Feature sets (all share the ATLAS-like kinematic set K):
   K+low      K + every low-level spin input of the h regressor (no h bottleneck)
   K+h        K + tauspin-style regressed h (6) and h-h+ products (9)
   K+exact    K + exact h and products (oracle; a fake tau gets an isotropic h)
+  K[mtt x%]  K with m_tautau(MMC) replaced by the true m_tautau smeared by a
+             Gaussian of x % (requirement curve for neutrino reconstruction)
 Classifier: XGBoost, signal (ggF HH) vs the sum of backgrounds weighted to
 their expected yields and rescaled to the signal total; trained on split 1,
 evaluated on split 2 (weights x3).
@@ -65,7 +67,17 @@ def feature_sets(d, hp):
     iso /= np.linalg.norm(iso, axis=-1, keepdims=True)
     h = np.where(np.isfinite(h), h, iso)          # fakes / undefined modes: no spin information
     E = np.concatenate([h.reshape(-1, 6), np.einsum("ni,nj->nij", h[:, 0], h[:, 1]).reshape(-1, 9)], 1)
-    return {"K": K, "K+obs": np.concatenate([K, obs], 1), "K+low": np.concatenate([K, low], 1),
+    sets = {}
+    mtt_true = d["m_tautau_true"]
+    i_mtt = kin.index("kin_m_tautau")
+    rng2 = np.random.default_rng(11)
+    for res in (0.15, 0.10, 0.05):
+        Km = K.copy()
+        smeared = mtt_true * (1 + res * rng2.standard_normal(len(mtt_true)))
+        # a fake tau has no true ditau mass: keep the MMC value there
+        Km[:, i_mtt] = np.where(d["is_true"].all(1), smeared, K[:, i_mtt])
+        sets[f"K[mtt {int(res * 100)}%]"] = Km
+    return {**sets, "K": K, "K+obs": np.concatenate([K, obs], 1), "K+low": np.concatenate([K, low], 1),
             "K+h": np.concatenate([K, H], 1), "K+exact": np.concatenate([K, E], 1)}
 
 
