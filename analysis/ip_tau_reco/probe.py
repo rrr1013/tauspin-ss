@@ -46,7 +46,10 @@ def build_sides(d, pv_sig, rng):
         svl = np.linalg.norm(svv, axis=-1)
         sv_dir = svv / np.maximum(svl, 1e-12)[:, None]
         sig_sv = np.hypot(SIG_SV_PERP, pv_sig[0]) / np.maximum(svl, 1e-3)
-        vis = d["vis"][:, s]
+        vis = d["vis"][:, s].copy()
+        # the mass shell has no solution for m_vis > m_tau: cap at 1.6 GeV (as in build_dataset.py)
+        mv = np.sqrt(np.maximum(vis[:, 3] ** 2 - (vis[:, :3] ** 2).sum(-1), 0))
+        vis[:, 3] = np.sqrt((vis[:, :3] ** 2).sum(-1) + np.minimum(mv, 1.6) ** 2)
         ptv = np.hypot(vis[:, 0], vis[:, 1])
         ptbin = np.clip(np.searchsorted(PT_EDGES, ptv, side="right") - 1, 0, len(PT_EDGES) - 2)
         three = d["nch"][:, s] >= 3
@@ -106,6 +109,30 @@ def main():
         st = to_torch(sides, dev)
         met = torch.as_tensor(d["met"], device=dev, dtype=torch.float64)
         r = {"diag": diag, "n": int(len(mtrue))}
+        # oracle: true tau directions + mass shell (best root by MET) -> what perfect direction knowledge gives
+        import ipmmc as _ip
+        t4 = []
+        for s_, sd in enumerate(sides):
+            tdir = d["tau_p4"][:, s_, :3] / np.linalg.norm(d["tau_p4"][:, s_, :3], axis=-1, keepdims=True)
+            (P0, ok0), (P1, ok1) = _ip.mass_shell_momenta(torch.as_tensor(tdir), torch.as_tensor(sd["vis"]))
+            cand = []
+            for P, ok in ((P0, ok0), (P1, ok1)):
+                P = P.numpy(); e = np.sqrt(P ** 2 + 1.77686 ** 2)
+                cand.append((np.concatenate([P[:, None] * tdir, e[:, None]], 1), ok.numpy()))
+            t4.append(cand)
+        best = np.full(len(mtrue), np.nan)
+        bestchi = np.full(len(mtrue), np.inf)
+        for a in (0, 1):
+            for b_ in (0, 1):
+                ta, oa = t4[0][a]
+                tb, ob = t4[1][b_]
+                nu = (ta - sides[0]["vis"])[:, :2] + (tb - sides[1]["vis"])[:, :2]
+                chi = ((d["met"] - nu) ** 2).sum(-1)
+                dd = ta + tb
+                m = np.sqrt(np.maximum(dd[:, 3] ** 2 - (dd[:, :3] ** 2).sum(-1), 0))
+                upd = oa & ob & (chi < bestchi)
+                best[upd], bestchi[upd] = m[upd], chi[upd]
+        r["oracle_true_direction"] = summary(best, mtrue)
         for tag, use_ip in (("mmc_dir", False), ("ipmmc", True)):
             o = run(st, met, met_sigma, table, use_ip=use_ip, S=args.S, dev=dev)
             r[tag] = summary(o["m_maxw"], mtrue)
