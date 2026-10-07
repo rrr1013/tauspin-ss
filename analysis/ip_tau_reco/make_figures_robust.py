@@ -43,8 +43,8 @@ def sigma_phi(q):
 
 def main():
     ent = merge("ent_robust.json", "ent_robust_zmf.json")
-    aux = merge("ent_robust_aux.json", "ent_robust_aux_zmf.json")
-    cp = merge("ent_cp.json", "ent_cp_zmf.json")
+    aux = merge("ent_robust_aux.json", "ent_robust_aux_zmf.json", "ent_robust_aux_lhcinfo.json")
+    cp = merge("ent_cp.json", "ent_cp_zmf.json", "ent_cp_v3.json")
     summ = {"entanglement": {}, "cp": {}}
     for lev in ORDER:
         e, a = ent.get(lev, {}), aux.get(lev, {})
@@ -89,13 +89,16 @@ def main():
             if not v or v["sigma_phi_deg"] is None:
                 continue
             lab, col, mk, _ = LEV[lev]
-            ax.plot(phis, (phis / v["sigma_phi_deg"]) ** 2, color=col, ls=ls,
+            qd = cp[lev][key]["q"]
+            gx = np.array([0.0] + [float(k) for k in qd if float(k) <= 45])
+            gy = np.array([0.0] + [qd[k] for k in qd if float(k) <= 45])
+            ax.plot(gx, gy, color=col, ls=ls, marker=mk, ms=3.5,
                     label=f"{lab.split(' (')[0]}: $\\pm${v['sigma_phi_deg']:.1f}$^\\circ$" + (" (shape known)" if ls == "--" else ""))
     ax.axhline(1, color="#999", lw=0.8, ls=":")
     ax.set_ylim(0, 6)
     ax.set_xlim(0, 45)
     ax.set_xlabel("CP-mixing angle $\\varphi_\\tau$ [deg]")
-    ax.set_ylabel("$-2\\Delta\\ln L$ (Asimov, $\\varphi_\\tau = 0$)")
+    ax.set_ylabel("profile $-2\\Delta\\ln L$ (Asimov, $\\varphi_\\tau = 0$); $\\pm$: small-angle 68 %")
     ax.set_title("(b) tau Yukawa CP angle, $\\tau_h\\tau_h$ only, 3 ab$^{-1}$, one experiment", fontsize=10)
     ax.legend(frameon=False, fontsize=6.8, ncol=1, loc="upper left")
     fig.tight_layout()

@@ -62,3 +62,32 @@ Events without both polarimeters keep weight 1. The residual correlation that re
 - `ent_robust.py`, `ent_cp.py`, `phicp_zmf.py`, `ent_add_zmf.py`, `ent_mcstat.py`, `make_figures_robust.py`
 - Results: `results/json/ent_robust*.json`, `ent_cp*.json`, `robust_summary.json`, `ent_mcstat.json`
 - Figure: `results/figures/ent_cp_robust.png`
+
+## Addendum after the re-review (`review_skeptical_entanglement_v2.md`, verdict: revise)
+
+Probes run:
+
+1. **Information vs regression machinery (M1).** The tauspin network was retrained without SV, the longitudinal IP component and MET (`train_h.py --drop sv_,ip_k,met_`; validation loss 0.01442 vs 0.01436 nominal and 0.01575 without IP/SV) and passed through the same second stage. It is indistinguishable from full tauspin:
+   - correlations 0.343 / 0.347 vs 0.344 / 0.348;
+   - entanglement at τ = 1: 2.96σ vs 3.02σ (sidebands only 1.81σ vs 1.84σ);
+   - σ(φ_τ): 14.1° vs 13.9°.
+
+   The gain is therefore carried by the **transverse impact-parameter information of all decay modes, used inside a learned per-τ polarimeter**. SV, longitudinal IP and MET do not matter. A gradient-boosted regressor on the same raw inputs does much worse (correlation 0.11, reviewer probe). The method claim is therefore "the learned polarimeter" (information plus architecture), not a pure information claim. The LHC CP analyses use the transverse IP only for 1p0n.
+2. **Separate CP-odd response (M5).** The sin 2φ term gets its own response k_A:
+   - 10 % prior: σ(φ_τ) 13.9° → 14.0° (φ*_CP 19.0° → 19.1°);
+   - k_A free: the local width is lost (about 45°).
+
+   The precision on φ_τ therefore needs the antisymmetric analysing power calibrated to about 10 %, but is insensitive to the common transverse scale. Only the local 68 % width is robust to k_T. The 95 % interval widens (29° → 42°) and the CP-odd exclusion needs k_T.
+3. **Auxiliary background control τ = 1, CP angle:** tauspin 8.5° vs φ*_CP 11.5°.
+
+Issues acknowledged and not resolved here:
+
+- φ*_CP baseline: no ATLAS 3p0n decay-plane or CMS a1 polarimetric treatment for 3-prong decays.
+- The Run-2 calibration of the absolute scale is only indicative: q(90°) < 1 at 139 fb⁻¹, so there is no 68 % interval and the ±95° figure is not one.
+- Kinematic-drift stress test not run for the φ*_CP baseline (no hold-out features).
+- Auxiliary samples measure the true shapes exactly (no transfer uncertainty).
+- No identified in-situ source for the transverse analysing power.
+- No IP/SV resolution-scaling test.
+- Known-shape fits for `exact` and `textbook_pair` (CP) returned NaN.
+
+Figure 1(b) now shows the actual profile q(φ) points.

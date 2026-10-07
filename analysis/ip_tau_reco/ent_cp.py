@@ -83,26 +83,27 @@ def templates(lev, nq=6):
 
 
 class CPModel:
-    def __init__(self, A0, D, S, Bg, Bf, sT, sL, tau):
+    def __init__(self, A0, D, S, Bg, Bf, sT, sL, tau, sA="same"):
         t = torch.tensor
         self.A0, self.D, self.S, self.Bg, self.Bf = t(A0), t(D), t(S), t(Bg), t(Bf)
-        self.sT, self.sL, self.tau = sT, sL, tau
+        self.sT, self.sL, self.tau, self.sA = sT, sL, tau, sA
         self.C, self.I = self.S.shape
 
-    def shape(self, phi, kT, kL):
-        s = self.A0 + kT * (torch.cos(2 * phi) * self.D[:, 0] + torch.sin(2 * phi) * self.D[:, 1]) - kL * self.D[:, 2]
+    def shape(self, phi, kT, kL, kA=None):
+        kA = kT if kA is None else kA
+        s = self.A0 + kT * torch.cos(2 * phi) * self.D[:, 0] + kA * torch.sin(2 * phi) * self.D[:, 1] - kL * self.D[:, 2]
         s = torch.clamp(s, min=1e-12)
         return s / s.sum(1, keepdim=True)
 
-    def lam(self, phi, mu, kT, kL, ag, af, shg, shf):
-        return (mu * self.S[:, :, None] * self.shape(phi, kT, kL)[:, None, :]
+    def lam(self, phi, mu, kT, kL, ag, af, shg, shf, kA=None):
+        return (mu * self.S[:, :, None] * self.shape(phi, kT, kL, kA)[:, None, :]
                 + (self.Bg * torch.exp(ag))[:, :, None] * shg[:, None, :]
                 + (self.Bf * torch.exp(af))[:, :, None] * shf[:, None, :])
 
     def nll_fit(self, n, phi, shg0, shf0, aux=None):
         P = {"lmu": torch.zeros(1), "ag": torch.zeros(self.C, self.I), "af": torch.zeros(self.C, self.I),
              "tg": torch.log(torch.tensor(shg0) + 1e-9), "tf": torch.log(torch.tensor(shf0) + 1e-9),
-             "thT": torch.zeros(1), "thL": torch.zeros(1)}
+             "thT": torch.zeros(1), "thL": torch.zeros(1), "thA": torch.zeros(1)}
         for v in P.values():
             v.requires_grad_(True)
         ph = torch.tensor(float(phi))
@@ -110,8 +111,9 @@ class CPModel:
         def f():
             kT = 1 + (1.0 if self.sT is None else self.sT) * P["thT"][0]
             kL = 1 + self.sL * P["thL"][0]
+            kA = None if self.sA == "same" else 1 + (1.0 if self.sA is None else self.sA) * P["thA"][0]
             shg, shf = torch.softmax(P["tg"], 1), torch.softmax(P["tf"], 1)
-            lam = self.lam(ph, torch.exp(P["lmu"][0]), kT, kL, P["ag"], P["af"], shg, shf)
+            lam = self.lam(ph, torch.exp(P["lmu"][0]), kT, kL, P["ag"], P["af"], shg, shf, kA)
             v = (lam - n - torch.where(n > 0, n * torch.log(lam / torch.clamp(n, min=1e-300)), torch.zeros_like(n))).sum()
             if aux is not None:
                 for m, sh, B in ((aux[0], shg, self.Bg), (aux[1], shf, self.Bf)):
@@ -120,6 +122,8 @@ class CPModel:
             v = v + 0.5 * (P["ag"] / 0.05).pow(2).sum() + 0.5 * (P["af"] / 0.10).pow(2).sum() + 0.5 * P["thL"].pow(2).sum()
             if self.sT is not None:
                 v = v + 0.5 * P["thT"].pow(2).sum()
+            if self.sA is not None:
+                v = v + 0.5 * P["thA"].pow(2).sum()
             return v
         opt = torch.optim.LBFGS(list(P.values()), lr=1, max_iter=400, history_size=50, tolerance_grad=1e-10,
                                 tolerance_change=1e-13, line_search_fn="strong_wolfe")
@@ -132,6 +136,8 @@ class CPModel:
                 return v
             opt.step(closure)
             v = float(f())
+            if not np.isfinite(v):
+                break
             if abs(prev - v) < 1e-7:
                 break
             prev = v
@@ -142,7 +148,7 @@ def job(spec):
     lev, name, kw = spec
     A0, D, Zsh, Ush = templates(lev, kw.get("nq", 6))
     S, Bg, Bf = yields(PREP["acc"], kw.get("scale", 1.0))
-    M = CPModel(A0, D, S, Bg, Bf, kw.get("sT", 0.1), kw.get("sL", 0.1), kw.get("tau", 0.0))
+    M = CPModel(A0, D, S, Bg, Bf, kw.get("sT", 0.1), kw.get("sL", 0.1), kw.get("tau", 0.0), kw.get("sA", "same"))
     with torch.no_grad():
         one = torch.tensor(1.0)
         n = M.lam(torch.tensor(0.0), one, one, one, torch.zeros(M.C, M.I), torch.zeros(M.C, M.I),
@@ -176,6 +182,7 @@ def main():
     ap.add_argument("--out", default="outputs/ent/ent_cp.json")
     ap.add_argument("--levels", default="exact,tauspin,tauspin_noIPSV,textbook,textbook_pair,phicp")
     ap.add_argument("--workers", type=int, default=8)
+    ap.add_argument("--extra", default="", help="levels that get the response-separation variants")
     args = ap.parse_args()
     if not os.path.exists(args.cache):
         prepare(args)
@@ -184,7 +191,10 @@ def main():
         specs += [(lev, "nominal", {}), (lev, "known_bkg_shape", {"tau": 100.0}),
                   (lev, "run2_139fb", {"scale": 139 / 3000 / 1.15, "grid": [10, 20, 30, 45, 60, 90]}),
                   (lev, "lumi6000", {"scale": 2.0})]
-        if lev in ("tauspin", "phicp"):
+        if lev in args.extra.split(","):
+            specs += [(lev, "kA_sep0.1", {"sA": 0.1}), (lev, "kA_free", {"sA": None}),
+                      (lev, "kT_free", {"sT": None}), (lev, "tau1", {"tau": 1.0})]
+        if lev in ("tauspin", "phicp") and not args.extra:
             specs += [(lev, "kT_free", {"sT": None}), (lev, "bins4", {"nq": 4}), (lev, "bins8", {"nq": 8}),
                       (lev, "lumi1000", {"scale": 1 / 3})]
     with mp.get_context("spawn").Pool(args.workers, initializer=load, initargs=(args.cache, args.acc)) as pool:

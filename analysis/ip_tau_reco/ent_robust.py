@@ -362,7 +362,7 @@ def main():
     ctx = mp.get_context("spawn")
     sb = np.array([v[0] / (v[1] + v[2] + v[3] + v[4]) for v in CATS.values()])
     if args.aux_scan:
-        specs = [(lev, f"tau{t:g}", {"tau": t}) for lev in args.levels.split(",") for t in (0.3, 1, 3, 10, 100)]
+        specs = [(lev, f"tau{t:g}", {"tau": t}) for lev in args.levels.split(",") for t in (0, 0.3, 1, 3, 10, 100)]
         specs += [(lev, f"tau{t:g}_lumi6000", {"tau": t, "scale": 2.0}) for lev in args.full.split(",") for t in (1, 10)]
         with ctx.Pool(args.workers, initializer=load_prep, initargs=(args.cache,)) as pool:
             res = pool.map(job, specs, chunksize=1)
