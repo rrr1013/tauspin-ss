@@ -1,0 +1,41 @@
+universe   = vanilla
+executable = /home/rbaba/dihiggs-spin-20261006/code/gen/condor_train.sh
+arguments  = $(proc) $(nev) $(seed) $(outdir)
+output     = /home/rbaba/dihiggs-spin-20261006/logs/train_$(proc)_$(seed).out
+error      = /home/rbaba/dihiggs-spin-20261006/logs/train_$(proc)_$(seed).err
+log        = /home/rbaba/dihiggs-spin-20261006/logs/train.log
+request_cpus = 1
+request_memory = 3000
+initialdir = /home/rbaba/dihiggs-spin-20261006/code/gen
+queue proc, nev, seed, outdir from (
+trainHU, 50000, 9000, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9001, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9002, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9003, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9004, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9005, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9006, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9007, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9008, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9009, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9010, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9011, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9012, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9013, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9014, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9015, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9016, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9017, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9018, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9019, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9020, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9021, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9022, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9023, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9024, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9025, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9026, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9027, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9028, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+trainHU, 50000, 9029, /home/rbaba/dihiggs-spin-20261006/train_shower_U
+)

@@ -14,7 +14,7 @@ from pythia_shower import empty, process_event
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--proc", choices=["trainH", "trainZ"], required=True)
+    ap.add_argument("--proc", choices=["trainH", "trainZ", "trainHU"], required=True)
     ap.add_argument("--n", type=int, required=True)
     ap.add_argument("--seed", type=int, required=True)
     ap.add_argument("--out", required=True)
@@ -23,7 +23,11 @@ def main():
     cmds = ["Beams:eCM = 14000", "111:mayDecay = off", "TauDecays:mode = 4",
             "ParticleDecays:limitTau0 = off", "Next:numberCount = 0",
             "Random:setSeed = on", f"Random:seed = {args.seed}", "PhaseSpace:pTHatMin = 40."]
-    if args.proc == "trainH":
+    if args.proc == "trainHU":
+        # spin-flat reference for reweighting: unpolarised, uncorrelated tau decays
+        cmds = [c for c in cmds if not c.startswith("TauDecays:mode")]
+        cmds += ["TauDecays:mode = 3", "TauDecays:tauPolarization = 0."]
+    if args.proc in ("trainH", "trainHU"):
         cmds += ["HiggsSM:gg2Hg(l:t) = on", "HiggsSM:qg2Hq(l:t) = on", "HiggsSM:qqbar2Hg(l:t) = on",
                  "25:onMode = off", "25:onIfAny = 15"]
     else:
