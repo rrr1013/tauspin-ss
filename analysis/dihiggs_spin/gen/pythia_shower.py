@@ -94,6 +94,7 @@ def empty(n):
         "tau_ch_p4": np.zeros((n, NTAU, NCH, 4)), "tau_ch_q": np.zeros((n, NTAU, NCH), np.int8),
         "tau_pi0_p4": np.zeros((n, NTAU, NPI0, 4)), "tau_oth_p4": np.zeros((n, NTAU, 4)),
         "tau_nu_p4": np.zeros((n, NTAU, 4)), "tau_lep_p4": np.zeros((n, NTAU, 4)),
+        "tau_lep_id": np.zeros((n, NTAU), np.int32),
         "jet_p4": np.zeros((n, NJET, 4)), "jet_flav": np.zeros((n, NJET), np.int8),
         "met_true": np.zeros((n, 2)), "nlep_prompt": np.zeros(n, np.int8),
         "lep_p4": np.zeros((n, 2, 4)), "lep_id": np.zeros((n, 2), np.int32),
@@ -140,6 +141,7 @@ def process_event(ev, out, k, fakes, jetdef):
                 out["tau_nu_p4"][k, t] += four(q)
             elif aid in (11, 13):
                 out["tau_lep_p4"][k, t] += four(q)
+                out["tau_lep_id"][k, t] = q.id()
                 out["tau_nlep"][k, t] += 1
             elif aid == 111:
                 if npi0 < NPI0:

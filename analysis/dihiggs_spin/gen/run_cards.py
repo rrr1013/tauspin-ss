@@ -11,6 +11,7 @@ CUTS = {
     "zbb": {"ptb": "20.0", "etab": "2.7", "drbb": "0.2", "ptl": "15.0", "etal": "2.7", "drll": "0.2"},
     "zh": {"ptb": "20.0", "etab": "2.7", "drbb": "0.2"},
     "tth": {},
+    "ttlt": {}, "ttljp": {}, "tWll": {}, "tWlj": {},
 }
 
 def patch(card, name, nevents, seed):
