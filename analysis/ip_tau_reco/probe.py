@@ -53,8 +53,10 @@ def build_sides(d, pv_sig, rng):
         ptv = np.hypot(vis[:, 0], vis[:, 1])
         ptbin = np.clip(np.searchsorted(PT_EDGES, ptv, side="right") - 1, 0, len(PT_EDGES) - 2)
         three = d["nch"][:, s] >= 3
+        bmag = np.linalg.norm(b, axis=-1)
         sides.append(dict(vis=vis, trk=trk, b=b, sig_bperp=sig_bperp, three=three, sv_dir=sv_dir,
-                          sv_len=svl, sig_sv=sig_sv, ptbin=ptbin, prong3=three.astype(int)))
+                          sv_len=svl, sig_sv=sig_sv, ptbin=ptbin, prong3=three.astype(int),
+                          e1=e1, e2=e2, bmag=bmag, sig_psi=sig_bperp / np.maximum(bmag, 1e-9)))
         # IP-azimuth quality, as measured in tauspin on ATLAS full simulation
         t = d["tau_p4"][:, s, :3]
         t = t / np.linalg.norm(t, axis=-1, keepdims=True)
@@ -133,8 +135,12 @@ def main():
                 upd = oa & ob & (chi < bestchi)
                 best[upd], bestchi[upd] = m[upd], chi[upd]
         r["oracle_true_direction"] = summary(best, mtrue)
-        for tag, use_ip in (("mmc_dir", False), ("ipmmc", True)):
-            o = run(st, met, met_sigma, table, use_ip=use_ip, S=args.S, dev=dev)
+        import ipmmc2
+        for tag, use_ip in (("mmc_dir", False), ("ipmmc", True), ("lik_noip", False), ("lik_ip", True)):
+            if tag.startswith("lik"):
+                o = ipmmc2.run(st, met, met_sigma, use_ip=use_ip, S=args.S, dev=dev)
+            else:
+                o = run(st, met, met_sigma, table, use_ip=use_ip, S=args.S, dev=dev)
             r[tag] = summary(o["m_maxw"], mtrue)
             store[f"{proc}_{tag}"] = o["m_maxw"]
         store[f"{proc}_mtrue"] = mtrue
