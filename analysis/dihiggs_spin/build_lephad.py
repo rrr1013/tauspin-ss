@@ -58,15 +58,20 @@ def load(proc, files):
     return d
 
 
-def lepton_ip_features(d, mm, ipscale):
+def lepton_ip_features(d, mm, ipscale, beamspot=0.0, eta_slope=0.0, e_tail=0.0, ip_true=None, seed=12345):
+    """Lepton IP features.  Resolution model: reco_lephad.lepton_resolution x ipscale, optionally
+    (+) a transverse beam-spot term [um], x (1 + eta_slope |eta|), and an extra electron tail
+    (fraction e_tail at 4x width).  `ip_true` overrides the stored true impact vectors."""
     lep = d["lep"]
     # lepton impact parameter (um) in the local basis of the lepton; re-smeared from the
     # true impact vector with the resolution scaled by `ipscale` (1 = reco_lephad.py)
-    rng = np.random.default_rng(12345)
+    rng = np.random.default_rng(seed)
     s_d0, s_z0 = lepton_resolution(lep, d["lep_id"])
-    s_d0, s_z0 = s_d0 * ipscale, s_z0 * ipscale
-    tail = np.where(rng.random(len(lep)) < 0.02, 4.0, 1.0)
-    ip = d["lep_ip_true"].copy()
+    etaf = 1 + eta_slope * np.abs(eta(lep))
+    s_d0, s_z0 = np.hypot(s_d0 * ipscale * etaf, beamspot), s_z0 * ipscale * etaf
+    ptail = 0.02 + np.where(np.abs(d["lep_id"]) == 11, e_tail, 0.0)
+    tail = np.where(rng.random(len(lep)) < ptail, 4.0, 1.0)
+    ip = (d["lep_ip_true"] if ip_true is None else ip_true).copy()
     ip[:, :2] += (s_d0 * tail)[:, None] * rng.standard_normal((len(lep), 2)) / np.sqrt(2)
     ip[:, 2] += s_z0 * tail * rng.standard_normal(len(lep))
     d0 = signed_d0(ip, lep)
@@ -134,7 +139,9 @@ def features(d, table, met_sigma, ipscales=(1.0,)):
     for m in range(5):
         sp[f"rmode{m}"] = (d["tau_rmode"] == m).astype(float)
     ipfs = {sc: lepton_ip_features(d, mm, sc) for sc in ipscales}
-    return f, ipfs, sp
+    ipfs["real"] = lepton_ip_features(d, mm, 1.0, beamspot=10.0, eta_slope=0.2, e_tail=0.07)
+    raw = {"lep_p4": d["lep"], "lep_ip_true": d["lep_ip_true"], "mmc_nu_lep": mm["nu4"][:, 0], "mmc_e_tau": mm["e_tau"]}
+    return f, ipfs, sp, raw
 
 
 def main():
@@ -171,12 +178,14 @@ def main():
     out = {}
     for p, d in data.items():
         scales = [float(x) for x in args.ipscales.split(",")]
-        f, ipfs, sp = features(d, table, met_sigma, scales)
+        f, ipfs, sp, raw = features(d, table, met_sigma, scales)
+        for k, v in raw.items():
+            out.setdefault(k, []).append(v)
         for pre, dd in (("kin_", f), ("had_", sp)):
             for k, v in dd.items():
                 out.setdefault(pre + k, []).append(v)
         for sc, ipf in ipfs.items():
-            tag = "lip_" if sc == scales[0] else f"lip{sc:g}_"
+            tag = "lip_" if sc == scales[0] else ("lipreal_" if sc == "real" else f"lip{sc:g}_")
             for k, v in ipf.items():
                 out.setdefault(tag + k.replace("lip_", ""), []).append(v)
         for k in ("w", "proc", "uid", "lep_from_tau", "lep_mother", "lep_id", "pass_ttva", "tau_is_true", "h_had", "trigger"):

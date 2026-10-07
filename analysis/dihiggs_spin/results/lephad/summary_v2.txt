@@ -1,0 +1,52 @@
+{
+ "direct_ratios": {
+  "null control (IP shuffled)": 0.984522056443042,
+  "direct, nominal resolution": 1.3441224000292444,
+  "direct, realistic resolution": 1.18736623675577,
+  "direct, realistic + 30 % non-prompt fakes": 1.0813936467047138,
+  "direct, realistic + 50 % non-prompt fakes": 1.0411685041032437,
+  "direct, with standard d0 cut (realistic)": 1.076157473951511
+ },
+ "direct_min_ess": {
+  "50": 1.5909679503520686,
+  "200": 1.2901418660164734,
+  "400": 1.1352497563171204
+ },
+ "direct_bootstrap": [
+  1.4131797290565036,
+  1.1798764989723103,
+  1.510736823462606
+ ],
+ "factorised_R": {
+  "SLT": {
+   "other=prompt, fakes=as simulated": 1.210456826095781,
+   "other=prompt, fakes=50% non-prompt": 1.1510703227985677,
+   "other=50/50, fakes=as simulated": 1.1809744581562593,
+   "other=50/50, fakes=50% non-prompt": 1.1316809288883012
+  },
+  "LTT": {
+   "other=prompt, fakes=as simulated": 1.1819260021519382,
+   "other=prompt, fakes=50% non-prompt": 1.1493545455787817,
+   "other=50/50, fakes=as simulated": 1.16205345794679,
+   "other=50/50, fakes=50% non-prompt": 1.1354079853889423
+  }
+ },
+ "projection": {
+  "R_lh_range": [
+   1.1316809288883012,
+   1.210456826095781
+  ],
+  "R_hh_channel_range": [
+   1.0,
+   1.027
+  ],
+  "low": {
+   "bbtautau": 3.621741003376687,
+   "ATLAS_combined": 4.399659974991246
+  },
+  "high": {
+   "bbtautau": 3.766732837320243,
+   "ATLAS_combined": 4.519765067760337
+  }
+ }
+}
