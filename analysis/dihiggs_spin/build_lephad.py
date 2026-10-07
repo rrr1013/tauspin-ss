@@ -23,6 +23,7 @@ import numpy as np
 from build_dataset import local_basis
 from mmc_lep import build_dr_table, run_mmc_lh
 from reco import delta_r, dphi, eta, mass, phi, pt
+from reco_lephad import lepton_resolution, signed_d0
 
 LUMI_FB = 3000.0
 BR_BBTT = 2 * 0.5824 * 0.06272
@@ -57,7 +58,37 @@ def load(proc, files):
     return d
 
 
-def features(d, table, met_sigma):
+def lepton_ip_features(d, mm, ipscale):
+    lep = d["lep"]
+    # lepton impact parameter (um) in the local basis of the lepton; re-smeared from the
+    # true impact vector with the resolution scaled by `ipscale` (1 = reco_lephad.py)
+    rng = np.random.default_rng(12345)
+    s_d0, s_z0 = lepton_resolution(lep, d["lep_id"])
+    s_d0, s_z0 = s_d0 * ipscale, s_z0 * ipscale
+    tail = np.where(rng.random(len(lep)) < 0.02, 4.0, 1.0)
+    ip = d["lep_ip_true"].copy()
+    ip[:, :2] += (s_d0 * tail)[:, None] * rng.standard_normal((len(lep), 2)) / np.sqrt(2)
+    ip[:, 2] += s_z0 * tail * rng.standard_normal(len(lep))
+    d0 = signed_d0(ip, lep)
+    sth = pt(lep) / np.maximum(np.linalg.norm(lep[:, :3], axis=-1), 1e-9)
+    z0s = ip[:, 2] * sth
+    n_, r_, k_ = local_basis(lep)
+    ipt = ip - (ip * k_).sum(-1, keepdims=True) * k_
+    nu_l = mm["nu4"][:, 0]
+    taul = lep + nu_l
+    tdir = taul[:, :3] / np.maximum(np.linalg.norm(taul[:, :3], axis=-1, keepdims=True), 1e-9)
+    tperp = tdir - (tdir * k_).sum(-1, keepdims=True) * k_
+    tperp /= np.maximum(np.linalg.norm(tperp, axis=-1, keepdims=True), 1e-12)
+    ipf = {"lip_d0sig": np.abs(d0) / s_d0, "lip_absd0": np.abs(d0),
+           "lip_z0sig": z0s / s_z0,
+           "lip_ttva": ((np.abs(d0) / s_d0 < np.where(np.abs(d["lep_id"]) == 11, 5.0, 3.0)) & (np.abs(z0s) < 500)).astype(float),
+           "lip_n": (ip * n_).sum(-1), "lip_r": (ip * r_).sum(-1), "lip_k": (ip * k_).sum(-1),
+           "lip_life": (ipt * tperp).sum(-1) / s_d0, "lip_sd0": s_d0,
+           "lip_is_e": (np.abs(d["lep_id"]) == 11).astype(float), "lip_x": lep[:, 3] / np.maximum(mm["e_tau"][:, 0], lep[:, 3])}
+    return ipf
+
+
+def features(d, table, met_sigma, ipscales=(1.0,)):
     lep, tau, met = d["lep"], d["tau_vis"], d["met"]
     vis = np.stack([lep, tau], 1)
     vis_m = vis.copy()
@@ -87,20 +118,6 @@ def features(d, table, met_sigma):
          "m_vis": mass(lep + tau), "dpt_lt": pt(lep) - pt(tau), "ht": d["ht"], "njet": d["njet"].astype(float),
          "eta_lep": eta(lep), "eta_tau": eta(tau), "trigger": d["trigger"].astype(float)}
     f["m_hh_star"] = f["m_hh"] - f["m_bb"] - f["m_tautau"] + 250.0
-    # lepton impact parameter (um) in the local basis of the lepton
-    ip = d["lep_ip"]
-    n_, r_, k_ = local_basis(lep)
-    ipt = ip - (ip * k_).sum(-1, keepdims=True) * k_
-    nu_l = mm["nu4"][:, 0]
-    taul = lep + nu_l
-    tdir = taul[:, :3] / np.maximum(np.linalg.norm(taul[:, :3], axis=-1, keepdims=True), 1e-9)
-    tperp = tdir - (tdir * k_).sum(-1, keepdims=True) * k_
-    tperp /= np.maximum(np.linalg.norm(tperp, axis=-1, keepdims=True), 1e-12)
-    ipf = {"lip_d0sig": np.abs(d["lep_d0"]) / d["lep_sd0"], "lip_absd0": np.abs(d["lep_d0"]),
-           "lip_z0sig": d["lep_z0sth"] / d["lep_sz0"],
-           "lip_n": (ip * n_).sum(-1), "lip_r": (ip * r_).sum(-1), "lip_k": (ip * k_).sum(-1),
-           "lip_life": (ipt * tperp).sum(-1) / d["lep_sd0"], "lip_sd0": d["lep_sd0"],
-           "lip_is_e": (np.abs(d["lep_id"]) == 11).astype(float), "lip_x": lep[:, 3] / np.maximum(mm["e_tau"][:, 0], lep[:, 3])}
     # hadronic-side tauspin inputs
     n2, r2, k2 = local_basis(tau)
     tip = d["tau_ip"][:, 0] * 1e3
@@ -116,7 +133,8 @@ def features(d, table, met_sigma):
           "tsv_L": np.where(three, L, 0), "tmet_n": (met3 * n2).sum(-1), "tmet_r": (met3 * r2).sum(-1)}
     for m in range(5):
         sp[f"rmode{m}"] = (d["tau_rmode"] == m).astype(float)
-    return f, ipf, sp
+    ipfs = {sc: lepton_ip_features(d, mm, sc) for sc in ipscales}
+    return f, ipfs, sp
 
 
 def main():
@@ -124,6 +142,7 @@ def main():
     ap.add_argument("--recodir", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--met-sigma", type=float, default=0.0, help="0: measure from the HH sample")
+    ap.add_argument("--ipscales", default="1.0,1.5,0.8", help="lepton IP resolution scales (first = nominal)")
     args = ap.parse_args()
     data = {}
     for p in PROCS:
@@ -151,10 +170,15 @@ def main():
     print("MET sigma per component", met_sigma, flush=True)
     out = {}
     for p, d in data.items():
-        f, ipf, sp = features(d, table, met_sigma)
-        for pre, dd in (("kin_", f), ("lip_", ipf), ("had_", sp)):
+        scales = [float(x) for x in args.ipscales.split(",")]
+        f, ipfs, sp = features(d, table, met_sigma, scales)
+        for pre, dd in (("kin_", f), ("had_", sp)):
             for k, v in dd.items():
-                out.setdefault(pre + k.replace("lip_", ""), []).append(v)
+                out.setdefault(pre + k, []).append(v)
+        for sc, ipf in ipfs.items():
+            tag = "lip_" if sc == scales[0] else f"lip{sc:g}_"
+            for k, v in ipf.items():
+                out.setdefault(tag + k.replace("lip_", ""), []).append(v)
         for k in ("w", "proc", "uid", "lep_from_tau", "lep_mother", "lep_id", "pass_ttva", "tau_is_true", "h_had", "trigger"):
             out.setdefault(k, []).append(d[k])
         print("features", p, flush=True)
