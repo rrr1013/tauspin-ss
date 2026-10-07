@@ -36,7 +36,16 @@ def main():
             "factorised_R": {c: {k: v["R"] for k, v in d.items()} for c, d in fac.items()}, "projection": proj}
     json.dump(summ, open(R / "summary_v2.json", "w"), indent=1)
     print(json.dumps(summ, indent=1))
-    fig, axes = plt.subplots(1, 2, figsize=(13, 4.4), gridspec_kw={"width_ratios": [1.3, 1]})
+    for single in (False, True):
+        _figure(rows, ess, boot, lo, hi, single)
+
+
+def _figure(rows, ess, boot, lo, hi, single):
+    if single:
+        fig, ax0 = plt.subplots(1, 1, figsize=(7.5, 4.4))
+        axes = [ax0, None]
+    else:
+        fig, axes = plt.subplots(1, 2, figsize=(13, 4.4), gridspec_kw={"width_ratios": [1.3, 1]})
     ax = axes[0]
     labels = [r[0] for r in rows] + [f"direct, merge threshold {k}" for k in ess] + [f"direct, MC bootstrap {i}" for i in range(3)]
     vals = [r[1] for r in rows] + list(ess.values()) + boot
@@ -48,6 +57,11 @@ def main():
     ax.set_xlabel("ratio of tau_lep tau_had HH significance: + lepton IP / kinematics only")
     ax.legend(frameon=False, fontsize=8, loc="upper right")
     ax.set_title("(a) lepton lifetime information in tau_lep tau_had (3 ab$^{-1}$)", fontsize=10)
+    if single:
+        fig.tight_layout()
+        for ext in ("png", "pdf"):
+            fig.savefig(R / f"lephad_ratios.{ext}", dpi=180)
+        return
     ax = axes[1]
     labs = ["ATLAS\nprojection", f"+ lepton IP\nx{lo:.2f}", f"+ lepton IP x{hi:.2f}\n+ tau_had tau_had spin"]
     bb = [3.5, project(lo, 1.0)[0], project(hi, 1.027)[0]]
