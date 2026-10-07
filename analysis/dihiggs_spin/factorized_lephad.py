@@ -45,7 +45,8 @@ def q0(s, B, prior):
         b = np.maximum((B * (1 + prior[:, None] * th[:, None])).sum(0), 1e-12)
         return float((b - n * np.log(b)).sum() + 0.5 * (th ** 2).sum())
     l0 = minimize(nll, np.zeros(len(prior)), method="L-BFGS-B").fun
-    return max(2 * (l0 - float((n - n * np.log(n)).sum())), 0.0)
+    sat = float((n - np.where(n > 0, n * np.log(np.maximum(n, 1e-300)), 0.0)).sum())
+    return max(2 * (l0 - sat), 0.0)
 
 
 def main():
@@ -93,19 +94,27 @@ def main():
         edges_ip[0], edges_ip[-1] = -np.inf, np.inf
         ttva = d[lip + "ttva"] > 0
         info = {}
+        regc = {}
         for c, procs in CLASS.items():
             mc = reg & np.isin(proc, procs)
+            ww = np.abs(w[mc])
+            if mc.sum() == 0 or ww.sum() ** 2 / max((ww ** 2).sum(), 1e-30) < 20:
+                regc[c] = m0          # too little MC in the signal-like region: whole category
+            else:
+                regc[c] = reg
+            mc = regc[c] & np.isin(proc, procs)
             ww = np.abs(w[mc])
             tau_mc = mc & (tau_origin == 1)
             info[c] = {"mc_events": int(mc.sum()), "ess": float(ww.sum() ** 2 / max((ww ** 2).sum(), 1e-30)),
                        "prompt_frac": float(np.average(1 - tau_origin[mc], weights=ww)) if mc.any() else None,
-                       "ttva_eff_tau": float(np.average(ttva[tau_mc], weights=np.abs(w[tau_mc]))) if tau_mc.any() else 1.0}
+                       "ttva_eff_tau": float(np.average(ttva[tau_mc], weights=np.abs(w[tau_mc]))) if tau_mc.any() else 1.0,
+                       "region": "signal-like" if regc[c] is reg else "whole category"}
         out = {"region_info": info}
         for scen in ("as_published", "no_ttva"):
             keep = ttva if scen == "as_published" else np.ones(len(w), bool)
             tmpl = {}
             for c, procs in CLASS.items():
-                mc = reg & keep & np.isin(proc, procs)
+                mc = regc[c] & keep & np.isin(proc, procs)
                 h, _ = np.histogram(s_ip[mc], edges_ip, weights=np.abs(w[mc]))
                 tmpl[c] = h / max(h.sum(), 1e-30)
             mp = reg & keep & (tau_origin == 0) & ~np.isin(proc, ("hhC",))

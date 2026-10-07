@@ -1,0 +1,12 @@
+lepton |d0|/sigma                R = 1.332
+lepton IP (local frame)          R = 1.251
+had. polarisation only           R = 1.021
+lepton IP, resolution x1.5       R = 1.165
+lepton IP, resolution x0.8       R = 1.345
+ATLAS-anchored (SLT / LTT)       R = 1.250
+nominal low (IP local) | no tau_had-tau_had gain             bbtautau 3.74  ATLAS 4.50
+nominal low (IP local) | tau_had-tau_had spin +2.7 %         bbtautau 3.81  ATLAS 4.55
+nominal high (|d0|/sigma) | no tau_had-tau_had gain          bbtautau 3.83  ATLAS 4.57
+nominal high (|d0|/sigma) | tau_had-tau_had spin +2.7 %      bbtautau 3.89  ATLAS 4.62
+resolution x1.5 | no tau_had-tau_had gain                    bbtautau 3.65  ATLAS 4.43
+resolution x1.5 | tau_had-tau_had spin +2.7 %                bbtautau 3.72  ATLAS 4.48

@@ -36,7 +36,9 @@ def feature_sets(d, lip="lip_"):
     kin = sorted(k for k in d.files if k.startswith("kin_") and k not in ("kin_mmc_valid",))
     ipk = [lip + s for s in ("d0sig", "absd0", "z0sig", "n", "r", "k", "life", "sd0", "is_e", "x")]
     had = sorted(k for k in d.files if k.startswith("had_"))
-    return {"K": kin, "K+d0": kin + [lip + "d0sig", lip + "sd0", lip + "is_e"], "K+IP": kin + ipk, "K+IP+H": kin + ipk + had}
+    hspin = [k for k in had if not (k.startswith("had_tip_") or k.startswith("had_tsv_"))]
+    return {"K": kin, "K+d0": kin + [lip + "d0sig", lip + "sd0", lip + "is_e"], "K+IP": kin + ipk, "K+IP+H": kin + ipk + had,
+            "K+IP+Hspin": kin + ipk + hspin, "K+Hspin": kin + hspin}
 
 
 def crossfit(X, y, w, fold, seed=0):
@@ -116,6 +118,8 @@ def main():
     ap.add_argument("--min-ess", type=float, default=100.0)
     ap.add_argument("--seeds", type=int, default=3)
     ap.add_argument("--variants", default="nominal,ip_res_x1.5,ip_res_x0.8")
+    ap.add_argument("--sets", default="K,K+d0,K+IP,K+IP+H")
+    ap.add_argument("--scen", default="no_ttva,ttva")
     args = ap.parse_args()
     d = np.load(args.data, allow_pickle=True)
     proc, w, uid = d["proc"], d["w"], d["uid"]
@@ -129,14 +133,14 @@ def main():
                                  "prompt_lepton_frac": float(np.average(~d["lep_from_tau"][m], weights=np.abs(w[m]) + 1e-12)) if m.any() else None}
     variants = [v for v in (("nominal", "lip_"), ("ip_res_x1.5", "lip1.5_"), ("ip_res_x0.8", "lip0.8_"))
                 if v[0] in args.variants.split(",")]
-    for scen in ("no_ttva", "ttva"):
+    for scen in args.scen.split(","):
         for vname, lip in variants:
             if lip + "d0sig" not in d.files:
                 continue
             sel = base & (d[lip + "ttva"] > 0 if scen == "ttva" else True)
-            fs = feature_sets(d, lip)
+            fs = {k: v for k, v in feature_sets(d, lip).items() if k in args.sets.split(",")}
             if vname != "nominal":
-                fs = {k: v for k, v in fs.items() if k in ("K", "K+IP", "K+IP+H")}
+                fs = {k: v for k, v in fs.items() if k in ("K", "K+IP", "K+IP+H", "K+IP+Hspin")}
             key = f"{scen}/{vname}"
             res["scenarios"][key] = {}
             for name, cols in fs.items():

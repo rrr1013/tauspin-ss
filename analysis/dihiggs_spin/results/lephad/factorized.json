@@ -1,0 +1,160 @@
+{
+ "config": {
+  "data": "/home/rbaba/dihiggs-spin-20261006/runs/lh/dataset.npz",
+  "out": "/home/rbaba/dihiggs-spin-20261006/runs/lh/factorized.json",
+  "kin_frac": 0.2,
+  "lip": "lip_"
+ },
+ "categories": {
+  "SLT": {
+   "region_info": {
+    "HH": {
+     "mc_events": 9249,
+     "ess": 9214.658236939305,
+     "prompt_frac": 0.0,
+     "ttva_eff_tau": 0.584031860744733,
+     "region": "signal-like"
+    },
+    "ttbar": {
+     "mc_events": 164996,
+     "ess": 160328.50583149694,
+     "prompt_frac": 0.9366406797069187,
+     "ttva_eff_tau": 0.6924564917406835,
+     "region": "whole category"
+    },
+    "single top": {
+     "mc_events": 6628,
+     "ess": 6602.436897337549,
+     "prompt_frac": 0.9376300173182197,
+     "ttva_eff_tau": 0.6609547221313241,
+     "region": "whole category"
+    },
+    "Z+HF": {
+     "mc_events": 6626,
+     "ess": 6600.908178856332,
+     "prompt_frac": 0.0005986408616851467,
+     "ttva_eff_tau": 0.6767903372690001,
+     "region": "whole category"
+    },
+    "fakes": {
+     "mc_events": 32311,
+     "ess": 1231.703974700532,
+     "prompt_frac": 0.9440373533774795,
+     "ttva_eff_tau": 0.7369576447965187,
+     "region": "whole category"
+    },
+    "single H": {
+     "mc_events": 502,
+     "ess": 298.3437542160854,
+     "prompt_frac": 0.045984771397543506,
+     "ttva_eff_tau": 0.5946337537440464,
+     "region": "signal-like"
+    }
+   },
+   "as_published": {
+    "Z_bin": 1.280127350635626,
+    "Z_split": 1.58437228769784,
+    "R": 1.2376677108813792,
+    "yields": {
+     "HH": 19.801079136690646,
+     "ttbar": 11.205755395683452,
+     "single top": 30.56115107913669,
+     "Z+HF": 39.47482014388489,
+     "fakes": 27.75971223021583,
+     "single H": 27.302158273381295,
+     "other": 12.224460431654675
+    }
+   },
+   "no_ttva": {
+    "Z_bin": 1.8574565940059606,
+    "Z_split": 2.3109503977975256,
+    "R": 1.2441477261191438,
+    "yields": {
+     "HH": 33.90410775097293,
+     "ttbar": 11.428447234455215,
+     "single top": 31.221365827221234,
+     "Z+HF": 58.30984250624121,
+     "fakes": 28.174455610508222,
+     "single H": 44.518664126282246,
+     "other": 12.224460431654675
+    }
+   },
+   "R_total_vs_published": 1.8052503890726663
+  },
+  "LTT": {
+   "region_info": {
+    "HH": {
+     "mc_events": 3072,
+     "ess": 3060.232068759993,
+     "prompt_frac": 0.0002886728000727029,
+     "ttva_eff_tau": 0.5088001112245936,
+     "region": "signal-like"
+    },
+    "ttbar": {
+     "mc_events": 28206,
+     "ess": 26397.485552206064,
+     "prompt_frac": 0.8132750724546376,
+     "ttva_eff_tau": 0.6222266830012025,
+     "region": "whole category"
+    },
+    "single top": {
+     "mc_events": 997,
+     "ess": 993.1212718495289,
+     "prompt_frac": 0.8389627031543627,
+     "ttva_eff_tau": 0.6283429040196882,
+     "region": "whole category"
+    },
+    "Z+HF": {
+     "mc_events": 4326,
+     "ess": 4309.48034894428,
+     "prompt_frac": 0.0006815015168904732,
+     "ttva_eff_tau": 0.6310858283766244,
+     "region": "whole category"
+    },
+    "fakes": {
+     "mc_events": 4363,
+     "ess": 132.81673290932247,
+     "prompt_frac": 0.8023047671724811,
+     "ttva_eff_tau": 0.66223338764821,
+     "region": "whole category"
+    },
+    "single H": {
+     "mc_events": 183,
+     "ess": 108.57271219581371,
+     "prompt_frac": 0.05395135381653121,
+     "ttva_eff_tau": 0.5446368654637708,
+     "region": "signal-like"
+    }
+   },
+   "as_published": {
+    "Z_bin": 0.4487283415393394,
+    "Z_split": 0.5666155750468657,
+    "R": 1.2627140356303777,
+    "yields": {
+     "HH": 6.482784172661871,
+     "ttbar": 44.82302158273381,
+     "single top": 15.53525179856115,
+     "Z+HF": 43.29496402877698,
+     "fakes": 20.37410071942446,
+     "single H": 9.928057553956835,
+     "other": 8.40431654676259
+    }
+   },
+   "no_ttva": {
+    "Z_bin": 0.7480215391924534,
+    "Z_split": 1.0121893102072852,
+    "R": 1.3531552999129157,
+    "yields": {
+     "HH": 12.73776845654548,
+     "ttbar": 48.224783084800116,
+     "single top": 16.524238267194544,
+     "Z+HF": 68.5766037788266,
+     "fakes": 21.831924160130296,
+     "single H": 17.441992535749417,
+     "other": 8.40431654676259
+    }
+   },
+   "R_total_vs_published": 2.255683932811157
+  }
+ }
+}

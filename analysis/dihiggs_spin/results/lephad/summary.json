@@ -1,0 +1,42 @@
+{
+ "ratios": {
+  "lepton |d0|/sigma": 1.331559211585806,
+  "lepton IP (local frame)": 1.2508616454584425,
+  "had. polarisation only": 1.0205626463864923,
+  "lepton IP, resolution x1.5": 1.165396392663368,
+  "lepton IP, resolution x0.8": 1.3445589623767973,
+  "ATLAS-anchored (SLT / LTT)": 1.2501908732558784
+ },
+ "projection": {
+  "nominal low (IP local) | no tau_had-tau_had gain": {
+   "R_lh": 1.2508616454584425,
+   "bbtautau": 3.7408633311153863,
+   "ATLAS_combined": 4.498228369267584
+  },
+  "nominal low (IP local) | tau_had-tau_had spin +2.7 %": {
+   "R_lh": 1.2508616454584425,
+   "bbtautau": 3.807288585946059,
+   "ATLAS_combined": 4.5536190416717055
+  },
+  "nominal high (|d0|/sigma) | no tau_had-tau_had gain": {
+   "R_lh": 1.331559211585806,
+   "bbtautau": 3.8259288628674777,
+   "ATLAS_combined": 4.569215650822626
+  },
+  "nominal high (|d0|/sigma) | tau_had-tau_had spin +2.7 %": {
+   "R_lh": 1.331559211585806,
+   "bbtautau": 3.8909021548111267,
+   "ATLAS_combined": 4.623756003328232
+  },
+  "resolution x1.5 | no tau_had-tau_had gain": {
+   "R_lh": 1.165396392663368,
+   "bbtautau": 3.65461622664553,
+   "ATLAS_combined": 4.426761769517399
+  },
+  "resolution x1.5 | tau_had-tau_had spin +2.7 %": {
+   "R_lh": 1.165396392663368,
+   "bbtautau": 3.7225807820183374,
+   "ATLAS_combined": 4.4830355428718445
+  }
+ }
+}
