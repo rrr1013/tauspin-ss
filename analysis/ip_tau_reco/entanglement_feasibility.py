@@ -27,12 +27,23 @@ import numpy as np
 from scipy.optimize import minimize
 from sklearn.ensemble import HistGradientBoostingRegressor
 
-HYPS = ("H", "W13", "Z")
+HYPS = ("H", "W13", "Z", "U")
 
 
 def spin_s(h):
     hm, hp = h[:, 0], h[:, 1]
     return hm[:, 0] * hp[:, 0] + hm[:, 1] * hp[:, 1] - hm[:, 2] * hp[:, 2]
+
+
+def z_target(h, z_transverse):
+    """rho_Z - 1 with one-side marginals; 0 when no polarimeter."""
+    one = np.isfinite(h).all(-1)
+    hz = np.where(one[..., None], h, 0.0)
+    hm, hp = hz[:, 0], hz[:, 1]
+    t = -0.147 * (hm[:, 2] + hp[:, 2]) + np.where(one.all(1), hm[:, 2] * hp[:, 2], 0.0)
+    if z_transverse:
+        t = t + np.where(one.all(1), 0.49 * hm[:, 0] * hp[:, 0] - 0.46 * hm[:, 1] * hp[:, 1], 0.0)
+    return t
 
 
 def weights(h, z_transverse):
@@ -48,7 +59,7 @@ def weights(h, z_transverse):
     only = one[:, 0] ^ one[:, 1]
     k1 = np.where(one[:, 0], hz[:, 0, 2], hz[:, 1, 2])
     W = {"H": np.where(ok, 1 + s, 1.0), "W13": np.where(ok, 1 + s / 3, 1.0),
-         "Z": np.where(ok, z, np.where(only, 1 - 0.147 * k1, 1.0))}
+         "Z": np.where(ok, z, np.where(only, 1 - 0.147 * k1, 1.0)), "U": np.ones(len(h))}
     return W, s, ok
 
 
@@ -59,7 +70,7 @@ def nll_fit(n, T_sig, T_bkg, S0, B0, b_unc):
         lam = np.maximum(S * T_sig + B * T_bkg, 1e-12)
         pen = 0.0 if b_unc is None else 0.5 * ((B - B0) / (b_unc * B0)) ** 2
         return float((lam - n * np.log(lam)).sum() + pen)
-    r = minimize(f, np.log([S0, B0]), method="Nelder-Mead", options=dict(xatol=1e-7, fatol=1e-9, maxiter=4000))
+    r = minimize(f, np.log([S0, B0]), method="Nelder-Mead", options=dict(xatol=1e-8, fatol=1e-10, maxiter=8000))
     return r.fun
 
 
@@ -70,9 +81,16 @@ def z_ent(T, S, B, b_unc=None):
     return float(np.sqrt(max(2 * (l0 - l1), 0.0)))
 
 
-def templates(g, W, edges):
-    b = np.searchsorted(edges, g)
-    nb = len(edges) + 1
+def templates(G, W, nq=8):
+    """2D quantile binning of (g_s, g_z)."""
+    e1 = np.quantile(G[:, 0], np.linspace(0, 1, nq + 1)[1:-1])
+    b1 = np.searchsorted(e1, G[:, 0])
+    b = b1 * nq
+    for i in range(nq):
+        m = b1 == i
+        e2 = np.quantile(G[m, 1], np.linspace(0, 1, nq + 1)[1:-1]) if m.sum() > nq else np.array([])
+        b[m] += np.searchsorted(e2, G[m, 1])
+    nb = nq * nq
     return {k: np.bincount(b, weights=W[k], minlength=nb) / W[k].sum() for k in HYPS}
 
 
@@ -96,25 +114,25 @@ def main():
     fold = (np.arange(len(h)) % 2)
     res = {"n_events": int(len(h)), "frac_both_h": float(ok.mean()), "z_transverse": args.z_transverse,
            "levels": {}}
-    gs = {"exact": np.where(ok, s, 0.0)}
+    zt = z_target(h, args.z_transverse)
+    gs = {"exact": np.stack([np.where(ok, s, 0.0), zt], 1)}
     for name, X in feats.items():
-        g = np.zeros(len(h))
-        for f in (0, 1):
-            reg = HistGradientBoostingRegressor(max_iter=600, learning_rate=0.05, min_samples_leaf=200,
-                                                l2_regularization=1.0, early_stopping=True, random_state=0)
-            reg.fit(X[fold != f], np.where(ok, s, 0.0)[fold != f])
-            g[fold == f] = reg.predict(X[fold == f])
-        gs[name] = g
-    for name, g in gs.items():
-        edges = np.quantile(g, np.linspace(0, 1, 21)[1:-1])
-        T = templates(g, W, edges)
-        # Fisher information per signal event for p at p = 1 (unbinned, from g): E_1[g^2/(1+g)^2]
+        G = np.zeros((len(h), 2))
+        for j, target in enumerate((np.where(ok, s, 0.0), zt)):
+            for f in (0, 1):
+                reg = HistGradientBoostingRegressor(max_iter=600, learning_rate=0.05, min_samples_leaf=200,
+                                                    l2_regularization=1.0, early_stopping=True, random_state=0)
+                reg.fit(X[fold != f], target[fold != f])
+                G[fold == f, j] = reg.predict(X[fold == f])
+        gs[name] = G
+    for name, G in gs.items():
+        T = templates(G, W)
+        g = G[:, 0]
         info = float(np.average(g ** 2 / np.maximum(1 + g, 1e-3) ** 2, weights=W["H"]))
         scan = {}
-        for sb in (None, 1.0, 0.3, 0.1):
+        for sb, bunc in ((None, None), (1.0, 0.02), (0.3, 0.02), (0.1, 0.02), (0.3, 0.05), (0.1, 0.05)):
             rows = []
-            for S in np.geomspace(100, 3e6, 60):
-                B = 0.0 if sb is None else S / sb
+            for S in np.geomspace(30, 3e6, 70):
                 if sb is None:
                     n = S * T["H"]
                     def fit(Tsig):
@@ -123,17 +141,17 @@ def main():
                         return r.fun
                     z = float(np.sqrt(max(2 * (fit(T["W13"]) - fit(T["H"])), 0)))
                 else:
-                    z = z_ent(T, S, B)
+                    z = z_ent(T, S, S / sb, bunc)
                 rows.append((S, z))
             rows = np.array(rows)
-            s3 = float(np.interp(3, rows[:, 1], rows[:, 0])) if rows[-1, 1] > 3 else None
-            s5 = float(np.interp(5, rows[:, 1], rows[:, 0])) if rows[-1, 1] > 5 else None
-            scan["inf" if sb is None else str(sb)] = {"S_for_3sigma": s3, "S_for_5sigma": s5,
-                                                      "curve": rows.tolist()}
-        res["levels"][name] = {"fisher_info_per_event": info, "sigma_p_per_sqrtN": float(1 / np.sqrt(max(info, 1e-12))),
-                               "scan": scan,
-                               "corr_g_exact": float(np.corrcoef(g, gs["exact"])[0, 1])}
-        print(name, "I =", round(info, 4), {k: (v["S_for_3sigma"], v["S_for_5sigma"]) for k, v in scan.items()}, flush=True)
+            s3 = float(np.interp(3, rows[:, 1], rows[:, 0])) if rows[:, 1].max() > 3 else None
+            s5 = float(np.interp(5, rows[:, 1], rows[:, 0])) if rows[:, 1].max() > 5 else None
+            key = "inf" if sb is None else f"SB{sb}_dB{bunc}"
+            scan[key] = {"S_for_3sigma": s3, "S_for_5sigma": s5, "curve": rows.tolist()}
+        res["levels"][name] = {"fisher_info_per_event": info, "scan": scan,
+                               "corr_gs_exact": float(np.corrcoef(G[:, 0], gs["exact"][:, 0])[0, 1])}
+        print(name, "I =", round(info, 4), {k: (None if v["S_for_3sigma"] is None else round(v["S_for_3sigma"]),
+                                                None if v["S_for_5sigma"] is None else round(v["S_for_5sigma"])) for k, v in scan.items()}, flush=True)
     json.dump(res, open(args.out, "w"), indent=1)
 
 
