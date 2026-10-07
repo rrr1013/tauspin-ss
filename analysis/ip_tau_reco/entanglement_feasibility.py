@@ -57,7 +57,8 @@ def weights(h, z_transverse):
         z = z + 0.49 * hm[:, 0] * hp[:, 0] - 0.46 * hm[:, 1] * hp[:, 1]
     one = np.isfinite(h).all(-1)
     only = one[:, 0] ^ one[:, 1]
-    k1 = np.where(one[:, 0], hz[:, 0, 2], hz[:, 1, 2])
+    h1 = np.where(one[..., None], h, 0.0)  # per-side polarimeters (hz is zero unless both exist)
+    k1 = np.where(one[:, 0], h1[:, 0, 2], h1[:, 1, 2])
     W = {"H": np.where(ok, 1 + s, 1.0), "W13": np.where(ok, 1 + s / 3, 1.0),
          "Z": np.where(ok, z, np.where(only, 1 - 0.147 * k1, 1.0)), "U": np.ones(len(h))}
     return W, s, ok
