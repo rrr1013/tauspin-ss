@@ -24,6 +24,7 @@ from reco_lephad import lepton_resolution
 
 ARMS = ("B", "B+d0", "B+Had", "B+d0+Had")
 VARIANTS = ("nominal", "null", "real", "nonprompt")
+CATEGORIES = (("Hi", 1), ("Lo", 0))
 TOKEN_NAMES = ("b1", "b2", "lep", "tau_vis", "met")
 TOKEN_COLS = ("log1p_pt_GeV", "eta", "sin_phi", "cos_phi", "log1p_mass_GeV",
               "is_b1", "is_b2", "is_lep", "is_tau", "is_met")
@@ -196,9 +197,11 @@ def prepare(args):
              "inject_u": rng.random(n), "inject_phi": rng.uniform(0, 2*np.pi, n), "inject_r": rng.exponential(100, n)}
     out = dict(tokens=tokens, globals=globals_, had=had, proc=D["proc"], uid=D["uid"],
                w=D["w"], y=(D["proc"] == "hhC").astype(np.int64), trigger=D["trigger"],
+               m_hh=D["kin_m_hh"], mass_category=(D["kin_m_hh"] > 350.).astype(np.int64),
                lep_from_tau=D["lep_from_tau"], lep_is_e=np.abs(D["lep_id"]) == 11,
                lep_pt=pt(lep), lep_eta=eta(lep), true_ip=D["lep_ip_true"])
-    legacy = (D["kin_m_bb"] < 150) & (D["kin_m_tautau"] > 60)
+    base = ((D["trigger"] == 0) & (D["kin_m_bb"] > 40.) & (D["kin_m_bb"] < 150.)
+            & (D["kin_m_vis"] > 40.) & (D["kin_m_tautau"] > 60.))
     report = {"N": n, "join": join, "raw_kinematic_closure_max_abs": {k:float(np.abs(v-D[k]).max()) for k,v in closures.items()},
               "variants": {}, "columns": {"tokens": TOKEN_COLS, "globals": gn, "had": hadcols}}
     d0true, z0strue, sth = geometry(D["lep_ip_true"], lep)
@@ -217,7 +220,7 @@ def prepare(args):
         f = corrected_ip(D, variant, noise)
         out[f"ip_{variant}"] = np.column_stack([f["d0sig"], f["sd0"]]).astype(np.float32)
         out[f"z0s_{variant}"] = f["z0s"].astype(np.float32)
-        out[f"sel_{variant}"] = legacy & (np.abs(f["z0s"]) < 500.)
+        out[f"sel_{variant}"] = base & (np.abs(f["z0s"]) < 500.)
         out[f"d0_{variant}"] = f["d0"].astype(np.float32)
         sel = out[f"sel_{variant}"]
         core_prompt = ~D["lep_from_tau"].astype(bool) & (f["tail"] == 1)
@@ -243,7 +246,7 @@ def prepare(args):
     np.savez_compressed(Path(args.out) / "prepared.npz", **out)
     report["source_dataset"] = {"path": str(Path(args.data).resolve()), "sha256": sha256(args.data)}
     report["timing_seconds"] = time.monotonic() - start
-    report["definition"] = "Toy m_bb<150, MMC>60, corrected |z0*sin(theta)|<500um; NO d0 selection. Scalar d0 Gaussian width sigma with common 2% 4x tail; longitudinal z0 width converted by sin(theta)."
+    report["definition"] = "Latest-paper-informed proxy SR: SLT only, 40<m_bb<150 GeV, m_vis(lepton,tau)>40 GeV, MMC>60 GeV, corrected |z0*sin(theta)|<500um; NO d0 selection. Hi m_HH>350 GeV vs Lo m_HH<=350 GeV. Legacy toy trigger/b-tag response retained. Scalar d0 Gaussian width sigma with common 2% 4x tail; longitudinal z0 width converted by sin(theta)."
     dump(Path(args.out) / "prepared.json", report)
     print(json.dumps({"prepared": report["N"], "geometry": report["geometry"], "timing_seconds": report["timing_seconds"]}), flush=True)
 
@@ -497,9 +500,9 @@ def evaluate(score, D, variant):
     split = D["uid"] % 3
     all_s, all_B, all_V = [], [], []
     cats = {}
-    for name, tv in (("SLT",0),("LTT",1)):
-        va = sel & (split == 1) & (D["trigger"] == tv)
-        ev = sel & (split == 2) & (D["trigger"] == tv)
+    for name, category in CATEGORIES:
+        va = sel & (split == 1) & (D["mass_category"] == category)
+        ev = sel & (split == 2) & (D["mass_category"] == category)
         edges = bin_edges(score[va], D["y"][va], 3*D["w"][va])
         s, B, V, ess, procs = templates(score, D, ev, edges)
         vs, vB, vV, vess, vp = templates(score, D, va, edges)
@@ -525,9 +528,9 @@ def bootstrap(args, D, results):
         z = {}
         for key, score in scores.items():
             s, B, V = [], [], []
-            for name,tv in (("SLT",0),("LTT",1)):
+            for name,category in CATEGORIES:
                 edge = np.array([float(x) for x in results[key]["evaluation"]["categories"][name]["edges"]])
-                m = D["sel_nominal"] & (D["uid"]%3 == 2) & (D["trigger"] == tv)
+                m = D["sel_nominal"] & (D["uid"]%3 == 2) & (D["mass_category"] == category)
                 st, bt, vt, _, _ = templates(score,D,m,edge,mult)
                 s.append(st);B.append(bt);V.append(vt)
             p = profile(np.concatenate(s),np.concatenate(B,1),np.concatenate(V))

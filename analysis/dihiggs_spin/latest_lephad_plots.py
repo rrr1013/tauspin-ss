@@ -64,20 +64,21 @@ def main():
         arm=key.split("/")[1]
         score=np.load(r["score_path"])["score"]
         fig,axes=plt.subplots(1,2,figsize=(11,4))
-        for a,(name,tv) in zip(axes,(("SLT",0),("LTT",1))):
-            m=D["sel_nominal"]&(D["uid"]%3==2)&(D["trigger"]==tv)
+        for a,(name,category) in zip(axes,(("Hi",1),("Lo",0))):
+            m=D["sel_nominal"]&(D["uid"]%3==2)&(D["mass_category"]==category)
             for p in np.unique(D["proc"]):
                 mm=m&(D["proc"]==p)
                 a.hist(score[mm],np.linspace(0,1,41),weights=3*D["w"][mm],histtype="step",label=str(p))
             edges=[float(x) for x in r["evaluation"]["categories"][name]["edges"]]
             for e in edges[1:-1]:a.axvline(e,color="k",lw=.7,ls=":")
-            a.set(xlabel="Proxy score",ylabel="Expected weighted yield / 0.025 (3 ab^-1)",yscale="log",title=name)
+            a.set(xlabel="Proxy score",ylabel="Expected weighted yield / 0.025 (3 ab^-1)",yscale="log",
+                  title="SLT " + name + (": mHH > 350 GeV" if category else ": mHH <= 350 GeV"))
             a.legend(fontsize=7,ncol=2)
         fig.suptitle(f"{arm}, seed 0: exploratory reused-MC evaluation; validation-fixed bins")
         fig.tight_layout();save(fig,out/("score_"+arm.replace("+","_")))
         cats=r["evaluation"]["categories"]
         fig,axes=plt.subplots(1,2,figsize=(11,4))
-        for a,name in zip(axes,("SLT","LTT")):
+        for a,name in zip(axes,("Hi","Lo")):
             c=cats[name]["evaluation"]; S=np.array(c["S"]);B=np.array(c["total_background"])
             centers=np.arange(len(S));bottom=np.zeros(len(S))
             for p,v in c["processes"].items():
@@ -85,7 +86,8 @@ def main():
                 values=np.array(v["yield"]);a.bar(centers,values,bottom=bottom,label=p);bottom+=values
             a.errorbar(centers,B,yerr=np.sqrt(c["mc_variance"]),fmt="k_",label="Background MC uncertainty")
             a.plot(centers,S,"ko--",label="HH (unscaled)")
-            a.set(xlabel="Score bin, increasing signal-like",ylabel="Expected yield (3 ab^-1)",yscale="log",title=name)
+            a.set(xlabel="Score bin, increasing signal-like",ylabel="Expected yield (3 ab^-1)",yscale="log",
+                  title="SLT " + name + (": mHH > 350 GeV" if name == "Hi" else ": mHH <= 350 GeV"))
             a.legend(fontsize=7,ncol=2)
         fig.suptitle(f"{arm}, seed 0: process composition and finite MC statistics")
         fig.tight_layout();save(fig,out/("bins_"+arm.replace("+","_")))
