@@ -1,0 +1,76 @@
+independent_variables:
+- header: {name: Channel}
+  values:
+  - {value: hadhad ggF and VBF cross section limit}
+  - {value: hadhad cross section limit divided by SM}
+  - {value: lephad ggF and VBF cross section limit}
+  - {value: lephad cross section limit divided by SM}
+  - {value: combined ggF and VBF cross section limit}
+  - {value: combined cross section limit divided by SM} 
+dependent_variables:
+- header: {name: Observed}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: 'fb$^{-1}$', value: 139}
+  values:
+  - value: 150
+  - value: 5.0
+  - value: 280
+  - value: 9.7
+  - value: 140
+  - value: 4.7
+- header: {name: -2sigma}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: 'fb$^{-1}$', value: 139}
+  values:
+  - value: 70
+  - value: 2.4
+  - value: 120
+  - value: 4.2
+  - value: 62
+  - value: 2.1
+- header: {name: -1sigma}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: 'fb$^{-1}$', value: 139}
+  values:
+  - value: 95
+  - value: 3.2
+  - value: 170
+  - value: 5.6
+  - value: 83
+  - value: 2.8
+- header: {name: Expected}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: 'fb$^{-1}$', value: 139}
+  values:
+  - value: 130
+  - value: 4.4
+  - value: 230
+  - value: 7.8
+  - value: 110
+  - value: 3.9
+- header: {name: +1sigma}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: 'fb$^{-1}$', value: 139}
+  values:
+  - value: 180
+  - value: 6.1
+  - value: 320
+  - value: 11
+  - value: 160
+  - value: 5.4
+- header: {name: +2sigma}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: 'fb$^{-1}$', value: 139}
+  values:
+  - value: 240
+  - value: 8.2
+  - value: 430
+  - value: 15
+  - value: 210
+  - value: 7.2

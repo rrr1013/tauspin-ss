@@ -1,0 +1,201 @@
+independent_variables:
+- header: {name: SM NN lephad SLT channel}
+  values:
+  - {value: 1}
+  - {value: 2}
+  - {value: 3}
+  - {value: 4}
+  - {value: 5}
+  - {value: 6}
+  - {value: 7}
+  - {value: 8}
+  - {value: 9}
+  - {value: 10}
+  - {value: 11}
+  - {value: 12}
+  - {value: 13}
+  - {value: 14}
+  - {value: 15}
+
+dependent_variables:
+- header: {name: "SM HH at expected limit"}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: "fb$^{-1}$", value: 139}
+  values:
+  - {value: 2.28009676e-03}
+  - {value: 9.67309996e-03}
+  - {value: 4.48086001e-02}
+  - {value: 1.84205413e-01}
+  - {value: 6.28935874e-01}
+  - {value: 1.37156630e+00}
+  - {value: 1.89305449e+00}
+  - {value: 2.11801481e+00}
+  - {value: 2.22474909e+00}
+  - {value: 2.29224277e+00}
+  - {value: 2.34209633e+00}
+  - {value: 2.30179214e+00}
+  - {value: 2.28048778e+00}
+  - {value: 2.29116154e+00}
+  - {value: 2.90416169e+00}
+- header: {name: "Top-quark"}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: "fb$^{-1}$", value: 139}
+  values:
+  - {value: 9291.100}
+  - {value: 13709.293}
+  - {value: 11436.455}
+  - {value: 10203.925}
+  - {value: 8260.650}
+  - {value: 4660.304}
+  - {value: 2015.882}
+  - {value: 812.429}
+  - {value: 366.779}
+  - {value: 162.162}
+  - {value: 67.347}
+  - {value: 33.274}
+  - {value: 14.221}
+  - {value: 6.514}
+  - {value: 1.658}
+- header: {name: "Jet to tau-had fakes"}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: "fb$^{-1}$", value: 139}
+  values:
+  - {value: 2134.184}
+  - {value: 6826.097}
+  - {value: 7854.382}
+  - {value: 7424.925}
+  - {value: 5501.011}
+  - {value: 2754.114}
+  - {value: 1078.297}
+  - {value: 433.584}
+  - {value: 186.774}
+  - {value: 67.567}
+  - {value: 31.269}
+  - {value: 13.305}
+  - {value: 3.725}
+  - {value: 1.264}
+  - {value: 1.089}
+- header: {name: "Z to tautau + HF"}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: "fb$^{-1}$", value: 139}
+  values:
+  - {value: 2.379}
+  - {value: 27.092}
+  - {value: 67.947}
+  - {value: 169.287}
+  - {value: 416.399}
+  - {value: 394.379}
+  - {value: 232.236}
+  - {value: 133.266}
+  - {value: 75.203}
+  - {value: 49.165}
+  - {value: 25.961}
+  - {value: 15.293}
+  - {value: 8.144}
+  - {value: 4.484}
+  - {value: 1.549}
+- header: {name: "Other"}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: "fb$^{-1}$", value: 139}
+  values:
+  - {value: 19.172}
+  - {value: 64.433}
+  - {value: 124.657}
+  - {value: 240.761}
+  - {value: 326.861}
+  - {value: 242.972}
+  - {value: 135.771}
+  - {value: 59.645}
+  - {value: 29.760}
+  - {value: 23.519}
+  - {value: 13.718}
+  - {value: 6.857}
+  - {value: 3.251}
+  - {value: 1.493}
+  - {value: 0.484}
+- header: {name: "SM Higgs"}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: "fb$^{-1}$", value: 139}
+  values:
+  - {value: 9.790}
+  - {value: 17.811}
+  - {value: 18.238}
+  - {value: 19.960}
+  - {value: 21.753}
+  - {value: 17.420}
+  - {value: 11.836}
+  - {value: 8.201}
+  - {value: 6.336}
+  - {value: 4.982}
+  - {value: 3.936}
+  - {value: 3.054}
+  - {value: 2.411}
+  - {value: 1.615}
+  - {value: 1.099}
+- header: {name: "Total Background"}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: "fb$^{-1}$", value: 139}
+  values:
+  - {value: 11456.623}
+  - {value: 20644.727}
+  - {value: 19501.680}
+  - {value: 18058.857}
+  - {value: 14526.675}
+  - {value: 8069.188}
+  - {value: 3474.022}
+  - {value: 1447.126}
+  - {value: 664.852}
+  - {value: 307.395}
+  - {value: 142.230}
+  - {value: 71.783}
+  - {value: 31.752}
+  - {value: 15.370}
+  - {value: 5.879}
+- header: {name: "Post-fit Uncertainty"}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: "fb$^{-1}$", value: 139}
+  values:
+  - {value: 95.486}
+  - {value: 114.356}
+  - {value: 112.032}
+  - {value: 106.782}
+  - {value: 90.099}
+  - {value: 57.396}
+  - {value: 35.957}
+  - {value: 22.951}
+  - {value: 14.239}
+  - {value: 10.732}
+  - {value: 6.827}
+  - {value: 4.196}
+  - {value: 2.713}
+  - {value: 1.568}
+  - {value: 0.988}
+- header: {name: "Data"}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: "fb$^{-1}$", value: 139}
+  values:
+  - {value: 11429}
+  - {value: 20671}
+  - {value: 19564}
+  - {value: 17898}
+  - {value: 14613}
+  - {value: 8151}
+  - {value: 3469}
+  - {value: 1381}
+  - {value: 697}
+  - {value: 307}
+  - {value: 148}
+  - {value: 68}
+  - {value: 38}
+  - {value: 15}
+  - {value: 7}
+

@@ -1,0 +1,5 @@
+lit/data/
+lit/survey_events.jsonl
+lit/survey_stderr.log
+outputs/
+__pycache__/

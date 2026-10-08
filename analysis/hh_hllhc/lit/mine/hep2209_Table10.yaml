@@ -1,0 +1,163 @@
+independent_variables:
+- header: {name: Sample}
+  values:
+  - {value: ttbar}
+  - {value: single top}
+  - {value: Z tautau + HF}  
+  - {value: Combined fakes} 
+  - {value: multijet fake tau-had}
+  - {value: ttbar fake tau-had}  
+  - {value: SM Higgs}  
+  - {value: Other}  
+  - {value: Total Bkg}  
+  - {value: Data}  
+  - {value: non-resonant HH}  
+  - {value: non-resonant VBF HH}
+  - {value: X to HH (300 GeV)}
+  - {value: X to HH (500 GeV)}  
+  - {value: X to HH (1000 GeV)}
+  - {value: X to HH (1600 GeV)}  
+dependent_variables:
+- header: {name: hadhad}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: 'fb$^{-1}$', value: 139}
+  values:
+  - value: 2980
+    errors:
+    - {symerror: 150}
+  - value: 260
+    errors:
+    - {symerror: 70}
+  - value: 1550
+    errors:
+    - {symerror: 160}
+  - value: 0
+  - value: 1270
+    errors:
+    - {symerror: 130}
+  - value: 2080
+    errors:
+    - {symerror: 200}
+  - value: 66
+    errors:
+    - {symerror: 13}
+  - value: 196
+    errors:
+    - {symerror: 33}
+  - value: 8410
+    errors:
+    - {symerror: 90}
+  - value: 8380
+  - value: 5.4
+    errors:
+    - {symerror: 0.9}
+  - value: 0.167
+    errors:
+    - {symerror: 0.014}
+  - value: 46
+    errors:
+    - {symerror: 7}
+  - value: 217
+    errors:
+    - {symerror: 23}
+  - value: 440
+    errors:
+    - {symerror: 40}
+  - value: 152
+    errors:
+    - {symerror: 31}
+- header: {name: lephad SLT}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: 'fb$^{-1}$', value: 139}
+  values:
+  - value: 57300
+    errors:
+    - {symerror: 1300}
+  - value: 3800
+    errors:
+    - {symerror: 500}
+  - value: 1620
+    errors:
+    - {symerror: 130}
+  - value: 34300
+    errors:
+    - {symerror: 1500}
+  - value: 0
+  - value: 0
+  - value: 148
+    errors:
+    - {symerror: 18}
+  - value: 1310
+    errors:
+    - {symerror: 90}
+  - value: 98400
+    errors:
+    - {symerror: 400}
+  - value: 98456
+  - value: 5.9
+    errors:
+    - {symerror: 1.0}
+  - value: 0.2
+    errors:
+    - {symerror: 0.018}
+  - value: 76
+    errors:
+    - {symerror: 5}
+  - value: 209
+    errors:
+    - {symerror: 13}
+  - value: 419
+    errors:
+    - {symerror: 27}
+  - value: 158
+    errors:
+    - {symerror: 26}
+- header: {name: lephad LTT}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: 'fb$^{-1}$', value: 139}
+  values:
+  - value: 3850
+    errors:
+    - {symerror: 190}
+  - value: 200
+    errors:
+    - {symerror: 40}
+  - value: 530
+    errors:
+    - {symerror: 60}
+  - value: 1640
+    errors:
+    - {symerror: 170}
+  - value: 0
+  - value: 0
+  - value: 23
+    errors:
+    - {symerror: 4}
+  - value: 121
+    errors:
+    - {symerror: 14}
+  - value: 6360
+    errors:
+    - {symerror: 80}
+  - value: 6351
+  - value: 1.42
+    errors:
+    - {symerror: 0.25}
+  - value: 0.055
+    errors:
+    - {symerror: 0.004}
+  - value: 26.2
+    errors:
+    - {symerror: 2.0}
+  - value: 51.1
+    errors:
+    - {symerror: 3.2}
+  - value: 47
+    errors:
+    - {symerror: 5}
+  - value: 15.8
+    errors:
+    - {symerror: 2.8}

@@ -1,0 +1,118 @@
+independent_variables:
+- header: {name: log10(S/B), units: NA}
+  values:
+  - {value: -8 to -7}
+  - {value: -7 to -6}
+  - {value: -6 to -5}
+  - {value: -5 to -4}
+  - {value: -4 to -3}
+  - {value: -3 to -2}
+  - {value: -2 to -1}
+  - {value: -1 to  0}
+
+dependent_variables:
+- header: {name: "Signal SM HH"}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: "fb$^{-1}$", value: 139}
+  values:
+  - {value: 0.0005876574}
+  - {value: 0.0154297}
+  - {value: 0.07564089}
+  - {value: 0.6885654}
+  - {value: 2.393498}
+  - {value: 3.452319}
+  - {value: 3.620595}
+  - {value: 2.235798}
+- header: {name: "Top-quark"}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: "fb$^{-1}$", value: 139}
+  values:
+  - {value: 9291.1}
+  - {value: 26239.29}
+  - {value: 13280.27}
+  - {value: 14782.39}
+  - {value: 4194.427}
+  - {value: 492.9157}
+  - {value: 48.33124}
+  - {value: 2.641253}
+- header: {name: "Jet to tau fakes"}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: "fb$^{-1}$", value: 139}
+  values:
+  - {value: 2134.184}
+  - {value: 15222.93}
+  - {value: 8436.6}
+  - {value: 9080.968}
+  - {value: 2123.235}
+  - {value: 212.1244}
+  - {value: 16.28794}
+  - {value: 1.554722}
+- header: {name: "Jet to tau fakes (ttbar)"}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: "fb$^{-1}$", value: 139}
+  values:
+  - {value: 0}
+  - {value: 0}
+  - {value: 1338.702}
+  - {value: 459.2476}
+  - {value: 203.9059}
+  - {value: 61.57754}
+  - {value: 14.85676}
+  - {value: 0.2863607}
+- header: {name: "Z+HF"}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: "fb$^{-1}$", value: 139}
+  values:
+  - {value: 2.378513}
+  - {value: 119.529}
+  - {value: 672.7019}
+  - {value: 1567.122}
+  - {value: 1002.564}
+  - {value: 284.2469}
+  - {value: 50.87942}
+  - {value: 3.809884}
+- header: {name: "Other"}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: "fb$^{-1}$", value: 139}
+  values:
+  - {value: 19.1719}
+  - {value: 199.0918}
+  - {value: 325.6459}
+  - {value: 665.4752}
+  - {value: 311.3632}
+  - {value: 75.24733}
+  - {value: 12.12562}
+  - {value: 0.8984904}
+- header: {name: "Single SM Higgs"}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: "fb$^{-1}$", value: 139}
+  values:
+  - {value: 9.789571}
+  - {value: 38.5715}
+  - {value: 32.53335}
+  - {value: 57.52607}
+  - {value: 50.71538}
+  - {value: 31.18078}
+  - {value: 14.6111}
+  - {value: 2.820559}
+- header: {name: "Data"}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: "fb$^{-1}$", value: 139}
+  values:
+  - {value: 11429}
+  - {value: 41927}
+  - {value: 23831}
+  - {value: 26855}
+  - {value: 7836}
+  - {value: 1145}
+  - {value: 149}
+  - {value: 15}
+

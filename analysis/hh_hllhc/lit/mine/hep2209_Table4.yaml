@@ -1,0 +1,114 @@
+independent_variables:
+- header: {name: Uncertainty source}
+  values:
+  - {value: Data statistical + floating normalisation}
+  - {value: Data statistical}
+  - {value: ttbar and Z+HF normalisations}  
+  - {value: Systematic} 
+  - {value: MC statistical}
+  - {value: Experimental}  
+  - {value: Jet and ETmiss}  
+  - {value: b-jet tagging}  
+  - {value: Tau-had-vis}  
+  - {value: Electrons and muons}  
+  - {value: Luminosity and pileup}  
+  - {value: Background and signal modelling}
+  - {value: Fake-tau-had-vis} 
+  - {value: Top-quark}  
+  - {value: Z-to-tautau + HF}  
+  - {value: Single Higgs boson}  
+  - {value: Other backgrounds}  
+  - {value: Signal}   
+dependent_variables:
+- header: {name: Non-resonant HH}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: 'fb$^{-1}$', value: 139}
+  values:
+  - value: 81%
+  - value: 81%
+  - value: 4%
+  - value: 58%
+  - value: 28%
+  - value: 12%
+  - value: 8%
+  - value: 5%
+  - value: 6%
+  - value: 3%
+  - value: 3%
+  - value: 42%
+  - value: 8%
+  - value: 24%
+  - value: 9%
+  - value: 29%
+  - value: 3%
+  - value: 5%
+- header: {name: 300 GeV Resonant HH}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: 'fb$^{-1}$', value: 139}
+  values:
+  - value: 76%
+  - value: 76%
+  - value: 8%
+  - value: 65%
+  - value: 44%
+  - value: 31%
+  - value: 27%
+  - value: 5%
+  - value: 12%
+  - value: 3%
+  - value: 2%
+  - value: 39%
+  - value: 19%
+  - value: 17%
+  - value: 17%
+  - value: 2%
+  - value: 2%
+  - value: 14%
+- header: {name: 500 GeV Resonant HH}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: 'fb$^{-1}$', value: 139}
+  values:
+  - value: 90%
+  - value: 90%
+  - value: 3%
+  - value: 43%
+  - value: 33%
+  - value: 8%
+  - value: 5%
+  - value: 3%
+  - value: 3%
+  - value: 2%
+  - value: 2%
+  - value: 26%
+  - value: 4%
+  - value: 12%
+  - value: 9%
+  - value: 14%
+  - value: 5%
+  - value: 7%
+- header: {name: 1000 GeV Resonant HH}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: 'fb$^{-1}$', value: 139}
+  values:
+  - value: 93%
+  - value: 93%
+  - value: 5%
+  - value: 37%
+  - value: 18%
+  - value: 12%
+  - value: 4%
+  - value: 7%
+  - value: 8%
+  - value: 2%
+  - value: 5%
+  - value: 30%
+  - value: 8%
+  - value: 8%
+  - value: 15%
+  - value: 15%
+  - value: 3%
+  - value: 15%

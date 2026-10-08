@@ -1,0 +1,123 @@
+independent_variables:
+- header: {name: Sample}
+  values:
+  - {value: ttbar}
+  - {value: single top}
+  - {value: Z tautau + HF}  
+  - {value: Combined fakes} 
+  - {value: multijet fake tau-had}
+  - {value: ttbar fake tau-had}  
+  - {value: SM Higgs}  
+  - {value: Other}  
+  - {value: Total Bkg}  
+  - {value: Data}  
+  - {value: non-resonant HH}  
+  - {value: non-resonant VBF HH}
+dependent_variables:
+- header: {name: hadhad}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: 'fb$^{-1}$', value: 139}
+  values:
+  - value: 0.5
+    errors:
+    - {symerror: 0.1}
+  - value: 0.47
+    errors:
+    - {symerror: 0.20}
+  - value: 2.3
+    errors:
+    - {symerror: 0.4}
+  - value: 0
+  - value: 0.47
+    errors:
+    - {symerror: 0.17}
+  - value: 0.29
+    errors:
+    - {symerror: 0.07}
+  - value: 1.7
+    errors:
+    - {symerror: 0.5}
+  - value: 0.4
+    errors:
+    - {symerror: 0.1}
+  - value: 6.1
+    errors:
+    - {symerror: 0.8}
+  - value: 8
+  - value: 1.58
+    errors:
+    - {symerror: 0.27}
+  - value: 0.0227
+    errors:
+    - {symerror: 0.0019}
+- header: {name: lephad SLT}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: 'fb$^{-1}$', value: 139}
+  values:
+  - value: 0.44
+    errors:
+    - {symerror: 0.12}
+  - value: 1.2
+    errors:
+    - {symerror: 0.7}
+  - value: 1.55
+    errors:
+    - {symerror: 0.33}
+  - value: 1.09
+    errors:
+    - {symerror: 0.22}
+  - value: 0
+  - value: 0
+  - value: 1.10
+    errors:
+    - {symerror: 0.28}
+  - value: 0.48
+    errors:
+    - {symerror: 0.09}
+  - value: 6
+    errors:
+    - {symerror: 1}
+  - value: 7
+  - value: 0.77
+    errors:
+    - {symerror: 0.13}
+  - value: 0.0075
+    errors:
+    - {symerror: 0.0007}
+- header: {name: lephad LTT}
+  qualifiers:
+  - {name: SQRT(S), units: GeV, value: 13000}
+  - {name: LUMINOSITY, units: 'fb$^{-1}$', value: 139}
+  values:
+  - value: 1.76
+    errors:
+    - {symerror: 0.32}
+  - value: 0.61
+    errors:
+    - {symerror: 0.35}
+  - value: 1.7
+    errors:
+    - {symerror: 0.4}
+  - value: 0.8
+    errors:
+    - {symerror: 0.5}
+  - value: 0
+  - value: 0
+  - value: 0.4
+    errors:
+    - {symerror: 0.1}
+  - value: 0.33
+    errors:
+    - {symerror: 0.07}
+  - value: 6
+    errors:
+    - {symerror: 1}
+  - value: 7
+  - value: 0.25
+    errors:
+    - {symerror: 0.05}
+  - value: 0.00455
+    errors:
+    - {symerror: 0.00035}
