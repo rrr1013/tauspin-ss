@@ -461,19 +461,68 @@ def profile(s, B, V, norm=True, mc=True):
     s, B, V, b = s[ok], B[:, ok], V[ok], b[ok]
     n = s+b
     tau = np.divide(b*b, V, out=np.full_like(b, np.inf), where=V > 0)
+    # Products/summation in extended precision keep Newton refinements
+    # readable even when the fitted NLL is tiny relative to the event yields.
+    B, n, tau = (np.asarray(a,dtype=np.longdouble) for a in (B,n,tau))
     prior = np.log1p(np.array(list(PRIOR.values()))) if norm else np.zeros(len(GROUPS))
+    def poisson_relative_deviance(delta):
+        # delta-log(1+delta), stable when the signal is tiny compared to B.
+        out = delta - np.log1p(delta)
+        small = np.abs(delta) < 1e-3
+        x = delta[small]
+        out[small] = x*x*(.5+x*(-1./3+x*(.25+x*(-.2+x/6))))
+        return out
     def objective(theta):
-        bs = (B * np.exp(prior[:, None]*theta[:, None])).sum(0)
-        beta = (n+tau)/(bs+tau) if mc else np.ones_like(b)
-        if mc:
-            beta = np.where(np.isfinite(tau), beta, 1.)
-        lam = bs*beta
-        dev = (lam - n + n*np.log(n/lam)).sum()
-        aux = np.sum(tau[np.isfinite(tau)] * (beta[np.isfinite(tau)] - 1 - np.log(beta[np.isfinite(tau)]))) if mc else 0.
-        return float(dev+aux+.5*(theta*theta).sum())
-    result = minimize(objective, np.zeros(len(GROUPS)), method="L-BFGS-B", options={"ftol":1e-12, "gtol":1e-7, "maxiter":1000})
-    return {"Z": float(np.sqrt(max(2*result.fun, 0.))), "success": bool(result.success),
-            "normalization_pull": result.x.tolist(), "message": str(result.message)}
+        components = B * np.exp(prior[:, None]*theta[:, None])
+        bs = components.sum(0)
+        finite = np.isfinite(tau) if mc else np.zeros(len(b), dtype=bool)
+        factor = np.ones_like(b)
+        factor[finite] = tau[finite]/(bs[finite]+tau[finite])
+        # lambda-n = factor*(bs-n); evaluate this before forming lambda.
+        delta = factor*(bs-n)/n
+        dev = np.sum(n*poisson_relative_deviance(delta))
+        beta_delta = (n[finite]-bs[finite])/(bs[finite]+tau[finite])
+        aux = np.sum(tau[finite]*poisson_relative_deviance(beta_delta))
+        value = float(dev+aux+.5*np.dot(theta,theta))
+        # Envelope derivative after the analytic per-bin beta profile.
+        gradient = np.asarray(prior * (components/bs * (factor*(bs-n))[None,:]).sum(1) + theta,dtype=float)
+        return value, gradient
+    result = minimize(objective, np.zeros(len(GROUPS)), jac=True, method="L-BFGS-B",
+                      options={"ftol":1e-16, "gtol":1e-8, "maxiter":1000, "maxls":100})
+    theta = result.x.copy()
+    value, gradient = objective(theta)
+    # Polish the nearly stationary fit: large curvature can satisfy an NLL
+    # stopping test before an absolute gradient test, even with stable NLL.
+    polish_steps = 0
+    for _ in range(4):
+        if np.max(np.abs(gradient)) < 1e-8:
+            break
+        components = B*np.exp(prior[:,None]*theta[:,None])
+        bs = components.sum(0)
+        finite = np.isfinite(tau) if mc else np.zeros(len(b),dtype=bool)
+        factor = np.ones_like(b)
+        factor[finite] = tau[finite]/(bs[finite]+tau[finite])
+        r = factor*(bs-n)
+        curvature = n.copy()
+        curvature[finite] = tau[finite]*(2*n[finite]*bs[finite]+n[finite]*tau[finite]-bs[finite]**2)/(bs[finite]+tau[finite])**2
+        A = prior[:,None]*components/bs
+        hessian = np.asarray(np.eye(len(prior))+(A*curvature)@A.T+np.diag((prior[:,None]*A*r).sum(1)),dtype=float)
+        if np.linalg.eigvalsh(hessian).min() <= 0:
+            break
+        candidate = theta-np.linalg.solve(hessian,gradient)
+        new_value,new_gradient = objective(candidate)
+        rounding = 64*np.finfo(float).eps*max(1.,abs(value))
+        if new_value > value+rounding or np.max(np.abs(new_gradient)) >= np.max(np.abs(gradient)):
+            break
+        theta,value,gradient = candidate,new_value,new_gradient
+        polish_steps += 1
+    gradient_max = float(np.max(np.abs(gradient)))
+    converged = bool(result.success and gradient_max < 1e-6)
+    return {"Z": float(np.sqrt(max(2*value, 0.))), "success": converged,
+            "normalization_pull": theta.tolist(), "message": str(result.message),
+            "gradient_max_abs": gradient_max,
+            "newton_polish_steps": polish_steps,
+            "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"}
 
 
 def serial_templates(s, B, V, ess, procs):

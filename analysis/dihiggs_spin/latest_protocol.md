@@ -33,3 +33,7 @@ The 6433ce2 legacy SLT/LTT attempt was stopped when a deeper §5.2 reading confi
 Independent skeptical review identified explicit product features as a rival explanation of tiny Joint15 gains. Without selecting or replacing the primary readout, run seed-0 Product15=mean-h6+outer-product(mean-h)9 and K+Product15 using the same frozen split/config/physical weights/binning/stress; compare to existing Joint15 scores with paired bootstrap100. This is an exploratory follow-up, not a pristine confirmation.
 
 The same audit found mode flags in spin-augmented K arms but not K alone. A fixed seed-0 K+Modes arm controls their contribution; report K+Joint15/K+Modes with paired bootstrap. It does not change or select the primary classifiers.
+
+## Numerical recovery
+
+All22 Transformer and2 GBDT fits converged at e34d272. Original profile fits had cancellation/finite-difference failures (16/24; bootstrap validity only7–17/100). These outputs are computational failures, not physics evidence. Preserve them, fix only equivalent Poisson-deviance evaluation and analytic derivatives, and re-evaluate the frozen scores. Independent full theta+logbeta fits, statistical-only closed form, additional optimizer starts and high-precision derivative checks validate the repair. No retraining, selection, score, nuisance or bin-rule change; verify old/new bin edges exactly. Final bootstrap failure counts remain part of the result.

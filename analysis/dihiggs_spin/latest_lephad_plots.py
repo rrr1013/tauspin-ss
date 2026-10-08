@@ -88,6 +88,9 @@ def main():
             a.plot(centers,S,"ko--",label="HH (unscaled)")
             a.set(xlabel="Score bin, increasing signal-like",ylabel="Expected yield (3 ab^-1)",yscale="log",
                   title="SLT " + name + (": mHH > 350 GeV" if name == "Hi" else ": mHH <= 350 GeV"))
+            positive = np.r_[S[S > 0], B[B > 0]]
+            if len(positive):
+                a.set_ylim(bottom=0.5 * positive.min())
             a.legend(fontsize=7,ncol=2)
         fig.suptitle(f"{arm}, seed 0: process composition and finite MC statistics")
         fig.tight_layout();save(fig,out/("bins_"+arm.replace("+","_")))
