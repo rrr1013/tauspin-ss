@@ -117,8 +117,6 @@ VARIANTS = {
     "lt_muonly_noLHshape": {"syst": "baseline_noLHshape", "lifetime": {"cut": "muonly"}, "arms": ("none", "tauspin")},
     "lt_muonly_LHshape08": {"syst": "baseline_LHshape08", "lifetime": {"cut": "muonly"}, "arms": ("none", "tauspin")},
     "lt_muonly_binsys5": {"syst": "baseline_binsys5", "lifetime": {"cut": "muonly"}, "arms": ("none", "tauspin")},
-    "lt_muonly_binsys5_s0": {"syst": "baseline_binsys5", "lifetime": {"cut": "muonly"}, "arms": ("tauspin",),
-                             "seeds": (0,)},
     "lt_muonly_real": {"lifetime": {"cut": "muonly", "variant": "real"}, "arms": ("none", "tauspin")},
     "lt_muonly_top25": {"lifetime": {"cut": "muonly", "top_tau_fraction": 0.25, "fake_tau_fraction": 0.25}, "arms": ("none", "tauspin")},
     "lt_muonly_np30": {"lifetime": {"cut": "muonly", "fake_nonprompt": 0.30}, "arms": ("none", "tauspin")},

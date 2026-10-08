@@ -203,7 +203,7 @@ def fig_robustness():
     lt_vars = [("lt_muonly", "μ only (nominal)"), ("lt_muonly_real", "μ: degraded d₀ resolution"),
                ("lt_muonly_top25", "μ: top & tt̄-fake τ→ℓ share 25%"), ("lt_muonly_np30", "μ: 30% non-prompt fakes"),
                ("lt_muonly_noLHshape", "μ: no lep-had shape syst."), ("lt_muonly_LHshape08", "μ: stronger lep-had shape syst."),
-               ("lt_muonly_binsys5", "μ: +5% per-bin bkg syst. (d₀ bins as in-situ control)"), ("lt_muonly_worst", "μ: worst combination + 25% spin unc."),
+               ("lt_muonly_binsys5", "μ: +5% per-bin bkg syst. (sub-bins as in-situ control)"), ("lt_muonly_worst", "μ: worst combination + 25% spin unc."),
                ("latest_run3_muonly", "μ: latest Run-3 composition"), ("latest_run2_muonly", "μ: latest Run-2 composition"),
                ("lt_nominal", "e+μ, no cut (optimistic)"), ("lt_ecut5", "e+μ, electrons |d₀/σ|<5"),
                ("lt_ttva", "e+μ, TTVA-shape truncation stress"), ("lt_stat", "e+μ, statistics only")]
