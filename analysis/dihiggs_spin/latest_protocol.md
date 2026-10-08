@@ -27,3 +27,7 @@ Correct literature/input mapping; geometry/source checks; converged paired proxy
 ## Pre-result refinement record
 
 The 6433ce2 legacy SLT/LTT attempt was stopped when a deeper §5.2 reading confirmed latest SLT-only and explicit lower mass cuts. Two models had automatically generated evaluation records; neither main nor worker read their sensitivity/scores/bin metrics, only optimization status and existence flags. The change is source-driven, all arms receive identical selection and Hi/Lo categories, and the architecture remains fixed. This superseded attempt is preserved remotely without scientific interpretation.
+
+## Post-result mechanism control
+
+Independent skeptical review identified explicit product features as a rival explanation of tiny Joint15 gains. Without selecting or replacing the primary readout, run seed-0 Product15=mean-h6+outer-product(mean-h)9 and K+Product15 using the same frozen split/config/physical weights/binning/stress; compare to existing Joint15 scores with paired bootstrap100. This is an exploratory follow-up, not a pristine confirmation.
