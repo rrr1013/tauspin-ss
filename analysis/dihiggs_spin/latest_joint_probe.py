@@ -15,6 +15,7 @@ def main():
     for name in ("data","pred","reference-summary","reference-scores","out"):
         ap.add_argument("--"+name,required=True)
     ap.add_argument("--bootstrap",type=int,default=100)
+    ap.add_argument("--mode-only",action="store_true",help="Isolate common decay-mode flags in augmented K arms")
     args=ap.parse_args()
     out=Path(args.out);out.mkdir(parents=True,exist_ok=True)
     d=np.load(args.data,allow_pickle=True);p=np.load(args.pred,allow_pickle=True)
@@ -34,7 +35,8 @@ def main():
     result={"definition":"Seed-0 fixed readout expression control; no claim of posterior calibration or optimal information.",
             "protocol":vars(args),"arms":{},"paired_bootstrap":{}}
     scores={}
-    for name,x in (("Product15",X),("K+Product15",np.c_[K,X])):
+    sets=(("K+Modes",np.c_[K,mode]),) if args.mode_only else (("Product15",X),("K+Product15",np.c_[K,X]))
+    for name,x in sets:
         pp,model,hist=train(x,W,split,0)
         model.save_model(out/(name.replace("+","_")+"_model.json"))
         D=discriminant(pp,fraction);scores[name]=D
@@ -50,13 +52,14 @@ def main():
     for reg,m in regions.items():
         ev=(split==2)&m;counts=rng.poisson(1,(args.bootstrap,int(ev.sum())))
         zb={}
-        for name in ("Product15","K+Product15","Joint15","K+Joint15"):
+        pairs=(("K+Joint15","K+Modes"),) if args.mode_only else (("Joint15","Product15"),("K+Joint15","K+Product15"))
+        for name in dict.fromkeys(n for pair in pairs for n in pair):
             if name in scores:
                 D=scores[name];e=result["arms"][name]["regions"][reg]["edges"]
             else:
                 D=rs[f"D_{name}_0"];e=reference["arms"][name][0]["regions"][reg]["edges"]
             zb[name]=np.array([zprofile(templates(D,W,ev,np.array(e),c)[0],fraction) for c in counts])
-        for full,control in (("Joint15","Product15"),("K+Joint15","K+Product15")):
+        for full,control in pairs:
             r=zb[full]/zb[control]
             result["paired_bootstrap"][reg+":"+full+"/"+control]={"median":float(np.median(r)),
                     "interval68":np.quantile(r,[.16,.84]).tolist(),"interval95":np.quantile(r,[.025,.975]).tolist()}

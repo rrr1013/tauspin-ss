@@ -31,3 +31,5 @@ The 6433ce2 legacy SLT/LTT attempt was stopped when a deeper §5.2 reading confi
 ## Post-result mechanism control
 
 Independent skeptical review identified explicit product features as a rival explanation of tiny Joint15 gains. Without selecting or replacing the primary readout, run seed-0 Product15=mean-h6+outer-product(mean-h)9 and K+Product15 using the same frozen split/config/physical weights/binning/stress; compare to existing Joint15 scores with paired bootstrap100. This is an exploratory follow-up, not a pristine confirmation.
+
+The same audit found mode flags in spin-augmented K arms but not K alone. A fixed seed-0 K+Modes arm controls their contribution; report K+Joint15/K+Modes with paired bootstrap. It does not change or select the primary classifiers.
