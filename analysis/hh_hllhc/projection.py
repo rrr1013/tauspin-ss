@@ -321,7 +321,8 @@ def significance(spec, return_fit=False):
         p = init.copy()
         p[free] = x
         p[poi] = 0.0
-        return float(-2 * model.logpdf(p, asimov)[0])
+        v = float(-2 * model.logpdf(p, asimov)[0])
+        return v if np.isfinite(v) else 1e30  # outside the physical (positive-rate) region
 
     nll_free = float(-2 * model.logpdf(init, asimov)[0])
     starts = [init[free]]
@@ -341,7 +342,10 @@ def significance(spec, return_fit=False):
         m.limits = [bounds[i] for i in free]
         m.migrad(ncall=200000)
         fits.append(type("F", (), {"fun": float(m.fval), "success": bool(m.valid)})())
-    best = min(fits, key=lambda f: f.fun)
+    ok = [f for f in fits if np.isfinite(f.fun)]
+    if not ok:
+        raise RuntimeError("no finite mu=0 fit")
+    best = min(ok, key=lambda f: f.fun)
     q0 = max(best.fun - nll_free, 0.0)
     z = float(np.sqrt(q0))
     if return_fit:
