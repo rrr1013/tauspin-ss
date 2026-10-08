@@ -8,7 +8,8 @@ modelling (+0.17/-0.15 on mu, i.e. H+heavy-flavour theory), then Z+jets (0.06), 
 (0.06), fakes (0.05).  The simplified model therefore has one correlated normalisation
 uncertainty on single H (scanned), and fixed smaller ones on Z+HF acceptance (10%),
 fakes (10%, Run-2 systematic halved), other (15%) and top (5%) on top of the free top and
-Z+HF normalisation factors.  Signal-cross-section uncertainty does not enter a discovery
+Z+HF normalisation factors.  v2 (after review): a score-dependent lep-had top/fake shape
+uncertainty (linear tilt) is scanned jointly so that the lep-had degradation also matches.  Signal-cross-section uncertainty does not enter a discovery
 significance and is left out.
 """
 import json
@@ -32,18 +33,20 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     stat, _ = run(dict(DEFAULT))
     rows = []
-    for s_h in (0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 1.0):
-        cfg = dict(DEFAULT)
-        cfg["norm_sys"] = {**FIXED, "single_h": s_h}
-        z, _ = run(cfg)
-        r = {"single_h": s_h, **z,
-             "ratio_hadhad": z["hadhad"] / stat["hadhad"],
-             "ratio_lephad": lephad(z) / lephad(stat),
-             "ratio_combined": z["combined"] / stat["combined"]}
-        rows.append(r)
-        print(json.dumps({k: round(v, 4) for k, v in r.items()}), flush=True)
+    for s_h in (0.14, 0.16, 0.18, 0.20):
+        for a in (0.0, 0.2, 0.4, 0.6, 0.8):
+            cfg = dict(DEFAULT)
+            cfg["norm_sys"] = {**FIXED, "single_h": s_h}
+            cfg["lephad_shape"] = a
+            z, _ = run(cfg)
+            r = {"single_h": s_h, "lephad_shape": a, **z,
+                 "ratio_hadhad": z["hadhad"] / stat["hadhad"],
+                 "ratio_lephad": lephad(z) / lephad(stat),
+                 "ratio_combined": z["combined"] / stat["combined"]}
+            rows.append(r)
+            print(json.dumps({k: round(v, 4) for k, v in r.items()}), flush=True)
     json.dump({"stat_only": stat, "target_ratio": TARGET, "fixed": FIXED, "scan": rows},
-              open(OUT / "calibration.json", "w"), indent=1)
+              open(OUT / "calibration_v2.json", "w"), indent=1)
 
 
 if __name__ == "__main__":

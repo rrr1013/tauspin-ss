@@ -1,6 +1,11 @@
 """Main study: HL-LHC bbtautau significance with and without TauSpin information, and its
 transfer to the ATLAS HL-LHC HH projection.
 
+v2 (after the validity and skeptical reviews, before re-running): systematics recalibrated
+with a lep-had shape term, MINUIT added to the minimiser, tt-bar-fake leptons get the same
+tau->l share as true-tau top (8%), and the lepton-lifetime headline is the muon-only use
+(electron likelihood ID already uses d0); e+mu without cut is the optimistic variant.
+
 Pre-registered nominal (fixed before the systematics-calibrated results were looked at):
   n_sub = 6 spin sub-bins per baseline bin, hadhad templates conditioned on K,
   Z transverse correlation c_T = 0.5, single H = H spin, fakes = unpolarised,
@@ -24,7 +29,12 @@ OUT = Path(os.environ.get("HH_OUT", Path(__file__).resolve().parent / "outputs")
 SYST_FIXED = {"zhf": 0.10, "fake": 0.10, "fake_mj": 0.10, "fake_tt": 0.10, "other": 0.15, "top": 0.05}
 SCEN = {
     "stat": {},
-    "baseline": {"norm_sys": {**SYST_FIXED, "single_h": 0.18}},
+    # v2 (after review): single-H 18% plus a lep-had top/fake score-tilt shape (0.6), which
+    # matches PUB-2024-016 Table 4 for all three ratios (0.755/0.807/0.790 vs 0.761/0.775/0.783)
+    "baseline": {"norm_sys": {**SYST_FIXED, "single_h": 0.18}, "lephad_shape": 0.6},
+    "baseline_noLHshape": {"norm_sys": {**SYST_FIXED, "single_h": 0.18}},
+    "baseline_LHshape08": {"norm_sys": {**SYST_FIXED, "single_h": 0.18}, "lephad_shape": 0.8},
+    "baseline_binsys5": {"norm_sys": {**SYST_FIXED, "single_h": 0.18}, "lephad_shape": 0.6, "bin_sys": 0.05},
 }
 # ATL-PHYS-PUB-2025-006 Table 5 (3000 fb^-1, baseline) and PUB-2024-016 Table 4
 ATLAS = {"bbgg": 2.43, "bbtt": 3.54, "bbbb": 0.99, "ML": 0.99, "bbll": 0.48, "comb": 4.26,
@@ -102,10 +112,23 @@ VARIANTS = {
     # lepton lifetime in lep-had (TauSpin PV-referenced IP on the light lepton), alone
     # ('none') and together with the spin discriminant
     "lt_nominal": {"lifetime": {}, "arms": ("none", "tauspin", "exact")},
+    "lt_muonly": {"lifetime": {"cut": "muonly"}, "arms": ("none", "tauspin", "exact")},
+    "lt_ecut5": {"lifetime": {"cut": "ecut5"}, "arms": ("none", "tauspin")},
+    "lt_muonly_noLHshape": {"syst": "baseline_noLHshape", "lifetime": {"cut": "muonly"}, "arms": ("none", "tauspin")},
+    "lt_muonly_LHshape08": {"syst": "baseline_LHshape08", "lifetime": {"cut": "muonly"}, "arms": ("none", "tauspin")},
+    "lt_muonly_binsys5": {"syst": "baseline_binsys5", "lifetime": {"cut": "muonly"}, "arms": ("none", "tauspin")},
+    "lt_muonly_real": {"lifetime": {"cut": "muonly", "variant": "real"}, "arms": ("none", "tauspin")},
+    "lt_muonly_top25": {"lifetime": {"cut": "muonly", "top_tau_fraction": 0.25, "fake_tau_fraction": 0.25}, "arms": ("none", "tauspin")},
+    "lt_muonly_np30": {"lifetime": {"cut": "muonly", "fake_nonprompt": 0.30}, "arms": ("none", "tauspin")},
+    "lt_muonly_worst": {"lifetime": {"cut": "muonly", "variant": "real", "top_tau_fraction": 0.25,
+                                     "fake_tau_fraction": 0.25, "fake_nonprompt": 0.30}, "shape": 0.25,
+                        "arms": ("none", "tauspin")},
+    "latest_run3_muonly": {"source": "latest_run3", "lifetime": {"cut": "muonly"}, "arms": ("none", "tauspin", "exact")},
+    "latest_run2_muonly": {"source": "latest_run2", "lifetime": {"cut": "muonly"}, "arms": ("none", "tauspin")},
     "lt_stat": {"syst": "stat", "lifetime": {}, "arms": ("none", "tauspin", "exact")},
     "lt_real_res": {"lifetime": {"variant": "real"}, "arms": ("none", "tauspin")},
     "lt_ttva": {"lifetime": {"ttva": True}, "arms": ("none", "tauspin")},
-    "lt_top_tau25": {"lifetime": {"top_tau_fraction": 0.25}, "arms": ("none", "tauspin")},
+    "lt_top_tau25": {"lifetime": {"top_tau_fraction": 0.25, "fake_tau_fraction": 0.25}, "arms": ("none", "tauspin")},
     "lt_fake_np30": {"lifetime": {"fake_nonprompt": 0.30}, "arms": ("none", "tauspin")},
     "latest_run3": {"source": "latest_run3", "lifetime": {}, "arms": ("none", "textbook", "tauspin", "exact")},
     "latest_run3_spinonly": {"source": "latest_run3", "arms": ("textbook", "tauspin", "exact")},
@@ -113,7 +136,8 @@ VARIANTS = {
     "latest_run2_spinonly": {"source": "latest_run2", "arms": ("tauspin", "exact")},
     "latest_run3_stat": {"source": "latest_run3", "syst": "stat", "lifetime": {}, "arms": ("none", "tauspin", "exact")},
     "lt_worst": {"lifetime": {"variant": "real", "ttva": True, "top_tau_fraction": 0.25,
-                              "fake_nonprompt": 0.30}, "shape": 0.25, "arms": ("none", "tauspin")},
+                              "fake_tau_fraction": 0.25, "fake_nonprompt": 0.30}, "shape": 0.25,
+                 "arms": ("none", "tauspin")},
 }
 
 

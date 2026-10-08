@@ -29,6 +29,14 @@ GROUPS = {"signal": ("hhC",), "zhf": ("zbb",), "single_h": ("tth", "zh"),
           "top": ("ttlt", "ttll", "tWll"), "fake": ("ttljp", "ttlj", "tWlj")}
 
 
+def CUTS(is_e):
+    """Lepton |d0|/sigma acceptance scenarios: none (latest ATLAS), standard TTVA
+    (3 for muons, 5 for electrons), and electrons-only < 5 (a proxy for the d0 terms of
+    the electron likelihood ID, muons unrestricted)."""
+    return {"nocut": np.inf, "ttva": np.where(is_e, 5.0, 3.0), "ecut5": np.where(is_e, 5.0, np.inf),
+            "muonly": np.inf}
+
+
 def kin_score(D, sel, fold):
     X = np.c_[D["tokens"].reshape(len(sel), -1), D["globals"]].astype(np.float32)
     y = (D["proc"] == "hhC").astype(int)
@@ -49,8 +57,13 @@ def kin_score(D, sel, fold):
     return bst.predict(xgb.DMatrix(X), iteration_range=(0, bst.best_iteration + 1)), int(bst.best_iteration)
 
 
-def hist(x, w):
-    h = np.histogram(x, EDGES, weights=w)[0]
+def hist(x, w, e=None):
+    """Normalised |d0|/sigma histogram.  With e (electron flags) given, electrons are not
+    binned in d0 and all go to one extra bin (muon-only use of the lepton lifetime)."""
+    if e is None:
+        h = np.histogram(x, EDGES, weights=w)[0]
+    else:
+        h = np.r_[np.histogram(x[~e], EDGES, weights=w[~e])[0], w[e].sum()]
     return h / max(h.sum(), 1e-300)
 
 
@@ -94,17 +107,17 @@ def main():
                 k_lo = np.interp(hi_f, cw, K[sig][o]) if hi_f < 1 else -np.inf
                 rr = ev & (K <= k_hi) & (K > k_lo)
                 row = {"k_range": [float(k_lo), float(k_hi)], "templates": {}, "tau_fraction": {}, "n": {}}
-                for ttva in (False, True):
-                    cut = np.where(is_e, 5.0, 3.0) if ttva else np.inf
+                for key, cut in CUTS(is_e).items():
+                    ttva = key  # template key: nocut | ttva | ecut5
                     ok_t, ok_p = rr & tau & (d0sig < cut), rr & ~tau & (d0sig < cut)
                     ok_n = rr & ~tau & (np_sig < cut)
                     ok_s = ok_t & (D["proc"] == "hhC")
-                    row["templates"]["ttva" if ttva else "nocut"] = {
-                        "tau": hist(d0sig[ok_t], w[ok_t]).tolist(),
-                        "tau_signal": hist(d0sig[ok_s], w[ok_s]).tolist(),
+                    row["templates"][key] = {
+                        "tau": hist(d0sig[ok_t], w[ok_t], is_e[ok_t] if key == "muonly" else None).tolist(),
+                        "tau_signal": hist(d0sig[ok_s], w[ok_s], is_e[ok_s] if key == "muonly" else None).tolist(),
                         "n_tau_signal": int(ok_s.sum()),
-                        "prompt": hist(d0sig[ok_p], w[ok_p]).tolist(),
-                        "nonprompt": hist(np_sig[ok_n], w[ok_n]).tolist()}
+                        "prompt": hist(d0sig[ok_p], w[ok_p], is_e[ok_p] if key == "muonly" else None).tolist(),
+                        "nonprompt": hist(np_sig[ok_n], w[ok_n], is_e[ok_n] if key == "muonly" else None).tolist()}
                 for g, procs in GROUPS.items():
                     m = rr & np.isin(D["proc"], procs)
                     row["tau_fraction"][g] = float(w[m & tau].sum() / max(w[m].sum(), 1e-300)) if m.any() else None
@@ -119,12 +132,11 @@ def main():
         # pooled prompt / nonprompt shapes (|d0|/sigma of a prompt lepton is a resolution
         # pull and depends little on kinematics) and pooled background-group tau fractions
         vrow["pooled"] = {}
-        for ttva in (False, True):
-            cut = np.where(is_e, 5.0, 3.0) if ttva else np.inf
+        for key, cut in CUTS(is_e).items():
             ok_p, ok_n = ev & ~tau & (d0sig < cut), ev & ~tau & (np_sig < cut)
-            vrow["pooled"]["ttva" if ttva else "nocut"] = {
-                "prompt": hist(d0sig[ok_p], w[ok_p]).tolist(),
-                "nonprompt": hist(np_sig[ok_n], w[ok_n]).tolist(),
+            vrow["pooled"][key] = {
+                "prompt": hist(d0sig[ok_p], w[ok_p], is_e[ok_p] if key == "muonly" else None).tolist(),
+                "nonprompt": hist(np_sig[ok_n], w[ok_n], is_e[ok_n] if key == "muonly" else None).tolist(),
                 "n_prompt": int(ok_p.sum())}
         hi = ev & (K > np.interp(0.5, cw, K[sig][o]))  # most signal-like half of the signal
         vrow["pooled_tau_fraction_highK"] = {

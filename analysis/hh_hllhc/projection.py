@@ -172,7 +172,7 @@ def lifetime_templates(cfg, ch, b):
     if path not in _LT_CACHE:
         _LT_CACHE[path] = json.load(open(path))
     v = _LT_CACHE[path]["variants"][lt.get("variant", "nominal")]
-    key = "ttva" if lt.get("ttva", False) else "nocut"
+    key = lt.get("cut", "ttva" if lt.get("ttva", False) else "nocut")
     src = cfg.get("source", "run2legacy")
     bins = v["channels"][ch if src == "run2legacy" else f"{src}:{ch}"]
     k = b
@@ -189,9 +189,13 @@ def origin_mix(cfg, p):
     f_top = lt.get("top_tau_fraction", 0.08)
     f_h = lt.get("single_h_tau_fraction", 0.92)
     f_np = lt.get("fake_nonprompt", 0.0)
+    # tt-bar l+jets fakes: the lepton comes from W -> tau -> l about as often as in the
+    # true-tau top background (BR 0.039 vs 0.108 x lower pT acceptance) -> same share
+    f_ft = lt.get("fake_tau_fraction", f_top)
     return {"signal": np.array([1.0, 0, 0]), "zhf": np.array([1.0, 0, 0]),
             "single_h": np.array([f_h, 1 - f_h, 0]), "top": np.array([f_top, 1 - f_top, 0]),
-            "fake": np.array([0, 1 - f_np, f_np]), "other": np.array([0, 1.0, 0])}[p]
+            "fake": np.array([f_ft * (1 - f_np), (1 - f_ft) * (1 - f_np), f_np]),
+            "other": np.array([0, 1.0, 0])}[p]
 
 
 def combine(t_spin, L, om):
@@ -258,6 +262,14 @@ def build_spec(cfg, spin):
                     lo[sl] *= 1 - cfg["bin_sys"]
                     mods.append({"name": f"binsys_{ch}_{b}", "type": "histosys",
                                  "data": {"hi_data": hi.tolist(), "lo_data": lo.tolist()}})
+            if cfg.get("lephad_shape", 0) > 0 and not ditau and p in ("top", "fake"):
+                # score-dependent modelling uncertainty of the dominant lep-had backgrounds,
+                # linear in the baseline-bin index and common to its spin/d0 sub-bins
+                a = cfg["lephad_shape"]
+                n_sub = len(data) // nb
+                tilt = np.repeat(1 + a * np.arange(nb) / max(nb - 1, 1), n_sub)
+                mods.append({"name": f"lhshape_{p}", "type": "histosys",
+                             "data": {"hi_data": (data * tilt).tolist(), "lo_data": (data * (2 - tilt)).tolist()}})
             if spin is not None and shape_unc > 0:
                 # independent response-contrast nuisance per spin hypothesis: the template
                 # of hypothesis h moves by +-u (T_h - mean_h' T_h') (correlated over bins
@@ -321,6 +333,14 @@ def significance(spec, return_fit=False):
     fits = [minimize(nll, x0, method="L-BFGS-B", bounds=[bounds[i] for i in free],
                      options={"maxiter": 20000, "maxfun": 200000, "ftol": 1e-13, "gtol": 1e-9})
             for x0 in starts]
+    from iminuit import Minuit
+    for x0 in starts:
+        m = Minuit(nll, x0)
+        m.errordef = 1.0
+        m.strategy = 2
+        m.limits = [bounds[i] for i in free]
+        m.migrad(ncall=200000)
+        fits.append(type("F", (), {"fun": float(m.fval), "success": bool(m.valid)})())
     best = min(fits, key=lambda f: f.fun)
     q0 = max(best.fun - nll_free, 0.0)
     z = float(np.sqrt(q0))

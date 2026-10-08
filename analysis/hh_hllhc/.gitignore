@@ -3,3 +3,6 @@ lit/survey_events.jsonl
 lit/survey_stderr.log
 outputs/
 __pycache__/
+review/*.png
+review/*.jsonl
+review/*_stderr.log

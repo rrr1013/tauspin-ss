@@ -80,7 +80,7 @@ def fig_spin_templates():
     for ax, arm, title in zip(axes, ("textbook", "tauspin", "exact"),
                               ("textbook observables (Υ, x, hybrid h)", "TauSpin ĥ (IP+SV, ATLAS-calibrated)",
                                "exact polarimeter h (ceiling)")):
-        st = SpinTemplates(arm, "s0_ct0.5", 10, True)
+        st = SpinTemplates(arm, "s0_ct0.5", 6, True)
         sig = rec["signal"]
         cum = np.r_[0, np.cumsum(sig[::-1])][::-1] / sig.sum()
         T, E = st.ditau(frac, (cum[b + 1], cum[b]))
@@ -155,14 +155,15 @@ def fig_main():
     rows = [("ATLAS HL-LHC baseline (PUB-2025-006)", None, None),
             ("textbook spin observables", "nominal", "textbook"),
             ("TauSpin ĥ (spin only)", "nominal", "tauspin"),
-            ("lepton lifetime only (PV-referenced d₀)", "lt_nominal", "none"),
-            ("TauSpin ĥ + lepton lifetime", "lt_nominal", "tauspin"),
-            ("exact h + lepton lifetime (ceiling)", "lt_nominal", "exact")]
-    latest = {"nominal": "latest_run3_spinonly", "lt_nominal": "latest_run3"}
-    fig, axes = plt.subplots(1, 2, figsize=(13, 4.4), sharey=True)
+            ("μ lifetime only (|d₀|/σ, muons)", "lt_muonly", "none"),
+            ("TauSpin ĥ + μ lifetime", "lt_muonly", "tauspin"),
+            ("TauSpin ĥ + e,μ lifetime (optimistic)", "lt_nominal", "tauspin"),
+            ("exact-h oracle + μ lifetime", "lt_muonly", "exact")]
+    latest = {"nominal": "latest_run3_spinonly", "lt_muonly": "latest_run3_muonly", "lt_nominal": "latest_run3"}
+    fig, axes = plt.subplots(1, 2, figsize=(13, 4.9), sharey=True)
     y = np.arange(len(rows))[::-1]
-    for ax, key, base, title in ((axes[0], "bbtt", 3.54, "ATLAS bbττ, 3 ab⁻¹, baseline syst."),
-                                 (axes[1], "comb", 4.26, "ATLAS HH combination, 3 ab⁻¹")):
+    for ax, key, base, title in ((axes[0], "bbtt", 3.54, "bbττ: surrogate gain × ATLAS 3.54σ"),
+                                 (axes[1], "comb", 4.26, "HH combination: transferred from ATLAS 4.26σ")):
         for yi, (lab, var, arm) in zip(y, rows):
             if var is None:
                 ax.plot([base], [yi], "D", color=INK, ms=7)
@@ -199,10 +200,13 @@ def fig_robustness():
                  ("Z_cT0", "Z transverse corr. = 0"), ("singleH_30pctZ", "30% of single H with Z spin"),
                  ("fakes_Hlike", "fakes H-like spin"), ("fakes_Wlike", "fakes W-like spin"),
                  ("latest_run3_spinonly", "latest Run-3 composition"), ("latest_run2_spinonly", "latest Run-2 composition")]
-    lt_vars = [("lt_nominal", "nominal"), ("lt_stat", "statistics only"), ("lt_real_res", "degraded d₀ resolution + e tails"),
-               ("lt_ttva", "TTVA cut |d₀/σ|<3 μ / 5 e"), ("lt_top_tau25", "top τ→ℓ share 25%"),
-               ("lt_fake_np30", "30% non-prompt fakes"), ("lt_worst", "all of the above + 25% spin unc."),
-               ("latest_run3", "latest Run-3 composition"), ("latest_run2", "latest Run-2 composition")]
+    lt_vars = [("lt_muonly", "μ only (nominal)"), ("lt_muonly_real", "μ: degraded d₀ resolution"),
+               ("lt_muonly_top25", "μ: top & tt̄-fake τ→ℓ share 25%"), ("lt_muonly_np30", "μ: 30% non-prompt fakes"),
+               ("lt_muonly_noLHshape", "μ: no lep-had shape syst."), ("lt_muonly_LHshape08", "μ: stronger lep-had shape syst."),
+               ("lt_muonly_binsys5", "μ: +5% per-bin bkg syst."), ("lt_muonly_worst", "μ: worst combination + 25% spin unc."),
+               ("latest_run3_muonly", "μ: latest Run-3 composition"), ("latest_run2_muonly", "μ: latest Run-2 composition"),
+               ("lt_nominal", "e+μ, no cut (optimistic)"), ("lt_ecut5", "e+μ, electrons |d₀/σ|<5"),
+               ("lt_ttva", "e+μ, TTVA-shape truncation stress"), ("lt_stat", "e+μ, statistics only")]
     fig, axes = plt.subplots(1, 2, figsize=(15, 5.6), gridspec_kw={"wspace": 0.75})
     for ax, vars_, arms, title in ((axes[0], spin_vars, (("textbook", C[3], "^"), ("tauspin", C[0], "o"), ("exact", C[2], "s")), "spin only (τhτh and τh side of τℓτh)"),
                                    (axes[1], lt_vars, (("none", C[5], "v"), ("tauspin", C[0], "o"), ("exact", C[2], "s")), "with lepton lifetime in τℓτh")):
@@ -227,7 +231,7 @@ def fig_robustness():
 def fig_where():
     """Statistics-only Asimov Z^2 contribution of every baseline bin, with and without the
     extra information (no profiling; illustrative of where the gain arises)."""
-    cfg = {**DEFAULT, "lifetime": {}}
+    cfg = {**DEFAULT, "lifetime": {"cut": "muonly"}}
     spin = SpinTemplates("tauspin", "s0_ct0.5", 6, True)
     base_spec, _ = build_spec({**DEFAULT}, None)
     new_spec, _ = build_spec(cfg, spin)
@@ -244,10 +248,10 @@ def fig_where():
         a, b = z2(base_spec, ch), z2(new_spec, ch)
         x = np.arange(1, len(a) + 1)
         ax.bar(x - 0.2, a, 0.38, color="#b9b8b0", label="baseline")
-        ax.bar(x + 0.2, b, 0.38, color=C[0], label="+ TauSpin ĥ (+ lepton d₀ in τℓτh)")
+        ax.bar(x + 0.2, b, 0.38, color=C[0], label="+ TauSpin ĥ (+ μ |d₀|/σ in τℓτh)")
         ax.set_xlabel("final-discriminant bin (signal-like →)")
         ax.set_ylabel("Z² contribution (stat. only, 3 ab⁻¹)")
-        ax.set_title(f"{title}: ΣZ² {a.sum():.2f} → {b.sum():.2f}", fontsize=10)
+        ax.set_title(f"{title}: ΣZ² {a.sum():.2f} → {b.sum():.2f} (known bkg, no profiling)", fontsize=10)
         ax.legend(fontsize=8)
     save(fig, "fig6_where_gain")
 
@@ -295,18 +299,19 @@ def fig_validation():
     ax.set_ylabel("figure extraction / auxiliary table")
     ax.set_ylim(0.97, 1.03)
     ax.legend(fontsize=7, ncol=2)
-    ax.set_title("Latest ATLAS (2607.26879): recovered bin yields, region totals", fontsize=10)
+    ax.set_title("Latest ATLAS (2607.26879): recovered bin yields — region-total closure only", fontsize=10)
     ax = axes[1]
-    cal = json.load(open(OUT / "calib" / "calibration.json"))
-    s = [r["single_h"] for r in cal["scan"] if np.isfinite(r["ratio_combined"])]
+    cal = json.load(open(OUT / "calib" / "calibration_v2.json"))
+    rows = [r for r in cal["scan"] if r["lephad_shape"] == 0.6 and np.isfinite(r["ratio_combined"])]
+    s = [r["single_h"] for r in rows]
     for key, c, m, lab, tgt in (("ratio_combined", C[0], "o", "bbττ", 3.5 / 4.6), ("ratio_hadhad", C[1], "s", "τhτh", 3.1 / 4.0),
                                 ("ratio_lephad", C[2], "^", "τℓτh", 1.8 / 2.3)):
-        r = [x[key] for x in cal["scan"] if np.isfinite(x["ratio_combined"])]
+        r = [x[key] for x in rows]
         ax.plot(s, r, marker=m, color=c, lw=1.6, label=f"{lab} (ATLAS {tgt:.3f})")
         ax.axhline(tgt, color=c, ls=":", lw=1.0)
     ax.axvline(0.18, color=MUTED, ls="--", lw=1.0)
-    ax.text(0.185, 0.97, "chosen 18%", fontsize=8, color=MUTED)
-    ax.set_xlabel("single-Higgs normalisation uncertainty (correlated)")
+    ax.text(0.181, 0.84, "chosen 18%", fontsize=8, color=MUTED)
+    ax.set_xlabel("single-Higgs norm. unc. (correlated); lep-had shape tilt 0.6")
     ax.set_ylabel("Z(baseline syst.) / Z(stat. only)")
     ax.legend(fontsize=8)
     ax.set_title("Systematic model calibrated to ATL-PHYS-PUB-2024-016", fontsize=10)
