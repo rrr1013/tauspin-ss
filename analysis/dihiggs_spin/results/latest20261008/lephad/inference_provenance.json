@@ -1,0 +1,154 @@
+{
+  "inference_commit": "9f4b6341eae975bb35ea8bbd316d40e41318554b",
+  "model_commit": "e34d272e69f1a5f4fe511bf93ce2a8bfa029abfe",
+  "retraining_performed": false,
+  "host": "lxgpu02.icepp.jp",
+  "threads": 4,
+  "start_unix": 1791447521.1159723,
+  "source_manifest_sha256": "7591bfdd1f6b96811bf54523f9a4d9f7f4ae1feb87c0964ac08ee9f761c90da7",
+  "source_archive_sha256": "2e68837668986a48033546e538aa572def91a89415dba2752aaa3fc58ca709d3",
+  "prepared": {
+    "path": "/home/rbaba/dihiggs-latest-20261008/prepared_latest_slt_hilo/prepared.npz",
+    "sha256": "d61908a7794c4784e2280e32381164da4226913bf153ace5b53b10c05cda9813"
+  },
+  "input": {
+    "path": "/home/rbaba/dihiggs-spin-20261006/runs/lh/dataset_v2.npz",
+    "sha256": "7acf735acf36a1c40c6f6694a40ecdc56e90d823ee81e210a0e226c48bb4f81b"
+  },
+  "scores": {
+    "nominal/B/0": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/nominal/B/seed0/scores.npz",
+      "sha256": "f18592e2b39e47afcc7a48ec1d3ecb36f8389d20ef7303ab8afb08004b2f188a",
+      "identity_and_selection_verified": true
+    },
+    "nominal/B+d0/0": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/nominal/B_d0/seed0/scores.npz",
+      "sha256": "2b012ef8ab9733a9b08d405f6d8a50e66403f5e4f09296999d77ba19da219592",
+      "identity_and_selection_verified": true
+    },
+    "nominal/B+Had/0": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/nominal/B_Had/seed0/scores.npz",
+      "sha256": "ddf24f048f1477a7afb1c94bc4af97a5a8245165f4613f25c30e24ca5990155a",
+      "identity_and_selection_verified": true
+    },
+    "nominal/B+d0+Had/0": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/nominal/B_d0_Had/seed0/scores.npz",
+      "sha256": "db1dc51314b7087d39efbd766a2e842d3d49bd9e552a19c95559ecae88824e4a",
+      "identity_and_selection_verified": true
+    },
+    "nominal/B/1": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/nominal/B/seed1/scores.npz",
+      "sha256": "ff73e9cfd4972b2512414f23b5c34e4f4084b0ee6a23a10c2fc0eb8c82f64101",
+      "identity_and_selection_verified": true
+    },
+    "nominal/B+d0/1": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/nominal/B_d0/seed1/scores.npz",
+      "sha256": "767600c24b2a908e138419efd6521b90e4ae54393eb96ba929d6a98c5de63196",
+      "identity_and_selection_verified": true
+    },
+    "nominal/B+Had/1": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/nominal/B_Had/seed1/scores.npz",
+      "sha256": "be285fb3800d290937ff5d3d5846c80e4989453bf8e86ad58dbf2e6262cb8660",
+      "identity_and_selection_verified": true
+    },
+    "nominal/B+d0+Had/1": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/nominal/B_d0_Had/seed1/scores.npz",
+      "sha256": "5e221d180d30063cb09a5e6c7291bfeebcb85ff6f351adcaed361772b543914c",
+      "identity_and_selection_verified": true
+    },
+    "nominal/B/2": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/nominal/B/seed2/scores.npz",
+      "sha256": "dc63f3028dcd33c8758a40c3682fad5a86909a849631c79f4c08a0180ec54ffd",
+      "identity_and_selection_verified": true
+    },
+    "nominal/B+d0/2": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/nominal/B_d0/seed2/scores.npz",
+      "sha256": "389d455c389a6c59192b3bc992abb24cf768e2535bfab051504d33306692bb40",
+      "identity_and_selection_verified": true
+    },
+    "nominal/B+Had/2": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/nominal/B_Had/seed2/scores.npz",
+      "sha256": "6258a6f738183e2311ee228287eec9bdba20d30da01e3b85c18009cd7a588d72",
+      "identity_and_selection_verified": true
+    },
+    "nominal/B+d0+Had/2": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/nominal/B_d0_Had/seed2/scores.npz",
+      "sha256": "081cc5a6812deb3dbf5b3eaa2d8ed1295bcc45e5600634c62422879d4e38b1ca",
+      "identity_and_selection_verified": true
+    },
+    "null/B/0": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/null/B/seed0/scores.npz",
+      "sha256": "f18592e2b39e47afcc7a48ec1d3ecb36f8389d20ef7303ab8afb08004b2f188a",
+      "identity_and_selection_verified": true
+    },
+    "null/B+d0/0": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/null/B_d0/seed0/scores.npz",
+      "sha256": "f2edb87435f1ca582041a411fe64bed8f8b2d96ac462bf1acad9a598c4bb8c99",
+      "identity_and_selection_verified": true
+    },
+    "real/B/0": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/real/B/seed0/scores.npz",
+      "sha256": "09cfe70ae177fec626daa4b6ac859314254339ec79f30804833bfe7d942e9160",
+      "identity_and_selection_verified": true
+    },
+    "real/B+d0/0": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/real/B_d0/seed0/scores.npz",
+      "sha256": "e62934f990c818d304f28d85ce04ad414f782dcf4260c36dbfe6898e6315ab9e",
+      "identity_and_selection_verified": true
+    },
+    "real/B+Had/0": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/real/B_Had/seed0/scores.npz",
+      "sha256": "50963faf10a92b99a15a0be55a39eb2871456570bd418082b258447ed609f9d4",
+      "identity_and_selection_verified": true
+    },
+    "real/B+d0+Had/0": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/real/B_d0_Had/seed0/scores.npz",
+      "sha256": "167b02fab5309bf132d457920578dc04e254871f35050e819503572176bdb948",
+      "identity_and_selection_verified": true
+    },
+    "nonprompt/B/0": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/nonprompt/B/seed0/scores.npz",
+      "sha256": "51cb452076f542b10f04acf3bd786c89bf1682fdbccf7771c0a6d371fe4d7f39",
+      "identity_and_selection_verified": true
+    },
+    "nonprompt/B+d0/0": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/nonprompt/B_d0/seed0/scores.npz",
+      "sha256": "2eae9d565ace05fbf1b155362906ee5e36122f31a14a9fa887ee2805071611d9",
+      "identity_and_selection_verified": true
+    },
+    "nonprompt/B+Had/0": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/nonprompt/B_Had/seed0/scores.npz",
+      "sha256": "f78dcd2e5ce6b881e6264b6a68bc1a607ad85b34862ed51643eb526786f1a954",
+      "identity_and_selection_verified": true
+    },
+    "nonprompt/B+d0+Had/0": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/nonprompt/B_d0_Had/seed0/scores.npz",
+      "sha256": "5a8e9e73d9b3780250081553d781fe40a1200351dd032a20427897b4261e40cc",
+      "identity_and_selection_verified": true
+    },
+    "nominal/GBDT_B/0": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/nominal/GBDT_B/seed0/scores.npz",
+      "sha256": "a826900baf20cadb5446d59700efed399382534c4d078897e9a460f242935cfe",
+      "identity_and_selection_verified": true
+    },
+    "nominal/GBDT_B+d0/0": {
+      "path": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models/nominal/GBDT_B_d0/seed0/scores.npz",
+      "sha256": "6fc2013ffc63a2ecf525320cf8b5fab127bcb4d3b7713f845781dd0f4e456869",
+      "identity_and_selection_verified": true
+    }
+  },
+  "fit_trace_definition": "Unmodified frozen profile result is returned; external wrapper only counts successes/failures by phase",
+  "old_new_bins_exact": true,
+  "old_mc_support_flags_unchanged": true,
+  "end_unix": 1791447849.6730607,
+  "all_bootstrap_ratios_valid": true,
+  "launcher": {
+    "pid": 3488617,
+    "start_utc": "2026-10-08T08:18:37Z",
+    "finished_utc": "2026-10-08T08:24:25Z",
+    "exit_code": 0
+  },
+  "external_driver_sha256": "b8ddd2fbcc096e97d4873ed89f0dab9620debd896f395f818a8e54c5a7092565",
+  "external_launcher_sha256": "097c9883bccfeed1289b39c0f57f2d94d837fe52750aac1d127809dfbc49269f",
+  "frozen_source_verified_before_and_after": true
+}

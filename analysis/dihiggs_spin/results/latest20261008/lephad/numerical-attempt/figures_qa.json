@@ -1,0 +1,19 @@
+{
+  "status": "Original numerical-attempt figures inspected; inference values require recomputation",
+  "viewed_pngs": [
+    "bins_B.png",
+    "bins_B_Had.png",
+    "bins_B_d0.png",
+    "bins_B_d0_Had.png",
+    "geometry_resolution.png",
+    "learning_seed0.png",
+    "score_B.png",
+    "score_B_Had.png",
+    "score_B_d0.png",
+    "score_B_d0_Had.png"
+  ],
+  "layout_issue": "Original bins_B, bins_B_Had and bins_B_d0_Had clipped Lo HH curve below log-axis lower limit",
+  "plotting_fix": "latest_lephad_plots.py now sets positive lower bound from S and B; affected three views rerendered in a plotting-only pilot and visually verified",
+  "plotting_fix_source_sha256": "68e17ba2ef1aec64cc9b94bad4b7cc3b85b565109446541ad808311beb11d3af",
+  "physics_metrics_changed": false
+}

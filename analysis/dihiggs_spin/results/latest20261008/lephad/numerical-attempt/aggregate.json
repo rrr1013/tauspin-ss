@@ -1,0 +1,81 @@
+{
+  "nominal/B": {
+    "Z_runs": [
+      0.0815018033997365,
+      0.07041404811677107
+    ],
+    "Z_mean": 0.07595792575825379,
+    "Z_seed_sd": 0.007840226948721826,
+    "paired_R_runs": [
+      1.0,
+      1.0
+    ],
+    "paired_R_mean": 1.0,
+    "paired_R_seed_sd": 0.0,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  },
+  "nominal/B+d0": {
+    "Z_runs": [
+      0.16136900736973442,
+      0.09890889898958967
+    ],
+    "Z_mean": 0.13013895317966204,
+    "Z_seed_sd": 0.044165966189247056,
+    "paired_R_runs": [
+      1.40467565258518
+    ],
+    "paired_R_mean": 1.40467565258518,
+    "paired_R_seed_sd": null,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  },
+  "nominal/B+Had": {
+    "Z_runs": [
+      0.07014064269984444
+    ],
+    "Z_mean": 0.07014064269984444,
+    "Z_seed_sd": null,
+    "paired_R_runs": [],
+    "paired_R_mean": null,
+    "paired_R_seed_sd": null,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  },
+  "real/B+Had": {
+    "Z_runs": [
+      0.07496462016210273
+    ],
+    "Z_mean": 0.07496462016210273,
+    "Z_seed_sd": null,
+    "paired_R_runs": [],
+    "paired_R_mean": null,
+    "paired_R_seed_sd": null,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  },
+  "real/B+d0+Had": {
+    "Z_runs": [
+      0.10313972515433423
+    ],
+    "Z_mean": 0.10313972515433423,
+    "Z_seed_sd": null,
+    "paired_R_runs": [],
+    "paired_R_mean": null,
+    "paired_R_seed_sd": null,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  },
+  "nonprompt/B+Had": {
+    "Z_runs": [
+      0.06091642809637068
+    ],
+    "Z_mean": 0.06091642809637068,
+    "Z_seed_sd": null,
+    "paired_R_runs": [],
+    "paired_R_mean": null,
+    "paired_R_seed_sd": null,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  }
+}

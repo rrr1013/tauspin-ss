@@ -1,0 +1,290 @@
+{
+  "interpretation": "Numerical inference attempt; profile failures are technical and not physics results",
+  "training_complete": true,
+  "models": {
+    "nominal/B/0": {
+      "optimization_complete": true,
+      "profile_success": false,
+      "sensitivity_resolved": false,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "ABNORMAL: "
+    },
+    "nominal/B+d0/0": {
+      "optimization_complete": true,
+      "profile_success": true,
+      "sensitivity_resolved": true,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+    },
+    "nominal/B+Had/0": {
+      "optimization_complete": true,
+      "profile_success": true,
+      "sensitivity_resolved": true,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+    },
+    "nominal/B+d0+Had/0": {
+      "optimization_complete": true,
+      "profile_success": false,
+      "sensitivity_resolved": false,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "ABNORMAL: "
+    },
+    "nominal/B/1": {
+      "optimization_complete": true,
+      "profile_success": true,
+      "sensitivity_resolved": true,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+    },
+    "nominal/B+d0/1": {
+      "optimization_complete": true,
+      "profile_success": false,
+      "sensitivity_resolved": false,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "ABNORMAL: "
+    },
+    "nominal/B+Had/1": {
+      "optimization_complete": true,
+      "profile_success": false,
+      "sensitivity_resolved": false,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "ABNORMAL: "
+    },
+    "nominal/B+d0+Had/1": {
+      "optimization_complete": true,
+      "profile_success": false,
+      "sensitivity_resolved": false,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "ABNORMAL: "
+    },
+    "nominal/B/2": {
+      "optimization_complete": true,
+      "profile_success": true,
+      "sensitivity_resolved": true,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+    },
+    "nominal/B+d0/2": {
+      "optimization_complete": true,
+      "profile_success": true,
+      "sensitivity_resolved": true,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+    },
+    "nominal/B+Had/2": {
+      "optimization_complete": true,
+      "profile_success": false,
+      "sensitivity_resolved": false,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "ABNORMAL: "
+    },
+    "nominal/B+d0+Had/2": {
+      "optimization_complete": true,
+      "profile_success": false,
+      "sensitivity_resolved": false,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "ABNORMAL: "
+    },
+    "null/B/0": {
+      "optimization_complete": true,
+      "profile_success": false,
+      "sensitivity_resolved": false,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "ABNORMAL: "
+    },
+    "null/B+d0/0": {
+      "optimization_complete": true,
+      "profile_success": false,
+      "sensitivity_resolved": false,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "ABNORMAL: "
+    },
+    "real/B/0": {
+      "optimization_complete": true,
+      "profile_success": false,
+      "sensitivity_resolved": false,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "ABNORMAL: "
+    },
+    "real/B+d0/0": {
+      "optimization_complete": true,
+      "profile_success": false,
+      "sensitivity_resolved": false,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "ABNORMAL: "
+    },
+    "real/B+Had/0": {
+      "optimization_complete": true,
+      "profile_success": true,
+      "sensitivity_resolved": true,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+    },
+    "real/B+d0+Had/0": {
+      "optimization_complete": true,
+      "profile_success": true,
+      "sensitivity_resolved": true,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+    },
+    "nonprompt/B/0": {
+      "optimization_complete": true,
+      "profile_success": false,
+      "sensitivity_resolved": false,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "ABNORMAL: "
+    },
+    "nonprompt/B+d0/0": {
+      "optimization_complete": true,
+      "profile_success": false,
+      "sensitivity_resolved": false,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "ABNORMAL: "
+    },
+    "nonprompt/B+Had/0": {
+      "optimization_complete": true,
+      "profile_success": true,
+      "sensitivity_resolved": true,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+    },
+    "nonprompt/B+d0+Had/0": {
+      "optimization_complete": true,
+      "profile_success": false,
+      "sensitivity_resolved": false,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "ABNORMAL: "
+    },
+    "nominal/GBDT_B/0": {
+      "optimization_complete": true,
+      "profile_success": false,
+      "sensitivity_resolved": false,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": [
+          7
+        ]
+      },
+      "profile_message": "ABNORMAL: "
+    },
+    "nominal/GBDT_B+d0/0": {
+      "optimization_complete": true,
+      "profile_success": false,
+      "sensitivity_resolved": false,
+      "poor_bins": {
+        "Hi": [],
+        "Lo": []
+      },
+      "profile_message": "ABNORMAL: "
+    }
+  },
+  "bootstrap": {
+    "nominal/B+d0/0": {
+      "requested": 100,
+      "n_valid": 7
+    },
+    "nominal/B+Had/0": {
+      "requested": 100,
+      "n_valid": 13
+    },
+    "nominal/B+d0+Had/0": {
+      "requested": 100,
+      "n_valid": 9
+    },
+    "nominal/B+d0/1": {
+      "requested": 100,
+      "n_valid": 17
+    },
+    "nominal/B+Had/1": {
+      "requested": 100,
+      "n_valid": 11
+    },
+    "nominal/B+d0+Had/1": {
+      "requested": 100,
+      "n_valid": 15
+    },
+    "nominal/B+d0/2": {
+      "requested": 100,
+      "n_valid": 14
+    },
+    "nominal/B+Had/2": {
+      "requested": 100,
+      "n_valid": 15
+    },
+    "nominal/B+d0+Had/2": {
+      "requested": 100,
+      "n_valid": 17
+    }
+  },
+  "optimizer_messages": {
+    "ABNORMAL: ": 16,
+    "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH": 8
+  }
+}

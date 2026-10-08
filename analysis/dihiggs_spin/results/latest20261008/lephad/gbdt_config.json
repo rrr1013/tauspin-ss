@@ -1,0 +1,18 @@
+{
+  "commit": "e34d272e69f1a5f4fe511bf93ce2a8bfa029abfe",
+  "prepared_sha256": "d61908a7794c4784e2280e32381164da4226913bf153ace5b53b10c05cda9813",
+  "arms": [
+    "B",
+    "B+d0"
+  ],
+  "seed": 0,
+  "max_iter": 1000,
+  "learning_rate": 0.05,
+  "max_leaf_nodes": 31,
+  "min_samples_leaf": 100,
+  "l2_regularization": 1.0,
+  "patience": 25,
+  "min_delta": 1e-05,
+  "threads": 4,
+  "definition": "Same fixed inputs, split, positive class-balanced training weights and validation loss rule as Transformer; sanity pair"
+}

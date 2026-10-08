@@ -1,0 +1,214 @@
+{
+  "nominal/B": {
+    "Z_runs": [
+      0.06895109523094962,
+      0.0799174772902833,
+      0.06939111214527652
+    ],
+    "Z_mean": 0.07275322822216981,
+    "Z_seed_sd": 0.006208321210576748,
+    "paired_R_runs": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "paired_R_mean": 1.0,
+    "paired_R_seed_sd": 0.0,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  },
+  "nominal/B+d0": {
+    "Z_runs": [
+      0.1611894666726594,
+      0.11348277252850911,
+      0.09560126773295183
+    ],
+    "Z_mean": 0.12342450231137343,
+    "Z_seed_sd": 0.03390547822027118,
+    "paired_R_runs": [
+      2.3377361321493173,
+      1.419999434120111,
+      1.3777163209720864
+    ],
+    "paired_R_mean": 1.7118172957471716,
+    "paired_R_seed_sd": 0.5424737392138298,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  },
+  "nominal/B+Had": {
+    "Z_runs": [
+      0.06923349732246918,
+      0.06828498467913331,
+      0.07022198017554648
+    ],
+    "Z_mean": 0.06924682072571632,
+    "Z_seed_sd": 0.0009685664784034142,
+    "paired_R_runs": [
+      1.0040956868135837,
+      0.854443696102951,
+      1.0119736952555316
+    ],
+    "paired_R_mean": 0.9568376927240222,
+    "paired_R_seed_sd": 0.08876324499633725,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  },
+  "nominal/B+d0+Had": {
+    "Z_runs": [
+      0.10510202584359571,
+      0.10554321868245917,
+      0.07337918439756771
+    ],
+    "Z_mean": 0.09467480964120752,
+    "Z_seed_sd": 0.018443871710365697,
+    "paired_R_runs": [
+      1.524298134664281,
+      1.320652531349254,
+      1.057472378363699
+    ],
+    "paired_R_mean": 1.300807681459078,
+    "paired_R_seed_sd": 0.23404472913692226,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  },
+  "null/B": {
+    "Z_runs": [
+      0.06895109523094962
+    ],
+    "Z_mean": 0.06895109523094962,
+    "Z_seed_sd": null,
+    "paired_R_runs": [
+      1.0
+    ],
+    "paired_R_mean": 1.0,
+    "paired_R_seed_sd": null,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  },
+  "null/B+d0": {
+    "Z_runs": [
+      0.06922725216227109
+    ],
+    "Z_mean": 0.06922725216227109,
+    "Z_seed_sd": null,
+    "paired_R_runs": [
+      1.0040051130500027
+    ],
+    "paired_R_mean": 1.0040051130500027,
+    "paired_R_seed_sd": null,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  },
+  "real/B": {
+    "Z_runs": [
+      0.0756858214479005
+    ],
+    "Z_mean": 0.0756858214479005,
+    "Z_seed_sd": null,
+    "paired_R_runs": [
+      1.0
+    ],
+    "paired_R_mean": 1.0,
+    "paired_R_seed_sd": null,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  },
+  "real/B+d0": {
+    "Z_runs": [
+      0.11811489769739143
+    ],
+    "Z_mean": 0.11811489769739143,
+    "Z_seed_sd": null,
+    "paired_R_runs": [
+      1.5605947776981934
+    ],
+    "paired_R_mean": 1.5605947776981934,
+    "paired_R_seed_sd": null,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  },
+  "real/B+Had": {
+    "Z_runs": [
+      0.07343552963063468
+    ],
+    "Z_mean": 0.07343552963063468,
+    "Z_seed_sd": null,
+    "paired_R_runs": [
+      0.9702679871313171
+    ],
+    "paired_R_mean": 0.9702679871313171,
+    "paired_R_seed_sd": null,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  },
+  "real/B+d0+Had": {
+    "Z_runs": [
+      0.10192815478134734
+    ],
+    "Z_mean": 0.10192815478134734,
+    "Z_seed_sd": null,
+    "paired_R_runs": [
+      1.3467272050619303
+    ],
+    "paired_R_mean": 1.3467272050619303,
+    "paired_R_seed_sd": null,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  },
+  "nonprompt/B": {
+    "Z_runs": [
+      0.07445242265581169
+    ],
+    "Z_mean": 0.07445242265581169,
+    "Z_seed_sd": null,
+    "paired_R_runs": [
+      1.0
+    ],
+    "paired_R_mean": 1.0,
+    "paired_R_seed_sd": null,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  },
+  "nonprompt/B+d0": {
+    "Z_runs": [
+      0.06501387750779743
+    ],
+    "Z_mean": 0.06501387750779743,
+    "Z_seed_sd": null,
+    "paired_R_runs": [
+      0.8732271588844329
+    ],
+    "paired_R_mean": 0.8732271588844329,
+    "paired_R_seed_sd": null,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  },
+  "nonprompt/B+Had": {
+    "Z_runs": [
+      0.06029559827116025
+    ],
+    "Z_mean": 0.06029559827116025,
+    "Z_seed_sd": null,
+    "paired_R_runs": [
+      0.8098540802346025
+    ],
+    "paired_R_mean": 0.8098540802346025,
+    "paired_R_seed_sd": null,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  },
+  "nonprompt/B+d0+Had": {
+    "Z_runs": [
+      0.07997889253776384
+    ],
+    "Z_mean": 0.07997889253776384,
+    "Z_seed_sd": null,
+    "paired_R_runs": [
+      1.074228207556128
+    ],
+    "paired_R_mean": 1.074228207556128,
+    "paired_R_seed_sd": null,
+    "all_sensitivity_resolved": true,
+    "interpretation": "Named proxy/stress only; seed spread is distinct from paired MC bootstrap uncertainty"
+  }
+}

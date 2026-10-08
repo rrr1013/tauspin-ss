@@ -1,0 +1,41 @@
+{
+  "definition": "Latest-SLT pilot used a pre-freeze working-tree copy; comparison of currently retained, unchanged pilot source files against production manifest",
+  "commit": "e34d272e69f1a5f4fe511bf93ce2a8bfa029abfe",
+  "files": {
+    "analysis/dihiggs_spin/reco.py": {
+      "sha256": "98ad8e893ff0cdbd351eec6e5c90d1acf2c0d51a832ca7f9cb0d5c7e90fd4ab7",
+      "production_sha256": "98ad8e893ff0cdbd351eec6e5c90d1acf2c0d51a832ca7f9cb0d5c7e90fd4ab7",
+      "matches": true
+    },
+    "analysis/dihiggs_spin/classify_lephad.py": {
+      "sha256": "dd5dc1878078f31acf0537717ca5d80538e3c1d508b052405097a9f8d2d49c74",
+      "production_sha256": "dd5dc1878078f31acf0537717ca5d80538e3c1d508b052405097a9f8d2d49c74",
+      "matches": true
+    },
+    "analysis/dihiggs_spin/latest_lephad.py": {
+      "sha256": "f07e0ac1541c4594c7a0f38e169805d2a4fcd7ade5d77ef89675542b4c5e5349",
+      "production_sha256": "f07e0ac1541c4594c7a0f38e169805d2a4fcd7ade5d77ef89675542b4c5e5349",
+      "matches": true
+    },
+    "analysis/dihiggs_spin/latest_lephad_plots.py": {
+      "sha256": "55b221dfbd6cebb46f9f78f4ce7a573aa6bf3e55b0372786cf02765b83d69a79",
+      "production_sha256": "55b221dfbd6cebb46f9f78f4ce7a573aa6bf3e55b0372786cf02765b83d69a79",
+      "matches": true
+    },
+    "analysis/dihiggs_spin/polarimeter_pythia.py": {
+      "sha256": "44fe5cfda00d5d27923197f45fafe8d4d868b23d141400fb2859efca5c6aac62",
+      "production_sha256": "44fe5cfda00d5d27923197f45fafe8d4d868b23d141400fb2859efca5c6aac62",
+      "matches": true
+    },
+    "analysis/dihiggs_spin/reco_lephad.py": {
+      "sha256": "daab4f41a1a38b279df85fadd5b92e7084fa2242202c5aacd7900741831cf432",
+      "production_sha256": "daab4f41a1a38b279df85fadd5b92e7084fa2242202c5aacd7900741831cf432",
+      "matches": true
+    },
+    "analysis/mode_pair_auc_origin/polarimeter.py": {
+      "sha256": "fdaab8fe7a296f4774a0ba7ba11546f9b1069a9d37cb4eb6592b9ec766dbc126",
+      "production_sha256": "fdaab8fe7a296f4774a0ba7ba11546f9b1069a9d37cb4eb6592b9ec766dbc126",
+      "matches": true
+    }
+  }
+}

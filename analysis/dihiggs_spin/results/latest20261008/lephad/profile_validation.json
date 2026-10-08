@@ -1,0 +1,1290 @@
+{
+  "checks": {
+    "all_profile_converged": true,
+    "all_independent_fits_converged": true,
+    "max_relative_Z_discrepancy": 1.8758246684117943e-14,
+    "all_nested_Z_order": true,
+    "max_stat_closed_form_discrepancy": 1.2028614386392806e-14,
+    "alternate_initializations_pass": true
+  },
+  "results": {
+    "nominal/B/0": {
+      "profile": {
+        "Z": 0.06895109523094962,
+        "success": true,
+        "normalization_pull": [
+          -0.0023040550456936357,
+          0.005466518838552442,
+          0.007267740402805511,
+          0.0011594130610935614,
+          0.025422423842822648
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 2.9765621603044926e-13,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 0.7727978629459531,
+        "success": true,
+        "normalization_pull": [
+          -0.009715096043650536,
+          0.11832105318595304,
+          0.1169549118988074,
+          0.09546056892473653,
+          0.037601596494877494
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 1.5435002879257058e-11,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.2882144022587998,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.06895109523094949,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 2.0127001262751883e-15,
+      "stat_closed_form_relative_discrepancy": 8.44594317704316e-15,
+      "alternate_initialization": {
+        "success": true,
+        "relative_Z_discrepancy": 2.0127001262751843e-15
+      },
+      "nested_Z_order": true
+    },
+    "nominal/B+d0/0": {
+      "profile": {
+        "Z": 0.1611894666726594,
+        "success": true,
+        "normalization_pull": [
+          -0.003038111062801021,
+          0.020446173331071404,
+          0.03923728547457774,
+          0.006461509299725391,
+          0.022739466807390547
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 2.5731055387565135e-09,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 1.1871370326674802,
+        "success": true,
+        "normalization_pull": [
+          -0.011009362480774396,
+          0.23919219653032103,
+          0.22070440009335074,
+          0.2636908972089462,
+          -0.021758080764639625
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 3.2626271289807685e-12,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.9059705758296135,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.1611894666726593,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 6.887689670689077e-16,
+      "stat_closed_form_relative_discrepancy": 2.0969908661422347e-15,
+      "alternate_initialization": {
+        "success": true,
+        "relative_Z_discrepancy": 5.165767253016803e-16
+      },
+      "nested_Z_order": true
+    },
+    "nominal/B+Had/0": {
+      "profile": {
+        "Z": 0.06923349732246918,
+        "success": true,
+        "normalization_pull": [
+          -0.0023528468703497467,
+          0.004922893191920155,
+          0.006256156555497522,
+          0.0012699172429467963,
+          0.0262856342916516
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 1.515704218629484e-13,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 0.7642810920044267,
+        "success": true,
+        "normalization_pull": [
+          -0.010559006638688122,
+          0.09347179959590905,
+          0.05315208346782368,
+          0.1116081985930358,
+          0.06462456202074782
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 4.559576926125317e-12,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.3035507752848687,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.06923349732246917,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 2.0044903615334963e-16,
+      "stat_closed_form_relative_discrepancy": 0.0,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "nominal/B+d0+Had/0": {
+      "profile": {
+        "Z": 0.10510202584359571,
+        "success": true,
+        "normalization_pull": [
+          -0.0027066012101497287,
+          0.008925388480584478,
+          0.020325484015925006,
+          0.002859530212078688,
+          0.026624188821816278
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 5.005610508152615e-13,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 1.0241777964665657,
+        "success": true,
+        "normalization_pull": [
+          -0.010802324333310626,
+          0.16649874449371727,
+          0.18129279643496982,
+          0.17980144074221072,
+          0.017662258525758166
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 5.371612493129796e-09,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.6046512626050204,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.10510202584359547,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 2.2446988137405344e-15,
+      "stat_closed_form_relative_discrepancy": 1.937258606523542e-15,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "nominal/B/1": {
+      "profile": {
+        "Z": 0.0799174772902833,
+        "success": true,
+        "normalization_pull": [
+          -0.002230120115319266,
+          0.007914536465039286,
+          0.008720301845358009,
+          0.0016467156417718203,
+          0.02346369558522353
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 2.1079770859943622e-09,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 0.8318570342413265,
+        "success": true,
+        "normalization_pull": [
+          -0.011253944732577247,
+          0.20188299420273048,
+          0.1718061292427504,
+          0.13031296863802933,
+          0.0059243374383429175
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 2.7556098852565922e-11,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.3283820938901996,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.07991747729028341,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 1.3892117998075755e-15,
+      "stat_closed_form_relative_discrepancy": 2.8416208718013123e-15,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "nominal/B+d0/1": {
+      "profile": {
+        "Z": 0.11348277252850911,
+        "success": true,
+        "normalization_pull": [
+          -0.0024432084643267794,
+          0.0132876169793897,
+          0.02473070035962878,
+          0.0035947065508882842,
+          0.02178143453806849
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 1.7542892288746748e-09,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 1.0971812407484152,
+        "success": true,
+        "normalization_pull": [
+          -0.008640389081925048,
+          0.11737192518733902,
+          0.19134053804278886,
+          0.20666128827394148,
+          0.018585836641021456
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 9.434337651178398e-12,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.657707716744774,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.11348277252850887,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 2.0789269373338397e-15,
+      "stat_closed_form_relative_discrepancy": 2.5449887522150885e-15,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "nominal/B+Had/1": {
+      "profile": {
+        "Z": 0.06828498467913331,
+        "success": true,
+        "normalization_pull": [
+          -0.002184009276186801,
+          0.006027083717024815,
+          0.006725298133900755,
+          0.0012405523239902726,
+          0.02408339148078678
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 1.7489942870721475e-15,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 0.7827208787642903,
+        "success": true,
+        "normalization_pull": [
+          -0.009437086307508192,
+          0.13564617650106045,
+          0.12008209193055311,
+          0.12355709525451673,
+          0.02550982340973479
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 6.59959700990032e-13,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.2552001153357935,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.06828498467913337,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 8.12933494707527e-16,
+      "stat_closed_form_relative_discrepancy": 1.945897410567023e-15,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "nominal/B+d0+Had/1": {
+      "profile": {
+        "Z": 0.10554321868245917,
+        "success": true,
+        "normalization_pull": [
+          -0.002658248784109057,
+          0.0072985322145120626,
+          0.01964694858092998,
+          0.0028606246710210234,
+          0.027005402407569556
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 6.522163658852183e-09,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 1.0785531741222998,
+        "success": true,
+        "normalization_pull": [
+          -0.008328527147792815,
+          0.1301835969018543,
+          0.21044911460074425,
+          0.20340600992776472,
+          0.007091991274960195
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 7.278104130350007e-12,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.6440603815090393,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.10554321868245857,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 5.654033325735607e-15,
+      "stat_closed_form_relative_discrepancy": 4.591994705523893e-15,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "nominal/B/2": {
+      "profile": {
+        "Z": 0.06939111214527652,
+        "success": true,
+        "normalization_pull": [
+          -0.0021719882843152273,
+          0.005539297234537635,
+          0.006360701005308677,
+          0.0012010759130621118,
+          0.024244726824164696
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 1.4488015754004872e-13,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 0.8267310123922311,
+        "success": true,
+        "normalization_pull": [
+          -0.010047867811564299,
+          0.12414483781828219,
+          0.09289120699631309,
+          0.1229157688759921,
+          0.040213450029142936
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 7.079041764603933e-13,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.2921789530750054,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.06939111214527645,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 9.999686832198393e-16,
+      "stat_closed_form_relative_discrepancy": 1.2028614386392806e-14,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "nominal/B+d0/2": {
+      "profile": {
+        "Z": 0.09560126773295183,
+        "success": true,
+        "normalization_pull": [
+          -0.0027479362295623985,
+          0.008886208909243997,
+          0.016804350510118315,
+          0.002503437886094366,
+          0.027346344599456878
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 8.790304244827679e-09,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 1.0002548168439744,
+        "success": true,
+        "normalization_pull": [
+          -0.010771117806745042,
+          0.1206477613372574,
+          0.13570904383220372,
+          0.17704617981463905,
+          0.04473420249250268
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 3.1580794385880514e-09,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.5547509285472294,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.09560126773295181,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 1.451632194520687e-16,
+      "stat_closed_form_relative_discrepancy": 2.4278861741878507e-15,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "nominal/B+Had/2": {
+      "profile": {
+        "Z": 0.07022198017554648,
+        "success": true,
+        "normalization_pull": [
+          -0.002736580123845149,
+          0.006406211941010368,
+          0.006003241127842349,
+          0.0012817411635066478,
+          0.02922474255095538
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 7.708172085339781e-14,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 0.5584057338798813,
+        "success": true,
+        "normalization_pull": [
+          -0.013811656014069617,
+          0.05954868894916713,
+          -0.05503540346121833,
+          0.05297976579032679,
+          0.12534469556029315
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 1.676803445205754e-11,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.3629690642757366,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.07022198017554646,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 3.952548126134201e-16,
+      "stat_closed_form_relative_discrepancy": 4.561548094420331e-15,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "nominal/B+d0+Had/2": {
+      "profile": {
+        "Z": 0.07337918439756771,
+        "success": true,
+        "normalization_pull": [
+          -0.0027734939193747583,
+          0.006101502875680159,
+          0.011737876685385644,
+          0.001638417259124058,
+          0.029328026170534864
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 3.320797667204873e-14,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 0.6564527348481868,
+        "success": true,
+        "normalization_pull": [
+          -0.011034091022048257,
+          0.03771188129572083,
+          0.04423568441624865,
+          0.0652451981937093,
+          0.09810752700647303
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 2.3365985134840258e-12,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.4232125858167477,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.07337918439756752,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 2.6477403762999984e-15,
+      "stat_closed_form_relative_discrepancy": 5.1485435384349205e-15,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "null/B/0": {
+      "profile": {
+        "Z": 0.06895109523094962,
+        "success": true,
+        "normalization_pull": [
+          -0.0023040550456936357,
+          0.005466518838552442,
+          0.007267740402805511,
+          0.0011594130610935614,
+          0.025422423842822648
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 2.9765621603044926e-13,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 0.7727978629459531,
+        "success": true,
+        "normalization_pull": [
+          -0.009715096043650536,
+          0.11832105318595304,
+          0.1169549118988074,
+          0.09546056892473653,
+          0.037601596494877494
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 1.5435002879257058e-11,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.2882144022587998,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.06895109523094949,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 2.0127001262751883e-15,
+      "stat_closed_form_relative_discrepancy": 8.44594317704316e-15,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "null/B+d0/0": {
+      "profile": {
+        "Z": 0.06922725216227109,
+        "success": true,
+        "normalization_pull": [
+          -0.0024237037113851233,
+          0.006938136348458139,
+          0.006648799008185149,
+          0.0012198745531706147,
+          0.02595004036884042
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 1.226718218718119e-15,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 0.7203214630903678,
+        "success": true,
+        "normalization_pull": [
+          -0.012297327347090548,
+          0.15652767995106792,
+          0.07612171735739386,
+          0.0876798987456551,
+          0.049262429468724965
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 5.4676503023775875e-12,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.305975616955164,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.06922725216227071,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 5.412612217117644e-15,
+      "stat_closed_form_relative_discrepancy": 1.020132085357236e-14,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "real/B/0": {
+      "profile": {
+        "Z": 0.0756858214479005,
+        "success": true,
+        "normalization_pull": [
+          -0.002544354319143384,
+          0.0073303675792520005,
+          0.008008734386904965,
+          0.0013869693084578724,
+          0.026828631726209744
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 5.47015613754369e-14,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 0.7796386588577672,
+        "success": true,
+        "normalization_pull": [
+          -0.012932392947259326,
+          0.17046921875802856,
+          0.12644239021202697,
+          0.0932337318454981,
+          0.04391531764480638
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 1.4694627908927481e-09,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.3946119077716932,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.07568582144790069,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 2.567046582736025e-15,
+      "stat_closed_form_relative_discrepancy": 1.0189827460965976e-14,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "real/B+d0/0": {
+      "profile": {
+        "Z": 0.11811489769739143,
+        "success": true,
+        "normalization_pull": [
+          -0.0025754769806516204,
+          0.013196022821386207,
+          0.021323730244315012,
+          0.0035528127988634947,
+          0.023243834694182234
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 1.3222589677795582e-09,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 1.0185882400201642,
+        "success": true,
+        "normalization_pull": [
+          -0.010318258560545947,
+          0.20834931145078742,
+          0.210227635967355,
+          0.19335331313267728,
+          -0.011509989652033805
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 2.3918801044632505e-10,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.5886756557848238,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.11811489769739157,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 1.1749396628500767e-15,
+      "stat_closed_form_relative_discrepancy": 5.590684394678095e-15,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "real/B+Had/0": {
+      "profile": {
+        "Z": 0.07343552963063468,
+        "success": true,
+        "normalization_pull": [
+          -0.0024114249278225615,
+          0.005991368767499749,
+          0.006966754897591818,
+          0.0013475494020684193,
+          0.0262778137843144
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 2.2182315303141112e-13,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 0.8294310007272383,
+        "success": true,
+        "normalization_pull": [
+          -0.011844056852147594,
+          0.14690234273479022,
+          0.09898110097697614,
+          0.12000064396809511,
+          0.0468613156942566
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 1.3946133657119204e-11,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.363767251469247,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.0734355296306347,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 1.8897920226921242e-16,
+      "stat_closed_form_relative_discrepancy": 4.7216953889225164e-15,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "real/B+d0+Had/0": {
+      "profile": {
+        "Z": 0.10192815478134734,
+        "success": true,
+        "normalization_pull": [
+          -0.002740735720613542,
+          0.010221311553268688,
+          0.017259408574449398,
+          0.0026892588058948603,
+          0.026530876036683086
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 3.3698133751632997e-09,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 0.9233607067294856,
+        "success": true,
+        "normalization_pull": [
+          -0.012148147155742502,
+          0.19823382914700063,
+          0.1937720414412215,
+          0.15384109664347195,
+          0.01466535719504144
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 5.970659731550171e-09,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.5325440092950202,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.10192815478134723,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 1.0892211548484996e-15,
+      "stat_closed_form_relative_discrepancy": 5.795451316981742e-15,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "nonprompt/B/0": {
+      "profile": {
+        "Z": 0.07445242265581169,
+        "success": true,
+        "normalization_pull": [
+          -0.0024452136945541333,
+          0.0072740720221762135,
+          0.00763458334489403,
+          0.0013727118635357518,
+          0.0259431544827069
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 3.7509576298779934e-13,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 0.7992332339430075,
+        "success": true,
+        "normalization_pull": [
+          -0.011225107230286874,
+          0.1494542006150331,
+          0.12648868656180112,
+          0.11029137250159328,
+          0.03662383209569507
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 1.2775695188175715e-11,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.3416178544416248,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.07445242265581174,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 7.455922755916478e-16,
+      "stat_closed_form_relative_discrepancy": 9.930306347217405e-16,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "nonprompt/B+d0/0": {
+      "profile": {
+        "Z": 0.06501387750779743,
+        "success": true,
+        "normalization_pull": [
+          -0.0024551421391401022,
+          0.00493807389524529,
+          0.005110544016933789,
+          0.0010723480912932424,
+          0.02739308090034665
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 9.856460563161005e-09,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 0.760142376312458,
+        "success": true,
+        "normalization_pull": [
+          -0.009076979781100357,
+          0.054764009223149744,
+          -0.009588476424219424,
+          0.10306892066560601,
+          0.07452065157036626
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 4.893343215382522e-09,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.348238497060167,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.06501387750779629,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 1.7503626054365427e-14,
+      "stat_closed_form_relative_discrepancy": 1.4822314068933586e-15,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "nonprompt/B+Had/0": {
+      "profile": {
+        "Z": 0.06029559827116025,
+        "success": true,
+        "normalization_pull": [
+          -0.0022521069128808324,
+          0.005198422997957926,
+          0.0054521695592239005,
+          0.0009569748209752409,
+          0.025255399683097098
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 9.97727838932669e-09,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 0.6494546962342266,
+        "success": true,
+        "normalization_pull": [
+          -0.009168461317815667,
+          0.07813333604117441,
+          0.041130616463237325,
+          0.0721235450791469,
+          0.059420760217474645
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 4.835046186124278e-10,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.1939285925521648,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.06029559827115912,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 1.8758246684117943e-14,
+      "stat_closed_form_relative_discrepancy": 1.6738031543858613e-15,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "nonprompt/B+d0+Had/0": {
+      "profile": {
+        "Z": 0.07997889253776384,
+        "success": true,
+        "normalization_pull": [
+          -0.002189646526853921,
+          0.005453298295260186,
+          0.010570883370435621,
+          0.0016198799487333626,
+          0.024159977168103
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 2.523154574793916e-09,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 0.8770901292692502,
+        "success": true,
+        "normalization_pull": [
+          -0.008510906838157499,
+          0.14150398612226375,
+          0.18785616173014824,
+          0.14024777306339187,
+          0.006161336284148167
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 8.797275236476552e-09,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.3423057718891278,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.07997889253776388,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 5.205543875690104e-16,
+      "stat_closed_form_relative_discrepancy": 4.300927440642557e-15,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "nominal/GBDT_B/0": {
+      "profile": {
+        "Z": 0.06541326396602741,
+        "success": true,
+        "normalization_pull": [
+          -0.002647582035820398,
+          0.006331779103806674,
+          0.00503700348424024,
+          0.0012554371050701831,
+          0.02857412096556544
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 1.4555745376676097e-13,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 0.5385481680164664,
+        "success": true,
+        "normalization_pull": [
+          -0.011094171971199409,
+          0.06279709686437782,
+          -0.014398316739647405,
+          0.06711705945652766,
+          0.0920617628229363
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 1.289586818069093e-11,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.2889171293205985,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.06541326396602741,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 0.0,
+      "stat_closed_form_relative_discrepancy": 1.7227221197849489e-16,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    },
+    "nominal/GBDT_B+d0/0": {
+      "profile": {
+        "Z": 0.08692429344893678,
+        "success": true,
+        "normalization_pull": [
+          -0.003141690128701498,
+          0.0069177316033818565,
+          0.012145954336813218,
+          0.00241709800617108,
+          0.03235563713089174
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 3.8761142673698055e-14,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "normalization_only": {
+        "Z": 0.7043289198045641,
+        "success": true,
+        "normalization_pull": [
+          -0.015644120696588774,
+          0.047621494836817505,
+          -0.01839347093901104,
+          0.12753051802063597,
+          0.14555905144999956
+        ],
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "gradient_max_abs": 1.6394218797045673e-12,
+        "newton_polish_steps": 1,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "stat_only": {
+        "Z": 1.6275672085770643,
+        "success": true,
+        "normalization_pull": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "gradient_max_abs": 0.0,
+        "newton_polish_steps": 0,
+        "numerics": "Stable Poisson relative deviance and analytic envelope gradient; unchanged likelihood"
+      },
+      "independent_full_fit_Z": 0.08692429344893687,
+      "independent_fit_success": true,
+      "relative_Z_discrepancy": 1.1175761205556204e-15,
+      "stat_closed_form_relative_discrepancy": 2.7285460625513336e-15,
+      "alternate_initialization": null,
+      "nested_Z_order": true
+    }
+  }
+}

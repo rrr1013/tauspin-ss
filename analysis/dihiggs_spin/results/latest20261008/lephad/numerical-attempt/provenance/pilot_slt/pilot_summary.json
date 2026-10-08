@@ -1,0 +1,34 @@
+{
+  "nominal/B/0": {
+    "status": {
+      "best_epoch": 3,
+      "stopped_epoch": 3,
+      "best_val_loss": 0.6271900375782334,
+      "seconds": 0.8979787289863452,
+      "n_train": 3901,
+      "n_val": 3893,
+      "peak_gpu_memory_bytes": 373956096,
+      "optimization_complete": false,
+      "technical_ceiling_reached": false,
+      "git_commit": "uncommitted-pilot",
+      "architecture": "4 layers, 4 heads, d_model64, FF256, CLS pooling, globals MLP64; dropout0.1"
+    },
+    "score_path": "/home/rbaba/dihiggs-latest-20261008/pilot_latest_slt_hilo/pilot/nominal/B/seed0/scores.npz"
+  },
+  "nominal/B+d0/0": {
+    "status": {
+      "best_epoch": 3,
+      "stopped_epoch": 3,
+      "best_val_loss": 0.6160678418611574,
+      "seconds": 0.6633243740070611,
+      "n_train": 3901,
+      "n_val": 3893,
+      "peak_gpu_memory_bytes": 375989760,
+      "optimization_complete": false,
+      "technical_ceiling_reached": false,
+      "git_commit": "uncommitted-pilot",
+      "architecture": "4 layers, 4 heads, d_model64, FF256, CLS pooling, globals MLP64; dropout0.1"
+    },
+    "score_path": "/home/rbaba/dihiggs-latest-20261008/pilot_latest_slt_hilo/pilot/nominal/B_d0/seed0/scores.npz"
+  }
+}

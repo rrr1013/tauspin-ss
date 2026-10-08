@@ -1,0 +1,4 @@
+EVALUATION_COMPLETE 24 fit_failures 0
+NOMINAL_BOOTSTRAP_COMPLETE {'nominal/B+d0/0': 100, 'nominal/B+Had/0': 100, 'nominal/B+d0+Had/0': 100, 'nominal/B+d0/1': 100, 'nominal/B+Had/1': 100, 'nominal/B+d0+Had/1': 100, 'nominal/B+d0/2': 100, 'nominal/B+Had/2': 100, 'nominal/B+d0+Had/2': 100}
+FLAVOR_COMPLETE
+REEVALUATION_COMPLETE True total_fit_failures 0

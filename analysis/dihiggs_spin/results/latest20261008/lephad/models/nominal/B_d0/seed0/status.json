@@ -1,0 +1,13 @@
+{
+  "best_epoch": 33,
+  "stopped_epoch": 58,
+  "best_val_loss": 0.1579143481171264,
+  "seconds": 46.15081024495885,
+  "n_train": 82650,
+  "n_val": 82450,
+  "peak_gpu_memory_bytes": 462059008,
+  "optimization_complete": true,
+  "technical_ceiling_reached": false,
+  "git_commit": "e34d272e69f1a5f4fe511bf93ce2a8bfa029abfe",
+  "architecture": "4 layers, 4 heads, d_model64, FF256, CLS pooling, globals MLP64; dropout0.1"
+}

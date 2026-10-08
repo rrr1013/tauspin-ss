@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/rbaba/dihiggs-latest-20261008/reevaluate_9f4b634.py", line 44, in <module>
+    context[0]="evaluation/"+key;r["evaluation"]=L.evaluate(score,D,variant);r["inference_commit"]=commit
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rbaba/dihiggs-latest-20261008/reevaluate_9f4b634.py", line 25, in traced_evaluate
+    try:return original_evaluate(score,data,variant)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rbaba/dihiggs-latest-20261008/source-inference-9f4b634/analysis/dihiggs_spin/latest_lephad.py", line 562, in evaluate
+    q = profile(s,B,V)
+        ^^^^^^^^^^^^^^
+  File "/home/rbaba/dihiggs-latest-20261008/reevaluate_9f4b634.py", line 14, in traced_profile
+    mode=f"norm{kwargs.get(norm,True)}_mc{kwargs.get(mc,True)}";key=context[0]+"/"+mode
+                           ^^^^
+NameError: name 'norm' is not defined

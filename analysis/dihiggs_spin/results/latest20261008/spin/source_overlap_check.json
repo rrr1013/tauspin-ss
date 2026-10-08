@@ -1,0 +1,7 @@
+{
+  "signature": "Exact stored float64 bytes of h_exact6 and ['kin_m_vis', 'kin_met', 'kin_m_tautau', 'kin_dr_tautau']",
+  "training_rows": 526859,
+  "applied_rows": 58805,
+  "equal_signatures_across_sources": 0,
+  "scope": "Selected stored source rows only; no claim of auditing all generated particles or random-number streams"
+}

@@ -1,0 +1,101 @@
+{
+  "definition": "Final scientific figure QA after frozen numerical reevaluation; all ten PNGs were actually opened and visually inspected.",
+  "all_24_evaluation_templates_and_edges_exactly_match_original": true,
+  "all_8_flavor_templates_and_edges_exactly_match_original": true,
+  "geometry_plot": "Prompt core agrees with unit Gaussian; corrected versus legacy geometry labeled.",
+  "learning_plot": "Four nominal seed0 train/validation curves readable, expected validation minimum before early stop.",
+  "score_plots": "All Hi/Lo axes, legends, validation bin guides readable; exact B0 Hi HH histogram and plot polygon have correct final-bin yield; see histogram_template_qa.json.",
+  "bin_plots": "All unscaled HH points visible, including Lo ~5-event points after frozen y-limit repair; process sums and background MC errors readable.",
+  "files": {
+    "bins_B.png": {
+      "opened_and_inspected": true,
+      "dimensions": [
+        1740,
+        630
+      ],
+      "png_sha256": "bc3f3da4aa75d895b3bcca4555e6e26fe9ee33777b25c133ee2c479d82f84faa",
+      "pdf_sha256": "078e785c261702312769e6079c2e7740187316ade53be5440f69a0c4c7b9eb3b"
+    },
+    "bins_B_Had.png": {
+      "opened_and_inspected": true,
+      "dimensions": [
+        1740,
+        630
+      ],
+      "png_sha256": "93aca078d69673dafb90ed2f4d9708385cbb1bcb02c800fc4b42a0bb8c13be8c",
+      "pdf_sha256": "a6ab19eac1b7a0a05b97c650be217f280bcfa9fe20313e7451d6541e4ceab90e"
+    },
+    "bins_B_d0.png": {
+      "opened_and_inspected": true,
+      "dimensions": [
+        1740,
+        630
+      ],
+      "png_sha256": "b6256358052d457400e978bfc67bdca802a2c92e68818159d2dec24b0d6302e6",
+      "pdf_sha256": "8797c444db0dcf4604ad6615101b82cb4c5a7df32cb487687da4ceae84c297cd"
+    },
+    "bins_B_d0_Had.png": {
+      "opened_and_inspected": true,
+      "dimensions": [
+        1740,
+        630
+      ],
+      "png_sha256": "68c2c953b29f25e3cf24192e3cdc384ff742f7b1960ed5684775f83a7d882444",
+      "pdf_sha256": "f6312b0fd61806bf8da60f3fcb52580102a91e88fdf7a42f54971e57e9ed54e5"
+    },
+    "geometry_resolution.png": {
+      "opened_and_inspected": true,
+      "dimensions": [
+        2062,
+        567
+      ],
+      "png_sha256": "2b45aadf53d983a59074e3eac4b4a80d7c9ba60af1ea2994fdd457ec712afb9b",
+      "pdf_sha256": "4a1e930db18c919e941119d3ae7dd1ef6576606cacb7bbcfe0a0b8577a942b0b"
+    },
+    "learning_seed0.png": {
+      "opened_and_inspected": true,
+      "dimensions": [
+        1741,
+        616
+      ],
+      "png_sha256": "6cef0d1094efe7ba539bb39b03999c761f6a64a4f7551ef4c3271c49499f145c",
+      "pdf_sha256": "0f4ad530b161b6b90888e6b1eb0d773e1e9e829da827eb384e5c2e0eea545b40"
+    },
+    "score_B.png": {
+      "opened_and_inspected": true,
+      "dimensions": [
+        1740,
+        630
+      ],
+      "png_sha256": "f43096d8c6e203251ffa3d5444ea5ba02b529519f9a97114afa0404e05d215d0",
+      "pdf_sha256": "f2b642db2b07986f7b5d97020601f425a199c378cf623abc1ee5808bf12ed042"
+    },
+    "score_B_Had.png": {
+      "opened_and_inspected": true,
+      "dimensions": [
+        1740,
+        630
+      ],
+      "png_sha256": "edc505afba3fdc16f4aa628973e8ea2e2894421919f41f1f3bd423b9c883b52d",
+      "pdf_sha256": "120d6bb1f22b04f5fb0e1d5715f9a123cbafb838adcd938b887ddd30568458e2"
+    },
+    "score_B_d0.png": {
+      "opened_and_inspected": true,
+      "dimensions": [
+        1740,
+        630
+      ],
+      "png_sha256": "74db44a2e92ec8d60cb8913c104b9da0d1d8e63c17a24911638bc84420799fff",
+      "pdf_sha256": "231dcf8e3fc629e1d5add7999d98da81c5fb15870b4ca3e00f9cfa298ad09925"
+    },
+    "score_B_d0_Had.png": {
+      "opened_and_inspected": true,
+      "dimensions": [
+        1740,
+        630
+      ],
+      "png_sha256": "5be980c0bd2d00e125abe9f6a4f17ad4c6790192c579e5e970e689541445563b",
+      "pdf_sha256": "50a60aa922ad1655afcaac6a13220736f277af5c107b339eaeea6885715e6938"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "v1/train_dataset.npz": {
+    "path": "/home/rbaba/dihiggs-spin-20261006/runs/v1/train_dataset.npz",
+    "sha256": "778eca21e2ce130caa22c402442f37fdb886cf6231d18db391fd76f4a09f492e",
+    "bytes": 278618925,
+    "N": 526859,
+    "processes": [
+      "trainH",
+      "trainZ"
+    ]
+  },
+  "v1/hpred_partial_model.pt": {
+    "path": "/home/rbaba/dihiggs-spin-20261006/runs/v1/hpred_partial_model.pt",
+    "sha256": "075dbe4247e45def963a10640b268979a9998b830e4c330351525af6221f91ce",
+    "bytes": 2013509
+  },
+  "v2/dataset_hhU.npz": {
+    "path": "/home/rbaba/dihiggs-spin-20261006/runs/v2/dataset_hhU.npz",
+    "sha256": "b9c32b2ac112a4b04847dbe121873c848d041e1e4f6e70aae08a3663c9642c9e",
+    "bytes": 31091232,
+    "N": 58805,
+    "processes": [
+      "hhU"
+    ]
+  },
+  "v2/hpred_hhU.npz": {
+    "path": "/home/rbaba/dihiggs-spin-20261006/runs/v2/hpred_hhU.npz",
+    "sha256": "cf65b2b1858471ef0a5264f2a79cbcd5095cf727759283e9f76ca3f7b281dd3a",
+    "bytes": 3393230,
+    "N": 58805,
+    "processes": [
+      "hhU"
+    ]
+  }
+}

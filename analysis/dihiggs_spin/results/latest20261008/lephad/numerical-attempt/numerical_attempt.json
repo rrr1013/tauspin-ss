@@ -1,0 +1,9 @@
+{
+  "recorded_unix": 1791446479.4767852,
+  "source_commit": "e34d272e69f1a5f4fe511bf93ce2a8bfa029abfe",
+  "status": "numerical-attempt",
+  "reason": "Original profile optimizer has multiple ABNORMAL failures; inference outputs require reviewed stable-deviance/analytic-gradient reevaluation",
+  "training_valid": true,
+  "score_and_checkpoint_location": "/home/rbaba/dihiggs-latest-20261008/lephad-slt/models",
+  "scientific_use": "Do not interpret original Z, ratio, flavor, or bootstrap values as physics conclusions"
+}

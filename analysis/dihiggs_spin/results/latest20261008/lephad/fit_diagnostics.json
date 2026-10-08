@@ -1,0 +1,417 @@
+{
+  "counts": {
+    "evaluation/nominal/B/0/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B/0/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B/0/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+d0/0/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+d0/0/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+d0/0/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+Had/0/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+Had/0/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+Had/0/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+d0+Had/0/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+d0+Had/0/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+d0+Had/0/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B/1/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B/1/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B/1/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+d0/1/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+d0/1/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+d0/1/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+Had/1/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+Had/1/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+Had/1/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+d0+Had/1/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+d0+Had/1/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+d0+Had/1/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B/2/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B/2/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B/2/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+d0/2/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+d0/2/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+d0/2/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+Had/2/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+Had/2/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+Had/2/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+d0+Had/2/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+d0+Had/2/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/B+d0+Had/2/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/null/B/0/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/null/B/0/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/null/B/0/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/null/B+d0/0/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/null/B+d0/0/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/null/B+d0/0/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/real/B/0/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/real/B/0/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/real/B/0/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/real/B+d0/0/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/real/B+d0/0/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/real/B+d0/0/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/real/B+Had/0/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/real/B+Had/0/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/real/B+Had/0/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/real/B+d0+Had/0/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/real/B+d0+Had/0/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/real/B+d0+Had/0/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nonprompt/B/0/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nonprompt/B/0/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nonprompt/B/0/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nonprompt/B+d0/0/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nonprompt/B+d0/0/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nonprompt/B+d0/0/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nonprompt/B+Had/0/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nonprompt/B+Had/0/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nonprompt/B+Had/0/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nonprompt/B+d0+Had/0/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nonprompt/B+d0+Had/0/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nonprompt/B+d0+Had/0/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/GBDT_B/0/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/GBDT_B/0/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/GBDT_B/0/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/GBDT_B+d0/0/normTrue_mcTrue": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/GBDT_B+d0/0/normTrue_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "evaluation/nominal/GBDT_B+d0/0/normFalse_mcFalse": {
+      "total": 1,
+      "success": 1,
+      "failure": 0
+    },
+    "nominal_bootstrap/normTrue_mcTrue": {
+      "total": 1200,
+      "success": 1200,
+      "failure": 0
+    },
+    "flavor_electron_evaluation/normTrue_mcTrue": {
+      "total": 4,
+      "success": 4,
+      "failure": 0
+    },
+    "flavor_electron_evaluation/normTrue_mcFalse": {
+      "total": 4,
+      "success": 4,
+      "failure": 0
+    },
+    "flavor_electron_evaluation/normFalse_mcFalse": {
+      "total": 4,
+      "success": 4,
+      "failure": 0
+    },
+    "flavor_electron_bootstrap/normTrue_mcTrue": {
+      "total": 400,
+      "success": 400,
+      "failure": 0
+    },
+    "flavor_muon_evaluation/normTrue_mcTrue": {
+      "total": 4,
+      "success": 4,
+      "failure": 0
+    },
+    "flavor_muon_evaluation/normTrue_mcFalse": {
+      "total": 4,
+      "success": 4,
+      "failure": 0
+    },
+    "flavor_muon_evaluation/normFalse_mcFalse": {
+      "total": 4,
+      "success": 4,
+      "failure": 0
+    },
+    "flavor_muon_bootstrap/normTrue_mcTrue": {
+      "total": 400,
+      "success": 400,
+      "failure": 0
+    },
+    "gbdt_bootstrap/normTrue_mcTrue": {
+      "total": 200,
+      "success": 200,
+      "failure": 0
+    }
+  },
+  "failures": [],
+  "total_fits": 2296,
+  "total_failures": 0
+}
