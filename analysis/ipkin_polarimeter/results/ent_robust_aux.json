@@ -1,0 +1,311 @@
+{
+ "config": {
+  "log": "../../../logs/ent_robust_aux.log",
+  "cache": "/home/rbaba/ipkin-polarimeter-20261016/out/ent_robust_G.npz",
+  "levels": "exact,tauspin,ipkin,ipkin_m125,ipkin_noip,ipkin_noip_m125,tauspin+ipkin,tauspin+ipkin_m125,phicp,textbook_pair",
+  "full": "tauspin,ipkin,ipkin_m125,tauspin+ipkin,phicp",
+  "out": "/home/rbaba/ipkin-polarimeter-20261016/out/ent_robust_aux.json"
+ },
+ "levels": {
+  "tauspin": {
+   "tau3": {
+    "Z": 3.295,
+    "source": "log"
+   },
+   "tau1": {
+    "Z": 3.02,
+    "source": "log"
+   },
+   "tau0.3": {
+    "Z": 2.608,
+    "source": "log"
+   },
+   "tau0": {
+    "Z": 1.845,
+    "source": "log"
+   },
+   "tau10": {
+    "Z": 3.444,
+    "source": "log"
+   },
+   "tau100": {
+    "Z": 3.513,
+    "source": "log"
+   },
+   "tau10_lumi6000": {
+    "Z": 4.807,
+    "source": "log"
+   },
+   "tau1_lumi6000": {
+    "Z": 4.229,
+    "source": "log"
+   }
+  },
+  "exact": {
+   "tau0": {
+    "Z": 5.158,
+    "source": "log"
+   },
+   "tau0.3": {
+    "Z": 7.13,
+    "source": "log"
+   },
+   "tau1": {
+    "Z": 8.01,
+    "source": "log"
+   },
+   "tau10": {
+    "Z": 8.797,
+    "source": "log"
+   },
+   "tau100": {
+    "Z": 8.919,
+    "source": "log"
+   },
+   "tau3": {
+    "Z": null,
+    "source": "failed: AttributeError(\"'NoneType' object has no attribute 'tolist'\")"
+   }
+  },
+  "ipkin": {
+   "tau10": {
+    "Z": 3.167,
+    "source": "log"
+   },
+   "tau0": {
+    "Z": 1.689,
+    "source": "log"
+   },
+   "tau1": {
+    "Z": 2.776,
+    "source": "log"
+   },
+   "tau3": {
+    "Z": 3.03,
+    "source": "log"
+   },
+   "tau100": {
+    "Z": 3.232,
+    "source": "log"
+   },
+   "tau10_lumi6000": {
+    "Z": 4.436,
+    "source": "log"
+   },
+   "tau1_lumi6000": {
+    "Z": 3.898,
+    "source": "log"
+   },
+   "tau0.3": {
+    "Z": null,
+    "source": "failed: AttributeError(\"'NoneType' object has no attribute 'tolist'\")"
+   }
+  },
+  "ipkin_m125": {
+   "tau1": {
+    "Z": 2.92,
+    "source": "log"
+   },
+   "tau0.3": {
+    "Z": 2.523,
+    "source": "log"
+   },
+   "tau0": {
+    "Z": 1.777,
+    "source": "log"
+   },
+   "tau3": {
+    "Z": 3.186,
+    "source": "log"
+   },
+   "tau10": {
+    "Z": 3.33,
+    "source": "log"
+   },
+   "tau100": {
+    "Z": 3.398,
+    "source": "log"
+   },
+   "tau10_lumi6000": {
+    "Z": 4.658,
+    "source": "log"
+   },
+   "tau1_lumi6000": {
+    "Z": 4.096,
+    "source": "log"
+   }
+  },
+  "ipkin_noip": {
+   "tau10": {
+    "Z": 1.872,
+    "source": "log"
+   },
+   "tau1": {
+    "Z": 1.635,
+    "source": "log"
+   },
+   "tau0": {
+    "Z": 0.994,
+    "source": "log"
+   },
+   "tau3": {
+    "Z": 1.789,
+    "source": "log"
+   },
+   "tau0.3": {
+    "Z": 1.408,
+    "source": "log"
+   },
+   "tau100": {
+    "Z": 1.911,
+    "source": "log"
+   }
+  },
+  "ipkin_noip_m125": {
+   "tau3": {
+    "Z": 1.86,
+    "source": "log"
+   },
+   "tau1": {
+    "Z": 1.7,
+    "source": "log"
+   },
+   "tau0": {
+    "Z": 1.034,
+    "source": "log"
+   },
+   "tau0.3": {
+    "Z": 1.463,
+    "source": "log"
+   },
+   "tau10": {
+    "Z": 1.947,
+    "source": "log"
+   },
+   "tau100": {
+    "Z": 1.988,
+    "source": "log"
+   }
+  },
+  "tauspin+ipkin": {
+   "tau3": {
+    "Z": 3.821,
+    "source": "log"
+   },
+   "tau1": {
+    "Z": 3.507,
+    "source": "log"
+   },
+   "tau0.3": {
+    "Z": 3.034,
+    "source": "log"
+   },
+   "tau0": {
+    "Z": 2.143,
+    "source": "log"
+   },
+   "tau100": {
+    "Z": 4.068,
+    "source": "log"
+   },
+   "tau10": {
+    "Z": 3.989,
+    "source": "log"
+   },
+   "tau1_lumi6000": {
+    "Z": 4.896,
+    "source": "log"
+   },
+   "tau10_lumi6000": {
+    "Z": 5.546,
+    "source": "log"
+   }
+  },
+  "tauspin+ipkin_m125": {
+   "tau3": {
+    "Z": 3.883,
+    "source": "log"
+   },
+   "tau1": {
+    "Z": 3.564,
+    "source": "log"
+   },
+   "tau0.3": {
+    "Z": 3.085,
+    "source": "log"
+   },
+   "tau0": {
+    "Z": 2.178,
+    "source": "log"
+   },
+   "tau10": {
+    "Z": 4.054,
+    "source": "log"
+   },
+   "tau100": {
+    "Z": 4.134,
+    "source": "log"
+   }
+  },
+  "phicp": {
+   "tau3": {
+    "Z": 2.109,
+    "source": "log"
+   },
+   "tau0.3": {
+    "Z": 1.662,
+    "source": "log"
+   },
+   "tau1": {
+    "Z": 1.929,
+    "source": "log"
+   },
+   "tau10": {
+    "Z": 2.207,
+    "source": "log"
+   },
+   "tau0": {
+    "Z": 1.172,
+    "source": "log"
+   },
+   "tau100": {
+    "Z": 2.253,
+    "source": "log"
+   },
+   "tau1_lumi6000": {
+    "Z": 2.716,
+    "source": "log"
+   },
+   "tau10_lumi6000": {
+    "Z": 3.103,
+    "source": "log"
+   }
+  },
+  "textbook_pair": {
+   "tau1": {
+    "Z": 1.582,
+    "source": "log"
+   },
+   "tau10": {
+    "Z": 1.81,
+    "source": "log"
+   },
+   "tau3": {
+    "Z": 1.73,
+    "source": "log"
+   },
+   "tau0.3": {
+    "Z": 1.364,
+    "source": "log"
+   },
+   "tau0": {
+    "Z": 0.96,
+    "source": "log"
+   },
+   "tau100": {
+    "Z": 1.848,
+    "source": "log"
+   }
+  }
+ }
+}
