@@ -5,7 +5,8 @@ pair: Pearson correlation of g_T with the exact target T = h-_n h+_n + h-_r h+_r
 per-event Fisher information of a small transverse correlation,
     I_T = E_flat[g_T^2] (the information on c in rho = 1 + c T, at c = 0),
 which is what the entanglement and CP fits use.  Also as a function of the impact-parameter
-significance |b_perp| / sigma of the 1-prong sides, and the event-level correlation between
+magnitude of the 1-prong leading-track impact vector projected on the plane transverse to the
+visible tau (|b| in the local (n, r) basis, um), and the event-level correlation between
 the learned and the classical statistics (complementarity).
 """
 import argparse
@@ -14,7 +15,7 @@ import json
 import numpy as np
 
 CLS = ["pi", "rho", "a1(1p)", "a1(3p)", "3pXn"]
-LEVELS = ["exact", "tauspin", "ipkin", "ipkin_m125", "tauspin+ipkin", "tauspin+ipkin_m125", "ipkin_noip", "phicp",
+LEVELS = ["exact", "tauspin", "ipkin", "ipkin_m125", "tauspin+ipkin", "tauspin+ipkin_m125", "ipkin_noip", "phicp", "phicp_zmf",
           "textbook_pair"]
 
 
@@ -51,8 +52,7 @@ def main():
             res["pairs"][key]["corr_tauspin_ipkin"] = wcorr(G["tauspin"][m], G["ipkin"][m], w[m])
     res["all"] = {l: {"corr": wcorr(G[l], T, w), "info": float(np.average(G[l] ** 2, weights=w))} for l in LEVELS}
     res["all"]["corr_tauspin_ipkin"] = wcorr(G["tauspin"], G["ipkin"], w)
-    # IP significance of 1-prong sides (transverse magnitude in the local basis over the d0 resolution)
-    pt = np.stack([d["kin_pt_tau1"], d["kin_pt_tau2"]], 1)  # only for a rough resolution scale
+    # 1-prong impact vector projected on the plane transverse to the visible tau (local n, r), um
     sig = np.stack([np.hypot(d[f"spin_ip_n_{q}"], d[f"spin_ip_r_{q}"]) for q in (0, 1)], 1)  # um
     one = rm <= 2
     smin = np.where(one.all(1), sig.min(1), np.where(one[:, 0], sig[:, 0], np.where(one[:, 1], sig[:, 1], np.nan)))

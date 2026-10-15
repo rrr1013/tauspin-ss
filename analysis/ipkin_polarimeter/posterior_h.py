@@ -68,7 +68,7 @@ def ordered(d):
     return o
 
 
-def build_sides(o):
+def build_sides(o, sig_sv_perp=SIG_SV_PERP):
     sides = []
     for s in (0, 1):
         trk_p = o["ch"][:, s, 0, :3]
@@ -89,7 +89,7 @@ def build_sides(o):
         sides.append(dict(vis=vis, trk=trk, e1=e1, e2=e2, bmag=bmag,
                           sig_psi=sig_bperp / np.maximum(bmag, 1e-9),
                           three=o["nch"][:, s] >= 3, sv_dir=svv / np.maximum(svl, 1e-12)[:, None],
-                          sv_len=svl, sig_sv=SIG_SV_PERP / np.maximum(svl, 1e-3)))
+                          sv_len=svl, sig_sv=sig_sv_perp / np.maximum(svl, 1e-3)))
     return sides
 
 
@@ -120,7 +120,6 @@ def pi0_candidates(pi0, R, rng):
     ph = np.arctan2(pi0[..., 1], pi0[..., 0])[:, None] + 1.3 * s_a[:, None] * rng.standard_normal(sh)
     p = np.sqrt(np.maximum(E ** 2 - 0.135 ** 2, 0))
     c = np.stack([p / np.cosh(et) * np.cos(ph), p / np.cosh(et) * np.sin(ph), p * np.tanh(et), E], -1)
-    c[0 * R:] = c
     out = np.where((pi0[..., 3] > 0)[:, None, ..., None], c, 0.0)
     out[:, 0] = pi0       # replica 0 keeps the measured clusters
     return out
@@ -221,6 +220,7 @@ def main():
     ap.add_argument("--batch", type=int, default=32)
     ap.add_argument("--met-sigma", type=float, default=0.0, help="0: dataset met_sigma")
     ap.add_argument("--mass-prior", default="", help="m,sigma [GeV]: Gaussian prior on m_tautau (signal hypothesis)")
+    ap.add_argument("--sv-sigma", type=float, default=SIG_SV_PERP, help="SV transverse resolution assumed in the likelihood [mm]")
     ap.add_argument("--pi0-replicas", type=int, default=1, help=">1: marginalise the pi0 measurement")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--threads", type=int, default=1)
@@ -231,7 +231,7 @@ def main():
     assert np.array_equal(ds["uid"], d["uid"]), "reco chunks and dataset_HU are not aligned"
     met_sigma = args.met_sigma or float(ds["met_sigma"])
     o = ordered(d)
-    sides = build_sides(o)
+    sides = build_sides(o, args.sv_sigma)
     stop = len(d["uid"]) if args.stop < 0 else min(args.stop, len(d["uid"]))
     gen = torch.Generator().manual_seed(args.seed * 1_000_003 + args.start)
     rng = np.random.default_rng(args.seed * 1_000_003 + args.start)
