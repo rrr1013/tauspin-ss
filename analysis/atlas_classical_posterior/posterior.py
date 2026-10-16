@@ -19,8 +19,8 @@ polarimeter of the reconstructed visible system is evaluated with the generator
           the oracle 'exact' (MET = sum of truth nu_T, narrow Gaussian)
   x prior optional (--x-prior empirical): TRAIN histogram of E_vis(reco)/E_tau(truth) per
           reco mode and reco E_vis decile, as an importance weight on the uniform proposal
-  |M|^2   optional (--unpol-weight): retained pairs reweighted by the spin-summed decay rate of each
-          side (rho, 3pi); without it the posterior is phase-space only, exact for pi only
+  |M|^2   optional (--unpol-weight): each side draw weighted by its spin-summed decay rate (rho, 3pi);
+          without it the posterior is phase-space only, which is the spin-flat posterior only for pi
   mass    optional m_tautau ~ N(91.1876, 3 GeV), common to H and Z (as p12)
 
 Sampling per measure: S prior draws per side, M per side kept by systematic
@@ -163,45 +163,48 @@ def lboost(v, P):
     return np.concatenate([v[..., :3] + ((g - 1.0) * bp / b2 - g * v[..., 3:4]) * b, e], -1)
 
 
-def unpol_rate(rows, nu_pair):
-    """Spin-summed decay rate |M|^2 of each side for each hypothesis (R,K,2); 1 for pi.
+def unpol_logw_side(rows, s, nu):
+    """log of the spin-summed decay rate |M|^2 of side s for draws nu (R,S,3); 0 for pi.
 
     Given the observed visible configuration, the spin-flat posterior over tau hypotheses is
     (x, azimuth uniform) x |M|^2_unpol; the pion configuration inside the visible system is fixed
     by the measurement.  rho: 2(q.N)q0 - q^2 N0 in the tau rest frame (q = pi - pi0);
-    3pi: the trace r0 of the generator (TauDecay UFO) current, as in mode_pair_auc_origin/polarimeter.
-    Factors depending only on the visible invariant masses are common to all hypotheses and dropped.
+    3pi: the trace of the generator (TauDecay UFO) current, as r0 in mode_pair_auc_origin/polarimeter.
+    Factors depending only on the visible invariant masses are common to all draws and dropped.
+    Non-positive rates (unphysical reco visible systems) -> -inf.
     """
     from polarimeter import current_taudecay, slash, V_MINUS_A, G0
     md4 = lambda a, b: a[..., 3] * b[..., 3] - np.sum(a[..., :3] * b[..., :3], -1)
-    R, K = nu_pair.shape[:2]
-    out = np.ones((R, K, 2))
-    for s in (0, 1):
-        pions, cnt, neu = G['pions'][rows, s], G['counts'][rows, s], G['neutral'][rows, s]
-        mode, q = G['modes'][rows, s], G['charges'][rows, s]
-        act = np.arange(3)[None, :] < cnt[:, None]
-        vis = np.where(act[..., None], pions, 0.0).sum(1) + neu
-        nu4 = np.concatenate([nu_pair[:, :, s], np.linalg.norm(nu_pair[:, :, s], axis=-1)[..., None]], -1)
-        tau = vis[:, None] + nu4
-        N = lboost(nu4, tau)
-        rho = mode == 1
-        if rho.any():
-            qv = lboost(pions[rho, None, 0], tau[rho]) - lboost(neu[rho, None], tau[rho])
-            out[rho, :, s] = 2 * md4(qv, N[rho]) * qv[..., 3] - md4(qv, qv) * N[rho, :, 3]
-        tri = mode == 3
-        if tri.any():
-            ch = -1 if s == 0 else 1
-            order = np.argsort(q[tri] != ch, axis=-1, kind='stable')
-            pp = np.take_along_axis(pions[tri], order[..., None], axis=1)            # (r,3,4)
-            rest = lboost(pp[:, None], tau[tri][:, :, None])                         # (r,K,3,4)
-            sgn = 1.0 if ch < 0 else -1.0
-            e = np.concatenate([rest[..., 3:4], sgn * rest[..., :3]], -1)
-            n4 = np.concatenate([N[tri][..., 3:4], sgn * N[tri][..., :3]], -1).astype(complex)
-            J = current_taudecay(e[..., 0, :], e[..., 1, :], e[..., 2, :])
-            A = np.einsum('...ab,bc->...ac', slash(J), V_MINUS_A)
-            Abar = np.einsum('ab,...cb,cd->...ad', G0, np.conj(A), G0)
-            Km = Abar @ slash(n4) @ A
-            out[tri, :, s] = np.real(np.einsum('...ii->...', Km))
+    R, S = nu.shape[:2]
+    out = np.zeros((R, S))
+    pions, cnt, neu = G['pions'][rows, s], G['counts'][rows, s], G['neutral'][rows, s]
+    mode, q = G['modes'][rows, s], G['charges'][rows, s]
+    act = np.arange(3)[None, :] < cnt[:, None]
+    vis = np.where(act[..., None], pions, 0.0).sum(1) + neu
+    nu4 = np.concatenate([nu, np.linalg.norm(nu, axis=-1)[..., None]], -1)
+    tau = vis[:, None] + nu4
+    N = lboost(nu4, tau)
+    rate = np.ones((R, S))
+    rho = (mode == 1) & G['avail_side'][rows, s]
+    if rho.any():
+        qv = lboost(pions[rho, None, 0], tau[rho]) - lboost(neu[rho, None], tau[rho])
+        rate[rho] = 2 * md4(qv, N[rho]) * qv[..., 3] - md4(qv, qv) * N[rho, :, 3]
+    tri = np.flatnonzero((mode == 3) & G['avail_side'][rows, s])
+    ch = -1 if s == 0 else 1
+    sgn = 1.0 if ch < 0 else -1.0
+    for a in range(0, len(tri), 8):
+        t = tri[a:a + 8]
+        order = np.argsort(q[t] != ch, axis=-1, kind='stable')
+        pp = np.take_along_axis(pions[t], order[..., None], axis=1)
+        rest = lboost(pp[:, None], tau[t][:, :, None])
+        e = np.concatenate([rest[..., 3:4], sgn * rest[..., :3]], -1)
+        n4 = np.concatenate([N[t][..., 3:4], sgn * N[t][..., :3]], -1).astype(complex)
+        J = current_taudecay(e[..., 0, :], e[..., 1, :], e[..., 2, :])
+        A = np.einsum('...ab,bc->...ac', slash(J), V_MINUS_A)
+        Abar = np.einsum('ab,...cb,cd->...ad', G0, np.conj(A), G0)
+        rate[t] = np.real(np.einsum('...ii->...', Abar @ slash(n4) @ A))
+    with np.errstate(divide='ignore', invalid='ignore'):
+        out = np.where(np.isfinite(rate) & (rate > 0), np.log(np.where(rate > 0, rate, 1.0)), -np.inf)
     return out
 
 
@@ -218,6 +221,8 @@ def run_block(args):
         base = np.where(ok, 0.0, -np.inf)
         if G['xprior'] is not None:
             base = base + xprior_logw(x, xmin, vis[:, s, 3], G['xp_mode'][rows, s])
+        if G['unpol']:
+            base = base + unpol_logw_side(rows, s, nu)
         ip = sum(ip_logw_side(tdir, G['meas'][j], rows, s, G['ip_resp'][j], 'psi') for j in range(3))
         ipsh = sum(ip_logw_side(tdir, G['meas'][j], rows, s, G['ip_resp'][j], 'psi_shuffle')
                    for j in range(3))
@@ -260,12 +265,6 @@ def run_block(args):
         h, valid = polar(rows, nu_pair, avail)
         valid &= good_row[:, None]
         wt = valid.astype(float)
-        if G['unpol']:
-            om = unpol_rate(rows, nu_pair).prod(-1)
-            ok_om = np.isfinite(om) & (om > 0)
-            valid &= ok_om
-            wt = np.where(valid, om, 0.0)
-            wt = wt / np.maximum(wt.max(1, keepdims=True), 1e-300)
         hh = h[:, :, 0, :, None] * h[:, :, 1, None, :]                   # (R,K,3,3)
         diag = np.einsum('rkii->rki', hh)
         wH = 1 + diag @ CH
@@ -397,7 +396,7 @@ def main():
                          'along / across the visible ditau pT; exact: oracle MET = sum truth nu_T')
     ap.add_argument('--exact-sigma', type=float, default=2.0)
     ap.add_argument('--unpol-weight', action='store_true',
-                    help='weight retained pairs by the spin-summed decay rate |M|^2 of each side (rho, 3pi)')
+                    help='weight each side draw by its spin-summed decay rate |M|^2 (rho, 3pi)')
     ap.add_argument('--rho-shell-cap', action='store_true',
                     help='reco rho sides: shell mass capped at the TRAIN 95%% quantile of truth rho visible mass')
     ap.add_argument('--x-prior', choices=('uniform', 'empirical'), default='uniform',
