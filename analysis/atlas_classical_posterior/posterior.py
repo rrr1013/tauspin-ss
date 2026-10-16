@@ -17,6 +17,8 @@ polarimeter of the reconstructed visible system is evaluated with the generator
   MET     isotropic Gaussian on reco MET - sum nu_T, sigma from TRAIN (default); or
           anisotropic (along / across the visible ditau pT, median bias, TRAIN); or
           the oracle 'exact' (MET = sum of truth nu_T, narrow Gaussian)
+  x prior optional (--x-prior empirical): TRAIN histogram of E_vis(reco)/E_tau(truth) per
+          reco mode and reco E_vis decile, as an importance weight on the uniform proposal
   mass    optional m_tautau ~ N(91.1876, 3 GeV), common to H and Z (as p12)
 
 Sampling per measure: S prior draws per side, M per side kept by systematic
@@ -59,6 +61,8 @@ import p12_geometry_nullspace as P12  # noqa: E402
 import nullspace as ns  # noqa: E402
 
 G = {}
+XP_MODES = np.array([-1, 0, 1, 3])
+XP_EBINS, XP_XBINS = 10, 40
 
 
 def unit(v):
@@ -85,8 +89,17 @@ def systematic(logw, m, rng):
     return np.where(tot > 0, idx, -1), ess
 
 
+def xprior_logw(x, xmin, evis, mode):
+    """log of the TRAIN empirical p(x | E_vis bin, reco mode) relative to the uniform proposal."""
+    tab, eb, xb = G['xprior']
+    c = np.searchsorted(XP_MODES, mode)
+    e = np.clip(np.searchsorted(eb[c], evis) - 1, 0, eb.shape[1] - 2)
+    i = np.clip(np.floor(x / xb).astype(int), 0, tab.shape[-1] - 1)
+    return tab[c[:, None], e[:, None], i] + np.log(1 - xmin)[:, None]
+
+
 def sample_side(vis, S, rng):
-    """vis (R,4) -> tau direction (R,S,3), nu (R,S,3), ok (R,S)."""
+    """vis (R,4) -> tau direction (R,S,3), nu (R,S,3), ok (R,S), x (R,S), xmin (R,)."""
     p = vis[:, :3]
     pm = np.linalg.norm(p, axis=-1)
     mv2 = np.clip(vis[:, 3] ** 2 - pm ** 2, 0.0, M_VIS_CAP ** 2)
@@ -105,7 +118,7 @@ def sample_side(vis, S, rng):
     t = (cth[..., None] * v[:, None] + sth[..., None] * (np.cos(phi)[..., None] * u1[:, None]
                                                          + np.sin(phi)[..., None] * u2[:, None]))
     nu = P[..., None] * t - p[:, None]
-    return t, nu, ok
+    return t, nu, ok, x, xmin
 
 
 def ip_logw_side(tdir, meas, rows, side, response, psi_key):
@@ -145,8 +158,10 @@ def run_block(args):
     draws = [sample_side(vis[:, s], S, rng) for s in (0, 1)]
     logs = {}
     for s in (0, 1):
-        tdir, nu, ok = draws[s]
+        tdir, nu, ok, x, xmin = draws[s]
         base = np.where(ok, 0.0, -np.inf)
+        if G['xprior'] is not None:
+            base = base + xprior_logw(x, xmin, vis[:, s, 3], G['xp_mode'][rows, s])
         ip = sum(ip_logw_side(tdir, G['meas'][j], rows, s, G['ip_resp'][j], 'psi') for j in range(3))
         ipsh = sum(ip_logw_side(tdir, G['meas'][j], rows, s, G['ip_resp'][j], 'psi_shuffle')
                    for j in range(3))
@@ -240,6 +255,28 @@ def init_globals(a):
     G['sv_dir'], G['sv_ok'] = sv_dir[ids], sv_ok[ids]
     G['met_sigma'] = float(np.sqrt(np.mean(tr_met_res ** 2)))   # per component, isotropic
     G['met_model'] = a.met_model
+    G['xprior'] = None
+    if a.x_prior == 'empirical':
+        # x_r = E_vis(reco) / E_tau(truth) on TRAIN, per reco mode and reco E_vis decile.
+        # Single-tau polarisation is zero for H and for this Z, so the marginal is spin-flat.
+        with np.load(LADDER / 'train.npz') as d:
+            ev = d['reco_visible_tau_lab4'][..., 3]
+            et = d['truth_visible_tau_lab4'][..., 3] + d['truth_neutrino_lab4'][..., 3]
+            md = np.where(d['reco_h_available_side'], d['reco_h_mode'], -1)
+        xr = ev / et
+        tab = np.zeros((len(XP_MODES), XP_EBINS, XP_XBINS))
+        eb = np.zeros((len(XP_MODES), XP_EBINS + 1))
+        for c, m in enumerate(XP_MODES):
+            sel = md == m
+            q = np.quantile(ev[sel], np.linspace(0, 1, XP_EBINS + 1))
+            q[0], q[-1] = 0.0, np.inf
+            eb[c] = q
+            ei = np.clip(np.searchsorted(q, ev[sel]) - 1, 0, XP_EBINS - 1)
+            xi = np.clip(np.floor(xr[sel] * XP_XBINS).astype(int), 0, XP_XBINS - 1)
+            cnt = np.ones((XP_EBINS, XP_XBINS))
+            np.add.at(cnt, (ei, xi), 1.0)
+            tab[c] = np.log(cnt / cnt.sum(1, keepdims=True) * XP_XBINS)   # log density on [0,1]
+        G['xprior'] = (tab, eb, 1.0 / XP_XBINS)
     with np.load(LADDER / 'train.npz') as d:
         vt = d['reco_visible_tau_lab4'][:, :, :2].sum(1)
     ut = vt / np.linalg.norm(vt, axis=1, keepdims=True)
@@ -258,6 +295,7 @@ def init_globals(a):
     G['counts'], G['neutral'] = V['reco_h_counts'], V['reco_h_neutral_lab4']
     G['ncount'], G['modes'] = V['reco_h_neutral_counts'], V['reco_h_mode'].astype(np.int64)
     G['avail_side'] = V['reco_h_available_side']
+    G['xp_mode'] = np.where(V['reco_h_available_side'], V['reco_h_mode'], -1).astype(int)
     G['truth_nu'] = V['truth_neutrino_lab4'][..., :3]
     truth_dir = unit(V['truth_visible_tau_lab4'][..., :3] + V['truth_neutrino_lab4'][..., :3])
     G['truth_dir'] = truth_dir
@@ -282,6 +320,8 @@ def main():
                     help='iso: isotropic Gaussian (TRAIN rms); aniso: TRAIN median bias and 68%% half-widths '
                          'along / across the visible ditau pT; exact: oracle MET = sum truth nu_T')
     ap.add_argument('--exact-sigma', type=float, default=2.0)
+    ap.add_argument('--x-prior', choices=('uniform', 'empirical'), default='uniform',
+                    help='empirical: TRAIN p(E_vis/E_tau | reco E_vis decile, reco mode) instead of uniform x')
     a = ap.parse_args()
     a.output.mkdir(parents=True, exist_ok=True)
     t0 = time.time()
@@ -317,7 +357,7 @@ def main():
         payload[k] = V[k][:n]
     np.savez_compressed(a.output / 'posterior.npz', **payload)
     summary = {'rows': n, 'S': a.S, 'M': a.M, 'K': a.K, 'seed': a.seed, 'met_sigma_GeV': G['met_sigma'],
-               'met_model': a.met_model, 'met_aniso': [G['met_bias_par'], G['met_sig_par'], G['met_sig_perp']],
+               'met_model': a.met_model, 'x_prior': a.x_prior, 'met_aniso': [G['met_bias_par'], G['met_sig_par'], G['met_sig_perp']],
                'closure_mean_log_response_truth_dir': clos, 'elapsed_s': time.time() - t0,
                'host': os.uname().nodename, 'workers': a.workers}
     (a.output / 'summary.json').write_text(json.dumps(summary, indent=1))
