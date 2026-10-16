@@ -1,0 +1,17 @@
+{
+ "rows": 59390,
+ "S": 4096,
+ "M": 64,
+ "K": 128,
+ "seed": 777,
+ "met_sigma_GeV": 27.3067400361615,
+ "closure_mean_log_response_truth_dir": {
+  "ip3_side0": 1.2701900781144477,
+  "sv_side0": 1.5739245388567666,
+  "ip3_side1": 1.2383442836323377,
+  "sv_side1": 1.5117188569595572
+ },
+ "elapsed_s": 212.48798966407776,
+ "host": "lxgpu02.icepp.jp",
+ "workers": 8
+}

@@ -1,0 +1,40 @@
+exactmet pair ess median 356.4833714738685 q05 22.595565272869017 no-valid 0.05266879946118875
+rho k corr: classical exactMET met 0.5194317910443967 truthnu 0.7224991750656248 P4 0.72789365
+m_vis 0-0.6 frac 0.219  k: cl-exactMET 0.62 truthnu 0.67 P4 0.73
+m_vis 0.6-0.9 frac 0.434  k: cl-exactMET 0.69 truthnu 0.86 P4 0.76
+m_vis 0.9-1.2 frac 0.170  k: cl-exactMET 0.52 truthnu 0.80 P4 0.70
+m_vis 1.2-1.6 frac 0.070  k: cl-exactMET 0.20 truthnu 0.58 P4 0.61
+m_vis 1.6-9 frac 0.104  k: cl-exactMET 0.14 truthnu 0.45 P4 0.68
+corr(exact h_k, x_true) rho 0.39067151293309743 pi 0.9983026116218984
+corr(P4 h_k, x_true) rho 0.4738394799306109  classical exactMET 0.26704620723061706
+reco rho, truth rho, raw 1p1n    frac 0.898 n=55907
+   truthnu                        nan,nan,nan
+   classical ipsv_mass            0.46,0.48,0.53
+   classical exactMET ipsv_mass   0.46,0.47,0.52
+   learner full22                 0.65,0.66,0.76
+   learner P4 base                0.34,0.47,0.73
+reco rho, truth rho, raw 1p2n    frac 0.068 n=4246
+   truthnu                        nan,nan,nan
+   classical ipsv_mass            0.29,0.31,0.38
+   classical exactMET ipsv_mass   0.29,0.32,0.37
+   learner full22                 0.54,0.56,0.65
+   learner P4 base                0.31,0.39,0.62
+reco rho, truth pi               frac 0.030 n=1893
+   truthnu                        nan,nan,nan
+   classical ipsv_mass            0.12,0.16,0.31
+   classical exactMET ipsv_mass   0.14,0.14,0.34
+   learner full22                 0.56,0.49,0.74
+   learner P4 base                0.03,0.04,0.74
+reco rho, truth 3pi              frac 0.003 n=181
+reco pi, truth pi                frac 0.862 n=25596
+   truthnu                        nan,nan,nan
+   classical ipsv_mass            0.69,0.63,0.82
+   classical exactMET ipsv_mass   0.66,0.60,0.90
+   learner full22                 0.80,0.74,0.92
+   learner P4 base                0.08,0.09,0.91
+reco pi, truth rho               frac 0.133 n=3960
+   truthnu                        nan,nan,nan
+   classical ipsv_mass            0.33,0.27,0.48
+   classical exactMET ipsv_mass   0.31,0.26,0.53
+   learner full22                 0.43,0.38,0.62
+   learner P4 base                0.10,0.09,0.60
