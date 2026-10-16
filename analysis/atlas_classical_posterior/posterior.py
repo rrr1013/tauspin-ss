@@ -93,7 +93,7 @@ def xprior_logw(x, xmin, evis, mode):
     """log of the TRAIN empirical p(x | E_vis bin, reco mode) relative to the uniform proposal."""
     tab, eb, xb = G['xprior']
     c = np.searchsorted(XP_MODES, mode)
-    e = np.clip(np.searchsorted(eb[c], evis) - 1, 0, eb.shape[1] - 2)
+    e = np.clip(np.array([np.searchsorted(eb[ci], ei) for ci, ei in zip(c, evis)]) - 1, 0, eb.shape[1] - 2)
     i = np.clip(np.floor(x / xb).astype(int), 0, tab.shape[-1] - 1)
     return tab[c[:, None], e[:, None], i] + np.log(1 - xmin)[:, None]
 
