@@ -14,7 +14,9 @@ polarimeter of the reconstructed visible system is evaluated with the generator
           response density of hz_beyond_ceiling/p12 (fitted on TRAIN, truth tau
           direction, per prong class and |IP| bin)
   SV      angle between hypothesis tau and PV->SV direction, p12 response (TRAIN)
-  MET     isotropic Gaussian on reco MET - sum nu_T, sigma from TRAIN
+  MET     isotropic Gaussian on reco MET - sum nu_T, sigma from TRAIN (default); or
+          anisotropic (along / across the visible ditau pT, median bias, TRAIN); or
+          the oracle 'exact' (MET = sum of truth nu_T, narrow Gaussian)
   mass    optional m_tautau ~ N(91.1876, 3 GeV), common to H and Z (as p12)
 
 Sampling per measure: S prior draws per side, M per side kept by systematic
@@ -153,6 +155,7 @@ def run_block(args):
                    'ip3_sv_mass': base + ip + sv, 'ip3_shuffle': base + ipsh}
     met = G['met'][rows]
     sig = G['met_sigma']
+    u = G['met_axis'][rows]                                            # (R,2) unit, visible ditau pT
     avail = G['avail_side']
     res = {}
     for m in MEASURES:
@@ -162,7 +165,13 @@ def run_block(args):
         nu0 = np.take_along_axis(draws[0][1], i0[..., None], 1)        # (R,M,3)
         nu1 = np.take_along_axis(draws[1][1], i1[..., None], 1)
         sum_t = nu0[:, :, None, :2] + nu1[:, None, :, :2]               # (R,M,M,2)
-        lw = -0.5 * np.sum((met[:, None, None] - sum_t) ** 2, -1) / sig ** 2
+        r = met[:, None, None] - sum_t
+        if G['met_model'] == 'aniso':
+            rpar = r[..., 0] * u[:, None, None, 0] + r[..., 1] * u[:, None, None, 1] - G['met_bias_par']
+            rperp = r[..., 0] * u[:, None, None, 1] - r[..., 1] * u[:, None, None, 0]
+            lw = -0.5 * (rpar ** 2 / G['met_sig_par'] ** 2 + rperp ** 2 / G['met_sig_perp'] ** 2)
+        else:
+            lw = -0.5 * np.sum(r ** 2, -1) / sig ** 2
         if m == 'ip3_sv_mass':
             v0, v1 = vis[:, 0], vis[:, 1]
             e0 = v0[:, None, 3] + np.linalg.norm(nu0, axis=-1)          # tau energies (massless nu)
@@ -230,8 +239,21 @@ def init_globals(a):
     G['sv_resp'] = P12.fit_sv_response(tr_truth, sv_dir[tr_ids], sv_ok[tr_ids])
     G['sv_dir'], G['sv_ok'] = sv_dir[ids], sv_ok[ids]
     G['met_sigma'] = float(np.sqrt(np.mean(tr_met_res ** 2)))   # per component, isotropic
+    G['met_model'] = a.met_model
+    with np.load(LADDER / 'train.npz') as d:
+        vt = d['reco_visible_tau_lab4'][:, :, :2].sum(1)
+    ut = vt / np.linalg.norm(vt, axis=1, keepdims=True)
+    rpar = np.sum(tr_met_res * ut, 1)
+    rperp = tr_met_res[:, 0] * ut[:, 1] - tr_met_res[:, 1] * ut[:, 0]
+    half68 = lambda x: float(np.diff(np.quantile(x, [0.16, 0.84]))[0] / 2)
+    G['met_bias_par'], G['met_sig_par'], G['met_sig_perp'] = float(np.median(rpar)), half68(rpar), half68(rperp)
     G['vis'] = V['reco_visible_tau_lab4']
     G['met'] = V['reco_met_xy']
+    if a.met_model == 'exact':            # oracle: MET replaced by sum of truth nu_T
+        G['met'] = V['truth_neutrino_lab4'][:, :, :2].sum(1)
+        G['met_sigma'] = a.exact_sigma
+    vv = V['reco_visible_tau_lab4'][:, :, :2].sum(1)
+    G['met_axis'] = vv / np.linalg.norm(vv, axis=1, keepdims=True)
     G['pions'], G['charges'] = V['reco_h_pions_lab4'], V['reco_h_charges']
     G['counts'], G['neutral'] = V['reco_h_counts'], V['reco_h_neutral_lab4']
     G['ncount'], G['modes'] = V['reco_h_neutral_counts'], V['reco_h_mode'].astype(np.int64)
@@ -256,6 +278,10 @@ def main():
     ap.add_argument('--block', type=int, default=100)
     ap.add_argument('--workers', type=int, default=24)
     ap.add_argument('--seed', type=int, default=20261017)
+    ap.add_argument('--met-model', choices=('iso', 'aniso', 'exact'), default='iso',
+                    help='iso: isotropic Gaussian (TRAIN rms); aniso: TRAIN median bias and 68%% half-widths '
+                         'along / across the visible ditau pT; exact: oracle MET = sum truth nu_T')
+    ap.add_argument('--exact-sigma', type=float, default=2.0)
     a = ap.parse_args()
     a.output.mkdir(parents=True, exist_ok=True)
     t0 = time.time()
@@ -291,6 +317,7 @@ def main():
         payload[k] = V[k][:n]
     np.savez_compressed(a.output / 'posterior.npz', **payload)
     summary = {'rows': n, 'S': a.S, 'M': a.M, 'K': a.K, 'seed': a.seed, 'met_sigma_GeV': G['met_sigma'],
+               'met_model': a.met_model, 'met_aniso': [G['met_bias_par'], G['met_sig_par'], G['met_sig_perp']],
                'closure_mean_log_response_truth_dir': clos, 'elapsed_s': time.time() - t0,
                'host': os.uname().nodename, 'workers': a.workers}
     (a.output / 'summary.json').write_text(json.dumps(summary, indent=1))
