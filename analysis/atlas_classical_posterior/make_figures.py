@@ -1,5 +1,7 @@
 """Figures of the ATLAS classical-posterior run (all numbers recomputed from the npz files).
 
+Classical rows use the corrected posterior (|M|^2_unpol per side, rho shell cap) unless labelled
+"first version".
 fig1_auc_pairs.png   weighted H/Z AUC by truth decay-mode pair: classical posterior variants vs
                      the geometry-free learner (P4 baseline, CLEO 3pi teacher), the main-line
                      learner (gen3pi full22 ensemble) and the reco-visible + truth-nu reference
@@ -42,7 +44,7 @@ def main():
     ids, y, w = M['global_indices'], M['labels'].astype(int), M['weights'].astype(float)
     sel = pair_masks(M['modes'])
     load = lambda tag: np.load(R / tag / 'posterior.npz')
-    E, X = load('exactmet'), load('xprior_aniso')
+    C, E = load('unpol'), load('unpol_exactmet')   # corrected: |M|^2_unpol weight + rho shell cap
     t = np.load(GEN / 'targets' / 'validation.npz')
     v = t['h_valid'].astype(bool)
     assert np.array_equal(t['global_indices'][v], ids)
@@ -60,10 +62,10 @@ def main():
 
     # fig1
     rows = [
-        ('classical: MET only', auc(M['met_lr']), ORANGE, 'o', 'none'),
-        ('classical: IP+SV+mass', auc(M['ip3_sv_mass_lr']), ORANGE, 'o', ORANGE),
+        ('classical: MET only', auc(C['met_lr']), ORANGE, 'o', 'none'),
+        ('classical: IP+SV+mass, first version (no |M|^2)', auc(M['ip3_sv_mass_lr']), ORANGE, 's', 'none'),
+        ('classical: IP+SV+mass', auc(C['ip3_sv_mass_lr']), ORANGE, 'o', ORANGE),
         ('classical: IP+SV+mass, exact MET (oracle)', auc(E['ip3_sv_mass_lr']), ORANGE, 'D', 'none'),
-        ('classical: IP+SV+mass, x prior, aniso MET', auc(X['ip3_sv_mass_lr']), ORANGE, 's', ORANGE),
         ('learner: no geometry (P4 baseline, CLEO 3pi)', auc(lp4b), BLUE, 'o', 'none'),
         ('learner: main line (gen3pi full22 ens)', auc(lfull), BLUE, 'o', BLUE),
         ('reco visible + truth nu (exact formula)', auc(M['truthnu_lr']), GRAY, '|', GRAY),
@@ -98,10 +100,10 @@ def main():
     assert np.array_equal(d4['global_indices'], ids)
     hp4 = d4['h_pred'].astype(float)
     hfull = np.load(GEN / 'p11' / 'full22_s42' / 'validation_predictions.npz')['h_pred'].astype(float)
-    est = [('classical: MET only', M['met_Eh'], ORANGE, 'o', 'none'),
-           ('classical: IP+SV+mass', M['ip3_sv_mass_Eh'], ORANGE, 'o', ORANGE),
+    est = [('classical: MET only', C['met_Eh'], ORANGE, 'o', 'none'),
+           ('classical: IP+SV+mass, first version (no |M|^2)', M['ip3_sv_mass_Eh'], ORANGE, 's', 'none'),
+           ('classical: IP+SV+mass', C['ip3_sv_mass_Eh'], ORANGE, 'o', ORANGE),
            ('classical: IP+SV+mass, exact MET', E['ip3_sv_mass_Eh'], ORANGE, 'D', 'none'),
-           ('classical: IP+SV+mass, x prior, aniso MET', X['ip3_sv_mass_Eh'], ORANGE, 's', ORANGE),
            ('learner: no geometry (P4 baseline)', hp4, BLUE, 'o', 'none'),
            ('learner: main line (full22 s42)', hfull, BLUE, 'o', BLUE)]
     fig, axes = plt.subplots(1, 3, figsize=(10.5, 4.6), sharey=True)
@@ -124,7 +126,7 @@ def main():
     plt.close(fig)
 
     # fig3
-    g_cl = np.array(auc(M['ip3_sv_lr'])) - np.array(auc(M['met_lr']))
+    g_cl = np.array(auc(C['ip3_sv_lr'])) - np.array(auc(C['met_lr']))
     g_p4 = np.array(auc(lp4i)) - np.array(auc(lp4b))
     g_gen = np.array(auc(lfull)) - np.array(auc(lbase))
     fig, ax = plt.subplots(figsize=(7.4, 4.0))
