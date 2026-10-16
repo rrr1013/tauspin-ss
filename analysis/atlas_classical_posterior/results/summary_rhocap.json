@@ -1,0 +1,25 @@
+{
+ "rows": 59390,
+ "S": 16384,
+ "M": 128,
+ "K": 512,
+ "seed": 20261017,
+ "met_sigma_GeV": 27.3067400361615,
+ "met_model": "iso",
+ "x_prior": "uniform",
+ "rho_shell_cap_GeV": 1.1108060843704062,
+ "met_aniso": [
+  -3.872962312066202,
+  29.019745115425877,
+  18.167680100187848
+ ],
+ "closure_mean_log_response_truth_dir": {
+  "ip3_side0": 1.2701900781144477,
+  "sv_side0": 1.5739245388567666,
+  "ip3_side1": 1.2383442836323377,
+  "sv_side1": 1.5117188569595572
+ },
+ "elapsed_s": 333.75523853302,
+ "host": "lxgpu02.icepp.jp",
+ "workers": 22
+}

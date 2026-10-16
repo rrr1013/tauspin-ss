@@ -129,7 +129,7 @@ def main():
     g_cl = np.array(auc(C['ip3_sv_lr'])) - np.array(auc(C['met_lr']))
     g_p4 = np.array(auc(lp4i)) - np.array(auc(lp4b))
     g_gen = np.array(auc(lfull)) - np.array(auc(lbase))
-    fig, ax = plt.subplots(figsize=(7.4, 4.0))
+    fig, ax = plt.subplots(figsize=(7.4, 4.6))
     xx = np.arange(len(PAIRS))
     for off, g, c, mk, fc, lab in ((-0.15, g_cl, ORANGE, 'o', ORANGE, 'classical: MET only -> +IP3+SV'),
                                    (0.0, g_p4, BLUE, 'o', 'none', 'learner P4: no geometry -> +lead-track PV IP'),
@@ -140,7 +140,7 @@ def main():
     ax.set_xticks(xx)
     ax.set_xticklabels(PAIRS, fontsize=8.5)
     ax.set_ylabel('AUC gain from IP/SV')
-    ax.legend(fontsize=7.5)
+    ax.legend(fontsize=7.5, loc='upper center', bbox_to_anchor=(0.5, -0.1), ncol=2, frameon=False)
     ax.grid(axis='y', color='#eeeeec')
     fig.tight_layout()
     fig.savefig(a.output / 'fig3_geometry_gain.png', dpi=160)

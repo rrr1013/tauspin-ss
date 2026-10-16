@@ -1,0 +1,30 @@
+{
+ "both_available_fraction": 0.9495874726384913,
+ "auc_all:classical ip3_sv": 0.5773438571533553,
+ "auc_both_available:classical ip3_sv": 0.5798785135992017,
+ "auc_all:classical ip3_sv_mass": 0.5813981430835113,
+ "auc_both_available:classical ip3_sv_mass": 0.5840540544090659,
+ "auc_all:learner ens_full22": 0.6286941432877282,
+ "auc_both_available:learner ens_full22": 0.6285795827146551,
+ "rel |E_vis - E_PFO| pi median,q95": [
+  0.0,
+  0.19050420646169144
+ ],
+ "rel |E_vis - E_PFO| rho median,q95": [
+  0.0,
+  0.0
+ ],
+ "rel |E_vis - E_PFO| 3pi median,q95": [
+  0.0,
+  0.09818584101436283
+ ]
+}
+exactmet pair ess median 356.95586844319723 q05 36.18161470123962 no-valid 0.05266879946118875
+rho k corr: classical exactMET met 0.5954223243656478 truthnu 0.7224991750656248 P4 0.72789365
+m_vis 0-0.6 frac 0.219  k: cl-exactMET 0.64 truthnu 0.67 P4 0.73
+m_vis 0.6-0.9 frac 0.434  k: cl-exactMET 0.72 truthnu 0.86 P4 0.76
+m_vis 0.9-1.2 frac 0.170  k: cl-exactMET 0.59 truthnu 0.80 P4 0.70
+m_vis 1.2-1.6 frac 0.070  k: cl-exactMET 0.41 truthnu 0.58 P4 0.61
+m_vis 1.6-9 frac 0.104  k: cl-exactMET 0.41 truthnu 0.45 P4 0.68
+corr(exact h_k, x_true) rho 0.39067151293309743 pi 0.9983026116218984
+corr(P4 h_k, x_true) rho 0.4738394799306109  classical exactMET 0.4045710372209609
