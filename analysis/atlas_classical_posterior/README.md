@@ -13,8 +13,12 @@ Responses (IP azimuth, SV angle, MET, x prior) are fitted on TRAIN.
 | `make_figures.py` | three figures in `results/` |
 | `rhosplit.py`, `yres.py`, `rhok.py` | rho diagnostics (mode migration split, energy-asymmetry resolution, h_k vs reco visible mass) |
 
-Result: the classical posterior reaches AUC 0.577 (IP+SV) / 0.581 (+parent mass) vs 0.629 for the
-main-line learner; exact MET, an anisotropic MET model and an empirical x prior do not change this.
-The gap sits in rho: on reco rho sides with an unphysical reco visible mass (>1.2 GeV, 17% of
-correct-rho sides) the exact-formula polarimeter loses its longitudinal component, while the learner
-does not.  For pi the classical estimator matches the learner given the same geometry.
+Result (corrected version: |M|^2_unpol per side draw for rho/3pi, rho shell mass capped at the TRAIN
+95% quantile 1.11 GeV): the classical posterior reaches AUC 0.581 (IP+SV) / 0.590 (+parent mass) vs
+0.629 for the main-line learner (first version without |M|^2: 0.577 / 0.581).  Exact MET (oracle)
+gives 0.595, an anisotropic MET model and an empirical x prior do not change the picture, and a
+cross-fit combination adds +0.0006 to the learner.  The gap sits in pairs with rho (rho x rho -0.047):
+there the exact formula evaluated on reco visible rho with the truth neutrinos already caps at 0.606
+(learner 0.621), and the classical neutrino posterior loses most of the rest.  With exact MET the
+classical matches the learner in 3pi x 3pi and uses the SV more strongly (+0.03 vs +0.009).
+`review_checks.py` and `results/review_checks_and_rho_unpol.txt`: review follow-up checks.
