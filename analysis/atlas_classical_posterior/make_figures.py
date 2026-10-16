@@ -68,7 +68,7 @@ def main():
         ('learner: main line (gen3pi full22 ens)', auc(lfull), BLUE, 'o', BLUE),
         ('reco visible + truth nu (exact formula)', auc(M['truthnu_lr']), GRAY, '|', GRAY),
     ]
-    fig, ax = plt.subplots(figsize=(8.6, 5.4))
+    fig, ax = plt.subplots(figsize=(8.6, 6.4))
     n = len(rows)
     for k, (lab, vals, c, mk, fc) in enumerate(rows):
         yy = np.arange(len(PAIRS)) + (k - (n - 1) / 2) * 0.1
@@ -82,7 +82,7 @@ def main():
     ax.set_xlabel('weighted H/Z AUC (validation, parent-overlap weights)')
     ax.set_title('ATLAS full reco: classical posterior polarimeter vs learned point h', fontsize=11)
     ax.grid(axis='x', color='#eeeeec')
-    ax.legend(fontsize=7.5, loc='lower right', frameon=True)
+    ax.legend(fontsize=7.5, loc='upper center', bbox_to_anchor=(0.5, -0.11), ncol=2, frameon=False)
     ax.set_xlim(0.54, 0.73)
     fig.tight_layout()
     fig.savefig(a.output / 'fig1_auc_pairs.png', dpi=160)
@@ -102,7 +102,7 @@ def main():
            ('classical: IP+SV+mass, x prior, aniso MET', X['ip3_sv_mass_Eh'], ORANGE, 's', ORANGE),
            ('learner: no geometry (P4 baseline)', hp4, BLUE, 'o', 'none'),
            ('learner: main line (full22 s42)', hfull, BLUE, 'o', BLUE)]
-    fig, axes = plt.subplots(1, 3, figsize=(10.5, 3.8), sharey=True)
+    fig, axes = plt.subplots(1, 3, figsize=(10.5, 4.6), sharey=True)
     for ax, (cname, cm) in zip(axes, cats):
         for k, (lab, h, c, mk, fc) in enumerate(est):
             m = cm & av & np.isfinite(h).all(-1)
@@ -115,9 +115,9 @@ def main():
         ax.grid(axis='y', color='#eeeeec')
         ax.set_ylim(-0.05, 1.0)
     axes[0].set_ylabel('weighted corr(estimate, exact h)')
-    axes[0].legend(fontsize=6.8, loc='lower left')
+    fig.legend(*axes[0].get_legend_handles_labels(), fontsize=7.5, loc='lower center', ncol=3, frameon=False)
     fig.suptitle('Per-side h quality on correctly reconstructed sides (P4 learner: CLEO 3pi teacher)', fontsize=10)
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0.12, 1, 1))
     fig.savefig(a.output / 'fig2_side_quality.png', dpi=160)
     plt.close(fig)
 
