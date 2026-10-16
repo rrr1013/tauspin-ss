@@ -94,7 +94,9 @@ def main():
     W = np.broadcast_to(w[:, None], rm.shape)
     cats = [('pi (truth pi)', (rm == 0) & (tm == 0)), ('rho 1p1n (truth rho)', (rm == 1) & (tm == 1) & (raw == 1)),
             ('3pi (truth 3pi)', (rm == 3) & (tm == 3))]
-    hp4 = np.load(P4 / 'p4' / 'baseline' / 'validation_predictions.npz')['h_pred'].astype(float)
+    d4 = np.load(P4 / 'p4' / 'baseline' / 'validation_predictions.npz')
+    assert np.array_equal(d4['global_indices'], ids)
+    hp4 = d4['h_pred'].astype(float)
     hfull = np.load(GEN / 'p11' / 'full22_s42' / 'validation_predictions.npz')['h_pred'].astype(float)
     est = [('classical: MET only', M['met_Eh'], ORANGE, 'o', 'none'),
            ('classical: IP+SV+mass', M['ip3_sv_mass_Eh'], ORANGE, 'o', ORANGE),

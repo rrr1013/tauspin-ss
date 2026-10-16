@@ -98,11 +98,12 @@ def xprior_logw(x, xmin, evis, mode):
     return tab[c[:, None], e[:, None], i] + np.log(1 - xmin)[:, None]
 
 
-def sample_side(vis, S, rng):
+def sample_side(vis, S, rng, cap=None):
     """vis (R,4) -> tau direction (R,S,3), nu (R,S,3), ok (R,S), x (R,S), xmin (R,)."""
     p = vis[:, :3]
     pm = np.linalg.norm(p, axis=-1)
-    mv2 = np.clip(vis[:, 3] ** 2 - pm ** 2, 0.0, M_VIS_CAP ** 2)
+    cap = np.full(len(p), M_VIS_CAP) if cap is None else cap
+    mv2 = np.clip(vis[:, 3] ** 2 - pm ** 2, 0.0, cap ** 2)
     ev = np.sqrt(pm ** 2 + mv2)                     # energy consistent with the capped mass
     xmin = np.minimum(mv2 / M_TAU ** 2, 0.999)
     x = np.maximum(xmin[:, None] + (1 - xmin[:, None]) * rng.random((len(p), S)), 1e-4)
@@ -155,7 +156,7 @@ def run_block(args):
     rows = np.arange(start, stop)
     R = len(rows)
     vis = G['vis'][rows]
-    draws = [sample_side(vis[:, s], S, rng) for s in (0, 1)]
+    draws = [sample_side(vis[:, s], S, rng, G['shell_cap'][rows, s]) for s in (0, 1)]
     logs = {}
     for s in (0, 1):
         tdir, nu, ok, x, xmin = draws[s]
@@ -295,6 +296,16 @@ def init_globals(a):
     G['counts'], G['neutral'] = V['reco_h_counts'], V['reco_h_neutral_lab4']
     G['ncount'], G['modes'] = V['reco_h_neutral_counts'], V['reco_h_mode'].astype(np.int64)
     G['avail_side'] = V['reco_h_available_side']
+    G['shell_cap'] = np.full(V['reco_h_mode'].shape, M_VIS_CAP)
+    G['rho_cap'] = None
+    if a.rho_shell_cap:
+        # reco rho sides: shell mass capped at the TRAIN 95% quantile of the truth visible mass of truth-rho sides,
+        # so that an over-measured reco m_vis does not push x_min above the true x
+        with np.load(LADDER / 'train.npz') as d:
+            tv, tm = d['truth_visible_tau_lab4'], d['modes']
+        mt = np.sqrt(np.maximum(tv[..., 3] ** 2 - np.sum(tv[..., :3] ** 2, -1), 0))[tm == 1]
+        G['rho_cap'] = float(np.quantile(mt, 0.95))
+        G['shell_cap'] = np.where(V['reco_h_mode'] == 1, G['rho_cap'], M_VIS_CAP)
     G['xp_mode'] = np.where(V['reco_h_available_side'], V['reco_h_mode'], -1).astype(int)
     G['truth_nu'] = V['truth_neutrino_lab4'][..., :3]
     truth_dir = unit(V['truth_visible_tau_lab4'][..., :3] + V['truth_neutrino_lab4'][..., :3])
@@ -320,6 +331,8 @@ def main():
                     help='iso: isotropic Gaussian (TRAIN rms); aniso: TRAIN median bias and 68%% half-widths '
                          'along / across the visible ditau pT; exact: oracle MET = sum truth nu_T')
     ap.add_argument('--exact-sigma', type=float, default=2.0)
+    ap.add_argument('--rho-shell-cap', action='store_true',
+                    help='reco rho sides: shell mass capped at the TRAIN 95%% quantile of truth rho visible mass')
     ap.add_argument('--x-prior', choices=('uniform', 'empirical'), default='uniform',
                     help='empirical: TRAIN p(E_vis/E_tau | reco E_vis decile, reco mode) instead of uniform x')
     a = ap.parse_args()
@@ -357,7 +370,7 @@ def main():
         payload[k] = V[k][:n]
     np.savez_compressed(a.output / 'posterior.npz', **payload)
     summary = {'rows': n, 'S': a.S, 'M': a.M, 'K': a.K, 'seed': a.seed, 'met_sigma_GeV': G['met_sigma'],
-               'met_model': a.met_model, 'x_prior': a.x_prior, 'met_aniso': [G['met_bias_par'], G['met_sig_par'], G['met_sig_perp']],
+               'met_model': a.met_model, 'x_prior': a.x_prior, 'rho_shell_cap_GeV': G['rho_cap'], 'met_aniso': [G['met_bias_par'], G['met_sig_par'], G['met_sig_perp']],
                'closure_mean_log_response_truth_dir': clos, 'elapsed_s': time.time() - t0,
                'host': os.uname().nodename, 'workers': a.workers}
     (a.output / 'summary.json').write_text(json.dumps(summary, indent=1))
