@@ -19,6 +19,8 @@ polarimeter of the reconstructed visible system is evaluated with the generator
           the oracle 'exact' (MET = sum of truth nu_T, narrow Gaussian)
   x prior optional (--x-prior empirical): TRAIN histogram of E_vis(reco)/E_tau(truth) per
           reco mode and reco E_vis decile, as an importance weight on the uniform proposal
+  |M|^2   optional (--unpol-weight): retained pairs reweighted by the spin-summed decay rate of each
+          side (rho, 3pi); without it the posterior is phase-space only, exact for pi only
   mass    optional m_tautau ~ N(91.1876, 3 GeV), common to H and Z (as p12)
 
 Sampling per measure: S prior draws per side, M per side kept by systematic
@@ -57,6 +59,7 @@ MEASURES = ('met', 'ip3', 'sv', 'ip3_sv', 'ip3_sv_mass', 'ip3_shuffle')
 
 sys.path.insert(0, str(P12_DIR))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'gen3pi_teacher'))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'mode_pair_auc_origin'))
 import p12_geometry_nullspace as P12  # noqa: E402
 import nullspace as ns  # noqa: E402
 
@@ -150,6 +153,58 @@ def polar(rows, nu_pair, avail):
     return out['h'], out['valid']
 
 
+def lboost(v, P):
+    """Four-vectors v (...,4) (px,py,pz,E) into the rest frame of P (...,4)."""
+    b = P[..., :3] / P[..., 3:4]
+    b2 = np.maximum(np.sum(b * b, -1, keepdims=True), 1e-300)
+    g = 1.0 / np.sqrt(np.maximum(1.0 - b2, 1e-300))
+    bp = np.sum(b * v[..., :3], -1, keepdims=True)
+    e = g * (v[..., 3:4] - bp)
+    return np.concatenate([v[..., :3] + ((g - 1.0) * bp / b2 - g * v[..., 3:4]) * b, e], -1)
+
+
+def unpol_rate(rows, nu_pair):
+    """Spin-summed decay rate |M|^2 of each side for each hypothesis (R,K,2); 1 for pi.
+
+    Given the observed visible configuration, the spin-flat posterior over tau hypotheses is
+    (x, azimuth uniform) x |M|^2_unpol; the pion configuration inside the visible system is fixed
+    by the measurement.  rho: 2(q.N)q0 - q^2 N0 in the tau rest frame (q = pi - pi0);
+    3pi: the trace r0 of the generator (TauDecay UFO) current, as in mode_pair_auc_origin/polarimeter.
+    Factors depending only on the visible invariant masses are common to all hypotheses and dropped.
+    """
+    from polarimeter import current_taudecay, slash, V_MINUS_A, G0
+    md4 = lambda a, b: a[..., 3] * b[..., 3] - np.sum(a[..., :3] * b[..., :3], -1)
+    R, K = nu_pair.shape[:2]
+    out = np.ones((R, K, 2))
+    for s in (0, 1):
+        pions, cnt, neu = G['pions'][rows, s], G['counts'][rows, s], G['neutral'][rows, s]
+        mode, q = G['modes'][rows, s], G['charges'][rows, s]
+        act = np.arange(3)[None, :] < cnt[:, None]
+        vis = np.where(act[..., None], pions, 0.0).sum(1) + neu
+        nu4 = np.concatenate([nu_pair[:, :, s], np.linalg.norm(nu_pair[:, :, s], axis=-1)[..., None]], -1)
+        tau = vis[:, None] + nu4
+        N = lboost(nu4, tau)
+        rho = mode == 1
+        if rho.any():
+            qv = lboost(pions[rho, None, 0], tau[rho]) - lboost(neu[rho, None], tau[rho])
+            out[rho, :, s] = 2 * md4(qv, N[rho]) * qv[..., 3] - md4(qv, qv) * N[rho, :, 3]
+        tri = mode == 3
+        if tri.any():
+            ch = -1 if s == 0 else 1
+            order = np.argsort(q[tri] != ch, axis=-1, kind='stable')
+            pp = np.take_along_axis(pions[tri], order[..., None], axis=1)            # (r,3,4)
+            rest = lboost(pp[:, None], tau[tri][:, :, None])                         # (r,K,3,4)
+            sgn = 1.0 if ch < 0 else -1.0
+            e = np.concatenate([rest[..., 3:4], sgn * rest[..., :3]], -1)
+            n4 = np.concatenate([N[tri][..., 3:4], sgn * N[tri][..., :3]], -1).astype(complex)
+            J = current_taudecay(e[..., 0, :], e[..., 1, :], e[..., 2, :])
+            A = np.einsum('...ab,bc->...ac', slash(J), V_MINUS_A)
+            Abar = np.einsum('ab,...cb,cd->...ad', G0, np.conj(A), G0)
+            Km = Abar @ slash(n4) @ A
+            out[tri, :, s] = np.real(np.einsum('...ii->...', Km))
+    return out
+
+
 def run_block(args):
     start, stop, S, M, K, seed = args
     rng = np.random.default_rng(seed + start)
@@ -204,18 +259,27 @@ def run_block(args):
                             np.take_along_axis(nu1, b[..., None], 1)], axis=2)  # (R,K,2,3)
         h, valid = polar(rows, nu_pair, avail)
         valid &= good_row[:, None]
+        wt = valid.astype(float)
+        if G['unpol']:
+            om = unpol_rate(rows, nu_pair).prod(-1)
+            ok_om = np.isfinite(om) & (om > 0)
+            valid &= ok_om
+            wt = np.where(valid, om, 0.0)
+            wt = wt / np.maximum(wt.max(1, keepdims=True), 1e-300)
         hh = h[:, :, 0, :, None] * h[:, :, 1, None, :]                   # (R,K,3,3)
         diag = np.einsum('rkii->rki', hh)
         wH = 1 + diag @ CH
         wZ = 1 + diag @ CZ
         n = valid.sum(1)
-        mean = lambda x: np.where(n > 0, np.nansum(np.where(valid, x, 0.0), 1) / np.maximum(n, 1), np.nan)
+        sw = wt.sum(1)
+        mean = lambda x: np.where(sw > 0, np.sum(np.where(valid, x * wt, 0.0), 1) / np.maximum(sw, 1e-300), np.nan)
         eH, eZ = mean(wH), mean(wZ)
         vm = valid[..., None, None]
-        Eh = np.where(vm, h, 0.0).sum(1) / np.maximum(n, 1)[:, None, None]
-        Ehh = np.where(vm, hh, 0.0).sum(1) / np.maximum(n, 1)[:, None, None]
-        res[m] = {'lr': np.where(n > 0, np.log(eH) - np.log(eZ), 0.0), 'Eh': Eh, 'Ehh': Ehh,
-                  'nvalid': n, 'ess0': ess_side[0], 'ess1': ess_side[1], 'ess_pair': ess_pair}
+        Eh = np.where(vm, h * wt[..., None, None], 0.0).sum(1) / np.maximum(sw, 1e-300)[:, None, None]
+        Ehh = np.where(vm, hh * wt[..., None, None], 0.0).sum(1) / np.maximum(sw, 1e-300)[:, None, None]
+        ess_w = sw ** 2 / np.maximum((wt ** 2).sum(1), 1e-300)
+        res[m] = {'lr': np.where(sw > 0, np.log(eH) - np.log(eZ), 0.0), 'Eh': Eh, 'Ehh': Ehh,
+                  'nvalid': n, 'ess0': ess_side[0], 'ess1': ess_side[1], 'ess_pair': ess_pair, 'ess_unpol': ess_w}
     # truth-neutrino polarimeter of the reco visible system (reference row)
     h_t, v_t = polar(rows, G['truth_nu'][rows][:, None], avail)
     hh = h_t[:, 0, 0] * h_t[:, 0, 1]
@@ -296,6 +360,7 @@ def init_globals(a):
     G['counts'], G['neutral'] = V['reco_h_counts'], V['reco_h_neutral_lab4']
     G['ncount'], G['modes'] = V['reco_h_neutral_counts'], V['reco_h_mode'].astype(np.int64)
     G['avail_side'] = V['reco_h_available_side']
+    G['unpol'] = a.unpol_weight
     G['shell_cap'] = np.full(V['reco_h_mode'].shape, M_VIS_CAP)
     G['rho_cap'] = None
     if a.rho_shell_cap:
@@ -331,6 +396,8 @@ def main():
                     help='iso: isotropic Gaussian (TRAIN rms); aniso: TRAIN median bias and 68%% half-widths '
                          'along / across the visible ditau pT; exact: oracle MET = sum truth nu_T')
     ap.add_argument('--exact-sigma', type=float, default=2.0)
+    ap.add_argument('--unpol-weight', action='store_true',
+                    help='weight retained pairs by the spin-summed decay rate |M|^2 of each side (rho, 3pi)')
     ap.add_argument('--rho-shell-cap', action='store_true',
                     help='reco rho sides: shell mass capped at the TRAIN 95%% quantile of truth rho visible mass')
     ap.add_argument('--x-prior', choices=('uniform', 'empirical'), default='uniform',
@@ -361,7 +428,7 @@ def main():
     starts = sorted(out)
     payload = {}
     for m in MEASURES:
-        for f in ('lr', 'Eh', 'Ehh', 'nvalid', 'ess0', 'ess1', 'ess_pair'):
+        for f in ('lr', 'Eh', 'Ehh', 'nvalid', 'ess0', 'ess1', 'ess_pair', 'ess_unpol'):
             payload[f'{m}_{f}'] = np.concatenate([out[s][m][f] for s in starts])
     payload['truthnu_lr'] = np.concatenate([out[s]['truthnu']['lr'] for s in starts])
     payload['truthnu_h'] = np.concatenate([out[s]['truthnu']['h'] for s in starts])
@@ -370,7 +437,7 @@ def main():
         payload[k] = V[k][:n]
     np.savez_compressed(a.output / 'posterior.npz', **payload)
     summary = {'rows': n, 'S': a.S, 'M': a.M, 'K': a.K, 'seed': a.seed, 'met_sigma_GeV': G['met_sigma'],
-               'met_model': a.met_model, 'x_prior': a.x_prior, 'rho_shell_cap_GeV': G['rho_cap'], 'met_aniso': [G['met_bias_par'], G['met_sig_par'], G['met_sig_perp']],
+               'met_model': a.met_model, 'x_prior': a.x_prior, 'rho_shell_cap_GeV': G['rho_cap'], 'unpol_weight': a.unpol_weight, 'met_aniso': [G['met_bias_par'], G['met_sig_par'], G['met_sig_perp']],
                'closure_mean_log_response_truth_dir': clos, 'elapsed_s': time.time() - t0,
                'host': os.uname().nodename, 'workers': a.workers}
     (a.output / 'summary.json').write_text(json.dumps(summary, indent=1))
