@@ -130,6 +130,12 @@ def main():
         n[sel] = new
         variants[name] = n
         res[f'{name}_converged'] = float(np.mean(gres < 1e-4))
+        if name == 'shell':   # review m2: refit only where it converged, reco pi0 elsewhere
+            nc = D['reco_h_neutral_lab4'].copy()
+            sub = nc[sel]
+            sub[gres < 1e-4] = new[gres < 1e-4]
+            nc[sel] = sub
+            variants['shell_conv'] = nc
         print(name, 'converged (|g|<1e-4 GeV^2)', res[f'{name}_converged'], flush=True)
     H = {k: s1.evaluate(pol, D, D['reco_h_pions_lab4'], n) for k, n in variants.items()}
     L = np.load(a.run_dir / 'out' / 's1' / 'ladder_validation.npz')
@@ -137,7 +143,7 @@ def main():
     Dn = np.load(a.run_dir / 'out' / 's4' / 'denoised.npz')
     hp = [np.load(GEN / 'p11' / arm / 'validation_predictions.npz')['h_pred'].astype(float) for arm in ('full22_s42', 'full22_s43')]
     rows = {'formula reco': H['reco'], 'formula shell refit': H['shell'], 'formula shell refit (dir only)': H['shell_dir'],
-            'formula truth pi0 dir': L['h_pi0dir'], 'denoised': Dn['h_validation'], 'learner full22': 0.5 * (hp[0] + hp[1])}
+            'formula shell refit (converged sides only)': H['shell_conv'], 'formula truth pi0 dir': L['h_pi0dir'], 'denoised': Dn['h_validation'], 'learner full22': 0.5 * (hp[0] + hp[1])}
     q = L['rho_side'] & np.isfinite(hx).all(-1)
     for h in rows.values():
         q &= np.isfinite(h).all(-1)
