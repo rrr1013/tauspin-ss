@@ -23,13 +23,13 @@ plt.rcParams.update({'font.size': 10, 'axes.edgecolor': MUTED, 'axes.labelcolor'
 
 
 def fig1(R, out):
-    s2, s4, s7 = (json.loads((R / f).read_text()) for f in ('s2_readouts.json', 's4_eval.json', 's7_shell_refit.json'))
+    s2, s4, s7 = (json.loads((R / f).read_text()) for f in ('s2_readouts.json', 's4_eval.json', 's7_shell_refit_v2.json'))
     a2, a4, a7 = s2['auc'], s4['auc'], s7['auc']
     rows = [  # label, source dict, key, group (0 reco+truth nu ladder, 1 refit/denoised, 2 learner, 3 exact)
         ('exact h (truth visible + truth ν)', a2, 'exact formula', 3),
         ('reco ρ + truth ν: truth π⁰ (direction + energy)', a2, 'ladder pi0 formula', 0),
-        ('reco ρ + truth ν: denoised E[h | reco ρ, ν] (MLP, train)', a4, 'denoised formula', 1),
-        ('reco ρ + truth ν: τ-mass-shell π⁰ refit', a7, 'formula shell refit', 1),
+        ('reco ρ + truth ν: denoised E[h | reco ρ, ν, mode, nPFO] (MLP, train)', a4, 'denoised formula', 1),
+        ('reco ρ + truth ν: τ-mass-shell π⁰ refit (converged sides)', a7, 'formula shell refit (converged sides only)', 1),
         ('reco ρ + truth ν: truth π⁰ direction', a2, 'ladder pi0dir formula', 0),
         ('reco ρ + truth ν: shell refit, direction only', a7, 'formula shell refit (dir only)', 1),
         ('learner (gen3pi full22, 2 seeds, own readout)', a2, 'learner ens_full22 readout', 2),
