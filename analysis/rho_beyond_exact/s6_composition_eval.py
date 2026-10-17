@@ -15,12 +15,19 @@ Per arm, on validation (test never loaded):
   dphi      static first harmonic of 10/01: m = mean exp(i(phi- - phi+)), phi = atan2(h_r, h_n), unit weight,
             truth rho x rho; amplitude 2|m| and its real part, for H and Z
   quality   weighted correlation of each component with the exact h on rho sides (truth rho, reco rho)
+  auc       weighted H/Z AUC of the exact-LR formula applied to the arm's h, by truth pair (no trained readout: the
+            single-class arms have no two-class TRAIN predictions to train one on)
 """
 import argparse
 import json
 from pathlib import Path
 
+import sys
+
 import numpy as np
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from s2_readouts import formula, pair_masks, wauc  # noqa: E402
 
 LADDER = Path('/home/rbaba/tauspin-full-reco-information-ladder-20260917-inputs-v1')
 GEN = Path('/home/rbaba/gen3pi-teacher-20260924/artifacts')
@@ -55,7 +62,7 @@ def main():
         assert np.array_equal(d['global_indices'], ids)
         return d['h_pred'].astype(float)
     arms = {'exact': hx, 'mix': load(GEN / 'p11' / 'base_s43' / 'validation_predictions.npz')}
-    for name in ('mixhalf', 'Honly', 'Zonly'):
+    for name in ('mixhalf', 'Honly', 'Zonly', 'flatw'):
         p = a.run_dir / 'out' / 'p11' / name / 'validation_predictions.npz'
         if p.exists():
             arms[name] = load(p)
@@ -97,6 +104,8 @@ def main():
         q = (rmode == 1) & (modes == 1) & avail & okx
         Wq = np.broadcast_to(w[:, None], q.shape)[q]
         r['quality'] = {c: wcorr(h[..., i][q], hx[..., i][q], Wq) for i, c in enumerate('nrk')}
+        lr = formula(h)
+        r['auc'] = {k: wauc(lr[m], y[m], w[m]) for k, m in pair_masks(modes).items()}
         res[name] = r
     a.output.write_text(json.dumps(res, indent=1))
     for name, r in res.items():
@@ -106,6 +115,7 @@ def main():
                 f"{ln}{c}:{r['cross'][sname][ln][c][1]:+.3f}[{r['cross'][sname][ln][c][2]:+.3f},{r['cross'][sname][ln][c][3]:+.3f}]"
                 for ln in ('H', 'Z') for c in 'nrk'))
         print('   plugin 9<hh> ' + '  '.join(f"{k}:" + ','.join(f'{v:+.3f}' for v in vals) for k, vals in r['plugin'].items()))
+        print('   auc formula ' + '  '.join(f"{k}:{v:.4f}" for k, v in r['auc'].items()))
         print('   dphi rho x rho  ' + '  '.join(f"{ln}: A={v[0]:.3f} Re={v[1]:+.3f} n={v[2]}" for ln, v in r['dphi'].items()))
 
 
