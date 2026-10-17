@@ -15,6 +15,9 @@ Per arm, on validation (test never loaded):
   dphi      static first harmonic of 10/01: m = mean exp(i(phi- - phi+)), phi = atan2(h_r, h_n), unit weight,
             truth rho x rho; amplitude 2|m| and its real part, for H and Z
   quality   weighted correlation of each component with the exact h on rho sides (truth rho, reco rho)
+  decomp    (review M1) on truth rho x rho, per label and component: own-side fit p = a h + const pooled over both sides,
+            residual r = p - a h - const; the plug-in 9<p- p+> split into 9<(a h- + c)(a h+ + c)> (own-side exact part)
+            and the rest; 9<r- r+> is the part carried by neither side's own exact h
   auc       weighted H/Z AUC of the exact-LR formula applied to the arm's h, by truth pair (no trained readout: the
             single-class arms have no two-class TRAIN predictions to train one on)
 """
@@ -104,6 +107,21 @@ def main():
         q = (rmode == 1) & (modes == 1) & avail & okx
         Wq = np.broadcast_to(w[:, None], q.shape)[q]
         r['quality'] = {c: wcorr(h[..., i][q], hx[..., i][q], Wq) for i, c in enumerate('nrk')}
+        r['decomp'] = {}
+        for lab, ln in ((1, 'H'), (0, 'Z')):
+            m = rhorho & (y == lab) & okx.all(1) & np.isfinite(h).all((1, 2))
+            ww = w[m]
+            for j, c in enumerate('nrk'):
+                P, X = h[m][..., j], hx[m][..., j]
+                Xs = np.stack([X.reshape(-1), np.ones(X.size)], 1)
+                coef = wls(Xs, P.reshape(-1), np.repeat(ww, 2))
+                fit = coef[0] * X + coef[1]
+                res_ = P - fit
+                tot = 9 * np.average(P[:, 0] * P[:, 1], weights=ww)
+                own = 9 * np.average(fit[:, 0] * fit[:, 1], weights=ww)
+                rr = 9 * np.average(res_[:, 0] * res_[:, 1], weights=ww)
+                r['decomp'][f'{ln} {c}'] = {'a': float(coef[0]), 'total': float(tot), 'own_exact_part': float(own),
+                                            'rest': float(tot - own), 'resid_resid': float(rr)}
         lr = formula(h)
         r['auc'] = {k: wauc(lr[m], y[m], w[m]) for k, m in pair_masks(modes).items()}
         res[name] = r
@@ -115,6 +133,8 @@ def main():
                 f"{ln}{c}:{r['cross'][sname][ln][c][1]:+.3f}[{r['cross'][sname][ln][c][2]:+.3f},{r['cross'][sname][ln][c][3]:+.3f}]"
                 for ln in ('H', 'Z') for c in 'nrk'))
         print('   plugin 9<hh> ' + '  '.join(f"{k}:" + ','.join(f'{v:+.3f}' for v in vals) for k, vals in r['plugin'].items()))
+        print('   decomp rho x rho (total = own-exact part + rest; resid-resid) ' + '  '.join(
+            f"{k}:{v['total']:+.2f}={v['own_exact_part']:+.2f}{v['rest']:+.2f}(rr{v['resid_resid']:+.2f})" for k, v in r['decomp'].items()))
         print('   auc formula ' + '  '.join(f"{k}:{v:.4f}" for k, v in r['auc'].items()))
         print('   dphi rho x rho  ' + '  '.join(f"{ln}: A={v[0]:.3f} Re={v[1]:+.3f} n={v[2]}" for ln, v in r['dphi'].items()))
 
