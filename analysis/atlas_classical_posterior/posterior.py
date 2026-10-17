@@ -55,6 +55,7 @@ M_TAU = 1.77686
 M_VIS_CAP = 1.6
 PARENT_MASS = 91.1876
 CH, CZ = np.array([1.0, 1.0, -1.0]), np.array([0.0, 0.0, 1.0])
+SURFACE = Path('/home/rbaba/gen3pi-teacher-20260924/artifacts/targets/truth_surface_gen3pi.npz')
 MEASURES = ('met', 'ip3', 'sv', 'ip3_sv', 'ip3_sv_mass', 'ip3_shuffle')
 
 sys.path.insert(0, str(P12_DIR))
@@ -357,6 +358,23 @@ def init_globals(a):
     G['met_axis'] = vv / np.linalg.norm(vv, axis=1, keepdims=True)
     G['pions'], G['charges'] = V['reco_h_pions_lab4'], V['reco_h_charges']
     G['counts'], G['neutral'] = V['reco_h_counts'], V['reco_h_neutral_lab4']
+    if a.pi0 != 'reco':
+        # oracle (rho_beyond_exact run): truth-rho AND reco-rho sides get the truth pi0 ('truth') or the reco pi0 rotated
+        # onto the truth pi0 direction ('truthdir'); the visible system of those sides is rebuilt as pi + pi0
+        with np.load(SURFACE) as d:
+            assert np.array_equal(d['global_indices'], ids)
+            tp0 = d['pi0']
+        side = V['reco_h_available_side'] & (V['modes'] == 1) & (V['reco_h_mode'] == 1)
+        neu = G['neutral'].copy()
+        if a.pi0 == 'truth':
+            rep = tp0
+        else:
+            rep = np.concatenate([unit(tp0[..., :3]) * np.linalg.norm(neu[..., :3], axis=-1, keepdims=True), neu[..., 3:]], -1)
+        neu[side] = rep[side]
+        G['neutral'] = neu
+        vis = G['vis'].copy()
+        vis[side] = G['pions'][side][:, 0] + neu[side]
+        G['vis'] = vis
     G['ncount'], G['modes'] = V['reco_h_neutral_counts'], V['reco_h_mode'].astype(np.int64)
     G['avail_side'] = V['reco_h_available_side']
     G['unpol'] = a.unpol_weight
@@ -399,6 +417,8 @@ def main():
                     help='weight each side draw by its spin-summed decay rate |M|^2 (rho, 3pi)')
     ap.add_argument('--rho-shell-cap', action='store_true',
                     help='reco rho sides: shell mass capped at the TRAIN 95%% quantile of truth rho visible mass')
+    ap.add_argument('--pi0', choices=('reco', 'truth', 'truthdir'), default='reco',
+                    help='oracle: truth pi0 (or truth pi0 direction) on truth-rho reco-rho sides')
     ap.add_argument('--x-prior', choices=('uniform', 'empirical'), default='uniform',
                     help='empirical: TRAIN p(E_vis/E_tau | reco E_vis decile, reco mode) instead of uniform x')
     a = ap.parse_args()
@@ -436,7 +456,7 @@ def main():
         payload[k] = V[k][:n]
     np.savez_compressed(a.output / 'posterior.npz', **payload)
     summary = {'rows': n, 'S': a.S, 'M': a.M, 'K': a.K, 'seed': a.seed, 'met_sigma_GeV': G['met_sigma'],
-               'met_model': a.met_model, 'x_prior': a.x_prior, 'rho_shell_cap_GeV': G['rho_cap'], 'unpol_weight': a.unpol_weight, 'met_aniso': [G['met_bias_par'], G['met_sig_par'], G['met_sig_perp']],
+               'met_model': a.met_model, 'x_prior': a.x_prior, 'pi0': a.pi0, 'rho_shell_cap_GeV': G['rho_cap'], 'unpol_weight': a.unpol_weight, 'met_aniso': [G['met_bias_par'], G['met_sig_par'], G['met_sig_perp']],
                'closure_mean_log_response_truth_dir': clos, 'elapsed_s': time.time() - t0,
                'host': os.uname().nodename, 'workers': a.workers}
     (a.output / 'summary.json').write_text(json.dumps(summary, indent=1))
