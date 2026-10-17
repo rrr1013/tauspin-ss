@@ -54,3 +54,23 @@ C4. (spin-flat weighted training, `s5_train_flatw.py`) — see the results secti
 - skeptical: alternative explanations for each claim, overstatement, hidden dependence (checkpoint selection on
   validation, single seed per composition arm, same-mass sample, the canonical basis), what result would falsify it.
 Return findings ranked by severity with file/line or artifact references.  Do not edit anything.
+
+## C4 results (spin-flat weighted training, added 07:35)
+
+`s5_train_flatw.py`: full TRAIN, base16, seed 43, same recipe as the existing mixed arm base_s43 except per-event MSE weight
+w = clip(1/(1 + h⁻ᵀ C_label h⁺), 0, 10), normalised to mean 1 per batch (also in the validation-MSE checkpoint window).
+`results/s6_composition.json` (arm `flatw`):
+- cross-side b on ρ sides ≤ 0.009 in all components (mixed: +0.04–0.05 transverse);
+- plug-in decomposition (`decomp`): residual–residual part ≈ 0 (mixed: +0.20 in Z n/r);
+- Z→ρρ plug-in 9⟨h⁻h⁺⟩ (+0.01, +0.02, +0.31) vs exact (−0.02, −0.03, +0.93); H (+0.19, +0.19, −0.34) vs exact (+1.03, +1.06, −0.93);
+- static Δφ harmonic in Z 0.027 (mixed 0.51);
+- AUC: formula 0.6162 vs 0.6179 (mixed); fixed MLP readout 0.6191 vs 0.6212, Δ −0.002 [−0.003, −0.001] (paired bootstrap 300).
+Claim: spin-flat weighted training removes the training-composition prior (response becomes multiplicative, no additive
+offset) at a cost of ~0.002 AUC (single seed each).
+
+## Already changed after a first skeptical review (Claude, same provider)
+- C3 reworded: b ≈ 0.09·C_train holds for (n,r) and ρ-side k; π-side k differs; most of the plug-in shift is in the
+  residual–residual part (`decomp` in s6), not in b; test-label dependence ≲0.01.
+- C1: "learner flat" holds for h_k only; learner > reference (+0.013) carries validation-selection effects.
+- s7: converged-only refit (`results/s7_shell_refit_v2.json`) 0.660 vs 0.664 on ρ×ρ.
+- fig3 added.

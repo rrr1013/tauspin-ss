@@ -113,39 +113,40 @@ def fig3(R, out):
     if not p.exists():
         return
     s6 = json.loads(p.read_text())
-    arms = [a for a in ('exact', 'mix', 'mixhalf', 'Honly', 'Zonly', 'flatw', 'full22') if a in s6]
-    names = {'exact': 'exact h', 'mix': 'mixed train (all)', 'mixhalf': 'mixed, random half', 'Honly': 'H only',
-             'Zonly': 'Z only', 'flatw': 'mixed, spin-flat weights', 'full22': 'mixed + IP/SV (full22)'}
-    fig, axes = plt.subplots(1, 3, figsize=(13.5, 4.3))
+    arms = [a for a in ('Honly', 'mix', 'mixhalf', 'Zonly', 'flatw', 'full22') if a in s6]
+    names = {'mix': 'mixed\n(all)', 'mixhalf': 'mixed\n(½)', 'Honly': 'H only\n(½)', 'Zonly': 'Z only\n(½)',
+             'flatw': 'spin-flat\nweighted (all)', 'full22': 'main line\n(+IP/SV)'}
     x = np.arange(len(arms))
-    for ax, sname, title in ((axes[0], 'rho', 'ρ sides'), (axes[1], 'pi', 'π sides')):
-        for j, (ln, comp, col, mk) in enumerate([('H', 'n', C[0], 'o'), ('H', 'k', C[0], 's'),
-                                                 ('Z', 'n', C[1], 'o'), ('Z', 'k', C[1], 's')]):
-            v = np.array([s6[a]['cross'][sname][ln][comp] for a in arms])
-            off = (j - 1.5) * 0.12
-            ax.errorbar(x + off, v[:, 1], yerr=[v[:, 1] - v[:, 2], v[:, 3] - v[:, 1]], color=col, marker=mk,
-                        ls='none', ms=6, mec='white', capsize=0, label=f'{ln} events, component {comp}')
-        ax.axhline(0, color=MUTED, lw=0.8)
-        ax.set_xticks(x)
-        ax.set_xticklabels([names[a] for a in arms], rotation=30, ha='right', fontsize=8)
-        ax.set_ylabel('b: coefficient of the other τ’s exact h')
-        ax.set_title(f'own-side h_pred on other-side exact h ({title})', color=INK, fontsize=9.5)
-        ax.grid(axis='y', color=GRID, lw=0.8)
-    axes[0].legend(frameon=False, fontsize=8)
-    for i, (comp, mk) in enumerate((('n', 'o'), ('r', '^'), ('k', 's'))):
-        for ln, col, off in (('H', C[0], -0.1), ('Z', C[1], 0.1)):
+    fig, axes = plt.subplots(1, 3, figsize=(15, 5.2))
+    ax = axes[0]
+    for j, (ln, comp, col, mk) in enumerate([('H', 'n', C[0], 'o'), ('Z', 'n', C[1], 'o'),
+                                             ('H', 'k', C[0], 's'), ('Z', 'k', C[1], 's')]):
+        v = np.array([s6[a]['cross']['rho'][ln][comp] for a in arms])
+        off = (j - 1.5) * 0.1
+        ax.errorbar(x + off, v[:, 1], yerr=[v[:, 1] - v[:, 2], v[:, 3] - v[:, 1]], color=col, marker=mk, ls='none',
+                    ms=7, mec='white', capsize=0, label=f'{ln} test events, h_{comp}')
+    ax.axhline(0, color=MUTED, lw=0.8)
+    ax.set_ylabel('b = coefficient of the other τ’s exact h')
+    ax.set_title('ρ sides: h_pred[c] = a·h[c] + b·h_other[c] + const', color=INK, fontsize=9.5)
+    ax.legend(frameon=False, fontsize=8, loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=2)
+    for ax, ln, title in ((axes[1], 'Z', 'Z→ττ, truth ρ×ρ'), (axes[2], 'H', 'H→ττ, truth ρ×ρ')):
+        ex = s6['exact']['plugin'][f'rho x rho {ln}']
+        for i, (comp, mk, col) in enumerate((('n', 'o', C[2]), ('r', '^', C[3]), ('k', 's', C[4]))):
             v = [s6[a]['plugin'][f'rho x rho {ln}'][i] for a in arms]
-            axes[2].plot(x + off + (i - 1) * 0.04, v, marker=mk, color=col, ls='none', ms=6, mec='white',
-                         label=f'{ln}: C_{comp}{comp}' if True else None)
-    axes[2].axhline(0, color=MUTED, lw=0.8)
-    axes[2].set_xticks(x)
-    axes[2].set_xticklabels([names[a] for a in arms], rotation=30, ha='right', fontsize=8)
-    axes[2].set_ylabel('plug-in 9⟨h⁻_i h⁺_i⟩ (truth ρ × ρ)')
-    axes[2].set_title('pair correlation read off the h used', color=INK, fontsize=9.5)
-    axes[2].grid(axis='y', color=GRID, lw=0.8)
-    axes[2].legend(frameon=False, fontsize=7.5, ncol=2)
-    fig.suptitle('Training composition of the point-h network (base16, seed 43, validation)', color=INK, fontsize=10.5)
-    fig.tight_layout(rect=(0, 0, 1, 0.94))
+            ax.plot(x + (i - 1) * 0.12, v, marker=mk, color=col, ls='none', ms=8, mec='white', label=f'C_{comp}{comp} from h_pred')
+            ax.axhline(ex[i], color=col, lw=1.2, ls=(0, (4, 3)), alpha=0.9)
+        ax.axhline(0, color=MUTED, lw=0.8)
+        ax.set_ylabel('plug-in 9⟨h⁻_c h⁺_c⟩')
+        ax.set_title(f'{title}: pair correlation read off h_pred\n(dashed: same quantity with the exact h)', color=INK, fontsize=9.5)
+        ax.set_ylim(-1.05, 1.15)
+    axes[1].legend(frameon=False, fontsize=8, loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=3)
+    for ax in axes:
+        ax.set_xticks(x)
+        ax.set_xticklabels([names[a] for a in arms], fontsize=7.5)
+        ax.grid(axis='y', color=GRID, lw=0.8)
+    fig.suptitle('Training composition of the point-h network (geometry hidden, seed 43; full22 = main line, 2 seeds) — validation, parent-overlap weights',
+                 color=INK, fontsize=10)
+    fig.tight_layout(rect=(0, 0, 1, 0.93))
     fig.savefig(out / 'fig3_cross_side.png', dpi=150, bbox_inches='tight')
     plt.close(fig)
 
