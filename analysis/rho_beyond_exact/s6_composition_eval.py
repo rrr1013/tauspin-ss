@@ -51,6 +51,7 @@ def main():
     ap.add_argument('--run-dir', type=Path, required=True)
     ap.add_argument('--output', type=Path, required=True)
     ap.add_argument('--boot', type=int, default=200)
+    ap.add_argument('--suffix', default='', help="e.g. _s44: evaluate this run's seed-replication arms")
     a = ap.parse_args()
     vt = np.load(GEN / 'targets' / 'validation.npz')
     vv = vt['h_valid'].astype(bool)
@@ -64,11 +65,18 @@ def main():
         d = np.load(path)
         assert np.array_equal(d['global_indices'], ids)
         return d['h_pred'].astype(float)
-    arms = {'exact': hx, 'mix': load(GEN / 'p11' / 'base_s43' / 'validation_predictions.npz')}
-    for name in ('mixhalf', 'Honly', 'Zonly', 'flatw'):
-        p = a.run_dir / 'out' / 'p11' / name / 'validation_predictions.npz'
-        if p.exists():
-            arms[name] = load(p)
+    arms = {'exact': hx}
+    if a.suffix:   # seed replication: every arm from this run's out/p11/<name><suffix>
+        for name in ('mix', 'Honly', 'Zonly', 'flatw'):
+            p = a.run_dir / 'out' / 'p11' / f'{name}{a.suffix}' / 'validation_predictions.npz'
+            if p.exists():
+                arms[name] = load(p)
+    else:
+        arms['mix'] = load(GEN / 'p11' / 'base_s43' / 'validation_predictions.npz')
+        for name in ('mixhalf', 'Honly', 'Zonly', 'flatw'):
+            p = a.run_dir / 'out' / 'p11' / name / 'validation_predictions.npz'
+            if p.exists():
+                arms[name] = load(p)
     arms['full22'] = 0.5 * (load(GEN / 'p11' / 'full22_s42' / 'validation_predictions.npz')
                             + load(GEN / 'p11' / 'full22_s43' / 'validation_predictions.npz'))
 
