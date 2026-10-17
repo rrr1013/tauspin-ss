@@ -10,7 +10,7 @@ Target: the exact (gen3pi) h of that side, in the truth pair basis (as the learn
 The basis mismatch is part of what is learned.  CP: tau+ sides are mirrored as in canonical_h (sign of the
 3-vectors) so one network serves both sides; the side index is also an input.
 
-Model: MLP 23 -> 256 x 4 (GELU) -> 3, MSE, AdamW 1e-3 cosine, batch 1024, early stopping on a 10% TRAIN holdout
+Model: MLP 21 -> 256 x 4 (GELU) -> 3, MSE, AdamW 1e-3 cosine, batch 1024, early stopping on a 10% TRAIN holdout
 (patience 6, max 80 epochs).  TRAIN predictions are 2-fold cross-fitted (event_number parity); VALIDATION
 gets the mean of the two fold models.  Test never loaded.
 
@@ -40,7 +40,7 @@ def features(D, h_formula):
     nu4[..., 3] = np.linalg.norm(nu4[..., :3], axis=-1)
     both = D['reco_h_available_side'].all(1)
     rho = both[:, None] & (D['reco_h_mode'] == 1)
-    F = np.full((n, 2, 23), np.nan)
+    F = np.full((n, 2, 21), np.nan)
     ix = np.flatnonzero(both)
     for s0 in range(0, len(ix), 50000):
         e = ix[s0:s0 + 50000]
