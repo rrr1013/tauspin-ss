@@ -43,6 +43,28 @@
    "longitudinal -k": 0.590047179352566
   }
  },
+ "psi_invE": {
+  "pi x pi": {
+   "transverse n+r": 0.560893943619815,
+   "longitudinal -k": 0.6057406605989708
+  },
+  "pi x rho": {
+   "transverse n+r": 0.5477177238615172,
+   "longitudinal -k": 0.5980833930029872
+  },
+  "rho x rho": {
+   "transverse n+r": 0.5348815159046604,
+   "longitudinal -k": 0.5880264063778767
+  },
+  "rho x 3pi": {
+   "transverse n+r": 0.5477754856692808,
+   "longitudinal -k": 0.5849909127268804
+  },
+  "overall": {
+   "transverse n+r": 0.5458768940155618,
+   "longitudinal -k": 0.5911271034619895
+  }
+ },
  "truth_train": {
   "pi x pi": {
    "transverse n+r": 0.5569174195800112,

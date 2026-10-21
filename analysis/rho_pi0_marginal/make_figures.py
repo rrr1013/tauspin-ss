@@ -27,7 +27,7 @@ ROWS = [  # (label, score key, color, marker, filled)
     ('classical, π⁰ marginalised (primary)', 'marg_invE:ip3_sv_mass', C[1], 'o', True),
     ('classical, π⁰ marginalised, TRAIN E_τ prior', 'marg_train:ip3_sv_mass', C[3], 's', True),
     ('classical, π⁰ marginalised, separation-dependent response', 'cond_invE:ip3_sv_mass', C[4], 'v', True),
-    ('classical, π⁰ marg., + anisotropic direction response', 'psi_invE:ip3_sv_mass', C[5], 'P', True),
+    ('classical, π⁰ marg., anisotropic response', 'psi_invE:ip3_sv_mass', C[5], 'P', True),
     ('classical, truth π⁰ (oracle)', 'truth_train:ip3_sv_mass', C[2], 'D', False),
     ('learner, no IP/SV (base)', 'learner:base_s43', C[0], '^', False),
     ('learner, main line (full22, 2 seeds)', 'learner:ens_full22', C[0], '^', True),
@@ -57,7 +57,7 @@ def fig1(res, out):
 
 
 def fig2(pit_files, out):
-    fig, axs = plt.subplots(1, 3, figsize=(10, 3.3), sharey=True)
+    fig, axs = plt.subplots(1, 3, figsize=(10, 3.9), sharey=True)
     qn = {'E2': 'true π⁰ energy', 'MV': 'true visible mass m(π±π⁰)', 'ET': 'true τ energy'}
     styles = [('invE', 'met', C[1], '-', 'isotropic response: prior + MET'),
               ('invE', 'ip3_sv_mass', C[1], '--', 'isotropic response: + IP, SV, parent mass'),
@@ -75,10 +75,11 @@ def fig2(pit_files, out):
         ax.set_xlim(0, 1)
         ax.set_ylim(0.5, 1.7)
     axs[0].set_ylabel('density (calibrated = 1)')
-    axs[0].legend(fontsize=7.5, loc='upper center')
+    h_, l_ = axs[0].get_legend_handles_labels()
+    fig.legend(h_, l_, fontsize=8, loc='lower center', ncol=4, frameon=False)
     n = int((np.load(pit_files['invE'])['marg_side'] & np.load(pit_files['invE'])['truth_rho_side']).sum())
     fig.suptitle(f'PIT on TRAIN held-out rows (truth ρ & reco ρ sides, {n:,}); 10 bins', fontsize=10)
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0.08, 1, 1))
     fig.savefig(out / 'fig2_pit_train.png', dpi=150)
 
 
