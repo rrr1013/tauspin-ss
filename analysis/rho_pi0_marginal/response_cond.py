@@ -110,11 +110,10 @@ def main():
     logpl = dens1d(l[inr], L_EDGES, keys, (2, 2, NE, NS), pk, (2, NE))
     # stage 3: psi of the reco pi0 around the true pi0, axis from the (truth) track to the true pi0
     t, n, c = unit(p2[:, :3]), unit(rn[:, :3]), unit(p1[:, :3])
-    ea = (t - c) - np.sum((t - c) * t, -1, keepdims=True) * t
-    ea = unit(ea)
-    eb = np.cross(t, ea)
+    ax_a = unit((t - c) - np.sum((t - c) * t, -1, keepdims=True) * t)
+    ax_b = np.cross(t, ax_a)
     dv = n - np.sum(n * t, -1, keepdims=True) * t
-    psi = np.arctan2(np.sum(dv * eb, -1), np.sum(dv * ea, -1))
+    psi = np.arctan2(np.sum(dv * ax_b, -1), np.sum(dv * ax_a, -1))
     ip = np.clip(np.floor((psi + np.pi) / (2 * np.pi) * N_PSI).astype(int), 0, N_PSI - 1)
     lb = bins(np.clip(l, L_PSI_EDGES[0], L_PSI_EDGES[-1] - 1e-9), L_PSI_EDGES)
     cps = np.zeros((2, 2, NE, NS, len(L_PSI_EDGES) - 1, N_PSI))
