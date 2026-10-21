@@ -135,6 +135,57 @@ def draw_pi0(rows, s, S, rng):
     return p2, lw
 
 
+def draw_pi0_cond(rows, s, S, rng):
+    """As draw_pi0, with the stage-2 response (response_cond.py): likelihood conditioned on the hypothesis pi+-/pi0
+    separation and the reco PFO-mass class, proposal on the reco separation; u and l drawn independently."""
+    C = G['cond']
+    R = len(rows)
+    raw = G['raw'][rows, s] - 1
+    rn = G['neutral0'][rows, s]
+    Er = rn[:, 3]
+    nhat = CP.unit(rn[:, :3])
+    p1 = CP.unit(G['pions'][rows, s, 0, :3])
+    mc = (np.sqrt(np.maximum(Er ** 2 - np.sum(rn[:, :3] ** 2, -1), 0)) > C['m_cut']).astype(int)
+    bins = lambda x, e: np.clip(np.searchsorted(e, x) - 1, 0, len(e) - 2)
+    rb = bins(Er, C['r_edges'])
+    sb = bins(np.arccos(np.clip(np.sum(p1 * nhat, -1), -1, 1)) * Er, C['sr_edges'])
+    du = C['u_edges'][1] - C['u_edges'][0]
+    dl = C['l_edges'][1] - C['l_edges'][0]
+
+    def draw(logq):                                   # logq (R, nb) log density -> bin index (R,S)
+        c = np.cumsum(np.exp(logq), -1)
+        return np.stack([np.minimum(np.searchsorted(c[r], rng.random(S) * c[r, -1]), logq.shape[1] - 1) for r in range(R)])
+    qu, ql = C['logqu'][raw, mc, rb, sb], C['logql'][raw, mc, rb, sb]
+    iu, il = draw(qu), draw(ql)
+    logq = np.take_along_axis(qu, iu, 1) + np.take_along_axis(ql, il, 1)
+    u = C['u_edges'][0] + (iu + rng.random((R, S))) * du
+    l = C['l_edges'][0] + (il + rng.random((R, S))) * dl
+    E2 = Er[:, None] * np.exp(-u)
+    good = E2 > M_PI0 * 1.0001
+    E2 = np.where(good, E2, 1.0)
+    p2m = np.sqrt(E2 ** 2 - M_PI0 ** 2)
+    d = np.exp(l)
+    psi = rng.random((R, S)) * 2 * np.pi
+    e1, e2 = CP.perp_basis(nhat)
+    dirn = (np.cos(d)[..., None] * nhat[:, None] + np.sin(d)[..., None]
+            * (np.cos(psi)[..., None] * e1[:, None] + np.sin(psi)[..., None] * e2[:, None]))
+    p2 = np.concatenate([p2m[..., None] * dirn, E2[..., None]], -1)
+    sep = np.arccos(np.clip(np.sum(dirn * p1[:, None], -1), -1, 1)) * E2
+    def corner(lc, x):                                # bilinear interpolation in log E2 and log sep
+        xc = np.clip(x, lc[0], lc[-1])
+        j = np.clip(np.searchsorted(lc, xc) - 1, 0, len(lc) - 2)
+        return j, (xc - lc[j]) / (lc[j + 1] - lc[j])
+    je, fe = corner(C['e_logcent'], np.log(E2))
+    js, fs = corner(C['s_logcent'], np.log(np.maximum(sep, 1e-9)))
+    logL = 0.0
+    rr, mm = raw[:, None], mc[:, None]
+    for a_, wa in ((je, 1 - fe), (je + 1, fe)):
+        for b_, wb in ((js, 1 - fs), (js + 1, fs)):
+            logL = logL + wa * wb * (C['logcat'][rr, mm, a_, b_] + C['logpu'][rr, mm, a_, b_, iu] + C['logpl'][rr, mm, a_, b_, il])
+    lw = np.where(good, logL - logq + np.log(p2m) + np.log(E2), -np.inf)
+    return p2, lw
+
+
 def side_draws(rows, s, S, rng):
     """All rows of one side -> dict of per-draw arrays (R,S,...) and the base log weight (R,S)."""
     R = len(rows)
@@ -156,7 +207,7 @@ def side_draws(rows, s, S, rng):
     mr = np.flatnonzero(G['marg'][rows, s])
     if len(mr):
         p1 = G['pions'][rows[mr], s, 0][:, None]                       # (Rm,1,4)
-        p2, lw2 = draw_pi0(rows[mr], s, S, rng)
+        p2, lw2 = (draw_pi0_cond if G['cond'] is not None else draw_pi0)(rows[mr], s, S, rng)
         V = p1 + p2
         pv = np.linalg.norm(V[..., :3], axis=-1)
         mv2m = np.maximum(V[..., 3] ** 2 - pv ** 2, 0.0)
@@ -251,6 +302,7 @@ def init(a):
     for k in ('u_edges', 'l_edges', 'e_logcent', 'logL', 'r_edges', 'pq', 'etau_logcent', 'etau_logrho'):
         G[k] = Rz[k]
     G['e_prior'] = a.e_prior
+    G['cond'] = dict(np.load(a.response_cond)) if a.response_cond else None
     G['raw'] = V['reco_mode_raw']
     G['neutral0'] = V['reco_h_neutral_lab4']
     rr = V['reco_h_available_side'] & (V['reco_h_mode'] == 1)
@@ -282,6 +334,7 @@ def main():
     ap.add_argument('--output', type=Path, required=True)
     ap.add_argument('--response', type=Path, required=True)
     ap.add_argument('--pi0-model', choices=('fixed', 'marg', 'truth'), required=True)
+    ap.add_argument('--response-cond', type=Path, help='stage 2: response_cond.py output (marg only)')
     ap.add_argument('--e-prior', choices=('invE', 'train'), required=True)
     ap.add_argument('--split', choices=('validation', 'train'), default='validation')
     ap.add_argument('--truth-train', type=Path, help='p0_train_truth.py output (for --split train)')
