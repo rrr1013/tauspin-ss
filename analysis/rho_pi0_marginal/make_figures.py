@@ -12,6 +12,7 @@ from pathlib import Path
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import matplotlib.ticker
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'atlas_classical_posterior'))
@@ -35,7 +36,7 @@ ROWS = [  # (label, score key, color, marker, filled)
 def fig1(res, out):
     pairs = ['overall', 'pi x rho', 'rho x rho', 'rho x 3pi']
     names = {'overall': 'all events', 'pi x rho': 'π × ρ', 'rho x rho': 'ρ × ρ', 'rho x 3pi': 'ρ × 3π'}
-    fig, ax = plt.subplots(figsize=(7.2, 4.6))
+    fig, ax = plt.subplots(figsize=(7.2, 6.4))
     for j, (lab, key, col, mk, fill) in enumerate(ROWS):
         if key not in res['auc']:
             continue
@@ -48,7 +49,7 @@ def fig1(res, out):
     ax.set_xlabel('weighted H/Z AUC (validation, parent-overlap weights)')
     ax.grid(axis='x', color='#dddddd', lw=0.6)
     ax.set_axisbelow(True)
-    ax.legend(fontsize=8, loc='lower right', frameon=True)
+    ax.legend(fontsize=8, loc='upper center', bbox_to_anchor=(0.45, -0.13), ncol=2, frameon=False)
     ax.set_title('ATLAS full-reco H/Z (both 91.19 GeV), by truth decay-mode pair', fontsize=10)
     fig.tight_layout()
     fig.savefig(out / 'fig1_auc_pairs.png', dpi=150)
@@ -108,6 +109,9 @@ def fig3(val, out):
             yy = [wcorr(h[..., 2][ok & (b == i)], hx[..., 2][ok & (b == i)], ww[ok & (b == i)]) for i in range(6)]
             ax.plot(cen, yy, color=col, ls=ls, marker=mk, ms=7, mfc=col if fill else 'white', lw=1.8, label=lab)
         ax.set_xscale('log')
+        ax.xaxis.set_major_formatter(matplotlib.ticker.FormatStrFormatter('%g'))
+        ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
+        ax.set_xticks([round(c, 2 if c < 3 else 0) for c in cen])
         ax.set_xlabel(xl)
         ax.grid(color='#eeeeee', lw=0.6)
     axs[0].set_ylabel('corr(h_k, exact h_k), ρ side')
