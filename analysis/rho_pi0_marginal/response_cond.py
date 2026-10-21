@@ -15,6 +15,12 @@ mass class (pseudo-count 20) and 1-2-1 smoothed.
 Proposal: p(u | raw, mclass, E_reco bin, sep_reco bin) * p(l | same), sep_reco from the reco pi0 and reco track,
 built the same way (independent u and l draws).
 
+Stage 3 (--psi): the azimuth psi of the reco pi0 around the TRUE pi0 direction, measured from the axis pointing from
+the charged track to the true pi0 (psi = 0: reco displaced away from the track, pi: toward it), is not uniform: the
+reco pi0 is pulled toward the track when the two overlap.  p(psi | raw, mclass, E2, sep, l-bin) in 8 bins (l in 4 bins)
+is stored as logpsi (log of 2 pi x density, i.e. 0 for isotropy); the sampler keeps psi uniform in the proposal and
+adds logpsi to the weight.
+
 Rows with event_number % 5 == 0 are held out (TRAIN PIT subset), as in response.py.
 """
 import argparse
@@ -29,6 +35,8 @@ L_EDGES = np.linspace(np.log(1e-4), np.log(0.3), 33)
 NE, NS = 8, 5
 M_CUT = 0.3
 K_SHRINK = 20.0
+N_PSI = 8
+L_PSI_EDGES = np.log(np.array([1e-4, 3e-3, 8e-3, 2e-2, 0.3]))
 
 
 def unit(v):
@@ -100,6 +108,19 @@ def main():
     pk = (raw[inr] - 1, eb[inr])
     logpu = dens1d(u[inr], U_EDGES, keys, (2, 2, NE, NS), pk, (2, NE))
     logpl = dens1d(l[inr], L_EDGES, keys, (2, 2, NE, NS), pk, (2, NE))
+    # stage 3: psi of the reco pi0 around the true pi0, axis from the (truth) track to the true pi0
+    t, n, c = unit(p2[:, :3]), unit(rn[:, :3]), unit(p1[:, :3])
+    ea = (t - c) - np.sum((t - c) * t, -1, keepdims=True) * t
+    ea = unit(ea)
+    eb = np.cross(t, ea)
+    dv = n - np.sum(n * t, -1, keepdims=True) * t
+    psi = np.arctan2(np.sum(dv * eb, -1), np.sum(dv * ea, -1))
+    ip = np.clip(np.floor((psi + np.pi) / (2 * np.pi) * N_PSI).astype(int), 0, N_PSI - 1)
+    lb = bins(np.clip(l, L_PSI_EDGES[0], L_PSI_EDGES[-1] - 1e-9), L_PSI_EDGES)
+    cps = np.zeros((2, 2, NE, NS, len(L_PSI_EDGES) - 1, N_PSI))
+    np.add.at(cps, (raw[inr] - 1, mc[inr], eb[inr], sb[inr], lb[inr], ip[inr]), 1.0)
+    cps = cps + 5.0 / N_PSI                                    # shrink toward isotropy (pseudo-count 5)
+    logpsi = np.log(cps / cps.sum(-1, keepdims=True) * N_PSI)
     # proposal on reco quantities
     Er = rn[:, 3]
     sepr = np.arccos(np.clip(np.sum(unit(p1r[:, :3]) * unit(rn[:, :3]), -1), -1, 1)) * Er
@@ -112,12 +133,15 @@ def main():
     logqu = dens1d(u[inr], U_EDGES, qk, (2, 2, NE, NS), qpk, (2, NE))
     logql = dens1d(l[inr], L_EDGES, qk, (2, 2, NE, NS), qpk, (2, NE))
     np.savez(a.output, u_edges=U_EDGES, l_edges=L_EDGES, e_logcent=ecent, s_logcent=scent, logcat=logcat,
-             logpu=logpu, logpl=logpl, r_edges=redges, sr_edges=sredges, logqu=logqu, logql=logql, m_cut=M_CUT)
+             logpu=logpu, logpl=logpl, r_edges=redges, sr_edges=sredges, logqu=logqu, logql=logql, m_cut=M_CUT,
+             logpsi=logpsi, l_psi_edges=L_PSI_EDGES)
     hw = lambda x: float(np.diff(np.quantile(x, [.16, .84]))[0] / 2)
     diag = {'sides': int(side.sum()), 'e_edges': eedges.round(2).tolist(), 'sep_edges': sedges.round(3).tolist(),
             'reco_rho_eff_by_E_sep': (cat.sum((0, 1)) / N).round(3).tolist(),
             'mclass1_frac': float(mc[r].mean()),
             'u_half68_by_sep_in_Ebin3': [hw(u[r & (eb == 3) & (sb == j)]) for j in range(NS)],
+            'psi_frac_8bins_all (bin0,7 = toward track)': (np.bincount(ip[inr], minlength=N_PSI) / inr.sum()).round(3).tolist(),
+            'psi_toward_track_frac_by_sep (|psi| > 3pi/4)': [float(np.mean(np.abs(psi[inr & (sb == j)]) > 0.75 * np.pi)) for j in range(NS)],
             'ang_median_mrad_by_sep_in_Ebin3': [float(1e3 * np.exp(np.median(l[r & (eb == 3) & (sb == j)]))) for j in range(NS)]}
     Path(str(a.output) + '.json').write_text(json.dumps(diag, indent=1))
     print(json.dumps(diag, indent=1))

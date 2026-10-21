@@ -179,9 +179,22 @@ def draw_pi0_cond(rows, s, S, rng):
     js, fs = corner(C['s_logcent'], np.log(np.maximum(sep, 1e-9)))
     logL = 0.0
     rr, mm = raw[:, None], mc[:, None]
+    if G['psi']:
+        # stage 3: azimuth of the reco pi0 around the hypothesis pi0, from the axis track -> hypothesis pi0
+        ea = CP.unit((dirn - p1[:, None]) - np.sum((dirn - p1[:, None]) * dirn, -1, keepdims=True) * dirn)
+        eb = np.cross(dirn, ea)
+        dv = nhat[:, None] - np.sum(nhat[:, None] * dirn, -1, keepdims=True) * dirn
+        psiL = np.arctan2(np.sum(dv * eb, -1), np.sum(dv * ea, -1))
+        npsi = C['logpsi'].shape[-1]
+        ip = np.clip(np.floor((psiL + np.pi) / (2 * np.pi) * npsi).astype(int), 0, npsi - 1)
+        le = C['l_psi_edges']
+        lb = np.clip(np.searchsorted(le, np.clip(l, le[0], le[-1] - 1e-9)) - 1, 0, len(le) - 2)
     for a_, wa in ((je, 1 - fe), (je + 1, fe)):
         for b_, wb in ((js, 1 - fs), (js + 1, fs)):
-            logL = logL + wa * wb * (C['logcat'][rr, mm, a_, b_] + C['logpu'][rr, mm, a_, b_, iu] + C['logpl'][rr, mm, a_, b_, il])
+            t_ = C['logcat'][rr, mm, a_, b_] + C['logpu'][rr, mm, a_, b_, iu] + C['logpl'][rr, mm, a_, b_, il]
+            if G['psi']:
+                t_ = t_ + C['logpsi'][rr, mm, a_, b_, lb, ip]
+            logL = logL + wa * wb * t_
     lw = np.where(good, logL - logq + np.log(p2m) + np.log(E2), -np.inf)
     return p2, lw
 
@@ -303,6 +316,7 @@ def init(a):
         G[k] = Rz[k]
     G['e_prior'] = a.e_prior
     G['mass_sigma'] = a.mass_sigma
+    G['psi'] = a.psi
     G['cond'] = dict(np.load(a.response_cond)) if a.response_cond else None
     G['raw'] = V['reco_mode_raw']
     G['neutral0'] = V['reco_h_neutral_lab4']
@@ -339,6 +353,7 @@ def main():
     ap.add_argument('--e-prior', choices=('invE', 'train'), required=True)
     ap.add_argument('--split', choices=('validation', 'train'), default='validation')
     ap.add_argument('--truth-train', type=Path, help='p0_train_truth.py output (for --split train)')
+    ap.add_argument('--psi', action='store_true', help='stage 3: anisotropic pi0 direction response (needs --response-cond with logpsi)')
     ap.add_argument('--mass-sigma', type=float, default=3.0, help='width of the parent-mass term [GeV] (10/17: 3)')
     ap.add_argument('--S', type=int, default=16384)
     ap.add_argument('--M', type=int, default=128)
