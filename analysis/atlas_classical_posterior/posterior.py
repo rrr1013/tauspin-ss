@@ -290,7 +290,7 @@ def run_block(args):
 
 def init_globals(a):
     t0 = time.time()
-    with np.load(LADDER / 'validation.npz') as d:
+    with np.load(LADDER / f"{getattr(a, 'split', 'validation')}.npz") as d:   # split: rho_pi0_marginal TRAIN PIT
         V = {k: d[k] for k in d.files}
     with np.load(LADDER / 'train.npz') as d:
         tr_ids = d['global_indices']
