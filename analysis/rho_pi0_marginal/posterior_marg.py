@@ -255,7 +255,7 @@ def run_block(args):
             px = (v0[:, :, None, :3] + nu0[:, :, None]) + (v1[:, None, :, :3] + nu1[:, None, :])
             et = e0[:, :, None] + e1[:, None, :]
             mh = np.sqrt(np.maximum(et ** 2 - np.sum(px ** 2, -1), 0))
-            lw = lw - 0.5 * ((mh - CP.PARENT_MASS) / 3.0) ** 2
+            lw = lw - 0.5 * ((mh - CP.PARENT_MASS) / G['mass_sigma']) ** 2
         pidx, ess_pair = CP.systematic(lw.reshape(R, M * M), K, rng)
         pidx = np.maximum(pidx, 0)
         a, b = pidx // M, pidx % M
@@ -302,6 +302,7 @@ def init(a):
     for k in ('u_edges', 'l_edges', 'e_logcent', 'logL', 'r_edges', 'pq', 'etau_logcent', 'etau_logrho'):
         G[k] = Rz[k]
     G['e_prior'] = a.e_prior
+    G['mass_sigma'] = a.mass_sigma
     G['cond'] = dict(np.load(a.response_cond)) if a.response_cond else None
     G['raw'] = V['reco_mode_raw']
     G['neutral0'] = V['reco_h_neutral_lab4']
@@ -338,6 +339,7 @@ def main():
     ap.add_argument('--e-prior', choices=('invE', 'train'), required=True)
     ap.add_argument('--split', choices=('validation', 'train'), default='validation')
     ap.add_argument('--truth-train', type=Path, help='p0_train_truth.py output (for --split train)')
+    ap.add_argument('--mass-sigma', type=float, default=3.0, help='width of the parent-mass term [GeV] (10/17: 3)')
     ap.add_argument('--S', type=int, default=16384)
     ap.add_argument('--M', type=int, default=128)
     ap.add_argument('--K', type=int, default=512)
