@@ -25,6 +25,7 @@ ROWS = [  # (label, score key, color, marker, filled)
     ('classical, reco π⁰ fixed (= 10/17)', 'fixed_invE:ip3_sv_mass', C[1], 'o', False),
     ('classical, π⁰ marginalised (primary)', 'marg_invE:ip3_sv_mass', C[1], 'o', True),
     ('classical, π⁰ marginalised, TRAIN E_τ prior', 'marg_train:ip3_sv_mass', C[3], 's', True),
+    ('classical, π⁰ marginalised, separation-dependent response', 'cond_invE:ip3_sv_mass', C[4], 'v', True),
     ('classical, truth π⁰ (oracle)', 'truth_train:ip3_sv_mass', C[2], 'D', False),
     ('learner, no IP/SV (base)', 'learner:base_s43', C[0], '^', False),
     ('learner, main line (full22, 2 seeds)', 'learner:ens_full22', C[0], '^', True),
@@ -92,6 +93,7 @@ def fig3(val, out):
     mv = np.sqrt(np.maximum(pv[..., 3] ** 2 - np.sum(pv[..., :3] ** 2, -1), 0))
     rows = [('classical, reco π⁰ fixed', np.load(val / 'val_fixed_invE' / 'posterior.npz')['ip3_sv_mass_Eh'], C[1], '-', 'o', False),
             ('classical, π⁰ marginalised', np.load(val / 'val_marg_invE' / 'posterior.npz')['ip3_sv_mass_Eh'], C[1], '-', 'o', True),
+            ('classical, π⁰ marg., separation-dependent response', np.load(val / 'val_cond_invE' / 'posterior.npz')['ip3_sv_mass_Eh'], C[4], '-', 'v', True),
             ('classical, truth π⁰ (oracle)', np.load(val / 'val_truth_train' / 'posterior.npz')['ip3_sv_mass_Eh'], C[2], '--', 'D', False),
             ('learner full22 s42', np.load(GEN / 'p11' / 'full22_s42' / 'validation_predictions.npz')['h_pred'].astype(float), C[0], '-', '^', True)]
     fig, axs = plt.subplots(1, 2, figsize=(10, 3.8), sharey=True)
