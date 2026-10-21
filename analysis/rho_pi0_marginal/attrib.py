@@ -6,7 +6,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "atlas_classical_posterior"))
 from evaluate import GEN, wauc, pair_masks
 out = {}
-P = {k: np.load(f"out/val_{k}/posterior.npz") for k in ("fixed_invE", "marg_invE", "truth_train")}
+P = {k: np.load(f"out/val_{k}/posterior.npz") for k in ("fixed_invE", "marg_invE", "psi_invE", "truth_train")}
 ref = P["marg_invE"]; y = ref["labels"]; w = ref["weights"].astype(float); sel = pair_masks(ref["modes"])
 t = np.load(GEN / "targets" / "validation.npz"); v = t["h_valid"].astype(bool); hx = t["h"][v].astype(float)
 rows = {k: (d["ip3_sv_mass_Ehh"][:, [0, 1, 2], [0, 1, 2]]) for k, d in P.items()}

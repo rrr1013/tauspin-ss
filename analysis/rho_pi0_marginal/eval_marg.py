@@ -18,7 +18,7 @@ from hquality import wcorr  # noqa: E402
 
 OLD = {'10/17 final (fixed, uniform x)': Path('/home/rbaba/atlas-classical-posterior-20261017/unpol/posterior.npz'),
        '10/18 truth pi0 oracle (uniform x)': Path('/home/rbaba/rho-beyond-exact-20261018/out/cp_truth/posterior.npz')}
-ARMS = ('fixed_invE', 'fixed_train', 'marg_invE', 'marg_train', 'truth_train', 'cond_invE')
+ARMS = ('fixed_invE', 'fixed_train', 'marg_invE', 'marg_train', 'truth_train', 'cond_invE', 'psi_invE', 'marg_invE_seed2', 'fixed_invE_seed2')
 MEAS = ('met', 'ip3_sv', 'ip3_sv_mass', 'ip3_shuffle')
 
 
@@ -98,6 +98,14 @@ def main():
             deltas.append((f'cond_invE:{m}', f'marg_invE:{m}'))
             deltas.append((f'cond_invE:{m}', f'fixed_invE:{m}'))
         deltas.append(('cond_invE:ip3_sv_mass', 'learner:ens_full22'))
+        for m in ('ip3_sv_mass', 'met', 'ip3_sv'):
+            deltas.append((f'psi_invE:{m}', f'cond_invE:{m}'))
+            deltas.append((f'psi_invE:{m}', f'fixed_invE:{m}'))
+        deltas.append(('psi_invE:ip3_sv_mass', 'learner:ens_full22'))
+        deltas.append(('psi_invE:ip3_sv_mass', 'truth_train:ip3_sv_mass'))
+        deltas.append(('combo learner+psi_invE:ip3_sv_mass', 'learner:ens_full22'))
+        deltas.append(('combo learner+psi_invE:ip3_shuffle', 'learner:ens_full22'))
+        deltas.append(('marg_invE_seed2:ip3_sv_mass', 'fixed_invE_seed2:ip3_sv_mass'))
         deltas.append(('cond_invE:ip3_sv_mass', 'truth_train:ip3_sv_mass'))
         deltas.append(('combo learner+cond_invE:ip3_sv_mass', 'learner:ens_full22'))
         deltas.append(('combo learner+cond_invE:ip3_shuffle', 'learner:ens_full22'))

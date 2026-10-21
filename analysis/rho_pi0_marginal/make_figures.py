@@ -1,7 +1,7 @@
 """Figures of the pi0-marginalised classical posterior run (results/ in this directory).
 
 fig1_auc_pairs.png      weighted H/Z AUC by truth mode pair: classical fixed / marginalised / truth-pi0 oracle, learner
-fig2_pit_train.png      TRAIN PIT of the truth pi0 energy, visible mass and tau energy (primary invE prior)
+fig2_pit_train.png      TRAIN PIT of the truth pi0 energy, visible mass and tau energy (invE prior; isotropic vs anisotropic response)
 fig3_rho_hk_bins.png    rho-side h_k quality vs the reco pi0 angle error (truth diagnostic) and the reco visible mass
 """
 import argparse
@@ -27,6 +27,7 @@ ROWS = [  # (label, score key, color, marker, filled)
     ('classical, π⁰ marginalised (primary)', 'marg_invE:ip3_sv_mass', C[1], 'o', True),
     ('classical, π⁰ marginalised, TRAIN E_τ prior', 'marg_train:ip3_sv_mass', C[3], 's', True),
     ('classical, π⁰ marginalised, separation-dependent response', 'cond_invE:ip3_sv_mass', C[4], 'v', True),
+    ('classical, π⁰ marg., + anisotropic direction response', 'psi_invE:ip3_sv_mass', C[5], 'P', True),
     ('classical, truth π⁰ (oracle)', 'truth_train:ip3_sv_mass', C[2], 'D', False),
     ('learner, no IP/SV (base)', 'learner:base_s43', C[0], '^', False),
     ('learner, main line (full22, 2 seeds)', 'learner:ens_full22', C[0], '^', True),
@@ -58,8 +59,10 @@ def fig1(res, out):
 def fig2(pit_files, out):
     fig, axs = plt.subplots(1, 3, figsize=(10, 3.3), sharey=True)
     qn = {'E2': 'true π⁰ energy', 'MV': 'true visible mass m(π±π⁰)', 'ET': 'true τ energy'}
-    styles = [('invE', 'met', C[1], '-', 'prior + MET'), ('invE', 'ip3_sv_mass', C[1], '--', '+ IP, SV, parent mass'),
-              ('train', 'ip3_sv_mass', C[3], ':', '+ IP, SV, mass; TRAIN E_τ prior')]
+    styles = [('invE', 'met', C[1], '-', 'isotropic response: prior + MET'),
+              ('invE', 'ip3_sv_mass', C[1], '--', 'isotropic response: + IP, SV, parent mass'),
+              ('psi', 'met', C[5], '-', 'anisotropic response: prior + MET'),
+              ('psi', 'ip3_sv_mass', C[5], '--', 'anisotropic response: + IP, SV, parent mass')]
     for ax, q in zip(axs, ('E2', 'MV', 'ET')):
         for prior, m, col, ls, lab in styles:
             P = np.load(pit_files[prior])
@@ -95,6 +98,7 @@ def fig3(val, out):
     rows = [('classical, reco π⁰ fixed', np.load(val / 'val_fixed_invE' / 'posterior.npz')['ip3_sv_mass_Eh'], C[1], '-', 'o', False),
             ('classical, π⁰ marginalised', np.load(val / 'val_marg_invE' / 'posterior.npz')['ip3_sv_mass_Eh'], C[1], '-', 'o', True),
             ('classical, π⁰ marg., separation-dependent response', np.load(val / 'val_cond_invE' / 'posterior.npz')['ip3_sv_mass_Eh'], C[4], '-', 'v', True),
+            ('classical, π⁰ marg., + anisotropic direction response', np.load(val / 'val_psi_invE' / 'posterior.npz')['ip3_sv_mass_Eh'], C[5], '-', 'P', True),
             ('classical, truth π⁰ (oracle)', np.load(val / 'val_truth_train' / 'posterior.npz')['ip3_sv_mass_Eh'], C[2], '--', 'D', False),
             ('learner full22 s42', np.load(GEN / 'p11' / 'full22_s42' / 'validation_predictions.npz')['h_pred'].astype(float), C[0], '-', '^', True)]
     fig, axs = plt.subplots(1, 2, figsize=(10, 3.8), sharey=True)
@@ -130,7 +134,7 @@ def main():
     res = json.loads((a.run_dir / 'out' / 'eval_val.json').read_text())
     fig1(res, a.out)
     fig2({'invE': a.run_dir / 'out' / 'pit_train_marg_invE' / 'posterior.npz',
-          'train': a.run_dir / 'out' / 'pit_train_marg_train' / 'posterior.npz'}, a.out)
+          'psi': a.run_dir / 'out' / 'pit_train_psi_invE' / 'posterior.npz'}, a.out)
     fig3(a.run_dir / 'out', a.out)
 
 
