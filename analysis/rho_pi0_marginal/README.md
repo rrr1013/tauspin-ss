@@ -13,11 +13,14 @@ treatment of the reco pi0 error (TRAIN response as likelihood, rho line shape an
 |---|---|
 | `p0_train_truth.py` | truth pi+- / pi0 / nu of every TRAIN event with a truth-rho side, re-read from ROOT |
 | `response.py` | stage-1 TRAIN pi0 response (u = log E_reco/E_true, l = log angle) per raw mode and true-E bin, proposal table, tau-energy prior; holds out event_number % 5 == 0 |
-| `response_cond.py` | stage-2 response conditioned on the hypothesis pi+-/pi0 separation (angle x E) and the reco PFO-mass class |
+| `response_cond.py` | stage-2 response conditioned on the hypothesis pi+-/pi0 separation (angle x E) and the reco PFO-mass class; stage-3 table of the azimuth of the reco pi0 around the true one (pull toward the track) |
+| `attrib.py` | AUC from the transverse (nn+rr) and longitudinal (kk) correlation terms separately |
 | `posterior_marg.py` | the sampler: pi0 hypotheses, derived Jacobian, then IP/SV/MET/(mass) as in `../atlas_classical_posterior/posterior.py`; per-pair polarimeter with the pair's own pi0; PIT outputs; `--split train` for the TRAIN PIT subset |
 | `eval_marg.py` | PIT summaries; AUC by truth pair, paired bootstrap, cross-fit combination with the learner, rho-side h quality |
 | `make_figures.py` | figures in `results/` |
 
 Main numbers (IP+SV+MET+parent mass, invE prior): rho x rho 0.575 -> 0.597 (+0.022 [0.015, 0.029]), overall
 0.590 -> 0.604; truth-pi0 oracle 0.636 / 0.626; learner 0.621 / 0.629; combination with the learner +0.0005.
-Stage 2 +0.002 (n.s.).  Parent-mass width 3 -> 1 GeV: no gain.  See the Vault run note for the claim boundary.
+Two posterior-sampling seeds: gain +0.023 [0.016, 0.031] (rho x rho), +0.015 overall.  Stage 2 +0.001, stage 3
+(anisotropic direction response, fixes the TRAIN m_vis PIT tilt) +0.000.  Parent-mass width 3 -> 1 GeV: no gain.
+The recovered part is mostly longitudinal (kk); the remaining gap to the learner is half transverse, half longitudinal.  See the Vault run note for the claim boundary.

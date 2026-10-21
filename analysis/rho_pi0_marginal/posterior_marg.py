@@ -4,7 +4,7 @@ On every reco-rho side (reco_h_mode 1, available) the true pi0 momentum p2 is a 
 charged pion p1 the spin-flat joint density of (p2, x, phi) -- x = E_vis/E_tau, phi the tau azimuth around the
 visible axis, visible V = p1 + p2 -- is, per d^3p2 dx dphi,
 
-    rho_E(E_tau) E_V / (P pV x^2)      tau-momentum prior f(P) d^3P ~ rho_E(E) dE dOmega / (4 pi P E) ... on the shell
+    rho_E(E_tau) E_V / (P pV x^2)      tau-momentum prior f(P) d^3P = rho_E(E) dE dOmega / 4 pi, nu on its shell
   x |B_rho(s)|^2 T(p1, p2, nu)          spin-summed tau -> pi pi0 nu rate, T = 2(q.N)q0 - q^2 N0 (tau rest frame),
                                         B the Kuehn-Santamaria rho+rho' form factor of the generator
   x 1 / E2                              pi0 phase space d^3p2 / 2E2
