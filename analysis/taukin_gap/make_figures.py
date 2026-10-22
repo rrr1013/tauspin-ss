@@ -74,8 +74,9 @@ def fig2(res, out):
         ax.grid(axis='y', color='#dddddd', lw=0.6)
         ax.set_axisbelow(True)
     axs[0].set_ylabel('weighted correlation with the exact h (validation)')
-    axs[1].legend(fontsize=7.5, loc='upper center', bbox_to_anchor=(0.5, -0.1), ncol=3, frameon=False)
-    fig.tight_layout()
+    h_, l_ = axs[0].get_legend_handles_labels()
+    fig.legend(h_, l_, fontsize=7.5, loc='lower center', ncol=3, frameon=False)
+    fig.tight_layout(rect=(0, 0.17, 1, 1))
     fig.savefig(out / 'fig2_side_quality.png', dpi=150)
 
 
@@ -118,7 +119,7 @@ def fig3(posts, out):
             ax.plot(10 ** np.array(cen), yy, marker=mk, ms=6.5, color=col, mfc=col if fill else 'white', mew=1.3,
                     lw=1.2, ls='-' if fill else '--', label=lab.strip())
         ax.set_xscale('log')
-        ax.set_xlabel('measured |IP| of the π track, PV-referenced [μm] (bin median, 1/6 of sides per bin)')
+        ax.set_xlabel('measured |IP| of the π track, PV-referenced [μm]\n(bin median; 1/6 of the sides per bin)')
         ax.set_title(f"π side (truth π, reco π): {'h_n' if c == 0 else 'h_r'}", fontsize=9.5)
         ax.grid(color='#dddddd', lw=0.6)
         ax.set_axisbelow(True)
@@ -144,29 +145,33 @@ def fig4(posts, out):
                             ('truth ρ, reco π (π⁰ lost)', av & rm & (ref['modes'] == 1), C[1], '--')):
         axs[0].hist(np.clip(r[s], bins[0], bins[-1]), bins, weights=np.broadcast_to(w[:, None], s.shape)[s],
                     density=True, histtype='step', lw=1.6, color=col, ls=ls, label=lab)
-    axs[0].set_xlabel('E(ATLAS τ four-vector) / E(track) − 1   (under/overflow in the end bins)')
+    axs[0].set_xlabel('E(ATLAS τ four-vector) / E(track) − 1\n(under/overflow in the end bins)')
     axs[0].set_ylabel('weighted density')
     axs[0].set_yscale('log')
     axs[0].legend(fontsize=8, frameon=False)
     axs[0].set_title('reco π sides, validation', fontsize=9.5)
-    # pi side h_k quality vs the mismatch
+    # pi side h_k quality vs the mismatch (exactly 0 on most sides, so explicit bins)
     x = r[msk]
-    e = np.quantile(x, np.linspace(0, 1, 7))
+    edges = [(-1e-9, 1e-9, '= 0'), (1e-9, 0.05, '0-0.05'), (0.05, 0.15, '0.05-0.15'), (0.15, 0.3, '0.15-0.3'), (0.3, np.inf, '> 0.3')]
     W = np.broadcast_to(w[:, None], msk.shape)
-    cen = [np.median(x[(x >= e[i]) & (x <= e[i + 1])]) for i in range(6)]
     est = {'base': np.load(posts['base'])['ip3_sv_mass_Eh'], 'track': np.load(posts['track'])['ip3_sv_mass_Eh'],
            'learner': np.load(GEN / 'p11' / 'full22_s42' / 'validation_predictions.npz')['h_pred']}
     style = {r_[1].split(':')[0]: r_ for r_ in ROWS}
+    frac = []
     for k, h in est.items():
         lab, _, col, mk, fill = style[k]
         yy = []
-        for i in range(6):
-            s = np.zeros_like(msk)
-            s[msk] = (x >= e[i]) & (x <= e[i + 1])
-            yy.append(wcorr(h[..., 2][s], hx[..., 2][s], W[s]))
-        axs[1].plot(cen, yy, marker=mk, ms=6.5, color=col, mfc=col if fill else 'white', mew=1.3, lw=1.2,
+        for lo, hi, _ in edges:
+            s_ = np.zeros_like(msk)
+            s_[msk] = (x > lo) & (x <= hi)
+            yy.append(wcorr(h[..., 2][s_], hx[..., 2][s_], W[s_]))
+            if k == 'base':
+                frac.append(np.mean((x > lo) & (x <= hi)))
+        axs[1].plot(range(len(edges)), yy, marker=mk, ms=6.5, color=col, mfc=col if fill else 'white', mew=1.3, lw=1.2,
                     ls='-' if fill else '--', label=lab.strip())
-    axs[1].set_xlabel('E(ATLAS τ four-vector) / E(track) − 1  (bin median, 1/6 of truth-π sides per bin)')
+    axs[1].set_xticks(range(len(edges)))
+    axs[1].set_xticklabels([f'{e_[2]}\n({f:.0%})' for e_, f in zip(edges, frac)], fontsize=8)
+    axs[1].set_xlabel('E(ATLAS τ four-vector) / E(track) − 1   (share of truth-π sides)')
     axs[1].set_ylabel('weighted correlation of h_k with the exact h_k')
     axs[1].set_title('π side (truth π, reco π): h_k vs the visible-energy mismatch', fontsize=9.5)
     axs[1].legend(fontsize=7.5, frameon=False, loc='lower left')
