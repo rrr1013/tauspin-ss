@@ -15,6 +15,8 @@ The base is the 10/22 primary: reco-rho pi0 marginalised (stage 1), invE tau-ene
   --decay-length    each side draw x p(|IP_lead| | lam = (P/m_tau) c tau sin(angle(tau, track)), prong class) (TRAIN
                     table); 3-prong sides with a usable SV use p(L_SV | (P/m_tau) c tau) instead of the IP magnitude
                     (the three IPs and the SV share one decay length); applied to the geometry measures only
+  --ip-fine         the IP azimuth response (p12: per prong class and |IP| bin) also conditioned on the track pT
+                    (0-20-40-80-inf GeV) and |eta| (0-1-1.7-inf); TRAIN without event_number % 5 == 0
 
 Measures: met (prior + MET), ip3_sv, ip3_sv_mass.  Pairs: M per side by systematic resampling on the side weight, M x M
 pairs weighted by MET (and mass), K resampled.  Output adds, per side, the posterior mean tau energy and the PIT of the
@@ -78,6 +80,43 @@ def dl_logw_side(d, rows, s):
     return out
 
 
+PT_EDGES = np.array([0.0, 20.0, 40.0, 80.0, np.inf])
+ETA_EDGES = np.array([0.0, 1.0, 1.7, np.inf])
+
+
+def fine_bins(meas, trk, j):
+    pt, th = trk[..., j, 0], trk[..., j, 1]
+    eta = np.abs(-np.log(np.tan(np.clip(th, 1e-6, np.pi - 1e-6) / 2)))
+    pb = np.clip(np.searchsorted(PT_EDGES, np.nan_to_num(pt)) - 1, 0, len(PT_EDGES) - 2)
+    eb = np.clip(np.searchsorted(ETA_EDGES, np.nan_to_num(eta)) - 1, 0, len(ETA_EDGES) - 2)
+    cls = (meas['n_core'] >= 2).astype(int)
+    b = np.clip(np.digitize(meas['mag_um'], CP.P12.IP_EDGES_UM) - 1, 0, len(CP.P12.IP_EDGES_UM) - 2)
+    return cls, b, pb, eb
+
+
+def fit_fine(meas, trk, j, truth_dir, keep):
+    P12 = CP.P12
+    psi_true = P12.azimuth_in_frame(truth_dir, meas['e1'], meas['e2'])
+    delta = np.angle(np.exp(1j * (psi_true - meas['psi'])))
+    cls, b, pb, eb = fine_bins(meas, trk, j)
+    table = np.ones((2, len(P12.IP_EDGES_UM) - 1, len(PT_EDGES) - 1, len(ETA_EDGES) - 1, P12.PHI_BINS))
+    good = meas['available'] & np.isfinite(delta) & keep[:, None]
+    idx = np.floor((delta[good] + np.pi) / (2 * np.pi) * P12.PHI_BINS).astype(int) % P12.PHI_BINS
+    np.add.at(table, (cls[good], b[good], pb[good], eb[good], idx), 1.0)
+    return np.log(table / table.sum(-1, keepdims=True) * P12.PHI_BINS)
+
+
+def ip_fine_logw_side(tdir, rows, s, j):
+    m = G['meas'][j]
+    e1, e2 = m['e1'][rows, s], m['e2'][rows, s]
+    psi_h = np.arctan2(np.sum(tdir * e2[:, None], -1), np.sum(tdir * e1[:, None], -1))
+    delta = np.angle(np.exp(1j * (psi_h - m['psi'][rows, s][:, None])))
+    idx = np.floor((delta + np.pi) / (2 * np.pi) * CP.P12.PHI_BINS).astype(int) % CP.P12.PHI_BINS
+    cls, b, pb, eb = (x[rows, s][:, None] for x in G['fine_bins'][j])
+    val = G['ip_fine'][j][cls, b, pb, eb, idx]
+    return np.where(m['available'][rows, s][:, None], val, 0.0)
+
+
 def mass_logw(mh):
     if G['mass_prior'] == 'gauss':
         return -0.5 * ((mh - CP.PARENT_MASS) / G['mass_sigma']) ** 2
@@ -118,7 +157,10 @@ def run_block(args):
     for s in (0, 1):
         d, base = PM.side_draws(rows, s, S, rng)
         D.append(d)
-        ip = sum(CP.ip_logw_side(d['t'], G['meas'][j], rows, s, G['ip_resp'][j], 'psi') for j in range(3))
+        if G['ip_fine'] is not None:
+            ip = sum(ip_fine_logw_side(d['t'], rows, s, j) for j in range(3))
+        else:
+            ip = sum(CP.ip_logw_side(d['t'], G['meas'][j], rows, s, G['ip_resp'][j], 'psi') for j in range(3))
         sv = CP.sv_logw_side(d['t'], rows, s)
         geo = base + ip + sv + (dl_logw_side(d, rows, s) if G['decay_length'] else 0.0)
         logs[s] = {'met': base, 'ip3_sv': geo, 'ip3_sv_mass': geo}
@@ -193,6 +235,17 @@ def init(a):
     with np.load(CP.P12.AUDIT) as g:
         G['sv_len_um'] = g['sv_length'][V['global_indices']] * 1e3
     G['etau_true'] = V['truth_visible_tau_lab4'][..., 3] + V['truth_neutrino_lab4'][..., 3]
+    G['ip_fine'] = None
+    if a.ip_fine:
+        tracks = dict(np.load(CP.TRACKS))
+        with np.load(CP.LADDER / 'train.npz') as d:
+            tr_ids, tr_ev = d['global_indices'], d['event_numbers']
+            tr_truth = CP.unit(d['truth_visible_tau_lab4'][..., :3] + d['truth_neutrino_lab4'][..., :3])
+        G['ip_fine'], G['fine_bins'] = [], []
+        for j in range(3):
+            mt = CP.P12.ip_measurements(tracks, tr_ids, j)
+            G['ip_fine'].append(fit_fine(mt, tracks['trk'][tr_ids], j, tr_truth, tr_ev % 5 != 0))
+            G['fine_bins'].append(fine_bins(G['meas'][j], tracks['trk'][V['global_indices']], j))
 
 
 def main():
@@ -207,6 +260,7 @@ def main():
     ap.add_argument('--met-model', choices=('iso', 'ptbin', 'exact'), default='iso')
     ap.add_argument('--exact-sigma', type=float, default=2.0)
     ap.add_argument('--decay-length', action='store_true')
+    ap.add_argument('--ip-fine', action='store_true')
     ap.add_argument('--split', choices=('validation', 'train'), default='validation')
     ap.add_argument('--truth-train', type=Path, default=Path('/home/rbaba/rho-pi0-marginal-20261022/out/train_truth_rho.npz'),
                     help='needed by posterior_marg.init on --split train (its rho PIT truth; unused here)')
@@ -247,6 +301,8 @@ def main():
             for k in list(mm):
                 if isinstance(mm[k], np.ndarray) and mm[k].shape[:1] == (nall,):
                     mm[k] = mm[k][sub]
+        if G['ip_fine'] is not None:
+            G['fine_bins'] = [tuple(x[sub] for x in fb) for fb in G['fine_bins']]
         V = {k: v[sub] for k, v in V.items()}
         G['V'] = V
         G['ids'] = V['global_indices']
