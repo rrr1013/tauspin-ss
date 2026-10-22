@@ -7,6 +7,12 @@ Variants (validation only, the selected checkpoint, nothing retrained):
                   core-track multiplicity (as p10 full_shuffle, but one side only); side s keeps its own.  The h of
                   side s is then read.  Done for s = 0 and s = 1.
   shuffle_own_s   the same for side s itself (control: what the own geometry is worth)
+  --own-edits     on reco-pi sides only (both sides at once), track-0 block of the 22 channels
+                  (u.n, u.r, log|IP|, avail, t.n/0.01, t.r/0.01):
+    rot90         (u.n, u.r) -> (-u.r, u.n): the measured IP direction rotated by +90 deg about k
+    flip          (u.n, u.r) -> -(u.n, u.r)
+    ipmag_const   log|IP| -> its median over reco-pi sides (direction kept)
+    offset_zero   (t.n, t.r) -> 0 (track direction put on the visible axis)
 Output: npz with h_pred per variant (rows in the stored validation order), json with the parity check.
 """
 import json
@@ -72,6 +78,24 @@ def main():
             g[:, side] = geo0[perm, side]
             ds.geometry_tau = g
             res[f'shuffle_{name}_{s}'] = run()['h_pred']
+            ds.geometry_tau = geo0
+    if '--own-edits' in sys.argv:
+        pi = torch.as_tensor(rmode == 0)
+        med = float(torch.median(geo0[:, :, 2][pi]))
+        for name in ('rot90', 'flip', 'ipmag_const', 'offset_zero'):
+            g = geo0.clone()
+            blk = g[:, :, 0:6].clone()
+            if name == 'rot90':
+                blk[..., 0], blk[..., 1] = -geo0[:, :, 1], geo0[:, :, 0]
+            elif name == 'flip':
+                blk[..., 0:2] = -geo0[:, :, 0:2]
+            elif name == 'ipmag_const':
+                blk[..., 2] = med
+            else:
+                blk[..., 4:6] = 0.0
+            g[:, :, 0:6] = torch.where(pi[..., None], blk, geo0[:, :, 0:6])
+            ds.geometry_tau = g
+            res[name] = run()['h_pred']
             ds.geometry_tau = geo0
     np.savez_compressed(out, global_indices=base['global_indices'], **res)
     out.with_suffix('.json').write_text(json.dumps({'parity_max_abs': parity, 'rows': int(len(ids))}, indent=1))
