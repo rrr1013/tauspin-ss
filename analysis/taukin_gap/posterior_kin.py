@@ -15,6 +15,10 @@ The base is the 10/22 primary: reco-rho pi0 marginalised (stage 1), invE tau-ene
   --decay-length    each side draw x p(|IP_lead| | lam = (P/m_tau) c tau sin(angle(tau, track)), prong class) (TRAIN
                     table); 3-prong sides with a usable SV use p(L_SV | (P/m_tau) c tau) instead of the IP magnitude
                     (the three IPs and the SV share one decay length); applied to the geometry measures only
+  --ip-joint        1-prong sides (fewer than 2 core tracks): the leading-track IP enters through one TRAIN table of the
+                    joint p(azimuth difference, log|IP| | log lam, track pT bin, |eta| bin), lam as for --decay-length,
+                    which replaces both the p12 azimuth response and the separate |IP| term; 3-prong sides as
+                    --decay-length (p12 azimuths, SV direction and length)
   --ip-fine         the IP azimuth response (p12: per prong class and |IP| bin) also conditioned on the track pT
                     (0-20-40-80-inf GeV) and |eta| (0-1-1.7-inf); TRAIN without event_number % 5 == 0
 
@@ -117,6 +121,58 @@ def ip_fine_logw_side(tdir, rows, s, j):
     return np.where(m['available'][rows, s][:, None], val, 0.0)
 
 
+J_PSI, J_IP = 16, np.linspace(0.0, 3.5, 13)          # azimuth bins; log10 |IP| [um] edges (clipped)
+J_LAM = np.linspace(0.5, 3.5, 11)                       # log10 lam [um] edges (clipped); rows at the centres
+J_PT, J_ETA = np.array([0.0, 30.0, 70.0, np.inf]), np.array([0.0, 1.2, np.inf])
+
+
+def joint_bins(meas, trk):
+    pt, th = trk[..., 0, 0], trk[..., 0, 1]
+    eta = np.abs(-np.log(np.tan(np.clip(th, 1e-6, np.pi - 1e-6) / 2)))
+    pb = np.clip(np.searchsorted(J_PT, np.nan_to_num(pt)) - 1, 0, len(J_PT) - 2)
+    eb = np.clip(np.searchsorted(J_ETA, np.nan_to_num(eta)) - 1, 0, len(J_ETA) - 2)
+    im = np.clip(np.searchsorted(J_IP, np.log10(np.maximum(meas['mag_um'], 1e-3))) - 1, 0, len(J_IP) - 2)
+    return pb, eb, im
+
+
+def fit_joint(meas, trk, tdir_true, p_true, keep):
+    P12 = CP.P12
+    psi_true = P12.azimuth_in_frame(tdir_true, meas['e1'], meas['e2'])
+    dpsi = np.angle(np.exp(1j * (psi_true - meas['psi'])))
+    sina = np.linalg.norm(np.cross(tdir_true, meas['tdir']), axis=-1)
+    lam = np.log10(np.maximum(p_true / CP.M_TAU * CTAU_UM * sina, 1e-3))
+    pb, eb, im = joint_bins(meas, trk)
+    il = np.clip(np.searchsorted(J_LAM, lam) - 1, 0, len(J_LAM) - 2)
+    ip_ = np.floor((dpsi + np.pi) / (2 * np.pi) * J_PSI).astype(int) % J_PSI
+    good = meas['available'] & (meas['n_core'] < 2) & np.isfinite(dpsi) & keep[:, None]
+    H = np.zeros((len(J_PT) - 1, len(J_ETA) - 1, len(J_LAM) - 1, J_PSI, len(J_IP) - 1))
+    np.add.at(H, (pb[good], eb[good], il[good], ip_[good], im[good]), 1.0)
+    Hs = H.copy()
+    Hs[:, :, 1:-1] = 0.25 * H[:, :, :-2] + 0.5 * H[:, :, 1:-1] + 0.25 * H[:, :, 2:]
+    Hs = Hs + 0.5
+    return np.log(Hs / Hs.sum((-1, -2), keepdims=True)), int(good.sum())
+
+
+def ip_joint_logw_side(d, rows, s):
+    m = G['meas'][0]
+    P = np.sqrt(np.maximum(d['Et'] ** 2 - CP.M_TAU ** 2, 1e-12))
+    tdir = m['tdir'][rows, s]
+    sina = np.linalg.norm(np.cross(d['t'], tdir[:, None]), axis=-1)
+    lam = np.log10(np.maximum(P / CP.M_TAU * CTAU_UM * sina, 1e-3))
+    e1, e2 = m['e1'][rows, s], m['e2'][rows, s]
+    psi_h = np.arctan2(np.sum(d['t'] * e2[:, None], -1), np.sum(d['t'] * e1[:, None], -1))
+    dpsi = np.angle(np.exp(1j * (psi_h - m['psi'][rows, s][:, None])))
+    ip_ = np.floor((dpsi + np.pi) / (2 * np.pi) * J_PSI).astype(int) % J_PSI
+    c = 0.5 * (J_LAM[1:] + J_LAM[:-1])
+    lc = np.clip(lam, c[0], c[-1])
+    j = np.clip(np.searchsorted(c, lc) - 1, 0, len(c) - 2)
+    f = (lc - c[j]) / (c[j + 1] - c[j])
+    pb, eb, im = (x[rows, s][:, None] for x in G['joint_bins'])
+    T = G['ip_joint']
+    val = (1 - f) * T[pb, eb, j, ip_, im] + f * T[pb, eb, j + 1, ip_, im]
+    return np.where(m['available'][rows, s][:, None], val, 0.0)
+
+
 def mass_logw(mh):
     if G['mass_prior'] == 'gauss':
         return -0.5 * ((mh - CP.PARENT_MASS) / G['mass_sigma']) ** 2
@@ -162,7 +218,12 @@ def run_block(args):
         else:
             ip = sum(CP.ip_logw_side(d['t'], G['meas'][j], rows, s, G['ip_resp'][j], 'psi') for j in range(3))
         sv = CP.sv_logw_side(d['t'], rows, s)
-        geo = base + ip + sv + (dl_logw_side(d, rows, s) if G['decay_length'] else 0.0)
+        dl = dl_logw_side(d, rows, s) if G['decay_length'] else 0.0
+        if G['ip_joint'] is not None:
+            one = (G['meas'][0]['n_core'][rows, s] < 2)[:, None]
+            ip = np.where(one, ip_joint_logw_side(d, rows, s), ip)
+            dl = np.where(one, 0.0, dl_logw_side(d, rows, s))
+        geo = base + ip + sv + dl
         logs[s] = {'met': base, 'ip3_sv': geo, 'ip3_sv_mass': geo}
     met = G['met'][rows]
     avail = G['avail_side']
@@ -235,6 +296,17 @@ def init(a):
     with np.load(CP.P12.AUDIT) as g:
         G['sv_len_um'] = g['sv_length'][V['global_indices']] * 1e3
     G['etau_true'] = V['truth_visible_tau_lab4'][..., 3] + V['truth_neutrino_lab4'][..., 3]
+    G['ip_joint'] = None
+    if a.ip_joint:
+        tracks = dict(np.load(CP.TRACKS))
+        with np.load(CP.LADDER / 'train.npz') as d:
+            tr_ids, tr_ev = d['global_indices'], d['event_numbers']
+            tt = d['truth_visible_tau_lab4'] + d['truth_neutrino_lab4']
+        mt = CP.P12.ip_measurements(tracks, tr_ids, 0)
+        G['ip_joint'], nj = fit_joint(mt, tracks['trk'][tr_ids], CP.unit(tt[..., :3]), np.linalg.norm(tt[..., :3], axis=-1),
+                                      tr_ev % 5 != 0)
+        G['joint_bins'] = joint_bins(G['meas'][0], tracks['trk'][V['global_indices']])
+        print(json.dumps({'ip_joint_train_sides': nj}), flush=True)
     G['ip_fine'] = None
     if a.ip_fine:
         tracks = dict(np.load(CP.TRACKS))
@@ -261,6 +333,7 @@ def main():
     ap.add_argument('--exact-sigma', type=float, default=2.0)
     ap.add_argument('--decay-length', action='store_true')
     ap.add_argument('--ip-fine', action='store_true')
+    ap.add_argument('--ip-joint', action='store_true')
     ap.add_argument('--split', choices=('validation', 'train'), default='validation')
     ap.add_argument('--truth-train', type=Path, default=Path('/home/rbaba/rho-pi0-marginal-20261022/out/train_truth_rho.npz'),
                     help='needed by posterior_marg.init on --split train (its rho PIT truth; unused here)')
@@ -303,6 +376,8 @@ def main():
                     mm[k] = mm[k][sub]
         if G['ip_fine'] is not None:
             G['fine_bins'] = [tuple(x[sub] for x in fb) for fb in G['fine_bins']]
+        if G['ip_joint'] is not None:
+            G['joint_bins'] = tuple(x[sub] for x in G['joint_bins'])
         V = {k: v[sub] for k, v in V.items()}
         G['V'] = V
         G['ids'] = V['global_indices']
