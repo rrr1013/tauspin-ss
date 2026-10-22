@@ -21,6 +21,11 @@ The base is the 10/22 primary: reco-rho pi0 marginalised (stage 1), invE tau-ene
                     --decay-length (p12 azimuths, SV direction and length)
   --ip-fine         the IP azimuth response (p12: per prong class and |IP| bin) also conditioned on the track pT
                     (0-20-40-80-inf GeV) and |eta| (0-1-1.7-inf); TRAIN without event_number % 5 == 0
+  --ip-orient       as --ip-fine, also conditioned on the signed orientation of the measured IP: the measured azimuth is
+                    pulled toward the z0 axis (z0 resolution worse than d0), so p(psi_true - psi_meas) depends on psi_meas.
+                    With u = psi_meas mod pi, the reflection u -> pi - u flips the sign of the azimuth difference; the
+                    table is over min(u, pi - u) (6 bins on [0, pi/2]) and sign x (psi_true - psi_meas).  Since psi_true
+                    is uniform on TRAIN, this conditional is proportional to the likelihood in psi_true
   --ip-aniso        as --ip-fine, also conditioned on the orientation of the measured IP in the plane transverse to the
                     track (|psi_meas| folded into [0, pi/2], 4 bins: along the transverse d0 axis ... along the z0 axis),
                     so that the anisotropic IP error (z0 vs d0, PV z vs beam spot) enters the azimuth response
@@ -92,6 +97,7 @@ ETA_EDGES = np.array([0.0, 1.0, 1.7, np.inf])
 
 
 N_ORI = 4
+N_SIGNED = 6
 
 
 def fine_bins(meas, trk, j):
@@ -101,20 +107,31 @@ def fine_bins(meas, trk, j):
     eb = np.clip(np.searchsorted(ETA_EDGES, np.nan_to_num(eta)) - 1, 0, len(ETA_EDGES) - 2)
     cls = (meas['n_core'] >= 2).astype(int)
     b = np.clip(np.digitize(meas['mag_um'], CP.P12.IP_EDGES_UM) - 1, 0, len(CP.P12.IP_EDGES_UM) - 2)
-    if G.get('ip_aniso'):
+    if G.get('ip_orient'):
+        u = np.mod(meas['psi'], np.pi)
+        uf = np.where(u > np.pi / 2, np.pi - u, u)
+        ob = np.clip((uf / (np.pi / 2) * N_SIGNED).astype(int), 0, N_SIGNED - 1)
+        eb = eb * N_SIGNED + ob
+    elif G.get('ip_aniso'):
         fold = np.abs(np.angle(np.exp(1j * np.where(np.abs(meas['psi']) > np.pi / 2, meas['psi'] - np.pi, meas['psi']))))
         ob = np.clip((fold / (np.pi / 2) * N_ORI).astype(int), 0, N_ORI - 1)
         eb = eb * N_ORI + ob                                   # |eta| bin x orientation bin
     return cls, b, pb, eb
 
 
+def orient_sign(psi):
+    if not G.get('ip_orient'):
+        return 1.0
+    return np.where(np.mod(psi, np.pi) > np.pi / 2, -1.0, 1.0)
+
+
 def fit_fine(meas, trk, j, truth_dir, keep):
     P12 = CP.P12
     psi_true = P12.azimuth_in_frame(truth_dir, meas['e1'], meas['e2'])
-    delta = np.angle(np.exp(1j * (psi_true - meas['psi'])))
+    delta = np.angle(np.exp(1j * (psi_true - meas['psi']))) * orient_sign(meas['psi'])
     cls, b, pb, eb = fine_bins(meas, trk, j)
-    table = np.ones((2, len(P12.IP_EDGES_UM) - 1, len(PT_EDGES) - 1,
-                     (len(ETA_EDGES) - 1) * (N_ORI if G.get('ip_aniso') else 1), P12.PHI_BINS))
+    nori = N_SIGNED if G.get('ip_orient') else (N_ORI if G.get('ip_aniso') else 1)
+    table = np.ones((2, len(P12.IP_EDGES_UM) - 1, len(PT_EDGES) - 1, (len(ETA_EDGES) - 1) * nori, P12.PHI_BINS))
     good = meas['available'] & np.isfinite(delta) & keep[:, None]
     idx = np.floor((delta[good] + np.pi) / (2 * np.pi) * P12.PHI_BINS).astype(int) % P12.PHI_BINS
     np.add.at(table, (cls[good], b[good], pb[good], eb[good], idx), 1.0)
@@ -126,6 +143,7 @@ def ip_fine_logw_side(tdir, rows, s, j):
     e1, e2 = m['e1'][rows, s], m['e2'][rows, s]
     psi_h = np.arctan2(np.sum(tdir * e2[:, None], -1), np.sum(tdir * e1[:, None], -1))
     delta = np.angle(np.exp(1j * (psi_h - m['psi'][rows, s][:, None])))
+    delta = delta * np.asarray(orient_sign(m['psi'][rows, s]))[..., None] if G.get('ip_orient') else delta
     idx = np.floor((delta + np.pi) / (2 * np.pi) * CP.P12.PHI_BINS).astype(int) % CP.P12.PHI_BINS
     cls, b, pb, eb = (x[rows, s][:, None] for x in G['fine_bins'][j])
     val = G['ip_fine'][j][cls, b, pb, eb, idx]
@@ -338,7 +356,8 @@ def init(a):
     G['psi_truth'] = CP.P12.azimuth_in_frame(td, m0['e1'], m0['e2'])
     G['ip_fine'] = None
     G['ip_aniso'] = a.ip_aniso
-    if a.ip_fine or a.ip_aniso:
+    G['ip_orient'] = a.ip_orient
+    if a.ip_fine or a.ip_aniso or a.ip_orient:
         tracks = dict(np.load(CP.TRACKS))
         with np.load(CP.LADDER / 'train.npz') as d:
             tr_ids, tr_ev = d['global_indices'], d['event_numbers']
@@ -365,6 +384,7 @@ def main():
     ap.add_argument('--decay-length', action='store_true')
     ap.add_argument('--ip-fine', action='store_true')
     ap.add_argument('--ip-aniso', action='store_true')
+    ap.add_argument('--ip-orient', action='store_true')
     ap.add_argument('--ip-vm', type=float, default=None, help='diagnostic: von Mises IP azimuth response, this kappa')
     ap.add_argument('--ip-truth-psi', action='store_true', help='oracle (with --ip-vm): truth tau azimuth as the measurement')
     ap.add_argument('--ip-joint', action='store_true')
