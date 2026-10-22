@@ -4,6 +4,8 @@ fig1_auc_pairs.png        weighted H/Z AUC by truth mode pair: classical arms vs
 fig2_side_quality.png     per-side correlation with the exact h (n, r, k) on correctly reconstructed pi / rho / 3pi sides
 fig3_pi_ip_bins.png       pi sides: transverse quality vs the measured |IP| of the track (6 quantile bins)
 fig4_vis_mismatch.png     reco pi sides: ATLAS tau four-vector vs track energy, and the pi-side h_k error before / after
+fig5_ip_azimuth_bias.png  TRAIN (1-prong leading track): measured vs truth tau azimuth around the track, and the mean signed
+                          azimuth difference vs the measured azimuth, by |IP|
 """
 import argparse
 import json
@@ -182,6 +184,48 @@ def fig4(posts, out):
     fig.savefig(out / 'fig4_vis_mismatch.png', dpi=150)
 
 
+def fig5(out):
+    P12 = CP.P12
+    with np.load(CP.LADDER / 'train.npz') as d:
+        ids, ev = d['global_indices'], d['event_numbers']
+        tt = d['truth_visible_tau_lab4'] + d['truth_neutrino_lab4']
+    keep = ev % 5 != 0
+    tracks = dict(np.load(CP.TRACKS))
+    m = P12.ip_measurements(tracks, ids, 0)
+    psi_t = P12.azimuth_in_frame(CP.unit(tt[..., :3]), m['e1'], m['e2'])
+    dp = np.angle(np.exp(1j * (psi_t - m['psi'])))
+    ok = m['available'] & (m['n_core'] < 2) & keep[:, None]
+    fig, axs = plt.subplots(1, 2, figsize=(10.5, 4.2))
+    b = np.linspace(-180, 180, 37)
+    axs[0].hist(np.degrees(psi_t[ok]), b, density=True, histtype='step', lw=1.6, color=C[0], label='truth τ direction')
+    axs[0].hist(np.degrees(m['psi'][ok]), b, density=True, histtype='step', lw=1.6, color=C[1], ls='--', label='measured IP')
+    axs[0].set_xlabel('azimuth around the π track [deg]  (0, ±180: along d0;  ±90: along z0 sinθ)')
+    axs[0].set_ylabel('density [1/deg]')
+    axs[0].set_xticks(np.arange(-180, 181, 90))
+    axs[0].legend(fontsize=8, frameon=False, loc='lower center')
+    axs[0].set_title(f'TRAIN, 1-prong leading track ({ok.sum():,} sides)', fontsize=9.5)
+    cen = np.linspace(-180, 180, 17)
+    cc = 0.5 * (cen[1:] + cen[:-1])
+    for (lo, hi), col, mk, ls in (((10, 25), C[1], 'o', '-'), ((25, 60), C[3], 's', '--'), ((60, 125), C[2], 'D', '-.'),
+                                  ((125, 1e9), C[0], '^', ':')):
+        s = ok & (m['mag_um'] >= lo) & (m['mag_um'] < hi)
+        k = np.clip(np.digitize(np.degrees(m['psi']), cen) - 1, 0, 15)
+        yy = [np.degrees(np.angle(np.mean(np.exp(1j * dp[s & (k == i)])))) for i in range(16)]
+        axs[1].plot(cc, yy, marker=mk, ms=5, color=col, ls=ls, lw=1.2,
+                    label=f'|IP| {lo}–{hi:.0f} μm' if hi < 1e8 else f'|IP| > {lo} μm')
+    axs[1].axhline(0, color='#999999', lw=0.8)
+    axs[1].set_xticks(np.arange(-180, 181, 90))
+    axs[1].set_xlabel('measured IP azimuth around the track [deg]')
+    axs[1].set_ylabel('circular mean of (truth − measured) azimuth [deg]')
+    axs[1].set_title('the measured azimuth is pulled toward the z0 axis (±90°)', fontsize=9.5)
+    axs[1].legend(fontsize=8, frameon=False, ncol=2)
+    for ax in axs:
+        ax.grid(color='#dddddd', lw=0.6)
+        ax.set_axisbelow(True)
+    fig.tight_layout()
+    fig.savefig(out / 'fig5_ip_azimuth_bias.png', dpi=150)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--eval', type=Path, required=True)
@@ -195,6 +239,7 @@ def main():
     fig2(res, a.out)
     fig3(posts, a.out)
     fig4(posts, a.out)
+    fig5(a.out)
 
 
 if __name__ == '__main__':
