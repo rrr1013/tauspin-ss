@@ -21,6 +21,9 @@ The base is the 10/22 primary: reco-rho pi0 marginalised (stage 1), invE tau-ene
                     --decay-length (p12 azimuths, SV direction and length)
   --ip-fine         the IP azimuth response (p12: per prong class and |IP| bin) also conditioned on the track pT
                     (0-20-40-80-inf GeV) and |eta| (0-1-1.7-inf); TRAIN without event_number % 5 == 0
+  --ip-aniso        as --ip-fine, also conditioned on the orientation of the measured IP in the plane transverse to the
+                    track (|psi_meas| folded into [0, pi/2], 4 bins: along the transverse d0 axis ... along the z0 axis),
+                    so that the anisotropic IP error (z0 vs d0, PV z vs beam spot) enters the azimuth response
 
 Measures: met (prior + MET), ip3_sv, ip3_sv_mass.  Pairs: M per side by systematic resampling on the side weight, M x M
 pairs weighted by MET (and mass), K resampled.  Output adds, per side, the posterior mean tau energy and the PIT of the
@@ -88,6 +91,9 @@ PT_EDGES = np.array([0.0, 20.0, 40.0, 80.0, np.inf])
 ETA_EDGES = np.array([0.0, 1.0, 1.7, np.inf])
 
 
+N_ORI = 4
+
+
 def fine_bins(meas, trk, j):
     pt, th = trk[..., j, 0], trk[..., j, 1]
     eta = np.abs(-np.log(np.tan(np.clip(th, 1e-6, np.pi - 1e-6) / 2)))
@@ -95,6 +101,10 @@ def fine_bins(meas, trk, j):
     eb = np.clip(np.searchsorted(ETA_EDGES, np.nan_to_num(eta)) - 1, 0, len(ETA_EDGES) - 2)
     cls = (meas['n_core'] >= 2).astype(int)
     b = np.clip(np.digitize(meas['mag_um'], CP.P12.IP_EDGES_UM) - 1, 0, len(CP.P12.IP_EDGES_UM) - 2)
+    if G.get('ip_aniso'):
+        fold = np.abs(np.angle(np.exp(1j * np.where(np.abs(meas['psi']) > np.pi / 2, meas['psi'] - np.pi, meas['psi']))))
+        ob = np.clip((fold / (np.pi / 2) * N_ORI).astype(int), 0, N_ORI - 1)
+        eb = eb * N_ORI + ob                                   # |eta| bin x orientation bin
     return cls, b, pb, eb
 
 
@@ -103,7 +113,8 @@ def fit_fine(meas, trk, j, truth_dir, keep):
     psi_true = P12.azimuth_in_frame(truth_dir, meas['e1'], meas['e2'])
     delta = np.angle(np.exp(1j * (psi_true - meas['psi'])))
     cls, b, pb, eb = fine_bins(meas, trk, j)
-    table = np.ones((2, len(P12.IP_EDGES_UM) - 1, len(PT_EDGES) - 1, len(ETA_EDGES) - 1, P12.PHI_BINS))
+    table = np.ones((2, len(P12.IP_EDGES_UM) - 1, len(PT_EDGES) - 1,
+                     (len(ETA_EDGES) - 1) * (N_ORI if G.get('ip_aniso') else 1), P12.PHI_BINS))
     good = meas['available'] & np.isfinite(delta) & keep[:, None]
     idx = np.floor((delta[good] + np.pi) / (2 * np.pi) * P12.PHI_BINS).astype(int) % P12.PHI_BINS
     np.add.at(table, (cls[good], b[good], pb[good], eb[good], idx), 1.0)
@@ -308,7 +319,8 @@ def init(a):
         G['joint_bins'] = joint_bins(G['meas'][0], tracks['trk'][V['global_indices']])
         print(json.dumps({'ip_joint_train_sides': nj}), flush=True)
     G['ip_fine'] = None
-    if a.ip_fine:
+    G['ip_aniso'] = a.ip_aniso
+    if a.ip_fine or a.ip_aniso:
         tracks = dict(np.load(CP.TRACKS))
         with np.load(CP.LADDER / 'train.npz') as d:
             tr_ids, tr_ev = d['global_indices'], d['event_numbers']
@@ -333,6 +345,7 @@ def main():
     ap.add_argument('--exact-sigma', type=float, default=2.0)
     ap.add_argument('--decay-length', action='store_true')
     ap.add_argument('--ip-fine', action='store_true')
+    ap.add_argument('--ip-aniso', action='store_true')
     ap.add_argument('--ip-joint', action='store_true')
     ap.add_argument('--split', choices=('validation', 'train'), default='validation')
     ap.add_argument('--truth-train', type=Path, default=Path('/home/rbaba/rho-pi0-marginal-20261022/out/train_truth_rho.npz'),
