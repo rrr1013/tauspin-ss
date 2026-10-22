@@ -98,6 +98,21 @@ def main():
                           'pit_max_cdf_dev': round(float(np.max(np.abs(np.cumsum(hist) / hist.sum() - np.linspace(.1, 1, 10)))), 4)}
             te[f'{k}:{m}'] = o
     res['tau_energy'] = te
+    # pi sides: tau energy implied by h_k (h = pi direction in the tau rest frame, x = (E* + p* h_k) / m_tau for beta -> 1),
+    # the same map for every estimator, against the truth tau energy
+    mt, mpi = 1.77686, 0.13957
+    es, ps = (mt ** 2 + mpi ** 2) / (2 * mt), (mt ** 2 - mpi ** 2) / (2 * mt)
+    with np.load(Path('/home/rbaba/tauspin-full-reco-information-ladder-20260917-inputs-v1/validation.npz')) as dv:
+        look = {int(g): i for i, g in enumerate(dv['global_indices'])}
+        r_ = np.array([look[int(g)] for g in ids])
+        epi = dv['reco_h_pions_lab4'][r_, :, 0, 3]
+    msk = grp['pi']
+    pe = {}
+    for name, h in list(rows.items()) + [('exact h', hx)]:
+        hk = np.clip(np.where(np.isfinite(h[..., 2]), h[..., 2], 0.0), -0.999, 0.999)
+        x = (es + ps * hk) / mt
+        pe[name] = round(wcorr(np.log(epi[msk] / x[msk]), np.log(etrue[msk]), W[msk]), 4)
+    res['pi_energy_from_hk'] = pe
     res['ess'] = {f'{k}:{m}': {'pair_q05': float(np.quantile(d[f'{m}_ess_pair'], .05)),
                                'pair_median': float(np.median(d[f'{m}_ess_pair'])),
                                'no_valid': float(np.mean(d[f'{m}_nvalid'] == 0))} for k, d in P.items() for m in MEAS}
@@ -139,6 +154,7 @@ def main():
     print('tau energy (pi sides): corr logE, rel q16/50/84, PIT max dev')
     for k, o in te.items():
         print(f"{k:35s} " + '  '.join(f"{g}: {o[g]['corr_logE']:.3f} {o[g]['rel_q16_50_84']} {o[g]['pit_max_cdf_dev']:.3f}" for g in ('pi', 'rho')))
+    print('pi sides, corr(log E_tau implied by h_k, log E_true):', res['pi_energy_from_hk'])
     for k, o in res['ess'].items():
         print(k, o)
 
