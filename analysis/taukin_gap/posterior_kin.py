@@ -184,6 +184,17 @@ def ip_joint_logw_side(d, rows, s):
     return np.where(m['available'][rows, s][:, None], val, 0.0)
 
 
+def ip_vm_logw_side(tdir, rows, s):
+    """Diagnostic: leading track only, von Mises in the azimuth difference with fixed kappa, around the measured IP azimuth
+    (or the truth tau azimuth with --ip-truth-psi)."""
+    m = G['meas'][0]
+    e1, e2 = m['e1'][rows, s], m['e2'][rows, s]
+    psi_h = np.arctan2(np.sum(tdir * e2[:, None], -1), np.sum(tdir * e1[:, None], -1))
+    ref = G['psi_truth'][rows, s] if G['ip_truth_psi'] else m['psi'][rows, s]
+    val = G['ip_vm'] * (np.cos(psi_h - ref[:, None]) - 1.0)
+    return np.where(m['available'][rows, s][:, None], val, 0.0)
+
+
 def mass_logw(mh):
     if G['mass_prior'] == 'gauss':
         return -0.5 * ((mh - CP.PARENT_MASS) / G['mass_sigma']) ** 2
@@ -224,7 +235,9 @@ def run_block(args):
     for s in (0, 1):
         d, base = PM.side_draws(rows, s, S, rng)
         D.append(d)
-        if G['ip_fine'] is not None:
+        if G['ip_vm'] is not None:
+            ip = ip_vm_logw_side(d['t'], rows, s)
+        elif G['ip_fine'] is not None:
             ip = sum(ip_fine_logw_side(d['t'], rows, s, j) for j in range(3))
         else:
             ip = sum(CP.ip_logw_side(d['t'], G['meas'][j], rows, s, G['ip_resp'][j], 'psi') for j in range(3))
@@ -319,6 +332,10 @@ def init(a):
                                       tr_ev % 5 != 0)
         G['joint_bins'] = joint_bins(G['meas'][0], tracks['trk'][V['global_indices']])
         print(json.dumps({'ip_joint_train_sides': nj}), flush=True)
+    G['ip_vm'], G['ip_truth_psi'] = a.ip_vm, a.ip_truth_psi
+    td = CP.unit(V['truth_visible_tau_lab4'][..., :3] + V['truth_neutrino_lab4'][..., :3])
+    m0 = G['meas'][0]
+    G['psi_truth'] = CP.P12.azimuth_in_frame(td, m0['e1'], m0['e2'])
     G['ip_fine'] = None
     G['ip_aniso'] = a.ip_aniso
     if a.ip_fine or a.ip_aniso:
@@ -348,6 +365,8 @@ def main():
     ap.add_argument('--decay-length', action='store_true')
     ap.add_argument('--ip-fine', action='store_true')
     ap.add_argument('--ip-aniso', action='store_true')
+    ap.add_argument('--ip-vm', type=float, default=None, help='diagnostic: von Mises IP azimuth response, this kappa')
+    ap.add_argument('--ip-truth-psi', action='store_true', help='oracle (with --ip-vm): truth tau azimuth as the measurement')
     ap.add_argument('--ip-joint', action='store_true')
     ap.add_argument('--split', choices=('validation', 'train'), default='validation')
     ap.add_argument('--truth-train', type=Path, default=Path('/home/rbaba/rho-pi0-marginal-20261022/out/train_truth_rho.npz'),
