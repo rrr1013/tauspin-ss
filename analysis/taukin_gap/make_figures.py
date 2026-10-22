@@ -28,6 +28,7 @@ ROWS = [  # (label, key in eval scores / side_quality, color, marker, filled)
     ('  + IP response by track pT, |η|', 'track_dl_fine:ip3_sv_mass', C[4], 'v', True),
     ('  + joint IP azimuth × |IP| response (1-prong)', 'track_dl_joint:ip3_sv_mass', C[5], 'P', True),
     ('  + TRAIN parent-mass prior', 'track_dl_mt:ip3_sv_mass', C[2], 'D', True),
+    ('  + IP response by signed IP orientation', 'track_dl_orient:ip3_sv_mass', C[2], '*', True),
     ('learner, no IP/SV (base)', 'learner base s43', C[0], '^', False),
     ('learner, main line (full22)', 'learner', C[0], '^', True),
 ]
