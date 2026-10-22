@@ -203,7 +203,7 @@ def mass_logw(mh):
 
 def met_logw(r, rows):
     if G['met_model2'] != 'ptbin':
-        return -0.5 * np.sum(r ** 2, -1) / G['met_sigma'] ** 2
+        return -0.5 * np.sum(r ** 2, -1) / (G['met_sigma'] * G['met_scale']) ** 2
     T = G['kin']
     u = G['met_axis'][rows]
     b = np.clip(np.searchsorted(T['met_pt_edges'], G['vis_pt'][rows]) - 1, 0, len(T['met_bias_par']) - 1)
@@ -293,6 +293,7 @@ def init(a):
     G['decay_length'] = a.decay_length
     G['mass_prior'] = a.mass_prior
     G['met_model2'] = a.met_model
+    G['met_scale'] = a.met_scale
     cnt = V['reco_h_counts']
     hv = (V['reco_h_pions_lab4'] * (np.arange(3)[None, None, :, None] < cnt[..., None, None])).sum(2) + V['reco_h_neutral_lab4']
     G['vis_tau'] = V['reco_visible_tau_lab4']
@@ -343,6 +344,7 @@ def main():
     ap.add_argument('--mass-sigma', type=float, default=3.0)
     ap.add_argument('--met-model', choices=('iso', 'ptbin', 'exact'), default='iso')
     ap.add_argument('--exact-sigma', type=float, default=2.0)
+    ap.add_argument('--met-scale', type=float, default=1.0, help='diagnostic: isotropic MET width x this factor')
     ap.add_argument('--decay-length', action='store_true')
     ap.add_argument('--ip-fine', action='store_true')
     ap.add_argument('--ip-aniso', action='store_true')
