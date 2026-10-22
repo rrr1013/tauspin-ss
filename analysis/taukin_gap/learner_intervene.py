@@ -13,6 +13,8 @@ Variants (validation only, the selected checkpoint, nothing retrained):
     flip          (u.n, u.r) -> -(u.n, u.r)
     ipmag_const   log|IP| -> its median over reco-pi sides (direction kept)
     offset_zero   (t.n, t.r) -> 0 (track direction put on the visible axis)
+  --token-edits   on reco-pi sides only: the per-track token columns d0 (5) and z0 sin(theta) (6) of every track of that side
+                  set to 0 (stored, standardised value), geometry kept: tok_d0z0_zero
 Output: npz with h_pred per variant (rows in the stored validation order), json with the parity check.
 """
 import json
@@ -97,6 +99,22 @@ def main():
             ds.geometry_tau = g
             res[name] = run()['h_pred']
             ds.geometry_tau = geo0
+    if '--token-edits' in sys.argv:
+        saved = {k: v['track_features'].clone() for k, v in ds._data.items()}
+        for i in range(len(ids)):
+            if not (rmode[i] == 0).any():
+                continue
+            d = ds._data[ds._sample[i]]
+            pos = int(ds._row_position[i])
+            a, b = int(d['track_offsets'][pos]), int(d['track_offsets'][pos + 1])
+            sides = d['track_sides'][a:b].numpy()
+            for sd in np.flatnonzero(rmode[i] == 0):
+                rows_ = a + np.flatnonzero(sides == sd)
+                d['track_features'][rows_, 5] = 0.0
+                d['track_features'][rows_, 6] = 0.0
+        res['tok_d0z0_zero'] = run()['h_pred']
+        for k, v in saved.items():
+            ds._data[k]['track_features'] = v
     np.savez_compressed(out, global_indices=base['global_indices'], **res)
     out.with_suffix('.json').write_text(json.dumps({'parity_max_abs': parity, 'rows': int(len(ids))}, indent=1))
     print(json.dumps({'parity_max_abs': parity}))
