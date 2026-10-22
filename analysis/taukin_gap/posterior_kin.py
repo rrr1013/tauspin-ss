@@ -414,7 +414,7 @@ def main():
     V = G['V']
     nall = len(V['event_numbers'])
     if a.split == 'train':
-        sub = np.flatnonzero(V['event_numbers'] % 5 == 0)
+        sub = np.flatnonzero(V['event_numbers'] % 5 == 0)[::a.stride]   # TRAIN is ordered by label too
         sub = sub[:a.rows] if a.rows else sub
     elif a.stride > 1:
         sub = np.arange(0, nall, a.stride)          # the validation file is ordered by label: pilots need a stride
