@@ -214,6 +214,7 @@ def main():
     ap.add_argument('--M', type=int, default=128)
     ap.add_argument('--K', type=int, default=512)
     ap.add_argument('--rows', type=int, default=0)
+    ap.add_argument('--stride', type=int, default=1, help='validation: every stride-th event (pilots)')
     ap.add_argument('--block', type=int, default=50)
     ap.add_argument('--workers', type=int, default=22)
     ap.add_argument('--seed', type=int, default=20261017)
@@ -230,10 +231,15 @@ def main():
     a.met_model = met_model
     G['met_model2'] = met_model
     V = G['V']
+    nall = len(V['event_numbers'])
     if a.split == 'train':
         sub = np.flatnonzero(V['event_numbers'] % 5 == 0)
         sub = sub[:a.rows] if a.rows else sub
-        nall = len(V['event_numbers'])
+    elif a.stride > 1:
+        sub = np.arange(0, nall, a.stride)          # the validation file is ordered by label: pilots need a stride
+    else:
+        sub = np.arange(a.rows or nall)
+    if len(sub) < nall:
         for k, v in list(G.items()):
             if isinstance(v, np.ndarray) and v.shape[:1] == (nall,):
                 G[k] = v[sub]
@@ -243,9 +249,8 @@ def main():
                     mm[k] = mm[k][sub]
         V = {k: v[sub] for k, v in V.items()}
         G['V'] = V
-        n = len(sub)
-    else:
-        n = a.rows or len(G['ids'])
+        G['ids'] = V['global_indices']
+    n = len(sub)
     print(json.dumps({'setup_s': time.time() - t0, 'rows': n, 'marg_sides': int(G['marg'][:n].sum()),
                       'vis_track_sides': G.get('vis_track_sides', 0)}), flush=True)
     jobs = [(s, min(s + a.block, n), a.S, a.M, a.K, a.seed) for s in range(0, n, a.block)]

@@ -49,13 +49,15 @@ def main():
         assert np.array_equal(d['global_indices'], ids), k
     t = np.load(GEN / 'targets' / 'validation.npz')
     v = t['h_valid'].astype(bool)
-    assert np.array_equal(t['global_indices'][v][:n], ids)
-    hx = t['h'][v][:n].astype(float)
+    look = {int(g): i for i, g in enumerate(t['global_indices'][v])}
+    pos = np.array([look[int(g)] for g in ids])
+    assert np.array_equal(t['global_indices'][v][pos], ids)
+    hx = t['h'][v][pos].astype(float)
     modes, rmode, av = ref['modes'], ref['reco_h_mode'].astype(int), ref['reco_h_available_side']
     etrue = ref['etau_true']
     dd = np.load(GEN / 'p11_readout' / 'readout_scores_ens_full22.npz')
-    assert np.array_equal(dd['global_indices'][:n], ids)
-    scores = {'exact h': lr_of(hx), 'learner': dd['scores'][:n]}
+    assert np.array_equal(dd['global_indices'][pos], ids)
+    scores = {'exact h': lr_of(hx), 'learner': dd['scores'][pos]}
     for k, d in P.items():
         for m in MEAS:
             scores[f'{k}:{m}'] = d[f'{m}_lr']
@@ -63,8 +65,8 @@ def main():
     res = {'rows': int(n), 'arms': arms, 'events_truth_pairs': {p: int(m.sum()) for p, m in sel.items()}}
     res['auc'] = {k: {p: wauc(s[m], y[m], w[m]) for p, m in sel.items()} for k, s in scores.items()}
     # per-side quality
-    hl = {'learner full22 s42': np.load(GEN / 'p11' / 'full22_s42' / 'validation_predictions.npz')['h_pred'][:n].astype(float),
-          'learner base s43': np.load(GEN / 'p11' / 'base_s43' / 'validation_predictions.npz')['h_pred'][:n].astype(float)}
+    hl = {'learner full22 s42': np.load(GEN / 'p11' / 'full22_s42' / 'validation_predictions.npz')['h_pred'][pos].astype(float),
+          'learner base s43': np.load(GEN / 'p11' / 'base_s43' / 'validation_predictions.npz')['h_pred'][pos].astype(float)}
     rows = dict(hl)
     for k, d in P.items():
         for m in MEAS:
