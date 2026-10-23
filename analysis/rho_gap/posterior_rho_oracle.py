@@ -206,6 +206,7 @@ def run_block(args):
 
 
 def init(a):
+    a.pi0 = 'reco'
     PK.init(a)
     V = G['V']
     ids = V['global_indices']
