@@ -179,3 +179,51 @@ def plot_pi0_decomposition(decomp_data, out_path):
     plt.savefig(out_path, dpi=200)
     plt.close()
     print(f'Saved {out_path}')
+
+
+def main():
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--intervene-json', type=Path, default=Path('out/eval_learner_intervene.json'))
+    parser.add_argument('--matrix-json', type=Path, default=Path('out/eval_matrix_full.json'))
+    parser.add_argument('--figures-dir', type=Path, default=Path('figures'))
+    args = parser.parse_args()
+
+    args.figures_dir.mkdir(parents=True, exist_ok=True)
+
+    if args.intervene_json.exists():
+        plot_learner_interventions(args.intervene_json, args.figures_dir / 'fig1_learner_rho_intervention.png')
+
+    if args.matrix_json.exists():
+        data = json.load(open(args.matrix_json))
+        # 1. Oracle matrix data
+        matrix_data = {}
+        arms = ['reco_pi0_reco_psi', 'reco_pi0_truth_psi', 'truth_pi0_reco_psi', 'truth_pi0_truth_psi']
+        for arm in arms:
+            val_name = f'val_{arm}'
+            sq = data['side_quality'][val_name]['rho']
+            auc = data['auc'][val_name]['pairs']['rho x rho']
+            matrix_data[arm] = {
+                'hn': sq['hn'],
+                'hr': sq['hr'],
+                'hk': sq['hk'],
+                'auc_rhorho': auc
+            }
+        plot_oracle_matrix(matrix_data, args.figures_dir / 'fig2_rho_oracle_matrix.png')
+
+        # 2. Pi0 decomposition data
+        sq = data['side_quality']
+        decomp_data = {
+            'reco': sq['val_reco_pi0_reco_psi']['rho'],
+            'truthe': sq['val_truthe_pi0_reco_psi']['rho'],
+            'truthdir': sq['val_truthdir_pi0_reco_psi']['rho'],
+            'truth': sq['val_truth_pi0_reco_psi']['rho'],
+            'learner_base': {'hn': 0.6188, 'hr': 0.6227, 'hk': 0.7410},
+            'learner_full22': sq['learner_s42']['rho']
+        }
+        plot_pi0_decomposition(decomp_data, args.figures_dir / 'fig3_pi0_decomposition.png')
+
+
+if __name__ == '__main__':
+    main()
+
