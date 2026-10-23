@@ -3,9 +3,9 @@
 Enables the 2x2 oracle matrix on reco-rho sides:
   --rho-pi0 {marg, truth, truthdir, truthe, fixed}
       marg      : sample pi0 from detector response likelihood (posterior_marg.py default)
-      truth     : exact truth pi0 4-momentum on truth-rho reco-rho sides
-      truthdir  : truth pi0 direction + reco pi0 energy
-      truthe    : reco pi0 direction + truth pi0 energy
+      truth     : exact truth pi0 4-momentum on truth-rho reco-rho sides (fixed visible system)
+      truthdir  : truth pi0 direction + reco pi0 energy (fixed visible system)
+      truthe    : reco pi0 direction + truth pi0 energy (fixed visible system)
       fixed     : reco pi0 fixed (no marginalisation)
   --rho-psi {reco, truth}
       reco      : reconstructed IP orientation-conditioned response (--ip-orient)
@@ -45,78 +45,6 @@ MEASURES = PK.MEASURES
 M_TAU, M_PI0 = CP.M_TAU, 0.1349768
 
 
-def rho_oracle_side_draws(rows, s, S, rng):
-    """Generates hypothesis draws, supporting modular pi0 oracles on reco-rho sides."""
-    R = len(rows)
-    vis = G['vis'][rows, s]
-    pm = np.linalg.norm(vis[:, :3], axis=-1)
-    cap = G['shell_cap'][rows, s]
-    mv2 = np.clip(vis[:, 3] ** 2 - pm ** 2, 0.0, cap ** 2)
-    ev = np.sqrt(pm ** 2 + mv2)
-    pS = np.broadcast_to(vis[:, None, :3], (R, S, 3))
-    t, nu, ok, x, xmin, Et, P = PM.sample_given_vis(pS, np.broadcast_to(mv2[:, None], (R, S)),
-                                                  np.broadcast_to(ev[:, None], (R, S)), rng)
-    base = np.where(ok, 0.0, -np.inf)
-    if G['e_prior'] == 'train':
-        base = base + PM.interp_logrho(Et) - np.log(P) - 2 * np.log(x)
-    if G['unpol']:
-        base = base + CP.unpol_logw_side(rows, s, nu)
-    neu = np.broadcast_to(G['neutral'][rows, s][:, None], (R, S, 4)).copy()
-    visd = np.broadcast_to(vis[:, None], (R, S, 4)).copy()
-
-    # Reco rho sides with marginalization or oracle
-    mr = np.flatnonzero(G['marg'][rows, s])
-    if len(mr):
-        p1 = G['pions'][rows[mr], s, 0][:, None]  # (Rm,1,4)
-        is_truth_rho = G['truth_rho_side'][rows[mr], s]
-
-        # Determine pi0 momentum p2 and prior/proposal log weight lw2
-        pi0_mode = G['rho_pi0_mode']
-        if pi0_mode == 'truth':
-            # Exact truth pi0 on truth-rho sides; fallback to marg for non-truth-rho
-            p2_truth = G['truth_pi0'][rows[mr], s][:, None, :].copy()
-            p2_marg, lw2_marg = (PM.draw_pi0_cond if G['cond'] is not None else PM.draw_pi0)(rows[mr], s, S, rng)
-            p2 = np.where(is_truth_rho[:, None, None], p2_truth, p2_marg)
-            lw2 = np.where(is_truth_rho[:, None], 0.0, lw2_marg)
-        elif pi0_mode == 'truthdir':
-            # Truth pi0 direction + reco pi0 energy
-            p2_reco = G['neutral0'][rows[mr], s]
-            p2_dir = CP.unit(G['truth_pi0'][rows[mr], s][..., :3])
-            p2_mag = np.linalg.norm(p2_reco[..., :3], axis=-1, keepdims=True)
-            p2_td = np.concatenate([p2_dir * p2_mag, p2_reco[..., 3:]], -1)[:, None, :].copy()
-            p2_marg, lw2_marg = (PM.draw_pi0_cond if G['cond'] is not None else PM.draw_pi0)(rows[mr], s, S, rng)
-            p2 = np.where(is_truth_rho[:, None, None], p2_td, p2_marg)
-            lw2 = np.where(is_truth_rho[:, None], 0.0, lw2_marg)
-        elif pi0_mode == 'truthe':
-            # Reco pi0 direction + truth pi0 energy
-            p2_reco = G['neutral0'][rows[mr], s]
-            p2_dir = CP.unit(p2_reco[..., :3])
-            E_true = G['truth_pi0'][rows[mr], s][..., 3:]
-            p2_mag = np.sqrt(np.maximum(E_true ** 2 - M_PI0 ** 2, 0.0))
-            p2_te = np.concatenate([p2_dir * p2_mag, E_true], -1)[:, None, :].copy()
-            p2_marg, lw2_marg = (PM.draw_pi0_cond if G['cond'] is not None else PM.draw_pi0)(rows[mr], s, S, rng)
-            p2 = np.where(is_truth_rho[:, None, None], p2_te, p2_marg)
-            lw2 = np.where(is_truth_rho[:, None], 0.0, lw2_marg)
-        elif pi0_mode == 'fixed':
-            p2 = np.broadcast_to(G['neutral0'][rows[mr], s][:, None, :], (len(mr), S, 4))
-            lw2 = np.zeros((len(mr), S))
-        else:  # 'marg'
-            p2, lw2 = (PM.draw_pi0_cond if G['cond'] is not None else PM.draw_pi0)(rows[mr], s, S, rng)
-
-        V = p1 + p2
-        pv = np.linalg.norm(V[..., :3], axis=-1)
-        mv2m = np.maximum(V[..., 3] ** 2 - pv ** 2, 0.0)
-        tm, num, okm, xm, xminm, Etm, Pm = PM.sample_given_vis(V[..., :3], mv2m, V[..., 3], rng)
-        with np.errstate(divide='ignore', invalid='ignore'):
-            lw = (lw2 + PM.interp_logrho(Etm) + np.log(V[..., 3]) - np.log(Pm) - np.log(pv) - 2 * np.log(xm)
-                  + np.log(1 - xminm) + PM.rho_rate_log(p1, p2, num))
-        lw = np.where(okm & np.isfinite(lw), lw, -np.inf)
-        t[mr], nu[mr], base[mr] = tm, num, lw
-        x[mr], Et[mr] = xm, Etm
-        neu[mr], visd[mr] = p2, V
-    return {'t': t, 'nu': nu, 'neu': neu, 'vis': visd, 'Et': Et}, base
-
-
 def ip_truth_psi_logw_side(tdir, rows, s, kappa=2000.0):
     """Von Mises around the truth tau azimuth."""
     m = G['meas'][0]
@@ -134,7 +62,7 @@ def run_block(args):
     R = len(rows)
     D, logs = [], {}
     for s in (0, 1):
-        d, base = rho_oracle_side_draws(rows, s, S, rng)
+        d, base = PM.side_draws(rows, s, S, rng)
         D.append(d)
 
         # IP likelihood calculation
@@ -210,6 +138,7 @@ def init(a):
     PK.init(a)
     V = G['V']
     ids = V['global_indices']
+
     # Load truth surface for truth pi0
     with np.load(CP.SURFACE) as d:
         assert np.array_equal(d['global_indices'], ids)
@@ -220,11 +149,44 @@ def init(a):
     G['rho_pi0_mode'] = a.rho_pi0
     G['rho_psi_mode'] = a.rho_psi
     G['rho_psi_scope'] = a.rho_psi_scope
+
+    # Handle fixed visible system for truth / truthdir / truthe / fixed
+    rr = V['reco_h_available_side'] & (V['reco_h_mode'] == 1)
+    if a.rho_pi0 == 'marg':
+        G['marg'] = rr & ((G['raw'] == 1) | (G['raw'] == 2))
+    else:
+        G['marg'] = np.zeros_like(rr)
+        # Apply replacement on truth-rho reco-rho sides
+        target_sides = isr & rr
+        neu = G['neutral'].copy()
+        if a.rho_pi0 == 'truth':
+            neu[target_sides] = tp0[target_sides]
+        elif a.rho_pi0 == 'truthdir':
+            p2_reco = G['neutral0']
+            p2_dir = CP.unit(tp0[..., :3])
+            p2_mag = np.linalg.norm(p2_reco[..., :3], axis=-1, keepdims=True)
+            neu_td = np.concatenate([p2_dir * p2_mag, p2_reco[..., 3:]], -1)
+            neu[target_sides] = neu_td[target_sides]
+        elif a.rho_pi0 == 'truthe':
+            p2_reco = G['neutral0']
+            p2_dir = CP.unit(p2_reco[..., :3])
+            E_true = tp0[..., 3:]
+            p2_mag = np.sqrt(np.maximum(E_true ** 2 - M_PI0 ** 2, 0.0))
+            neu_te = np.concatenate([p2_dir * p2_mag, E_true], -1)
+            neu[target_sides] = neu_te[target_sides]
+        elif a.rho_pi0 == 'fixed':
+            pass  # keep reco neutral
+        G['neutral'] = neu
+        vis = G['vis'].copy()
+        vis[target_sides] = G['pions'][target_sides][:, 0] + neu[target_sides]
+        G['vis'] = vis
+
     print(json.dumps({
         'rho_pi0_mode': a.rho_pi0,
         'rho_psi_mode': a.rho_psi,
         'rho_psi_scope': a.rho_psi_scope,
-        'truth_rho_sides': int(isr.sum())
+        'truth_rho_sides': int(isr.sum()),
+        'marg_sides': int(G['marg'].sum())
     }), flush=True)
 
 
