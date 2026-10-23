@@ -142,7 +142,7 @@ def run_block(args):
         ip_reco = sum(PK.ip_fine_logw_side(d['t'], rows, s, j) for j in range(3))
         if G['rho_psi_mode'] == 'truth':
             if G['rho_psi_scope'] == 'rho_only':
-                target = G['truth_rho_side'][rows, s] & (G['reco_h_mode'][rows, s] == 1)
+                target = G['truth_rho_side'][rows, s] & (G['modes'][rows, s] == 1)
             else:
                 target = np.ones(R, dtype=bool)
             ip_truth = ip_truth_psi_logw_side(d['t'], rows, s, kappa=2000.0)
