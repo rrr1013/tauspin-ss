@@ -39,18 +39,18 @@ def main():
 
     # Reference: exact h & learner
     exact_lr = lr_of(hx)
-    print(f"{'exact h':28s} | {wauc(y, exact_lr, w):.4f}  | {wauc(y[pairs['rho x rho']], exact_lr[pairs['rho x rho']], w[pairs['rho x rho']]):.4f}    {wauc(y[pairs['pi x rho']], exact_lr[pairs['pi x rho']], w[pairs['pi x rho']]):.4f}    {wauc(y[pairs['rho x 3pi']], exact_lr[pairs['rho x 3pi']], w[pairs['rho x 3pi']]):.4f}    | 1.000  1.000  1.000")
-    print(f"{'learner (ens full22)':28s} | {wauc(y, s_ens, w):.4f}  | {wauc(y[pairs['rho x rho']], s_ens[pairs['rho x rho']], w[pairs['rho x rho']]):.4f}    {wauc(y[pairs['pi x rho']], s_ens[pairs['pi x rho']], w[pairs['pi x rho']]):.4f}    {wauc(y[pairs['rho x 3pi']], s_ens[pairs['rho x 3pi']], w[pairs['rho x 3pi']]):.4f}    | 0.644  0.653  0.750")
+    print(f"{'exact h':28s} | {wauc(exact_lr, y, w):.4f}  | {wauc(exact_lr[pairs['rho x rho']], y[pairs['rho x rho']], w[pairs['rho x rho']]):.4f}    {wauc(exact_lr[pairs['pi x rho']], y[pairs['pi x rho']], w[pairs['pi x rho']]):.4f}    {wauc(exact_lr[pairs['rho x 3pi']], y[pairs['rho x 3pi']], w[pairs['rho x 3pi']]):.4f}    | 1.000  1.000  1.000")
+    print(f"{'learner (ens full22)':28s} | {wauc(s_ens, y, w):.4f}  | {wauc(s_ens[pairs['rho x rho']], y[pairs['rho x rho']], w[pairs['rho x rho']]):.4f}    {wauc(s_ens[pairs['pi x rho']], y[pairs['pi x rho']], w[pairs['pi x rho']]):.4f}    {wauc(s_ens[pairs['rho x 3pi']], y[pairs['rho x 3pi']], w[pairs['rho x 3pi']]):.4f}    | 0.644  0.653  0.750")
     print("-" * 95)
 
     msk_rho = av & (rm == 1) & (modes == 1)
 
     for k, d in P.items():
         lr = d['ip3_sv_mass_lr']
-        auc_tot = wauc(y, lr, w)
-        auc_rr = wauc(y[pairs['rho x rho']], lr[pairs['rho x rho']], w[pairs['rho x rho']])
-        auc_pr = wauc(y[pairs['pi x rho']], lr[pairs['pi x rho']], w[pairs['pi x rho']])
-        auc_r3 = wauc(y[pairs['rho x 3pi']], lr[pairs['rho x 3pi']], w[pairs['rho x 3pi']])
+        auc_tot = wauc(lr, y, w)
+        auc_rr = wauc(lr[pairs['rho x rho']], y[pairs['rho x rho']], w[pairs['rho x rho']])
+        auc_pr = wauc(lr[pairs['pi x rho']], y[pairs['pi x rho']], w[pairs['pi x rho']])
+        auc_r3 = wauc(lr[pairs['rho x 3pi']], y[pairs['rho x 3pi']], w[pairs['rho x 3pi']])
         h_side = d['ip3_sv_mass_Eh']
         corrs = [wcorr(h_side[..., c][msk_rho], hx[..., c][msk_rho], W[msk_rho]) for c in range(3)]
         print(f"{k:28s} | {auc_tot:.4f}  | {auc_rr:.4f}    {auc_pr:.4f}    {auc_r3:.4f}    | {corrs[0]:.3f}  {corrs[1]:.3f}  {corrs[2]:.3f}")
